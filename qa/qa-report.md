@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.2.0 round)
 
-- Revision: `23ba571` · generated 2026-09-28T16:31:37.043Z
+- Revision: `4ac298f` · generated 2026-09-28T16:34:11.699Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/153.0.8010.54 · Edge: Edg/154.0.4258.37
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -27,7 +27,7 @@
 | g | responsive: no overflow at max size and landing | PASS | [{"vp":"360x740","ok":true,"overflow@0.68":0,"overflow@1":0},{"vp":"768x1024","ok":true,"overflow@0.68":0,"overflow@1":0},{"vp":"1280x800","ok":true,"overflow@0.68":0,"overflow@1":0},{"vp":"1440x900","ok":true,"overflow@0.68":0,"overflow@1":0},{"vp":"1920x1080","ok":true,"overflow@0.68":0,"overflow@1":0},{"vp":"2560x10 | scrollWidth overflow <= 1px in both states; no horizontal scrollbar | evidence/g/responsive.json |
 | h | reduced motion: static logo fully visible in hero and footer | PASS | {"top":{"x":227.1875,"y":90,"r":1212.796875,"b":863.96875},"end":{"x":611.4375,"y":534.2578125,"r":828.5625,"b":750.0234375},"bandCy":641.6,"frameComputed":"none"} | no transforms; wordmark fully in viewport; landing centred in the footer band and fully visible | evidence/h/reduced-1440-full.png |
 | i | perf: zero errors, local-only | PASS | {"consoleErrors":0,"pageErrors":0,"failed":0,"hosts":{"localhost:8123":5},"resources":5,"transferBytes":49155} | 0 errors; localhost-only; no failed requests | evidence/i/perf.json |
-| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":6.9,"frameP95Ms":7} | informational only | — |
+| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":6.9,"frameP95Ms":7.1} | informational only | — |
 | j | resize mid-sequence | PASS | {"p":[0.55,0.61875],"spin":294.9755859375,"tx":-305.81428571272534} | state re-renders consistently after resize | — |
 | j | fling (wheel bursts) | PASS | {"p":1,"mapP":1} | end state == mapping ±0.002 | — |
 | j | reload mid-sequence | PASS | {"scrollY":1080,"p":0.5,"mapP":0.5} | deterministic restore | — |
@@ -42,7 +42,7 @@
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (79)
+## Evidence files (77)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -82,7 +82,6 @@
 - `qa/evidence/b/pin-1-834x1112.png`
 - `qa/evidence/d/dock-audit.json`
 - `qa/evidence/d/stability.json`
-- `qa/evidence/e/dock-zoom-2x.png`
 - `qa/evidence/e/mark-zoom-2x.png`
 - `qa/evidence/e/sharpness.json`
 - `qa/evidence/edge/dock-1440x900.png`
@@ -116,7 +115,6 @@
 - `qa/evidence/i/responsive.json`
 - `qa/evidence/j/dock-live-zoom-2x.png`
 - `qa/evidence/j/reduced-motion.json`
-- `qa/evidence/l/perf.json`
 - `qa/evidence/rollback/dist-v1.0.0.zip`
 - `qa/evidence/rollback/dist-v1.1.0.zip`
 - `qa/evidence/rollback/tag-show-v1.1.0.txt`
