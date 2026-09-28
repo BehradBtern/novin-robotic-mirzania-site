@@ -1,0 +1,17 @@
+﻿tag v1.2.0
+Tagger: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Mon Sep 28 20:06:06 2026 +0330
+
+Release v1.2.0 - big hero, half-clipped growth, footer-centre landing
+
+commit 9642c9bc5504afbcda91c3aff01ff082c393baab
+Author: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Mon Sep 28 20:06:06 2026 +0330
+
+    docs: QA evidence for v1.2.0 (revision 4ac298f)
+
+ qa/evidence/i/perf.json | 2 +-
+ qa/qa-log.md            | 2 +-
+ qa/qa-report.md         | 8 +++-----
+ qa/qa-summary.json      | 8 ++++----
+ 4 files changed, 9 insertions(+), 11 deletions(-)
