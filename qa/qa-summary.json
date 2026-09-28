@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/153.0.8010.54",
     "edge": "Edg/154.0.4258.37",
-    "generatedAt": "2026-09-28T16:31:37.043Z",
-    "sha": "23ba571"
+    "generatedAt": "2026-09-28T16:34:11.699Z",
+    "sha": "4ac298f"
   },
-  "generatedAt": "2026-09-28T16:31:37.043Z",
+  "generatedAt": "2026-09-28T16:34:11.699Z",
   "counts": {
     "PASS": 21,
     "FAIL": 0,
@@ -197,7 +197,7 @@
       "id": "i",
       "entry": "CLS + frame cadence (headless)",
       "status": "INFO",
-      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7}",
+      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7.1}",
       "threshold": "informational only",
       "evidence": [],
       "note": ""
