@@ -60,8 +60,11 @@
   /* re-measure once late resources (e.g. the footer logo) change the footer height */
   var flogo = doc.getElementById("footer-logo");
   if (flogo) {
+    flogo.setAttribute("width", "1304");
+    flogo.setAttribute("height", "1022");
     flogo.addEventListener("load", function () { onResize(); });
     flogo.addEventListener("error", function () { onResize(); });
+    if (flogo.complete) window.requestAnimationFrame(function () { onResize(); });
   }
 
   /* ---------------- footer content ---------------- */
@@ -135,7 +138,16 @@
   function cub(p, a, b) { return cubic((p - a) / (b - a)); }
 
   var A = Object.assign(
-    { spinTurns: 1, dockXFrac: 0.30, maxRadiusVh: 0.46, edgeMarginPx: 12 },
+    {
+      spinTurns: 1,
+      heroWidthVw: 92,
+      heroWidthVh: 86,
+      heroWidthMaxPx: 1250,
+      bigDiameterVh: 0.96,
+      footerScale: 0.42,
+      footerMaxPx: 330,
+      edgeMarginPx: 12
+    },
     C.animation || {}
   );
 
@@ -149,40 +161,44 @@
     geo.travel = Math.max(1, heroEl.offsetHeight - vh);
     geo.vh = vh;
     geo.vw = vw;
-    geo.frameW = frameEl.offsetWidth;
-    geo.frameH = frameEl.offsetHeight;
-    geo.markBoxW = markboxEl.offsetWidth || 1;
+
+    /* hero logo size: as large as fits without being clipped at rest */
+    var mobile = vw <= 640;
+    var frameTargetW;
+    if (mobile) {
+      frameTargetW = Math.min(0.88 * vw, 0.62 * vh * 1.2734, 520);
+    } else {
+      frameTargetW = Math.min((A.heroWidthVw / 100) * vw, (A.heroWidthVh / 100) * vh * 1.2734, A.heroWidthMaxPx);
+    }
+    frameTargetW = Math.max(frameTargetW, 280);
+    root.style.setProperty("--frame-w", frameTargetW.toFixed(2) + "px");
+    geo.frameW = frameTargetW;
+    geo.frameH = frameTargetW / 1.2734;
+    geo.markBoxW = 0.5095 * frameTargetW;
     geo.sC = 0.60;
 
     var footerH = footerEl.offsetHeight;
-    var mobile = vw <= 640;
-    /* final radius: fits above the footer edge with breathing room, and
-       always fully visible horizontally */
-    var r = Math.min(A.maxRadiusVh * vh, vh - footerH - 20, vw / 2 - A.edgeMarginPx);
-    r = Math.max(110, r);
-    geo.rFinal = r;
+    geo.footerH = footerH;
+
+    /* enlarged state: exactly half hangs past the left edge (single-axis clip) */
+    var rBig = Math.min((A.bigDiameterVh * vh) / 2, vw - A.edgeMarginPx);
+    rBig = Math.max(rBig, 120);
+    geo.rBig = rBig;
+
+    /* landing state: centred in the footer band at a footer-appropriate size */
+    var rFin = Math.max(Math.min(A.footerScale * footerH, A.footerMaxPx) / 2, 70);
+    geo.rFinal = rFin;
 
     /* vertical offset of the mark's centre from the frame centre inside the
-       wordmark lockup (it must be cancelled while the logo grows/descends so
-       the mark — not the lockup — lands exactly on the dock line) */
+       wordmark lockup (cancelled by the compensation term in render) */
     geo.offY = (0.5 - ((C.constants && C.constants.wordmarkDiamondCenterYFrac) || 0.3203)) * geo.frameH;
 
-    var minX = r + A.edgeMarginPx;
-    var maxX = vw - r - A.edgeMarginPx;
-    geo.dockX = Math.min(Math.max(A.dockXFrac * vw, minX), Math.max(minX, maxX));
-    if (mobile) {
-      /* keep the docked emblem clear of the footer's own small logo (left column) */
-      var flogoEl = footerEl.querySelector('.footer__logo');
-      var logoRight = flogoEl ? flogoEl.getBoundingClientRect().right : 180;
-      geo.dockX = Math.min(Math.max(logoRight + 10 + r, minX), Math.max(minX, maxX));
-    }
-    geo.sEnd = (2 * r) / geo.markBoxW;
-    geo.txEnd = geo.dockX - vw / 2;
-    geo.tyEnd = vh / 2;
+    geo.kBig = (2 * rBig) / geo.markBoxW;
+    geo.kFin = (2 * rFin) / geo.markBoxW;
+    geo.txBig = -vw / 2;                      /* centre-x at the left edge (half clipped) */
+    geo.tyFin = vh / 2 + footerH / 2;         /* centre-y at the footer band centre when docked */
 
-    root.style.setProperty("--dock-x", geo.dockX.toFixed(2) + "px");
-    root.style.setProperty("--dock-r", r.toFixed(2) + "px");
-    root.style.setProperty("--dock-drop", Math.max(0, footerH - vh).toFixed(2) + "px");
+    root.style.setProperty("--dock-r", rFin.toFixed(2) + "px");
   }
 
   /* ---------------- render ---------------- */
@@ -190,42 +206,49 @@
 
   function render(p) {
     p = clamp01(p);
-    var spin = A.spinTurns * 360 * cub(p, 0.18, 0.42);
-    var sF, tx = 0, ty = 0;
-    if (p <= 0.42) {
-      sF = 1 - 0.40 * cub(p, 0.18, 0.42);
-    } else if (p <= 0.70) {
-      var u = cub(p, 0.42, 0.70);
-      sF = geo.sC + (geo.sEnd - geo.sC) * u;
-      tx = geo.txEnd * u;
+
+    /* one continuous clockwise turn across the whole sequence: spin + shrink,
+       then the growth, then the travel into the footer (ends at 360 = upright) */
+    var spin =
+      A.spinTurns * (180 * cub(p, 0.12, 0.40) +
+        120 * cub(p, 0.40, 0.68) +
+        60 * cub(p, 0.68, 0.92));
+
+    var sF, targetX = geo.vw / 2, targetY = geo.vh / 2;
+    if (p <= 0.40) {
+      /* A/B: hold, then spin + shrink in place */
+      sF = 1 - 0.40 * cub(p, 0.12, 0.40);
+    } else if (p <= 0.68) {
+      /* C: centre travels to the left edge while growing — half ends up
+         off-canvas (the mark's visible half stays inside the viewport) */
+      var u = cub(p, 0.40, 0.68);
+      sF = geo.sC + (geo.kBig - geo.sC) * u;
+      targetX = (geo.vw / 2) * (1 - u);
     } else {
-      sF = geo.sEnd;
-      tx = geo.txEnd;
-      ty = geo.tyEnd * cub(p, 0.70, 0.92);
+      /* D: travel to the middle of the footer while settling to landing size */
+      var v = cub(p, 0.68, 0.92);
+      sF = geo.kBig + (geo.kFin - geo.kBig) * v;
+      targetX = (geo.vw / 2) * v;
+      targetY = geo.vh / 2 + (geo.vh / 2 + geo.footerH / 2) * v;
     }
-    var fade = seg(spin, 150, 210); /* wordmark→mark swap, hidden inside the spin */
-    /* cancel the lockup-internal offset once the spin has settled, so the
-       MARK's centre - not the lockup's - tracks the designed path and dock */
-    var comp = geo.offY * sF * seg(p, 0.36, 0.42);
+    var fade = seg(spin, 150, 210); /* wordmark→mark swap, hidden inside the turn */
 
-    /* phones: the footer is taller than the screen; near the end of the
-       sequence the mark blends toward the footer-child layer (see CSS
-       .docked-mobile) which rides the footer rigidly, so the docked half
-       stays visible at the top of the viewport */
-    var kc = seg(p, 0.99, 1);
-    if (kc > 0 && geo.vw <= 640 && stickyEl) {
-      var sTop = stickyEl.getBoundingClientRect().top;
-      var fBottom = footerEl.getBoundingClientRect().bottom;
-      var desired = fBottom - geo.vh;
-      var corrected = desired - sTop - geo.vh / 2;
-      ty = ty + (corrected - ty) * kc;
-    }
-    root.classList.toggle("docked-mobile", p >= 0.999 && geo.vw <= 640);
+    /* keep the MARK's centre on the target path: cancel the lockup-internal
+       offset, including how it rotates with the spin (blended in after the
+       turn, so the spin itself stays a natural rigid rotation) */
+    var rad = spin * Math.PI / 180;
+    var off = geo.offY * sF;
+    var cb = seg(p, 0.40, 0.52);
+    var tx = (targetX - geo.vw / 2) - off * Math.sin(rad) * cb;
+    var ty = (targetY - geo.vh / 2) + off * Math.cos(rad) * cb;
 
-    st.p = p; st.spin = spin; st.tx = tx; st.ty = ty; st.sF = sF; st.fade = fade; st.comp = comp;
+    /* docking: hand the mark over to the footer-child layer (CSS .docked-footer) */
+    root.classList.toggle("docked-footer", p >= 0.999);
+
+    st.p = p; st.spin = spin; st.tx = tx; st.ty = ty; st.sF = sF; st.fade = fade; st.comp = cb;
 
     frameEl.style.transform =
-      "translate(-50%, -50%) translate(" + tx.toFixed(2) + "px, " + (ty + comp).toFixed(2) + "px) rotate(" +
+      "translate(-50%, -50%) translate(" + tx.toFixed(2) + "px, " + ty.toFixed(2) + "px) rotate(" +
       spin.toFixed(2) + "deg) scale(" + sF.toFixed(4) + ")";
     wordmarkEl.style.opacity = (1 - fade).toFixed(3);
     markboxEl.style.opacity = fade.toFixed(3);
@@ -315,6 +338,7 @@
 
   /* ---------------- init ---------------- */
   computeGeo();
+  window.addEventListener("load", function () { onResize(); });
 
   if (qaMode) {
     pSmooth = pTarget = qaPinned;
@@ -328,7 +352,6 @@
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     window.addEventListener("orientationchange", onResize);
-    window.addEventListener("load", function () { onResize(); });
     wake();
   }
 
@@ -350,8 +373,10 @@
       qa: qaMode ? qaPinned : null,
       heroTop: geo.heroTop,
       travel: geo.travel,
-      dockX: geo.dockX,
+      dockX: geo.vw / 2,
       dockR: geo.rFinal,
+      rBig: geo.rBig,
+      footerH: geo.footerH,
       frame: { x: fr.x, y: fr.y, w: fr.width, h: fr.height },
       markbox: { x: mk.x, y: mk.y, w: mk.width, h: mk.height },
       footer: { top: ft.top, height: ft.height },

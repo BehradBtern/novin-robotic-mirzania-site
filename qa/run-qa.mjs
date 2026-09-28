@@ -137,14 +137,17 @@ try {
       const st = await state(page);
       const dx = +(st.frame.x + st.frame.w / 2 - w / 2).toFixed(2);
       const dy = +(st.frame.y + st.frame.h / 2 - h / 2).toFixed(2);
+      const expectedW = Math.min(0.92 * w, 0.86 * h * 1.2734, 1250);
+      const sizeOk = Math.abs(st.frame.w - expectedW) <= 3;
+      const notClipped = st.frame.x >= -2 && st.frame.x + st.frame.w <= w + 2 && st.frame.y >= -2 && st.frame.y + st.frame.h <= h + 2;
       const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-      rows.push({ vp: w + 'x' + h, dx, dy, bg, spin: st.spin, markOpacity: st.markboxOpacity, wordOpacity: st.wordmarkOpacity });
+      rows.push({ vp: w + 'x' + h, dx, dy, frameW: +st.frame.w.toFixed(1), expectedW: +expectedW.toFixed(1), sizeOk, notClipped, bg, spin: st.spin, markOpacity: st.markboxOpacity, wordOpacity: st.wordmarkOpacity });
       await shot(page, 'a/intro-' + w + 'x' + h + '.png');
       await page.close();
     }
     writeJson(evPath('a', 'intro-audit.json'), rows);
-    const ok = rows.every((r) => Math.abs(r.dx) <= 8 && Math.abs(r.dy) <= 8 && r.bg === 'rgb(23, 25, 27)' && r.spin === 0 && r.markOpacity === 0 && r.wordOpacity === 1);
-    add('b', 'intro: wordmark centered on dark gray, alone', ok ? PASS : FAIL, JSON.stringify(rows), '|dx|,|dy| <= 8px; bg rgb(23,25,27); spin 0; mark hidden; wordmark visible', ['evidence/a/intro-1440x900.png', 'evidence/a/intro-audit.json']);
+    const ok = rows.every((r) => Math.abs(r.dx) <= 8 && Math.abs(r.dy) <= 8 && r.sizeOk && r.notClipped && r.bg === 'rgb(23, 25, 27)' && r.spin === 0 && r.markOpacity === 0 && r.wordOpacity === 1);
+    add('b', 'intro: big wordmark centered on dark gray, unclipped', ok ? PASS : FAIL, JSON.stringify(rows), 'hero size == min(92vw, 86vh*1.2734, 1250px) ±3; centered ±8px; fully in viewport; bg rgb(23,25,27)', ['evidence/a/intro-1440x900.png', 'evidence/a/intro-audit.json']);
   } catch (e) { add('b', 'intro stage', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- c) motion trace: clockwise spin → left → down, no diagonal ---------- */
@@ -158,7 +161,7 @@ try {
       const y = Math.round((travel * i) / STEPS);
       await page.evaluate((yy) => window.scrollTo(0, yy), y);
       const st = await settle(page);
-      trace.push({ y, p: +st.p.toFixed(5), spin: +st.spin.toFixed(3), tx: +st.tx.toFixed(2), ty: +st.ty.toFixed(2), sF: +st.sF.toFixed(4), fade: +st.fade.toFixed(3), wOp: st.wordmarkOpacity, mOp: st.markboxOpacity });
+      trace.push({ y, p: +st.p.toFixed(5), spin: +st.spin.toFixed(3), tx: +st.tx.toFixed(2), ty: +st.ty.toFixed(2), sF: +st.sF.toFixed(4), fade: +st.fade.toFixed(3), wOp: st.wordmarkOpacity, mOp: st.markboxOpacity, mcx: +(st.markbox.x + st.markbox.w / 2).toFixed(1), mcy: +(st.markbox.y + st.markbox.h / 2).toFixed(1) });
     }
     const mapErr = Math.max(...trace.map((t) => Math.abs(t.p - Math.min(1, Math.max(0, (t.y - heroTop) / travel)))));
     let monoSpin = true, maxSpinStep = 0, spinEnd = trace[trace.length - 1].spin;
@@ -167,21 +170,25 @@ try {
       if (d < -0.001) monoSpin = false;
       maxSpinStep = Math.max(maxSpinStep, d);
     }
-    let orderOk = true, diagonalSteps = 0;
+    let orderOk = true, maxPosStep = 0;
     for (let i = 1; i < trace.length; i++) {
       const a = trace[i - 1], b = trace[i];
-      const dx = Math.abs(b.tx - a.tx), dy = Math.abs(b.ty - a.ty);
-      if (dx > 1 && dy > 1) diagonalSteps++;
-      if (b.p > 0.42 && b.p <= 0.70 && dy > 1.5) orderOk = false;            // left travel must be horizontal
-      if (b.p > 0.70 && b.p <= 0.92 && dx > 1.5) orderOk = false;            // descend must be vertical
-      if (b.p > 0.18 && b.p <= 0.42 && (Math.abs(b.tx) > 1 || Math.abs(b.ty) > 1)) orderOk = false; // spin in place
+      // B (0.12-0.40): spin in place (no frame translation)
+      if (b.p > 0.12 && b.p <= 0.40 && (Math.abs(b.tx) > 1 || Math.abs(b.ty) > 1)) orderOk = false;
+      // C (0.54-0.66): mark centre stays on the middle line, travels left
+      if (b.p > 0.54 && b.p <= 0.66 && (Math.abs(b.mcy - 450) > 4 || b.mcx > a.mcx + 2)) orderOk = false;
+      // D (0.70-0.90): mark centre travels right and down only
+      if (b.p > 0.70 && b.p <= 0.90 && (b.mcy < a.mcy - 2 || b.mcx < a.mcx - 2)) orderOk = false;
+      maxPosStep = Math.max(maxPosStep, Math.abs(b.mcx - a.mcx), Math.abs(b.mcy - a.mcy));
     }
+    const cEnd = trace.reduce((acc, t) => (Math.abs(t.p - 0.68) < Math.abs(acc.p - 0.68) ? t : acc), trace[0]);
+    const dEnd = trace.reduce((acc, t) => (Math.abs(t.p - 1) < Math.abs(acc.p - 1) ? t : acc), trace[0]);
     const opacityOk = trace.every((t) => Math.abs((t.wOp || 0) + (t.mOp || 0) - 1) <= 0.01);
-    const traceOk = mapErr <= 0.002 && monoSpin && Math.abs(spinEnd - 360) <= 0.5 && maxSpinStep <= 162 && orderOk && diagonalSteps === 0 && opacityOk;
-    writeJson(evPath('b', 'motion-trace.json'), { travel, heroTop, mapErr, monoSpin, spinEnd, maxSpinStep, orderOk, diagonalSteps, opacityOk, steps: trace });
+    const traceOk = mapErr <= 0.002 && monoSpin && Math.abs(spinEnd - 360) <= 0.5 && maxSpinStep <= 162 && orderOk && opacityOk;
+    writeJson(evPath('b', 'motion-trace.json'), { travel, heroTop, mapErr, monoSpin, spinEnd, maxSpinStep, maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEnd, dEnd, steps: trace });
     add('c', 'motion trace (60 steps)', traceOk ? PASS : FAIL,
-      JSON.stringify({ mapErr: +mapErr.toFixed(4), monoSpin, spinEnd, maxSpinStep: +maxSpinStep.toFixed(1), orderOk, diagonalSteps, opacityOk }),
-      'clockwise monotonic to 360±0.5; spin in place; left horizontal; descend vertical; no diagonal; swap opacity sum=1', ['evidence/b/motion-trace.json']);
+      JSON.stringify({ mapErr: +mapErr.toFixed(4), monoSpin, spinEnd, maxSpinStep: +maxSpinStep.toFixed(1), maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEndTx: cEnd.tx, dEndTy: dEnd.ty }),
+      'clockwise monotonic to 360±0.5; spin in place; left travel horizontal; footer travel right+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
 
     // settle / oscillation / idle
     await page.evaluate(() => window.scrollTo(0, 0));
@@ -214,8 +221,28 @@ try {
     add('c', 'determinism (same scrollY twice)', t1 === t2 ? PASS : FAIL, t1 === t2 ? 'identical serialized transforms' : 'MISMATCH', 'identical', []);
     await page.close();
 
+    // enlarged-state half-clip audit (single-axis left clip, no overflow)
+    {
+      const clipRows = [];
+      for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [390, 844]]) {
+        const pg = await openPage(browser, { w, h, qa: 0.68 });
+        const stc = await state(pg);
+        const mk = stc.markbox;
+        const cx = mk.x + mk.w / 2;
+        const r = stc.rBig;
+        const visW = Math.max(0, Math.min(cx + r, w) - Math.max(cx - r, 0));
+        const fracX = +(visW / (2 * r)).toFixed(3);
+        const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+        clipRows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), overflow, ok: fracX >= 0.42 && fracX <= 0.58 && overflow <= 1 });
+        await shot(pg, 'b/halfclip-' + w + 'x' + h + '.png');
+        await pg.close();
+      }
+      writeJson(evPath('b', 'halfclip-audit.json'), clipRows);
+      add('c', 'enlarged state: half clipped at the left edge, no overflow', clipRows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(clipRows), 'visible width fraction 0.42-0.58 at max size; scrollWidth overflow 0', ['evidence/b/halfclip-audit.json', 'evidence/b/halfclip-1440x900.png']);
+    }
+
     // stage stills at pins
-    for (const q of [0, 0.30, 0.55, 0.80, 1.0]) {
+    for (const q of [0, 0.30, 0.55, 0.68, 0.80, 1.0]) {
       for (const [w, h] of [[1440, 900], [834, 1112], [390, 844]]) {
         const p = await openPage(browser, { w, h, qa: q });
         await shot(p, 'b/pin-' + q + '-' + w + 'x' + h + '.png');
@@ -224,7 +251,7 @@ try {
     }
   } catch (e) { add('c', 'motion trace', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
-  /* ---------- d) dock at the footer: half visible, rides, stable ---------- */
+  /* ---------- d) landing: centred in the footer band, fully visible ---------- */
   try {
     const rows = [];
     for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [2560, 1080], [834, 1112], [390, 844]]) {
@@ -233,33 +260,28 @@ try {
       await waitStableScroll(page);
       await settle(page, 2500);
       const st = await state(page);
-      let mk;
-      if (w <= 640) {
-        mk = await page.evaluate(() => {
-          const el = document.getElementById('footer-endmark');
-          const r = el.getBoundingClientRect();
-          return { x: r.x, y: r.y, w: r.width, h: r.height };
-        });
-      } else {
-        mk = st.markbox;
-      }
+      const em = await page.evaluate(() => {
+        const el = document.getElementById('footer-endmark');
+        const r = el.getBoundingClientRect();
+        return { x: r.x, y: r.y, w: r.width, h: r.height, transform: getComputedStyle(el).transform, opacity: +getComputedStyle(el).opacity, display: getComputedStyle(el).display };
+      });
       const ft = st.footer;
-      const cxc = mk.x + mk.w / 2, cyc = mk.y + mk.h / 2;
-      const visible = (w <= 640)
-        ? Math.max(0, Math.min(mk.y + mk.h, h) - Math.max(mk.y, 0))
-        : Math.max(0, Math.min(ft.top, h) - Math.max(mk.y, 0));
-      const frac = +(visible / mk.h).toFixed(3);
-      const anchorsFooter = Math.abs(cyc - Math.max(ft.top, 0)) <= 6;
-      const xOn = Math.abs(cxc - st.dockX) <= 4;
+      const cxc = em.x + em.w / 2, cyc = em.y + em.h / 2;
+      const bandCy = ft.top + ft.height / 2;
+      const visible = Math.max(0, Math.min(em.y + em.h, h) - Math.max(em.y, 0));
+      const frac = +(visible / em.h).toFixed(3);
+      const centered = Math.abs(cxc - w / 2) <= 6 && Math.abs(cyc - bandCy) <= 8;
+      const sizeOk = Math.abs(em.w - st.dockR * 2) <= 6;
+      const upright = em.transform === 'none' || /matrix\(1, 0, 0, 1/.test(em.transform);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-      const ok = frac >= 0.42 && frac <= 0.58 && anchorsFooter && xOn && overflow <= 1;
-      rows.push({ vp: w + 'x' + h, frac, markCenter: [+cxc.toFixed(1), +cyc.toFixed(1)], footerTop: +ft.top.toFixed(1), dockX: +st.dockX.toFixed(1), anchorsFooter, xOn, overflow, ok });
+      const ok = frac >= 0.9 && centered && sizeOk && upright && em.display === 'block' && em.opacity > 0.95 && overflow <= 1;
+      rows.push({ vp: w + 'x' + h, center: [+cxc.toFixed(1), +cyc.toFixed(1)], bandCy: +bandCy.toFixed(1), bandCx: w / 2, frac, size: +em.w.toFixed(1), dockD: +(st.dockR * 2).toFixed(1), centered, sizeOk, upright, overflow, ok });
       await shot(page, 'b/dock-' + w + 'x' + h + '.png');
       await page.close();
     }
     writeJson(evPath('d', 'dock-audit.json'), rows);
-    add('d', 'dock: ~half visible, anchored to footer edge, no overflow', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows),
-      'visible fraction 0.42-0.58; mark centre anchored to the footer edge (footer-child layer on phones); centred on dockX ±6px; overflow 0', ['evidence/d/dock-audit.json', 'evidence/b/dock-1440x900.png']);
+    add('d', 'landing: centred in the footer band, fully visible, upright', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows),
+      'centre == (viewport/2, footer band centre) ±6/±8px; visible fraction >= 0.9; size == configured ±6; no rotation; overflow 0', ['evidence/d/dock-audit.json', 'evidence/b/dock-1440x900.png']);
   } catch (e) { add('d', 'dock audit', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- d2) stability: no drift after scroll/resize ---------- */
@@ -268,39 +290,44 @@ try {
     await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
     await waitStableScroll(page);
     await settle(page, 2500);
+    const get = () => page.evaluate(() => {
+      const el = document.getElementById('footer-endmark');
+      const r = el.getBoundingClientRect();
+      const ft = document.getElementById('footer').getBoundingClientRect();
+      return { x: r.x + r.width / 2, y: r.y + r.height / 2, bandCy: ft.top + ft.height / 2, w: r.width };
+    });
     const yMax = await page.evaluate(() => window.scrollY);
     await page.mouse.wheel({ deltaY: 800 });
     await delay(500);
     const yAfter = await page.evaluate(() => window.scrollY);
-    const s1 = await state(page);
+    const s1 = await get();
     await delay(400);
-    const s2 = await state(page);
-    const drift = Math.max(Math.abs(s1.markbox.x - s2.markbox.x), Math.abs(s1.markbox.y - s2.markbox.y));
+    const s2 = await get();
+    const drift = Math.max(Math.abs(s1.x - s2.x), Math.abs(s1.y - s2.y));
     await page.setViewport({ width: 1380, height: 860 });
     await delay(500);
     await settle(page, 2500);
-    const s3 = await state(page);
-    const resizeOk = Math.abs((s3.markbox.y + s3.markbox.h / 2) - s3.footer.top) <= 5 && Math.abs((s3.markbox.x + s3.markbox.w / 2) - s3.dockX) <= 5;
+    const s3 = await get();
+    const resizeOk = Math.abs(s3.y - s3.bandCy) <= 8 && Math.abs(s3.x - 690) <= 6;
     await page.setViewport({ width: 1440, height: 900 });
     await delay(500);
     await settle(page, 2500);
-    const s4 = await state(page);
-    const resizeBackOk = Math.abs((s4.markbox.y + s4.markbox.h / 2) - s4.footer.top) <= 5;
+    const s4 = await get();
+    const resizeBackOk = Math.abs(s4.y - s4.bandCy) <= 8;
     const ok = yAfter === yMax && drift <= 0.5 && resizeOk && resizeBackOk;
     writeJson(evPath('d', 'stability.json'), { yMax, yAfter, drift, resizeOk, resizeBackOk });
-    add('d', 'dock stability: scroll + resize', ok ? PASS : FAIL, JSON.stringify({ yMax, yAfter, drift, resizeOk, resizeBackOk }), 'no scroll past max; drift 0; re-anchors after resize ±5px', ['evidence/d/stability.json']);
+    add('d', 'landing stability: scroll + resize', ok ? PASS : FAIL, JSON.stringify({ yMax, yAfter, drift, resizeOk, resizeBackOk }), 'no scroll past max; drift 0; stays centred after resize ±8px', ['evidence/d/stability.json']);
     await page.close();
-  } catch (e) { add('d', 'dock stability', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
+  } catch (e) { add('d', 'landing stability', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- e) sharpness evidence (vector + zoom crops) ---------- */
   try {
-    const page = await openPage(browser, { w: 1440, h: 900, qa: 1, dpr: 2 });
+    const page = await openPage(browser, { w: 1440, h: 900, qa: 0.68, dpr: 2 });
     const src = await page.evaluate(() => document.getElementById('hero-mark').src);
-    const cropX = Math.max(0, Math.round((await state(page)).markbox.x));
-    await shot(page, 'e/dock-zoom-2x.png');
+    await shot(page, 'e/mark-zoom-2x.png');
     const isSvg = /\.svg(\?|$)/.test(src);
     writeJson(evPath('e', 'sharpness.json'), { markSrc: src, deviceScaleFactor: 2, isSvg });
-    add('e', 'large mark rendered from vector (SVG) source', isSvg ? PASS : FAIL, JSON.stringify({ markSrc: src, dpr: 2 }), 'symbol mark displayed from .svg (scale-free)', ['evidence/e/dock-zoom-2x.png']);
+    add('e', 'enlarged mark rendered from vector (SVG) source', isSvg ? PASS : FAIL, JSON.stringify({ markSrc: src, dpr: 2 }), 'mark displayed from .svg (scale-free)', ['evidence/e/mark-zoom-2x.png']);
     await page.close();
   } catch (e) { add('e', 'sharpness evidence', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
@@ -356,23 +383,35 @@ try {
     const vps = [[360, 740], [768, 1024], [1280, 800], [1440, 900], [1920, 1080], [2560, 1080], [1280, 500]];
     const rows = [];
     for (const [w, h] of vps) {
-      const page = await openPage(browser, { w, h, qa: 1 });
-      const m = await page.evaluate(() => {
-        const de = document.documentElement;
-        const mk = document.getElementById('hero-markbox').getBoundingClientRect();
-        return { overflow: de.scrollWidth - de.clientWidth, mk: { x: mk.x, r: mk.x + mk.width }, bodyOverflowY: getComputedStyle(document.body).overflowY };
-      });
-      const ok = m.overflow <= 1 && m.mk.x >= -2 && m.mk.r <= w + 2 && m.bodyOverflowY !== 'hidden';
-      rows.push({ vp: w + 'x' + h, overflow: m.overflow, markLeft: +m.mk.x.toFixed(1), markRight: +m.mk.r.toFixed(1), ok });
-      await page.close();
+      const out = { vp: w + 'x' + h, ok: true };
+      for (const q of [0.68, 1]) {
+        const page = await openPage(browser, { w, h, qa: q });
+        const m = await page.evaluate((qq) => {
+          const de = document.documentElement;
+          const stg = window.__heroState();
+          const mk = stg.markbox;
+          const r = qq === 1 ? stg.dockR : stg.rBig;
+          return { overflow: de.scrollWidth - de.clientWidth, right: (mk.x + mk.w / 2) + r, bodyOverflowY: getComputedStyle(document.body).overflowY };
+        }, q);
+        out['overflow@' + q] = m.overflow;
+        if (m.overflow > 1 || m.right > w + 2 || m.bodyOverflowY === 'hidden') out.ok = false;
+        await page.close();
+      }
+      rows.push(out);
     }
     writeJson(evPath('g', 'responsive.json'), rows);
-    add('g', 'responsive: no overflow, mark fully in width', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'overflow <= 1px; mark within horizontal bounds', ['evidence/g/responsive.json']);
+    add('g', 'responsive: no overflow at max size and landing', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'scrollWidth overflow <= 1px in both states; no horizontal scrollbar', ['evidence/g/responsive.json']);
   } catch (e) { add('g', 'responsive scan', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
-  /* ---------- h) reduced motion: end state without the spin ---------- */
+  /* ---------- h) reduced motion: static logo, fully visible everywhere ---------- */
   try {
     const page = await openPage(browser, { w: 1440, h: 900, reduced: true });
+    const top = await page.evaluate(() => {
+      const wm = document.getElementById('hero-wordmark').getBoundingClientRect();
+      return { x: wm.x, y: wm.y, r: wm.x + wm.width, b: wm.y + wm.height };
+    });
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await delay(400);
     const rc = await page.evaluate(() => {
       const frame = document.getElementById('hero-frame');
       const end = document.getElementById('footer-endmark');
@@ -383,20 +422,22 @@ try {
         frameInline: frame.style.transform,
         frameComputed: getComputedStyle(frame).transform,
         markboxDisplay: getComputedStyle(document.getElementById('hero-markbox')).display,
-        wordmarkOpacity: getComputedStyle(document.getElementById('hero-wordmark')).opacity,
         endDisplay: getComputedStyle(end).display,
-        endOpacity: getComputedStyle(end).opacity,
-        endCenter: [er.x + er.width / 2, er.y + er.height / 2],
+        endOpacity: +getComputedStyle(end).opacity,
+        endRect: { x: er.x, y: er.y, r: er.x + er.width, b: er.y + er.height },
         footerTop: ft.top,
-        dock: [parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--dock-x')), parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--dock-r'))]
+        bandCy: ft.top + ft.height / 2,
+        vw: innerWidth, vh: innerHeight
       };
     });
     await shotFull(page, 'h/reduced-1440-full.png');
+    const inView = (r) => r.x >= -2 && r.r <= rc.vw + 2 && r.y >= -2 && r.b <= rc.vh + 2;
     const ok = rc.hasClass && rc.frameInline === '' && rc.frameComputed === 'none' && rc.markboxDisplay === 'none' &&
-      rc.endDisplay === 'block' && parseFloat(rc.endOpacity) === 1 &&
-      Math.abs(rc.endCenter[0] - rc.dock[0]) <= 3 && Math.abs(rc.endCenter[1] - rc.footerTop) <= 3;
-    writeJson(evPath('h', 'reduced-motion.json'), rc);
-    add('h', 'reduced motion: static end state, no spin', ok ? PASS : FAIL, JSON.stringify(rc), 'no transforms; markbox hidden; endmark at dock position; wordmark visible', ['evidence/h/reduced-1440-full.png']);
+      rc.endDisplay === 'block' && rc.endOpacity === 1 && inView(rc.endRect) && inView(top) &&
+      Math.abs((rc.endRect.x + rc.endRect.r) / 2 - rc.vw / 2) <= 6 &&
+      Math.abs((rc.endRect.y + rc.endRect.b) / 2 - rc.bandCy) <= 8;
+    writeJson(evPath('h', 'reduced-motion.json'), { top, rc });
+    add('h', 'reduced motion: static logo fully visible in hero and footer', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed }), 'no transforms; wordmark fully in viewport; landing centred in the footer band and fully visible', ['evidence/h/reduced-1440-full.png']);
     await page.close();
     const p390 = await openPage(browser, { w: 390, h: 844, reduced: true });
     await shotFull(p390, 'h/reduced-390-full.png');
@@ -471,7 +512,10 @@ try {
       await delay(500);
       await settle(page, 2500);
       const s2 = await state(page);
-      const ok = Math.abs(s2.p - s2.pTarget) <= 0.01 && s2.spin >= 359.5 && Math.abs(s2.tx) > 1;
+      const t01 = Math.max(0, Math.min(1, (s2.p - 0.40) / 0.28));
+      const ease = t01 < 0.5 ? 4 * t01 * t01 * t01 : 1 - Math.pow(-2 * t01 + 2, 3) / 2;
+      const expSpin = 180 + 120 * ease;
+      const ok = Math.abs(s2.p - s2.pTarget) <= 0.01 && Math.abs(s2.spin - expSpin) <= 6 && Math.abs(s2.tx) > 1;
       add('j', 'resize mid-sequence', ok ? PASS : FAIL, JSON.stringify({ p: [s1.p, s2.p], spin: s2.spin, tx: s2.tx }), 'state re-renders consistently after resize', []);
       await page.close();
     }
@@ -535,13 +579,17 @@ try {
     await p2.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
     await waitStableScroll(p2);
     await settle(p2, 2500);
-    const st = await state(p2);
-    const ft = st.footer, mk = st.markbox;
-    const frac = +((Math.max(0, Math.min(ft.top, 900) - Math.max(mk.y, 0))) / mk.h).toFixed(3);
+    const em = await p2.evaluate(() => {
+      const el = document.getElementById('footer-endmark');
+      const r = el.getBoundingClientRect();
+      const ft = document.getElementById('footer').getBoundingClientRect();
+      return { cy: r.y + r.height / 2, cx: r.x + r.width / 2, bandCy: ft.top + ft.height / 2, w: r.width };
+    });
+    const centered = Math.abs(em.cx - 720) <= 6 && Math.abs(em.cy - em.bandCy) <= 8;
     const errs = p2.qa.errors.length + p2.qa.pageerrors.length;
     await shot(p2, 'edge/dock-1440x900.png');
     await p2.close();
-    add('k', 'Edge subset (same engine as Chrome)', errs === 0 ? PASS : FAIL, JSON.stringify({ version: env.edge, dockFraction: frac, errors: errs }), 'intro + dock + zero errors on Edge', ['evidence/edge/dock-1440x900.png'], 'Chromium engine shared with Chrome — not independent engine coverage');
+    add('k', 'Edge subset (same engine as Chrome)', errs === 0 && centered ? PASS : FAIL, JSON.stringify({ version: env.edge, landingCentered: centered, errors: errs }), 'intro + centred landing + zero errors on Edge', ['evidence/edge/dock-1440x900.png'], 'Chromium engine shared with Chrome — not independent engine coverage');
   } catch (e) { add('k', 'Edge subset', NP, 'Edge not runnable: ' + e.message, 'n/a', []); }
 
 } catch (e) {
@@ -573,7 +621,7 @@ try {
     const matrix = results.map((r) => '| ' + r.id + ' | ' + r.entry + ' | ' + r.status + ' | ' + String(r.value).replace(/\|/g, '\\|').slice(0, 320) + ' | ' + r.threshold + ' | ' + (r.evidence.join('<br>') || '—') + ' |').join('\n');
 
     const report = [
-      '# QA report — logo-sequence site (v1.1.0 fix round)',
+      '# QA report — logo-sequence site (v1.2.0 round)',
       '',
       '- Revision: `' + env.sha + '` · generated ' + env.generatedAt,
       '- Environment: ' + env.os + ' · Node ' + env.node + ' · puppeteer-core ' + (env.puppeteer || '?'),
@@ -600,7 +648,7 @@ try {
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-report.md'), report, 'utf8');
 
     const log = [
-      '# QA log — environment, commands, honesty notes (v1.1.0)',
+      '# QA log — environment, commands, honesty notes (v1.2.0)',
       '',
       '## Environment',
       '',

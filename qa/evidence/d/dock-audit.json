@@ -1,85 +1,103 @@
 [
   {
     "vp": "1280x800",
-    "frac": 0.5,
-    "markCenter": [
-      385.9,
-      305.1
+    "center": [
+      640,
+      553.2
     ],
-    "footerTop": 305,
-    "dockX": 384,
-    "anchorsFooter": true,
-    "xOn": true,
+    "bandCy": 552.7,
+    "bandCx": 640,
+    "frac": 1,
+    "size": 207.9,
+    "dockD": 207.9,
+    "centered": true,
+    "sizeOk": true,
+    "upright": true,
     "overflow": 0,
     "ok": true
   },
   {
     "vp": "1440x900",
-    "frac": 0.5,
-    "markCenter": [
-      434.5,
-      383.1
+    "center": [
+      720,
+      642.2
     ],
-    "footerTop": 383,
-    "dockX": 432,
-    "anchorsFooter": true,
-    "xOn": true,
+    "bandCy": 641.7,
+    "bandCx": 720,
+    "frac": 1,
+    "size": 217.1,
+    "dockD": 217.1,
+    "centered": true,
+    "sizeOk": true,
+    "upright": true,
     "overflow": 0,
     "ok": true
   },
   {
     "vp": "1920x1080",
-    "frac": 0.5,
-    "markCenter": [
-      579.4,
-      524.1
+    "center": [
+      960,
+      802.6
     ],
-    "footerTop": 524,
-    "dockX": 576,
-    "anchorsFooter": true,
-    "xOn": true,
+    "bandCy": 802.1,
+    "bandCx": 960,
+    "frac": 1,
+    "size": 233.5,
+    "dockD": 233.5,
+    "centered": true,
+    "sizeOk": true,
+    "upright": true,
     "overflow": 0,
     "ok": true
   },
   {
     "vp": "2560x1080",
-    "frac": 0.5,
-    "markCenter": [
-      771.4,
-      524.1
+    "center": [
+      1280,
+      802.6
     ],
-    "footerTop": 524,
-    "dockX": 768,
-    "anchorsFooter": true,
-    "xOn": true,
+    "bandCy": 802.1,
+    "bandCx": 1280,
+    "frac": 1,
+    "size": 233.5,
+    "dockD": 233.5,
+    "centered": true,
+    "sizeOk": true,
+    "upright": true,
     "overflow": 0,
     "ok": true
   },
   {
     "vp": "834x1112",
-    "frac": 0.5,
-    "markCenter": [
-      419.7,
-      520.2
+    "center": [
+      417,
+      816.7
     ],
-    "footerTop": 520,
-    "dockX": 417,
-    "anchorsFooter": true,
-    "xOn": true,
+    "bandCy": 816.2,
+    "bandCx": 417,
+    "frac": 1,
+    "size": 248.6,
+    "dockD": 248.6,
+    "centered": true,
+    "sizeOk": true,
+    "upright": true,
     "overflow": 0,
     "ok": true
   },
   {
     "vp": "390x844",
-    "frac": 0.506,
-    "markCenter": [
-      268,
-      1.4
+    "center": [
+      195,
+      406.4
     ],
-    "footerTop": -32.6,
-    "dockX": 268,
-    "anchorsFooter": true,
-    "xOn": true,
+    "bandCy": 405.9,
+    "bandCx": 195,
+    "frac": 1,
+    "size": 330,
+    "dockD": 330,
+    "centered": true,
+    "sizeOk": true,
+    "upright": true,
     "overflow": 0,
     "ok": true
   }

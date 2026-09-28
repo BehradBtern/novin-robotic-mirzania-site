@@ -78,15 +78,21 @@ const results = { editedText: EDITED, filesChanged: ['content.js', 'assets/logo/
   await page.waitForFunction('document.documentElement.dataset.ready === "true"');
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
   await delay(700);
-  const st = await page.evaluate(() => window.__heroState());
-  const mk = st.markbox, ft = st.footer;
-  const frac = +((Math.max(0, Math.min(ft.top, 900) - Math.max(mk.y, 0))) / mk.h).toFixed(3);
+  const em = await page.evaluate(() => {
+    const el = document.getElementById('footer-endmark');
+    const r = el.getBoundingClientRect();
+    const ft = document.getElementById('footer').getBoundingClientRect();
+    return { x: r.x, y: r.y, w: r.width, h: r.height, bandCy: ft.top + ft.height / 2, vw: innerWidth, vh: innerHeight };
+  });
+  const frac = +((Math.max(0, Math.min(em.y + em.h, em.vh) - Math.max(em.y, 0))) / em.h).toFixed(3);
+  results.checks.landingVisibleFrac = frac;
+  results.checks.landingCenter = [+(em.x + em.w / 2).toFixed(1), +(em.y + em.h / 2).toFixed(1)];
+  results.checks.bandCy = +em.bandCy.toFixed(1);
   const loaded = await page.evaluate(() => {
     const i = document.getElementById('hero-mark');
     return i.decode().then(() => true).catch(() => i.complete);
   });
   results.checks.markLoaded = loaded === true;
-  results.checks.dockFraction = frac;
   results.checks.logoSwapErrors = errs.length;
   await page.screenshot({ path: path.join(evidenceDir, 'roundtrip-logoswap-dock.png') });
   await page.close();
@@ -100,7 +106,8 @@ results.pass =
   results.checks.errors === 0 &&
   results.checks.markLoaded === true &&
   results.checks.logoSwapErrors === 0 &&
-  Math.abs(results.checks.dockFraction - 0.5) <= 0.08;
+  results.checks.landingVisibleFrac >= 0.9 &&
+  Math.abs(results.checks.landingCenter[0] - 720) <= 6;
 fs.writeFileSync(path.join(evidenceDir, 'roundtrip.json'), JSON.stringify(results, null, 2));
 fs.rmSync(tmp, { recursive: true, force: true });
 console.log('ROUNDTRIP', results.pass ? 'PASS' : 'FAIL', JSON.stringify({
@@ -109,6 +116,7 @@ console.log('ROUNDTRIP', results.pass ? 'PASS' : 'FAIL', JSON.stringify({
   errors: results.checks.errors,
   markLoaded: results.checks.markLoaded,
   logoSwapErrors: results.checks.logoSwapErrors,
-  dockFraction: results.checks.dockFraction
+  landingVisibleFrac: results.checks.landingVisibleFrac,
+  landingCenter: results.checks.landingCenter
 }));
 process.exitCode = results.pass ? 0 : 1;

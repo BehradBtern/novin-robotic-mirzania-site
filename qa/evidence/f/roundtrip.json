@@ -9,8 +9,13 @@
     "domBlurb": "EDITED BLURB (content round-trip test).",
     "headerCount": 0,
     "errors": 0,
+    "landingVisibleFrac": 1,
+    "landingCenter": [
+      720,
+      674.6
+    ],
+    "bandCy": 674.1,
     "markLoaded": true,
-    "dockFraction": 0.5,
     "logoSwapErrors": 0
   },
   "pass": true
