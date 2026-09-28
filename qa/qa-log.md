@@ -47,3 +47,9 @@ its overflow is left/right-negative only, which does not create document scrollb
 - Archive: qa/evidence/rollback/dist-v1.0.0.zip (git archive of v1.0.0); SHA-256: ABA9DD1445F06CA7C721C5E2B7A0DEB83D774D6897A90992D9EC262F4CF8DC75
 - Limits: demonstrates repository-level restore on this machine; does NOT verify hosting/CDN rollback. Remote: none configured (local repo only).
 - History note: the repository was re-initialised during release packaging; the tag additionally carries the final QA evidence next to the verified code.
+
+## Supplementary round-trip test (post-release)
+- Script: qa/roundtrip-test.mjs (run: node qa/roundtrip-test.mjs) - executed against a served COPY; the repo itself was not modified by the test.
+- (a) A single headline edited in content.js only -> the edited text appeared on reload (no rebuild, no other file touched); zero console errors; no navbar.
+- (b) logo-mark.svg swapped (fill recoloured) -> page loads clean; final framing fraction ~0.5 preserved.
+- Evidence: qa/evidence/f/roundtrip.json + roundtrip-headline.png + roundtrip-logoswap-final.png
