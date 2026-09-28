@@ -112,7 +112,7 @@ a:hover { color: var(--ink-1); }
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(300px, 56vmin, 560px);
+  width: var(--frame-w, clamp(300px, 56vmin, 560px));
   aspect-ratio: 1304 / 1024;
   transform: translate(-50%, -50%);
   transform-origin: center;
@@ -173,16 +173,17 @@ a:hover { color: var(--ink-1); }
 
 .footer > .shell { position: relative; z-index: 3; }
 
-/* the end-state mark shown statically under prefers-reduced-motion */
+/* the landing mark: centred in the footer band, between its background and
+   its content; shown once the sequence docks (or statically in reduced motion) */
 .footer__endmark {
   display: none;
   position: absolute;
-  left: calc(var(--dock-x, 50%) - var(--dock-r, 0px));
-  top: 0;
+  left: 50%;
+  top: 50%;
   width: calc(var(--dock-r, 0px) * 2);
   height: auto;
-  transform: translateY(-50%);
-  z-index: 0;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   pointer-events: none;
   -webkit-user-drag: none;
   user-select: none;
@@ -239,15 +240,15 @@ a:hover { color: var(--ink-1); }
 }
 
 @media (max-width: 640px) {
-  .hero { height: 260vh; z-index: 3; } /* the docked half shows over the footer on phones */
+  .hero { height: 260vh; }
   .footer__grid { grid-template-columns: 1fr; }
   .footer__legal { flex-direction: column; }
-  /* once docked, the emblem hands off to this footer-child layer: between the
-     footer's background and its content, riding the footer rigidly */
-  .footer__endmark { top: var(--dock-drop, 0px); }
-  .docked-mobile .footer__endmark { display: block; z-index: 2; }
-  .docked-mobile .hero__markbox { visibility: hidden; }
 }
+
+/* once the sequence docks, the mark hands off to the footer-child layer
+   (between the footer's background and its content, riding the footer) */
+.docked-footer .footer__endmark { display: block; }
+.docked-footer .hero__markbox { visibility: hidden; }
 
 /* =========================================================================
    REDUCED MOTION — static: wordmark on the stage, end state at the footer,
@@ -267,7 +268,7 @@ a:hover { color: var(--ink-1); }
   position: static;
   transform: none;
   margin: 0 auto;
-  width: min(420px, 72vw);
+  width: var(--frame-w, min(420px, 72vw));
 }
 .reduced-motion .hero__markbox { display: none; }
 .reduced-motion .footer__endmark { display: block; }

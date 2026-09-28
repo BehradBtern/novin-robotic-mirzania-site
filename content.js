@@ -47,14 +47,22 @@ window.SITE_CONTENT = {
   },
 
   /* Animation tuning (all optional to edit):
-     spinTurns    — full clockwise turns during the spin stage (1 = 360°)
-     dockXFrac    — where the logo ends horizontally (share of viewport width)
-     maxRadiusVh  — cap for the logo's final radius (share of viewport height)
-     edgeMarginPx — minimum gap kept between the logo and screen edges       */
+     spinTurns      — full clockwise turns across the whole sequence (1 = 360°)
+     heroWidthVw/Vh — the first (hero) logo's max share of viewport width/height
+     heroWidthMaxPx — absolute cap for the hero logo
+     bigDiameterVh  — diameter of the enlarged state (share of viewport height;
+                      exactly half of it hangs past the left edge)
+     footerScale    — landing size inside the footer (share of footer height)
+     footerMaxPx    — absolute cap for the landing size
+     edgeMarginPx   — minimum gap kept between the logo and screen edges       */
   animation: {
     spinTurns: 1,
-    dockXFrac: 0.30,
-    maxRadiusVh: 0.46,
+    heroWidthVw: 92,
+    heroWidthVh: 86,
+    heroWidthMaxPx: 1250,
+    bigDiameterVh: 0.96,
+    footerScale: 0.42,
+    footerMaxPx: 330,
     edgeMarginPx: 12
   },
 

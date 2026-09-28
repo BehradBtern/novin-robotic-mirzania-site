@@ -5,12 +5,12 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/153.0.8010.54",
     "edge": "Edg/154.0.4258.37",
-    "generatedAt": "2026-09-28T15:51:49.218Z",
-    "sha": "ca0993c"
+    "generatedAt": "2026-09-28T16:31:37.043Z",
+    "sha": "23ba571"
   },
-  "generatedAt": "2026-09-28T15:51:49.218Z",
+  "generatedAt": "2026-09-28T16:31:37.043Z",
   "counts": {
-    "PASS": 20,
+    "PASS": 21,
     "FAIL": 0,
     "INFO": 1,
     "OBSERVED": 0,
@@ -52,10 +52,10 @@
     },
     {
       "id": "b",
-      "entry": "intro: wordmark centered on dark gray, alone",
+      "entry": "intro: big wordmark centered on dark gray, unclipped",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"dx\":0,\"dy\":0,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1},{\"vp\":\"1440x900\",\"dx\":0,\"dy\":0,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1},{\"vp\":\"1920x1080\",\"dx\":0,\"dy\":0,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1}]",
-      "threshold": "|dx|,|dy| <= 8px; bg rgb(23,25,27); spin 0; mark hidden; wordmark visible",
+      "value": "[{\"vp\":\"1280x800\",\"dx\":0,\"dy\":0,\"frameW\":876.1,\"expectedW\":876.1,\"sizeOk\":true,\"notClipped\":true,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1},{\"vp\":\"1440x900\",\"dx\":0,\"dy\":0,\"frameW\":985.6,\"expectedW\":985.6,\"sizeOk\":true,\"notClipped\":true,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1},{\"vp\":\"1920x1080\",\"dx\":0,\"dy\":0,\"frameW\":1182.7,\"expectedW\":1182.7,\"sizeOk\":true,\"notClipped\":true,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1}]",
+      "threshold": "hero size == min(92vw, 86vh*1.2734, 1250px) ±3; centered ±8px; fully in viewport; bg rgb(23,25,27)",
       "evidence": [
         "evidence/a/intro-1440x900.png",
         "evidence/a/intro-audit.json"
@@ -66,8 +66,8 @@
       "id": "c",
       "entry": "motion trace (60 steps)",
       "status": "PASS",
-      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":65.1,\"orderOk\":true,\"diagonalSteps\":0,\"opacityOk\":true}",
-      "threshold": "clockwise monotonic to 360±0.5; spin in place; left horizontal; descend vertical; no diagonal; swap opacity sum=1",
+      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":30.2,\"maxPosStep\":130,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":-515.86,\"dEndTy\":767.74}",
+      "threshold": "clockwise monotonic to 360±0.5; spin in place; left travel horizontal; footer travel right+down; swap opacity sum=1",
       "evidence": [
         "evidence/b/motion-trace.json"
       ],
@@ -92,11 +92,23 @@
       "note": ""
     },
     {
-      "id": "d",
-      "entry": "dock: ~half visible, anchored to footer edge, no overflow",
+      "id": "c",
+      "entry": "enlarged state: half clipped at the left edge, no overflow",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"frac\":0.5,\"markCenter\":[385.9,305.1],\"footerTop\":305,\"dockX\":384,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"frac\":0.5,\"markCenter\":[434.5,383.1],\"footerTop\":383,\"dockX\":432,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"frac\":0.5,\"markCenter\":[579.4,524.1],\"footerTop\":524,\"dockX\":576,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"2560x1080\",\"frac\":0.5,\"markCenter\":[771.4,524.1],\"footerTop\":524,\"dockX\":768,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"frac\":0.5,\"markCenter\":[419.7,520.2],\"footerTop\":520,\"dockX\":417,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"frac\":0.506,\"markCenter\":[268,1.4],\"footerTop\":-32.6,\"dockX\":268,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true}]",
-      "threshold": "visible fraction 0.42-0.58; mark centre anchored to the footer edge (footer-child layer on phones); centred on dockX ±6px; overflow 0",
+      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.502,\"markCx\":1.3,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.502,\"markCx\":1.5,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.502,\"markCx\":1.8,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.502,\"markCx\":1.3,\"overflow\":0,\"ok\":true}]",
+      "threshold": "visible width fraction 0.42-0.58 at max size; scrollWidth overflow 0",
+      "evidence": [
+        "evidence/b/halfclip-audit.json",
+        "evidence/b/halfclip-1440x900.png"
+      ],
+      "note": ""
+    },
+    {
+      "id": "d",
+      "entry": "landing: centred in the footer band, fully visible, upright",
+      "status": "PASS",
+      "value": "[{\"vp\":\"1280x800\",\"center\":[640,553.2],\"bandCy\":552.7,\"bandCx\":640,\"frac\":1,\"size\":207.9,\"dockD\":207.9,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"center\":[720,642.2],\"bandCy\":641.7,\"bandCx\":720,\"frac\":1,\"size\":217.1,\"dockD\":217.1,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"center\":[960,802.6],\"bandCy\":802.1,\"bandCx\":960,\"frac\":1,\"size\":233.5,\"dockD\":233.5,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"2560x1080\",\"center\":[1280,802.6],\"bandCy\":802.1,\"bandCx\":1280,\"frac\":1,\"size\":233.5,\"dockD\":233.5,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"center\":[417,816.7],\"bandCy\":816.2,\"bandCx\":417,\"frac\":1,\"size\":248.6,\"dockD\":248.6,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"center\":[195,406.4],\"bandCy\":405.9,\"bandCx\":195,\"frac\":1,\"size\":330,\"dockD\":330,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true}]",
+      "threshold": "centre == (viewport/2, footer band centre) ±6/±8px; visible fraction >= 0.9; size == configured ±6; no rotation; overflow 0",
       "evidence": [
         "evidence/d/dock-audit.json",
         "evidence/b/dock-1440x900.png"
@@ -105,10 +117,10 @@
     },
     {
       "id": "d",
-      "entry": "dock stability: scroll + resize",
+      "entry": "landing stability: scroll + resize",
       "status": "PASS",
       "value": "{\"yMax\":2677,\"yAfter\":2677,\"drift\":0,\"resizeOk\":true,\"resizeBackOk\":true}",
-      "threshold": "no scroll past max; drift 0; re-anchors after resize ±5px",
+      "threshold": "no scroll past max; drift 0; stays centred after resize ±8px",
       "evidence": [
         "evidence/d/stability.json"
       ],
@@ -116,12 +128,12 @@
     },
     {
       "id": "e",
-      "entry": "large mark rendered from vector (SVG) source",
+      "entry": "enlarged mark rendered from vector (SVG) source",
       "status": "PASS",
       "value": "{\"markSrc\":\"http://localhost:8123/assets/logo/logo-mark.svg\",\"dpr\":2}",
-      "threshold": "symbol mark displayed from .svg (scale-free)",
+      "threshold": "mark displayed from .svg (scale-free)",
       "evidence": [
-        "evidence/e/dock-zoom-2x.png"
+        "evidence/e/mark-zoom-2x.png"
       ],
       "note": ""
     },
@@ -150,10 +162,10 @@
     },
     {
       "id": "g",
-      "entry": "responsive: no overflow, mark fully in width",
+      "entry": "responsive: no overflow at max size and landing",
       "status": "PASS",
-      "value": "[{\"vp\":\"360x740\",\"overflow\":0,\"markLeft\":128.9,\"markRight\":348.6,\"ok\":true},{\"vp\":\"768x1024\",\"overflow\":0,\"markLeft\":14.3,\"markRight\":758.7,\"ok\":true},{\"vp\":\"1280x800\",\"overflow\":0,\"markLeft\":28,\"markRight\":744.8,\"ok\":true},{\"vp\":\"1440x900\",\"overflow\":0,\"markLeft\":21.2,\"markRight\":848.5,\"ok\":true},{\"vp\":\"1920x1080\",\"overflow\":0,\"markLeft\":82,\"markRight\":1076.7,\"ok\":true},{\"vp\":\"2560x1080\",\"overflow\":0,\"markLeft\":274,\"markRight\":1268.7,\"ok\":true},{\"vp\":\"1280x500\",\"overflow\":0,\"markLeft\":274.9,\"markRight\":494.6,\"ok\":true}]",
-      "threshold": "overflow <= 1px; mark within horizontal bounds",
+      "value": "[{\"vp\":\"360x740\",\"ok\":true,\"overflow@0.68\":0,\"overflow@1\":0},{\"vp\":\"768x1024\",\"ok\":true,\"overflow@0.68\":0,\"overflow@1\":0},{\"vp\":\"1280x800\",\"ok\":true,\"overflow@0.68\":0,\"overflow@1\":0},{\"vp\":\"1440x900\",\"ok\":true,\"overflow@0.68\":0,\"overflow@1\":0},{\"vp\":\"1920x1080\",\"ok\":true,\"overflow@0.68\":0,\"overflow@1\":0},{\"vp\":\"2560x1080\",\"ok\":true,\"overflow@0.68\":0,\"overflow@1\":0},{\"vp\":\"1280x500\",\"ok\":true,\"overflow@0.68\":0,\"overflow@1\":0}]",
+      "threshold": "scrollWidth overflow <= 1px in both states; no horizontal scrollbar",
       "evidence": [
         "evidence/g/responsive.json"
       ],
@@ -161,10 +173,10 @@
     },
     {
       "id": "h",
-      "entry": "reduced motion: static end state, no spin",
+      "entry": "reduced motion: static logo fully visible in hero and footer",
       "status": "PASS",
-      "value": "{\"hasClass\":true,\"frameInline\":\"\",\"frameComputed\":\"none\",\"markboxDisplay\":\"none\",\"wordmarkOpacity\":\"1\",\"endDisplay\":\"block\",\"endOpacity\":\"1\",\"endCenter\":[432,510.8125],\"footerTop\":509.8125,\"dock\":[432,363]}",
-      "threshold": "no transforms; markbox hidden; endmark at dock position; wordmark visible",
+      "value": "{\"top\":{\"x\":227.1875,\"y\":90,\"r\":1212.796875,\"b\":863.96875},\"end\":{\"x\":611.4375,\"y\":534.2578125,\"r\":828.5625,\"b\":750.0234375},\"bandCy\":641.6,\"frameComputed\":\"none\"}",
+      "threshold": "no transforms; wordmark fully in viewport; landing centred in the footer band and fully visible",
       "evidence": [
         "evidence/h/reduced-1440-full.png"
       ],
@@ -174,7 +186,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":5},\"resources\":5,\"transferBytes\":48076}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":5},\"resources\":5,\"transferBytes\":49155}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
@@ -194,7 +206,7 @@
       "id": "j",
       "entry": "resize mid-sequence",
       "status": "PASS",
-      "value": "{\"p\":[0.55,0.61875],\"spin\":360,\"tx\":-184.78360058309045}",
+      "value": "{\"p\":[0.55,0.61875],\"spin\":294.9755859375,\"tx\":-305.81428571272534}",
       "threshold": "state re-renders consistently after resize",
       "evidence": [],
       "note": ""
@@ -230,8 +242,8 @@
       "id": "k",
       "entry": "Edge subset (same engine as Chrome)",
       "status": "PASS",
-      "value": "{\"version\":\"Edg/154.0.4258.37\",\"dockFraction\":0.5,\"errors\":0}",
-      "threshold": "intro + dock + zero errors on Edge",
+      "value": "{\"version\":\"Edg/154.0.4258.37\",\"landingCentered\":true,\"errors\":0}",
+      "threshold": "intro + centred landing + zero errors on Edge",
       "evidence": [
         "evidence/edge/dock-1440x900.png"
       ],

@@ -1,18 +1,26 @@
 {
-  "hasClass": true,
-  "frameInline": "",
-  "frameComputed": "none",
-  "markboxDisplay": "none",
-  "wordmarkOpacity": "1",
-  "endDisplay": "block",
-  "endOpacity": "1",
-  "endCenter": [
-    432,
-    510.8125
-  ],
-  "footerTop": 509.8125,
-  "dock": [
-    432,
-    363
-  ]
+  "top": {
+    "x": 227.1875,
+    "y": 90,
+    "r": 1212.796875,
+    "b": 863.96875
+  },
+  "rc": {
+    "hasClass": true,
+    "frameInline": "",
+    "frameComputed": "none",
+    "markboxDisplay": "none",
+    "endDisplay": "block",
+    "endOpacity": 1,
+    "endRect": {
+      "x": 611.4375,
+      "y": 534.2578125,
+      "r": 828.5625,
+      "b": 750.0234375
+    },
+    "footerTop": 382.96875,
+    "bandCy": 641.640625,
+    "vw": 1440,
+    "vh": 900
+  }
 }
