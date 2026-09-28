@@ -1,9 +1,9 @@
 /* =========================================================================
-   main.js — renders content from content.js and drives the four-stage
-   scroll-linked logo choreography.
-   Internal QA API: window.__heroState() returns live values (used by the
-   QA harness; harmless otherwise). URL hook: ?qa=<0..1> pins hero progress
-   for deterministic screenshots.
+   main.js — renders content from content.js and drives the logo sequence:
+   hold → clockwise spin (+ shrink, wordmark→mark swap) → travel left (+ grow)
+   → descend → docked half-hidden at the footer (rides with it on release).
+   Internal QA API: window.__heroState() returns live values (used by the QA
+   harness; harmless otherwise). URL hook: ?qa=<0..1> pins progress.
    ========================================================================= */
 (function () {
   "use strict";
@@ -41,80 +41,30 @@
     if (tc && C.theme && C.theme.stage) tc.setAttribute("content", C.theme.stage);
   }
 
-  /* ---------------- text helpers ---------------- */
   function setText(id, value) {
     var el = doc.getElementById(id);
     if (el && typeof value === "string") el.textContent = value;
   }
 
-  /* ---------------- render content ---------------- */
-  if (C.hero) {
-    setText("hero-left-kicker", C.hero.left.kicker);
-    setText("hero-left-headline", C.hero.left.headline);
-    setText("hero-left-body", C.hero.left.body);
-    setText("hero-right-kicker", C.hero.right.kicker);
-    setText("hero-right-headline", C.hero.right.headline);
-    setText("hero-right-body", C.hero.right.body);
-    var hintSpan = doc.querySelector('[data-field="hero.scrollHint"]');
-    if (hintSpan) hintSpan.textContent = C.hero.scrollHint || "";
-  }
-
+  /* ---------------- images ---------------- */
   var logoWordmark = C.logos ? C.logos.wordmark : "";
   var logoMark = C.logos ? C.logos.mark : "";
   ["hero-wordmark", "footer-logo"].forEach(function (id) {
     var el = doc.getElementById(id);
     if (el && logoWordmark) el.src = logoWordmark;
   });
-  ["hero-mark", "rm-mark"].forEach(function (id) {
+  ["hero-mark", "footer-endmark"].forEach(function (id) {
     var el = doc.getElementById(id);
     if (el && logoMark) el.src = logoMark;
   });
-
-  if (C.gallery) {
-    setText("gallery-label", C.gallery.sectionLabel);
-    setText("gallery-title", C.gallery.title);
-    setText("gallery-intro", C.gallery.intro);
-
-    var rows = doc.getElementById("gallery-rows");
-    if (rows && Array.isArray(C.gallery.items)) {
-      rows.innerHTML = "";
-      C.gallery.items.forEach(function (item, i) {
-        var art = doc.createElement("article");
-        art.className = "gallery__row reveal";
-
-        var fig = doc.createElement("figure");
-        fig.className = "gallery__media";
-        var img = doc.createElement("img");
-        img.src = item.image;
-        img.alt = item.alt || "";
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.width = 1200;
-        img.height = 800;
-        fig.appendChild(img);
-
-        var tx = doc.createElement("div");
-        tx.className = "gallery__text";
-        var idx = doc.createElement("p");
-        idx.className = "gallery__index";
-        idx.textContent = String(i + 1).padStart(2, "0");
-        var h = doc.createElement("h3");
-        h.className = "gallery__card-title";
-        h.textContent = item.title || "";
-        var p = doc.createElement("p");
-        p.className = "gallery__card-text";
-        p.textContent = item.text || "";
-        tx.appendChild(idx);
-        tx.appendChild(h);
-        tx.appendChild(p);
-
-        art.appendChild(fig);
-        art.appendChild(tx);
-        rows.appendChild(art);
-      });
-    }
+  /* re-measure once late resources (e.g. the footer logo) change the footer height */
+  var flogo = doc.getElementById("footer-logo");
+  if (flogo) {
+    flogo.addEventListener("load", function () { onResize(); });
+    flogo.addEventListener("error", function () { onResize(); });
   }
 
+  /* ---------------- footer content ---------------- */
   if (C.footer) {
     setText("footer-blurb", C.footer.blurb);
     setText("footer-legal", C.footer.legal);
@@ -146,22 +96,6 @@
     }
   }
 
-  /* ---------------- gallery reveal ---------------- */
-  var revealEls = Array.prototype.slice.call(doc.querySelectorAll(".gallery__row.reveal"));
-  if ("IntersectionObserver" in window && revealEls.length) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add("is-in");
-          io.unobserve(en.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add("is-in"); });
-  }
-
   /* ---------------- reduced motion ---------------- */
   var mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   var reduced = mqReduce.matches;
@@ -170,7 +104,7 @@
     mqReduce.addEventListener("change", function () { window.location.reload(); });
   }
 
-  /* ---------------- QA hook + state ---------------- */
+  /* ---------------- QA hook ---------------- */
   var params = new URLSearchParams(window.location.search);
   var qaRaw = params.get("qa");
   var qaPinned = null;
@@ -190,10 +124,8 @@
   var wordmarkEl = doc.getElementById("hero-wordmark");
   var markboxEl = doc.getElementById("hero-markbox");
   var markEl = doc.getElementById("hero-mark");
-  var copyLeftEl = doc.getElementById("hero-copy-left");
-  var copyRightEl = doc.getElementById("hero-copy-right");
-  var indicatorEl = doc.getElementById("hero-indicator");
-  var hintEl = doc.getElementById("hero-hint");
+  var footerEl = doc.getElementById("footer");
+  var stickyEl = doc.querySelector(".hero__sticky");
 
   /* ---------------- math helpers ---------------- */
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
@@ -202,11 +134,12 @@
   function seg(p, a, b) { return smooth((p - a) / (b - a)); }
   function cub(p, a, b) { return cubic((p - a) / (b - a)); }
 
-  var K = {
-    diamW: (C.constants && C.constants.wordmarkDiamondWidthFrac) || 0.5061,
-    diamCY: (C.constants && C.constants.wordmarkDiamondCenterYFrac) || 0.3203
-  };
+  var A = Object.assign(
+    { spinTurns: 1, dockXFrac: 0.30, maxRadiusVh: 0.46, edgeMarginPx: 12 },
+    C.animation || {}
+  );
 
+  /* ---------------- geometry ---------------- */
   var geo = {};
   function computeGeo() {
     var vh = window.innerHeight;
@@ -218,108 +151,84 @@
     geo.vw = vw;
     geo.frameW = frameEl.offsetWidth;
     geo.frameH = frameEl.offsetHeight;
-    geo.markBaseW = markboxEl.offsetWidth || 1;
+    geo.markBoxW = markboxEl.offsetWidth || 1;
+    geo.sC = 0.60;
+
+    var footerH = footerEl.offsetHeight;
     var mobile = vw <= 640;
-    var tablet = vw > 640 && vw <= 1023;
-    geo.sEnd = mobile ? 0.64 : 0.60;
-    geo.k0 = mobile ? 0.64 : 0.60;              /* seeded at fold = settled C scale */
-    geo.rzEnd = mobile ? -12 : -14;
-    var D = vh * (mobile ? 1.30 : tablet ? 1.40 : 1.50);
-    D = Math.min(1920, Math.max(560, D));
-    geo.kEnd = D / geo.markBaseW;
-    /* keep roughly half of the mark on screen: cap the scale so the rotated
-       bounding-box half-width does not exceed the viewport width (narrow
-       screens would otherwise hide more than half of the giant). */
-    var rzAbs = Math.abs(geo.rzEnd) * Math.PI / 180;
-    var rotFactor = Math.cos(rzAbs) + Math.sin(rzAbs);
-    geo.kEnd = Math.min(geo.kEnd, (2 * vw) / (geo.markBaseW * rotFactor));
-    geo.deltaEnd = (0.5 - K.diamCY) * geo.frameH * geo.sEnd;
-    geo.foldTy = (0.5 - K.diamCY) * geo.frameH;
-    geo.txEnd = -0.5 * vw;
+    /* final radius: fits above the footer edge with breathing room, and
+       always fully visible horizontally */
+    var r = Math.min(A.maxRadiusVh * vh, vh - footerH - 20, vw / 2 - A.edgeMarginPx);
+    r = Math.max(110, r);
+    geo.rFinal = r;
+
+    /* vertical offset of the mark's centre from the frame centre inside the
+       wordmark lockup (it must be cancelled while the logo grows/descends so
+       the mark — not the lockup — lands exactly on the dock line) */
+    geo.offY = (0.5 - ((C.constants && C.constants.wordmarkDiamondCenterYFrac) || 0.3203)) * geo.frameH;
+
+    var minX = r + A.edgeMarginPx;
+    var maxX = vw - r - A.edgeMarginPx;
+    geo.dockX = Math.min(Math.max(A.dockXFrac * vw, minX), Math.max(minX, maxX));
+    if (mobile) {
+      /* keep the docked emblem clear of the footer's own small logo (left column) */
+      var flogoEl = footerEl.querySelector('.footer__logo');
+      var logoRight = flogoEl ? flogoEl.getBoundingClientRect().right : 180;
+      geo.dockX = Math.min(Math.max(logoRight + 10 + r, minX), Math.max(minX, maxX));
+    }
+    geo.sEnd = (2 * r) / geo.markBoxW;
+    geo.txEnd = geo.dockX - vw / 2;
+    geo.tyEnd = vh / 2;
+
+    root.style.setProperty("--dock-x", geo.dockX.toFixed(2) + "px");
+    root.style.setProperty("--dock-r", r.toFixed(2) + "px");
+    root.style.setProperty("--dock-drop", Math.max(0, footerH - vh).toFixed(2) + "px");
   }
 
   /* ---------------- render ---------------- */
-  var lastShowMark = null;
-  var lastStage = -1;
-  var chapters = (C.hero && Array.isArray(C.hero.chapters)) ? C.hero.chapters : ["", "", "", ""];
-
-  function stageIndex(p) {
-    return p < 0.20 ? 0 : p < 0.45 ? 1 : p < 0.78 ? 2 : 3;
-  }
-
-  function setStageLabel(i) {
-    if (i === lastStage || !indicatorEl) return;
-    lastStage = i;
-    var label = String(i + 1).padStart(2, "0") + " / " + (chapters[i] || "");
-    if (qaMode || reduced) {
-      indicatorEl.textContent = label;
-      return;
-    }
-    indicatorEl.style.opacity = "0.2";
-    window.setTimeout(function () {
-      indicatorEl.textContent = label;
-      indicatorEl.style.opacity = "1";
-    }, 160);
-  }
+  var st = { p: 0, spin: 0, tx: 0, ty: 0, sF: 1, fade: 0 };
 
   function render(p) {
     p = clamp01(p);
-    setStageLabel(stageIndex(p));
-
-    var showMark, frameTf, markboxTf, markTf;
-
-    if (p < 0.82) {
-      var sF = 1 - 0.42 * cub(p, 0.20, 0.45) + 0.02 * seg(p, 0.45, 0.60);
-      var delta = geo.deltaEnd * cub(p, 0.20, 0.45);
-      var wRotY = 90 * cub(p, 0.20, 0.325);
-      var mRotY = -90 + 90 * cub(p, 0.325, 0.45);
-      var rzC = -5 * seg(p, 0.60, 0.78);
-      showMark = p >= 0.325;
-      frameTf = "translate(-50%, -50%) translateY(" + delta.toFixed(2) + "px) scale(" + sF.toFixed(4) + ")";
-      markboxTf = "translateY(-50%) rotateY(" + mRotY.toFixed(2) + "deg)";
-      markTf = "rotate(" + rzC.toFixed(2) + "deg)";
-      if (wordmarkEl) wordmarkEl.style.transform = "rotateY(" + wRotY.toFixed(2) + "deg)";
+    var spin = A.spinTurns * 360 * cub(p, 0.18, 0.42);
+    var sF, tx = 0, ty = 0;
+    if (p <= 0.42) {
+      sF = 1 - 0.40 * cub(p, 0.18, 0.42);
+    } else if (p <= 0.70) {
+      var u = cub(p, 0.42, 0.70);
+      sF = geo.sC + (geo.sEnd - geo.sC) * u;
+      tx = geo.txEnd * u;
     } else {
-      var u = cub(p, 0.82, 0.97);
-      var k = geo.k0 + (geo.kEnd - geo.k0) * u;
-      var tx = geo.txEnd * u;
-      var ty = geo.foldTy;
-      var rz = -5 + (geo.rzEnd + 5) * u;
-      showMark = true;
-      frameTf = "translate(-50%, -50%)";
-      markboxTf = "translateY(-50%)";
-      markTf = "translate(" + tx.toFixed(2) + "px, " + ty.toFixed(2) + "px) rotate(" + rz.toFixed(2) + "deg) scale(" + k.toFixed(4) + ")";
-      if (wordmarkEl) wordmarkEl.style.transform = "rotateY(90deg)";
+      sF = geo.sEnd;
+      tx = geo.txEnd;
+      ty = geo.tyEnd * cub(p, 0.70, 0.92);
     }
+    var fade = seg(spin, 150, 210); /* wordmark→mark swap, hidden inside the spin */
+    /* cancel the lockup-internal offset once the spin has settled, so the
+       MARK's centre - not the lockup's - tracks the designed path and dock */
+    var comp = geo.offY * sF * seg(p, 0.36, 0.42);
 
-    frameEl.style.transform = frameTf;
-    markboxEl.style.transform = markboxTf;
-    markEl.style.transform = markTf;
-    if (showMark !== lastShowMark) {
-      lastShowMark = showMark;
-      wordmarkEl.style.visibility = showMark ? "hidden" : "visible";
-      markboxEl.style.visibility = showMark ? "visible" : "hidden";
+    /* phones: the footer is taller than the screen; near the end of the
+       sequence the mark blends toward the footer-child layer (see CSS
+       .docked-mobile) which rides the footer rigidly, so the docked half
+       stays visible at the top of the viewport */
+    var kc = seg(p, 0.99, 1);
+    if (kc > 0 && geo.vw <= 640 && stickyEl) {
+      var sTop = stickyEl.getBoundingClientRect().top;
+      var fBottom = footerEl.getBoundingClientRect().bottom;
+      var desired = fBottom - geo.vh;
+      var corrected = desired - sTop - geo.vh / 2;
+      ty = ty + (corrected - ty) * kc;
     }
+    root.classList.toggle("docked-mobile", p >= 0.999 && geo.vw <= 640);
 
-    /* copy columns */
-    if (copyLeftEl) {
-      var inL = seg(p, 0.47, 0.57);
-      var outL = seg(p, 0.78, 0.83);
-      copyLeftEl.style.opacity = (inL * (1 - outL)).toFixed(3);
-      copyLeftEl.style.transform = "translateX(" + (-40 * (1 - inL) - 16 * outL).toFixed(2) + "px)";
-    }
-    if (copyRightEl) {
-      var inR = seg(p, 0.52, 0.62);
-      var outR = seg(p, 0.80, 0.84);
-      copyRightEl.style.opacity = (inR * (1 - outR)).toFixed(3);
-      copyRightEl.style.transform = "translateX(" + (40 * (1 - inR) + 16 * outR).toFixed(2) + "px)";
-    }
+    st.p = p; st.spin = spin; st.tx = tx; st.ty = ty; st.sF = sF; st.fade = fade; st.comp = comp;
 
-    /* scroll hint */
-    if (hintEl && !hintFaded && p > 0.02) {
-      hintFaded = true;
-      hintEl.style.opacity = "0";
-    }
+    frameEl.style.transform =
+      "translate(-50%, -50%) translate(" + tx.toFixed(2) + "px, " + (ty + comp).toFixed(2) + "px) rotate(" +
+      spin.toFixed(2) + "deg) scale(" + sF.toFixed(4) + ")";
+    wordmarkEl.style.opacity = (1 - fade).toFixed(3);
+    markboxEl.style.opacity = fade.toFixed(3);
   }
 
   /* ---------------- loop ---------------- */
@@ -328,8 +237,6 @@
   var running = false;
   var rafId = null;
   var lastTime = 0;
-  var hintFaded = false;
-  var heroOnscreen = true;
 
   function wake() {
     if (qaMode || reduced) return;
@@ -363,12 +270,9 @@
   }
 
   function setWillChange(on) {
-    [frameEl, markboxEl, markEl, wordmarkEl, copyLeftEl, copyRightEl].forEach(function (el) {
-      if (el) el.style.willChange = on ? "transform" : "";
-    });
+    if (frameEl) frameEl.style.willChange = on ? "transform" : "";
   }
 
-  /* ---------------- scroll / resize / visibility ---------------- */
   function currentP() {
     var y = window.scrollY || window.pageYOffset || 0;
     return clamp01((y - geo.heroTop) / geo.travel);
@@ -385,20 +289,19 @@
       computeGeo();
       if (qaMode) {
         render(qaPinned);
-      } else {
-        pTarget = currentP();
-        if (reduced) return;
-        render(pSmooth);
-        wake();
+        return;
       }
+      if (reduced) return;
+      pTarget = currentP();
+      render(pSmooth);
+      wake();
     });
   }
 
   if ("IntersectionObserver" in window && heroEl) {
     var hio = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        heroOnscreen = en.isIntersecting;
-        if (heroOnscreen) {
+        if (en.isIntersecting) {
           setWillChange(true);
           wake();
         } else {
@@ -416,45 +319,45 @@
   if (qaMode) {
     pSmooth = pTarget = qaPinned;
     render(qaPinned);
-    if (hintEl) hintEl.style.opacity = "0";
   } else if (reduced) {
-    /* CSS handles the static layout */
+    /* static layout handled entirely by the .reduced-motion CSS */
   } else {
     pSmooth = pTarget = currentP();
     render(pSmooth);
-    if (hintEl) hintEl.style.opacity = pSmooth > 0.02 ? "0" : "1";
     setWillChange(true);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     window.addEventListener("orientationchange", onResize);
+    window.addEventListener("load", function () { onResize(); });
     wake();
   }
 
   /* ---------------- internal QA API ---------------- */
   window.__heroState = function () {
     var fr = frameEl.getBoundingClientRect();
-    var mr = markboxEl.getBoundingClientRect();
-    var mk = markEl.getBoundingClientRect();
-    var wm = wordmarkEl.getBoundingClientRect();
+    var mk = markboxEl.getBoundingClientRect();
+    var ft = footerEl.getBoundingClientRect();
     return {
       scrollY: (window.scrollY || window.pageYOffset || 0),
       p: pSmooth,
       pTarget: pTarget,
-      stage: stageIndex(pSmooth),
-      qa: qaMode ? qaPinned : null,
+      spin: st.spin,
+      tx: st.tx,
+      ty: st.ty,
+      sF: st.sF,
+      fade: st.fade,
       reduced: reduced,
+      qa: qaMode ? qaPinned : null,
       heroTop: geo.heroTop,
       travel: geo.travel,
+      dockX: geo.dockX,
+      dockR: geo.rFinal,
       frame: { x: fr.x, y: fr.y, w: fr.width, h: fr.height },
-      markbox: { x: mr.x, y: mr.y, w: mr.width, h: mr.height },
-      markImg: { x: mk.x, y: mk.y, w: mk.width, h: mk.height },
-      wordmarkImg: { x: wm.x, y: wm.y, w: wm.width, h: wm.height },
-      transform: frameEl.style.transform,
-      markTransform: markEl.style.transform,
-      markboxTransform: markboxEl.style.transform,
-      wordmarkTransform: wordmarkEl.style.transform,
-      copyLeftOpacity: copyLeftEl ? parseFloat(copyLeftEl.style.opacity || "0") : null,
-      copyRightOpacity: copyRightEl ? parseFloat(copyRightEl.style.opacity || "0") : null
+      markbox: { x: mk.x, y: mk.y, w: mk.width, h: mk.height },
+      footer: { top: ft.top, height: ft.height },
+      frameTransform: frameEl.style.transform,
+      wordmarkOpacity: wordmarkEl ? parseFloat(wordmarkEl.style.opacity || "1") : null,
+      markboxOpacity: markboxEl ? parseFloat(markboxEl.style.opacity || "1") : null
     };
   };
 

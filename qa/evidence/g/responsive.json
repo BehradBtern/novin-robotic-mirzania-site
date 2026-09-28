@@ -1,0 +1,51 @@
+[
+  {
+    "vp": "360x740",
+    "overflow": 0,
+    "markLeft": 128.9,
+    "markRight": 348.6,
+    "ok": true
+  },
+  {
+    "vp": "768x1024",
+    "overflow": 0,
+    "markLeft": 14.3,
+    "markRight": 758.7,
+    "ok": true
+  },
+  {
+    "vp": "1280x800",
+    "overflow": 0,
+    "markLeft": 28,
+    "markRight": 744.8,
+    "ok": true
+  },
+  {
+    "vp": "1440x900",
+    "overflow": 0,
+    "markLeft": 21.2,
+    "markRight": 848.5,
+    "ok": true
+  },
+  {
+    "vp": "1920x1080",
+    "overflow": 0,
+    "markLeft": 82,
+    "markRight": 1076.7,
+    "ok": true
+  },
+  {
+    "vp": "2560x1080",
+    "overflow": 0,
+    "markLeft": 274,
+    "markRight": 1268.7,
+    "ok": true
+  },
+  {
+    "vp": "1280x500",
+    "overflow": 0,
+    "markLeft": 274.9,
+    "markRight": 494.6,
+    "ok": true
+  }
+]

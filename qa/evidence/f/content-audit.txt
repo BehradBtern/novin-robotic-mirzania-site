@@ -1,7 +1,4 @@
-index.html :: Novin Robotic Mirzania=0, Automation on the factory floor=0, +00 000 000 0000=0, Institute for Applied Robotics=0, hello@example.com=0 :: total=0
-assets/css/style.css :: Novin Robotic Mirzania=0, Automation on the factory floor=0, +00 000 000 0000=0, Institute for Applied Robotics=0, hello@example.com=0 :: total=0
-assets/js/main.js :: Novin Robotic Mirzania=0, Automation on the factory floor=0, +00 000 000 0000=0, Institute for Applied Robotics=0, hello@example.com=0 :: total=0
-server.js :: Novin Robotic Mirzania=0, Automation on the factory floor=0, +00 000 000 0000=0, Institute for Applied Robotics=0, hello@example.com=0 :: total=0
-
-Scan scope: index.html, assets/css/style.css, assets/js/main.js, server.js.
-README / qa reports / content.js intentionally excluded (content.js IS the source).
+index.html :: Novin Robotic Mirzania=0, +00 000 000 0000=0, hello@example.com=0, Robotics research, teaching=0
+assets/css/style.css :: Novin Robotic Mirzania=0, +00 000 000 0000=0, hello@example.com=0, Robotics research, teaching=0
+assets/js/main.js :: Novin Robotic Mirzania=0, +00 000 000 0000=0, hello@example.com=0, Robotics research, teaching=0
+server.js :: Novin Robotic Mirzania=0, +00 000 000 0000=0, hello@example.com=0, Robotics research, teaching=0

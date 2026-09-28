@@ -5,35 +5,57 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/153.0.8010.54",
     "edge": "Edg/154.0.4258.37",
-    "generatedAt": "2026-09-28T13:58:21.331Z",
-    "sha": "52fd9fd"
+    "generatedAt": "2026-09-28T15:42:24.167Z",
+    "sha": "865d7ee"
   },
-  "generatedAt": "2026-09-28T13:58:21.331Z",
+  "generatedAt": "2026-09-28T15:42:24.167Z",
   "counts": {
-    "PASS": 25,
+    "PASS": 20,
     "FAIL": 0,
-    "INFO": 3,
-    "OBSERVED": 1,
+    "INFO": 1,
+    "OBSERVED": 0,
     "NOT PERFORMED": 0
   },
   "results": [
     {
       "id": "a",
-      "entry": "nav-absence sweep (9 cells)",
+      "entry": "nav absence (9 cells)",
       "status": "PASS",
-      "value": "headers 0, fixed/sticky-outside-hero 0, nav only in footer",
-      "threshold": "zero header/nav outside footer at top/mid/footer × 360/768/1440",
+      "value": "headers 0; no fixed/sticky outside hero; nav only in footer",
+      "threshold": "zero nav outside footer",
       "evidence": [
         "evidence/a/nav-sweep.json"
       ],
       "note": ""
     },
     {
-      "id": "b",
-      "entry": "intro: wordmark centered on dark gray",
+      "id": "a",
+      "entry": "old elements removed from DOM",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"dx\":0,\"dy\":0,\"bg\":\"rgb(23, 25, 27)\"},{\"vp\":\"1440x900\",\"dx\":0,\"dy\":0,\"bg\":\"rgb(23, 25, 27)\"},{\"vp\":\"1920x1080\",\"dx\":0,\"dy\":0,\"bg\":\"rgb(23, 25, 27)\"}]",
-      "threshold": "|dx|,|dy| <= 8px; bg rgb(23,25,27); copy opacity 0",
+      "value": "{\"gallery\":0,\"copy\":0,\"indicator\":0,\"hint\":0,\"rmMark\":0} body=[\"A.skip-link\",\"NOSCRIPT\",\"SECTION#story.hero\",\"FOOTER#footer.footer\"]",
+      "threshold": "gallery/copy/indicator/hint/rm-mark counts all 0",
+      "evidence": [
+        "evidence/a/nav-sweep.json"
+      ],
+      "note": ""
+    },
+    {
+      "id": "a",
+      "entry": "source removal audit",
+      "status": "PASS",
+      "value": "stale refs: 0; leftover img files: 0",
+      "threshold": "0 stale references; no unused gallery assets",
+      "evidence": [
+        "evidence/a/removal-audit.txt"
+      ],
+      "note": ""
+    },
+    {
+      "id": "b",
+      "entry": "intro: wordmark centered on dark gray, alone",
+      "status": "PASS",
+      "value": "[{\"vp\":\"1280x800\",\"dx\":0,\"dy\":0,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1},{\"vp\":\"1440x900\",\"dx\":0,\"dy\":0,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1},{\"vp\":\"1920x1080\",\"dx\":0,\"dy\":0,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1}]",
+      "threshold": "|dx|,|dy| <= 8px; bg rgb(23,25,27); spin 0; mark hidden; wordmark visible",
       "evidence": [
         "evidence/a/intro-1440x900.png",
         "evidence/a/intro-audit.json"
@@ -42,12 +64,12 @@
     },
     {
       "id": "c",
-      "entry": "scroll mapping trace (60 steps)",
+      "entry": "motion trace (60 steps)",
       "status": "PASS",
-      "value": "{\"mapErr\":0,\"mono\":true,\"maxDispStep\":1.3545,\"dispRange\":4.653,\"maxRotStep\":30.37,\"undeclaredFlat\":[]}",
-      "threshold": "monotone; mapErr<=0.002; max step <= 45% of range; no undeclared flat >=5% p",
+      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":65.1,\"orderOk\":true,\"diagonalSteps\":0,\"opacityOk\":true}",
+      "threshold": "clockwise monotonic to 360±0.5; spin in place; left horizontal; descend vertical; no diagonal; swap opacity sum=1",
       "evidence": [
-        "evidence/b/scroll-trace.json"
+        "evidence/b/motion-trace.json"
       ],
       "note": ""
     },
@@ -55,8 +77,8 @@
       "id": "c",
       "entry": "settle / no-oscillation / idle-stability",
       "status": "PASS",
-      "value": "{\"settleOk\":true,\"p\":0.38462,\"mapP\":0.38462,\"reversals\":0,\"idleDelta\":0}",
-      "threshold": "after wheel stop: p==mapping (+-0.002) within 650ms; <=2 reversals; idle delta 0",
+      "value": "{\"settleOk\":true,\"p\":0.41667,\"mapP\":0.41667,\"reversals\":0,\"idleDelta\":0}",
+      "threshold": "p==mapping after stop (0.002); <=2 reversals; idle delta 0",
       "evidence": [],
       "note": ""
     },
@@ -71,34 +93,35 @@
     },
     {
       "id": "d",
-      "entry": "copy reveal (p=0.70)",
+      "entry": "dock: ~half visible, anchored to footer edge, no overflow",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"ok\":true,\"leftRightEdge\":639,\"markCx\":720,\"rightLeftEdge\":801,\"dcy\":0.05,\"opacity\":[1,1],\"contrast\":{\"head\":16.08,\"body\":9.86,\"kicker\":5.85}},{\"vp\":\"1920x1080\",\"ok\":true,\"leftRightEdge\":862.8,\"markCx\":960,\"rightLeftEdge\":1057.2,\"dcy\":0.05,\"opacity\":[1,1],\"contrast\":{\"head\":16.08,\"body\":9.86,\"kicker\":5.85}},{\"vp\":\"2560x1080\",\"ok\":true,\"leftRightEdge\":1182.8,\"markCx\":1280,\"rightLeftEdge\":1377.2,\"dcy\":0.05,\"opacity\":[1,1],\"contrast\":{\"head\":16.08,\"body\":9.86,\"kicker\":5.85}}]",
-      "threshold": "opacity>=0.99; left right-edge < mark cx; right left-edge > mark cx; |dcy|<=4px; contrast>=4.5",
+      "value": "[{\"vp\":\"1280x800\",\"frac\":0.5,\"markCenter\":[385.9,305.1],\"footerTop\":305,\"dockX\":384,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"frac\":0.5,\"markCenter\":[434.5,383.1],\"footerTop\":383,\"dockX\":432,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"frac\":0.5,\"markCenter\":[579.4,524.1],\"footerTop\":524,\"dockX\":576,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"2560x1080\",\"frac\":0.5,\"markCenter\":[771.4,524.1],\"footerTop\":524,\"dockX\":768,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"frac\":0.5,\"markCenter\":[419.7,520.2],\"footerTop\":520,\"dockX\":417,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"frac\":0.506,\"markCenter\":[268,1.4],\"footerTop\":-32.6,\"dockX\":268,\"anchorsFooter\":true,\"xOn\":true,\"overflow\":0,\"ok\":true}]",
+      "threshold": "visible fraction 0.42-0.58; mark centre anchored to the footer edge (footer-child layer on phones); centred on dockX ±6px; overflow 0",
       "evidence": [
-        "evidence/c/copy-audit.json",
-        "evidence/c/copy-1440x900.png"
+        "evidence/d/dock-audit.json",
+        "evidence/b/dock-1440x900.png"
       ],
       "note": ""
     },
     {
       "id": "d",
-      "entry": "copy stagger at p=0.55",
-      "status": "OBSERVED",
-      "value": "{\"left\":0.896,\"right\":0.216}",
-      "threshold": "left enters before right (stagger) by design",
-      "evidence": [],
+      "entry": "dock stability: scroll + resize",
+      "status": "PASS",
+      "value": "{\"yMax\":2677,\"yAfter\":2677,\"drift\":0,\"resizeOk\":true,\"resizeBackOk\":true}",
+      "threshold": "no scroll past max; drift 0; re-anchors after resize ±5px",
+      "evidence": [
+        "evidence/d/stability.json"
+      ],
       "note": ""
     },
     {
       "id": "e",
-      "entry": "final framing: half-visible giant at left",
+      "entry": "large mark rendered from vector (SVG) source",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"frac\":0.5,\"rz\":-14,\"k\":5.24,\"visiblePx\":727,\"markPx\":1454,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"frac\":0.5,\"rz\":-14,\"k\":5.23,\"visiblePx\":816,\"markPx\":1633,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"frac\":0.5,\"rz\":-14,\"k\":5.64,\"visiblePx\":979,\"markPx\":1957,\"overflow\":0,\"ok\":true},{\"vp\":\"2560x1080\",\"frac\":0.5,\"rz\":-14,\"k\":5.64,\"visiblePx\":979,\"markPx\":1957,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"frac\":0.5,\"rz\":-12,\"k\":4.33,\"visiblePx\":389,\"markPx\":777,\"overflow\":0,\"ok\":true}]",
-      "threshold": "visible fraction 0.35-0.65; rotation negative; no horizontal overflow",
+      "value": "{\"markSrc\":\"http://localhost:8123/assets/logo/logo-mark.svg\",\"dpr\":2}",
+      "threshold": "symbol mark displayed from .svg (scale-free)",
       "evidence": [
-        "evidence/d/final-framing.json",
-        "evidence/d/final-1440x900.png"
+        "evidence/e/dock-zoom-2x.png"
       ],
       "note": ""
     },
@@ -106,212 +129,100 @@
       "id": "f",
       "entry": "single content source (no duplicates)",
       "status": "PASS",
-      "value": "total hardcoded duplicate strings outside content.js: 0",
-      "threshold": "0 occurrences of sample strings in html/css/js/server",
+      "value": "duplicates outside content.js: 0",
+      "threshold": "0 occurrences of sample strings in shipped files",
       "evidence": [
         "evidence/f/content-audit.txt"
       ],
       "note": ""
     },
     {
-      "id": "g",
+      "id": "f",
       "entry": "footer: links land + contact/legal intact",
       "status": "PASS",
-      "value": "{\"landings\":[{\"label\":\"Our story\",\"href\":\"#story\",\"top\":0,\"y\":0},{\"label\":\"Programmes\",\"href\":\"#programmes\",\"top\":24,\"y\":3216},{\"label\":\"Get in touch\",\"href\":\"#contact\",\"top\":476.3,\"y\":7304},{\"label\":\"Back to top\",\"href\":\"#top\",\"top\":0,\"y\":0}],\"contactCheck\":{\"emailText\":true,\"emailHref\":true,\"phoneHref\":true,\"address\":true,\"legal\":true}}",
-      "threshold": "4 explore links land within +-40px; mailto/tel formats; texts == content",
+      "value": "{\"landings\":[{\"label\":\"Our story\",\"href\":\"#story\",\"top\":0},{\"label\":\"Programmes\",\"href\":\"#story\",\"top\":0},{\"label\":\"Get in touch\",\"href\":\"#contact\",\"top\":456},{\"label\":\"Back to top\",\"href\":\"#top\",\"top\":0}],\"contactCheck\":{\"emailText\":true,\"emailHref\":true,\"phoneHref\":true,\"address\":true,\"legal\":true}}",
+      "threshold": "4 links land within viewport; mailto/tel formats; texts == content",
       "evidence": [
-        "evidence/g/footer-links.json",
-        "evidence/g/footer-1440x900.png"
+        "evidence/f/footer-links.json",
+        "evidence/f/footer-1440x900.png"
+      ],
+      "note": ""
+    },
+    {
+      "id": "g",
+      "entry": "responsive: no overflow, mark fully in width",
+      "status": "PASS",
+      "value": "[{\"vp\":\"360x740\",\"overflow\":0,\"markLeft\":128.9,\"markRight\":348.6,\"ok\":true},{\"vp\":\"768x1024\",\"overflow\":0,\"markLeft\":14.3,\"markRight\":758.7,\"ok\":true},{\"vp\":\"1280x800\",\"overflow\":0,\"markLeft\":28,\"markRight\":744.8,\"ok\":true},{\"vp\":\"1440x900\",\"overflow\":0,\"markLeft\":21.2,\"markRight\":848.5,\"ok\":true},{\"vp\":\"1920x1080\",\"overflow\":0,\"markLeft\":82,\"markRight\":1076.7,\"ok\":true},{\"vp\":\"2560x1080\",\"overflow\":0,\"markLeft\":274,\"markRight\":1268.7,\"ok\":true},{\"vp\":\"1280x500\",\"overflow\":0,\"markLeft\":274.9,\"markRight\":494.6,\"ok\":true}]",
+      "threshold": "overflow <= 1px; mark within horizontal bounds",
+      "evidence": [
+        "evidence/g/responsive.json"
       ],
       "note": ""
     },
     {
       "id": "h",
-      "entry": "gallery: 6 cards complete",
+      "entry": "reduced motion: static end state, no spin",
       "status": "PASS",
-      "value": "{\"count\":6,\"alts\":[68,57,60,57,56,50],\"decoded\":[true,true,true,true,true,true],\"mediaVsText\":[false,false,false,false,false,false]}",
-      "threshold": "count 6; alt/title/text non-empty; images decoded; no media/text overlap",
+      "value": "{\"hasClass\":true,\"frameInline\":\"\",\"frameComputed\":\"none\",\"markboxDisplay\":\"none\",\"wordmarkOpacity\":\"1\",\"endDisplay\":\"block\",\"endOpacity\":\"1\",\"endCenter\":[432,510.8125],\"footerTop\":509.8125,\"dock\":[432,363]}",
+      "threshold": "no transforms; markbox hidden; endmark at dock position; wordmark visible",
       "evidence": [
-        "evidence/h/gallery-audit.json",
-        "evidence/h/gallery-6-1440x900.png"
-      ],
-      "note": ""
-    },
-    {
-      "id": "h",
-      "entry": "gallery count variants (4/7/0/8)",
-      "status": "PASS",
-      "value": "[{\"n\":4,\"count\":4,\"overlaps\":0,\"pageErrors\":0,\"consoleErrors\":0},{\"n\":7,\"count\":7,\"overlaps\":0,\"pageErrors\":0,\"consoleErrors\":0},{\"n\":0,\"count\":0,\"overlaps\":0,\"pageErrors\":0,\"consoleErrors\":0},{\"n\":8,\"count\":8,\"overlaps\":0,\"pageErrors\":0,\"consoleErrors\":0}]",
-      "threshold": "4/7 render without overlap or errors; 0/8 graceful (no errors)",
-      "evidence": [
-        "evidence/h/variant-runs.json",
-        "evidence/h/variant-4-1440x900.png",
-        "evidence/h/variant-7-1440x900.png"
+        "evidence/h/reduced-1440-full.png"
       ],
       "note": ""
     },
     {
       "id": "i",
-      "entry": "responsive overlap + overflow",
+      "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "[{\"vp\":\"360x740\",\"heroOverlapPairs\":0,\"rowOverlaps\":0,\"footerOverlaps\":[],\"overflow\":0,\"ok\":true},{\"vp\":\"768x1024\",\"heroOverlapPairs\":0,\"rowOverlaps\":0,\"footerOverlaps\":[],\"overflow\":0,\"ok\":true},{\"vp\":\"1280x800\",\"heroOverlapPairs\":0,\"rowOverlaps\":0,\"footerOverlaps\":[],\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"heroOverlapPairs\":0,\"rowOverlaps\":0,\"footerOverlaps\":[],\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"heroOverlapPairs\":0,\"rowOverlaps\":0,\"footerOverlaps\":[],\"overflow\":0,\"ok\":true},{\"vp\":\"2560x1080\",\"heroOverlapPairs\":0,\"rowOverlaps\":0,\"footerOverlaps\":[],\"overflow\":0,\"ok\":true},{\"vp\":\"1280x500\",\"heroOverlapPairs\":0,\"rowOverlaps\":0,\"footerOverlaps\":[],\"overflow\":0,\"ok\":true}]",
-      "threshold": "0 overlap pairs at 7 viewports; overflow <= 1px; body not locked",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":5},\"resources\":5,\"transferBytes\":48076}",
+      "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
-        "evidence/i/responsive.json",
-        "evidence/i/resp-360x740-q070.png"
+        "evidence/i/perf.json"
       ],
       "note": ""
     },
     {
       "id": "i",
-      "entry": "wheel reaches page bottom",
-      "status": "PASS",
-      "value": "{\"y\":7304,\"max\":7304}",
-      "threshold": "scrollY == max +-2px",
-      "evidence": [],
-      "note": ""
-    },
-    {
-      "id": "j",
-      "entry": "reduced motion: static readable layout",
-      "status": "PASS",
-      "value": "{\"copyOpacity\":[1,1],\"rowsOpacity\":[1,1,1,1,1,1],\"rmMarkWidth\":160,\"stable\":true}",
-      "threshold": "no pinned choreography; copy + rows visible; no transforms; static mark shown",
-      "evidence": [
-        "evidence/j/reduced-1440-full.png"
-      ],
-      "note": ""
-    },
-    {
-      "id": "j",
-      "entry": "reduced motion toggle semantics",
-      "status": "INFO",
-      "value": "OS-setting change reloads the page (documented; listener present)",
-      "threshold": "n/a",
-      "evidence": [],
-      "note": ""
-    },
-    {
-      "id": "k",
-      "entry": "a11y: contrast, alt, keyboard, focus",
-      "status": "PASS",
-      "value": "{\"contrast\":{\"headline\":16.08,\"body\":9.86,\"kicker\":5.85,\"intro\":9.86,\"legal\":5.85,\"accentVsStage\":8.28},\"heroFocusables\":0,\"firstTab\":{\"tag\":\"A\",\"id\":\"\",\"cls\":\"skip-link\",\"text\":\"Skip to gallery\"},\"focusRing\":{\"width\":\"2px\",\"style\":\"solid\"},\"skipRing\":{\"width\":\"2px\",\"style\":\"solid\"},\"galleryAlts\":[68,57,60,57,56,50]}",
-      "threshold": "contrast>=4.5 (accent>=3); alt text present; hero has 0 focusables; skip link first; focus ring >=2px",
-      "evidence": [
-        "evidence/k/a11y.json",
-        "evidence/k/focus-skip.png"
-      ],
-      "note": ""
-    },
-    {
-      "id": "l",
-      "entry": "perf: no errors, local-only, lazy images",
-      "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failedRequests\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":330113,\"lazy\":[\"lazy\",\"lazy\",\"lazy\",\"lazy\",\"lazy\",\"lazy\"],\"aspect\":[1.5,1.5,1.5,1.5,1.5,1.5]}",
-      "threshold": "0 errors/failed; localhost-only; lazy below fold; 3:2 frames",
-      "evidence": [
-        "evidence/l/perf.json"
-      ],
-      "note": ""
-    },
-    {
-      "id": "l",
       "entry": "CLS + frame cadence (headless)",
       "status": "INFO",
-      "value": "{\"cls\":0,\"clsCount\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7.1,\"frames\":838}",
-      "threshold": "informational — headless numbers are not device guarantees",
+      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7.1}",
+      "threshold": "informational only",
       "evidence": [],
       "note": ""
     },
     {
-      "id": "m",
-      "entry": "E1 resize during pin",
+      "id": "j",
+      "entry": "resize mid-sequence",
       "status": "PASS",
-      "value": "{\"p\":[0.5,0.5625,0.4166666666666667],\"map\":[0.5625,0.4166666666666667],\"stickyTop\":[0,0]}",
-      "threshold": "render matches recomputed mapping +-0.01p; sticky top 0; single instance",
-      "evidence": [
-        "evidence/m/e1-resize.json"
-      ],
+      "value": "{\"p\":[0.55,0.61875],\"spin\":360,\"tx\":-184.78360058309045}",
+      "threshold": "state re-renders consistently after resize",
+      "evidence": [],
       "note": ""
     },
     {
-      "id": "m",
-      "entry": "E2 fling (wheel bursts)",
+      "id": "j",
+      "entry": "fling (wheel bursts)",
       "status": "PASS",
       "value": "{\"p\":1,\"mapP\":1}",
-      "threshold": "end state == mapping +-0.002",
+      "threshold": "end state == mapping ±0.002",
       "evidence": [],
       "note": ""
     },
     {
-      "id": "m",
-      "entry": "E3 reload mid-pin",
+      "id": "j",
+      "entry": "reload mid-sequence",
       "status": "PASS",
-      "value": "{\"behavior\":\"scroll restored\",\"beforeY\":1170,\"afterY\":1170,\"consistent\":true}",
-      "threshold": "state consistent with restored position",
-      "evidence": [
-        "evidence/m/e3-reload.json"
-      ],
-      "note": ""
-    },
-    {
-      "id": "m",
-      "entry": "E4 hash deep-links",
-      "status": "PASS",
-      "value": "[{\"hash\":\"#programmes\",\"top\":24,\"consistent\":true},{\"hash\":\"#contact\",\"top\":476.3,\"consistent\":true}]",
-      "threshold": "targets land +-40px; hero state consistent",
+      "value": "{\"scrollY\":1080,\"p\":0.5,\"mapP\":0.5}",
+      "threshold": "deterministic restore",
       "evidence": [],
       "note": ""
     },
     {
-      "id": "m",
-      "entry": "E5 zoom proxy (720x450)",
-      "status": "INFO",
-      "value": "layout proxy only — labels: approximates 200% zoom; not a real zoom test",
-      "threshold": "n/a",
-      "evidence": [
-        "evidence/m/e5-zoomproxy-720x450.png"
-      ],
-      "note": ""
-    },
-    {
-      "id": "m",
-      "entry": "E7 short viewport 1280x500",
+      "id": "j",
+      "entry": "QA hook robustness",
       "status": "PASS",
-      "value": "{\"p\":0.7,\"stage\":2}",
-      "threshold": "choreography functional at short viewport",
-      "evidence": [
-        "evidence/m/e7-short-1280x500.png"
-      ],
-      "note": ""
-    },
-    {
-      "id": "m",
-      "entry": "E8 rapid reversals",
-      "status": "PASS",
-      "value": "{\"seq\":[0.7,0.3,0.6,0.1,0.3],\"got\":[0.7,0.3,0.6,0.1,0.3]}",
-      "threshold": "same p => same values; no hysteresis",
-      "evidence": [],
-      "note": ""
-    },
-    {
-      "id": "m",
-      "entry": "E12 unpin seam",
-      "status": "PASS",
-      "value": "{\"gap\":0,\"storyBottom\":900,\"releasedBottom\":750}",
-      "threshold": "no gap/overlap at release (<=1px); releases correctly",
-      "evidence": [
-        "evidence/m/seam-a-pinend.png",
-        "evidence/m/seam-b-unpinned.png"
-      ],
-      "note": ""
-    },
-    {
-      "id": "m",
-      "entry": "E13 QA hook robustness",
-      "status": "PASS",
-      "value": "[{\"qa\":\"abc\",\"got\":null,\"errors\":0},{\"qa\":\"-1\",\"got\":0,\"errors\":0},{\"qa\":\"2\",\"got\":1,\"errors\":0},{\"qa\":\"0.5\",\"got\":0.5,\"errors\":0},{\"qa\":\"0.5&qa=x\",\"got\":0.5,\"errors\":0}]",
-      "threshold": "invalid ignored; clamped to [0,1]; no errors",
+      "value": "[{\"qa\":\"abc\",\"got\":null,\"errors\":0},{\"qa\":\"-1\",\"got\":0,\"errors\":0},{\"qa\":\"2\",\"got\":1,\"errors\":0},{\"qa\":\"0.5\",\"got\":0.5,\"errors\":0}]",
+      "threshold": "invalid ignored; clamped; no errors",
       "evidence": [],
       "note": ""
     },
@@ -319,11 +230,10 @@
       "id": "k",
       "entry": "Edge subset (same engine as Chrome)",
       "status": "PASS",
-      "value": "{\"version\":\"Edg/154.0.4258.37\",\"headerCount\":0,\"finalFraction\":0.5,\"errors\":0}",
-      "threshold": "intro + final framing + nav + zero errors on Edge",
+      "value": "{\"version\":\"Edg/154.0.4258.37\",\"dockFraction\":0.5,\"errors\":0}",
+      "threshold": "intro + dock + zero errors on Edge",
       "evidence": [
-        "evidence/edge/intro-1440x900.png",
-        "evidence/edge/final-1440x900.png"
+        "evidence/edge/dock-1440x900.png"
       ],
       "note": "Chromium engine shared with Chrome — not independent engine coverage"
     }

@@ -1,5 +1,5 @@
 /* =========================================================================
-   Site stylesheet for the institute one-pager.
+   Site stylesheet — logo stage + footer.
    Design tokens are defined once in :root; main.js also applies the values
    from content.js (theme.*) over these defaults, so content.js stays the
    single place to retheme the stage.
@@ -25,7 +25,6 @@ body {
 img { max-width: 100%; }
 
 h1, h2, h3, p, ul { margin: 0; }
-
 ul { padding: 0; list-style: none; }
 
 a { color: var(--ink-2); text-decoration-color: var(--border-strong); text-underline-offset: 3px; }
@@ -57,23 +56,12 @@ a:hover { color: var(--ink-1); }
   --content: min(1180px, 100% - 2 * clamp(20px, 5vw, 64px));
   --gutter: clamp(16px, 2.5vw, 32px);
   --region: clamp(80px, 12vh, 160px);
-
-  --mark-slot: clamp(140px, 18vh, 220px);
 }
 
 /* ---------- shared ---------- */
 .shell {
   width: var(--content);
   margin-inline: auto;
-}
-
-.kicker {
-  font-family: var(--font-mono);
-  font-size: clamp(0.6875rem, 0.65rem + 0.18vw, 0.8125rem);
-  line-height: 1.4;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
 }
 
 .skip-link {
@@ -101,9 +89,12 @@ a:hover { color: var(--ink-1); }
 }
 
 /* =========================================================================
-   HERO — pinned four-stage logo choreography
+   LOGO STAGE — clockwise spin, travel left, descend, dock at the footer
    ========================================================================= */
-.hero { height: 360vh; }
+.hero {
+  position: relative;          /* stacking anchor; z-index is lifted on phones */
+  height: 340vh;
+}
 
 .hero__sticky {
   position: sticky;
@@ -112,16 +103,10 @@ a:hover { color: var(--ink-1); }
   height: 100svh;
   overflow: hidden; /* fallback for browsers without overflow: clip */
   overflow: clip;
+  pointer-events: none; /* decorative stage never intercepts clicks */
 }
 
 .hero__stage { position: absolute; inset: 0; }
-
-.hero__persp {
-  position: absolute;
-  inset: 0;
-  perspective: 1400px;
-  perspective-origin: 50% 50%;
-}
 
 .hero__frame {
   position: absolute;
@@ -130,6 +115,7 @@ a:hover { color: var(--ink-1); }
   width: clamp(300px, 56vmin, 560px);
   aspect-ratio: 1304 / 1024;
   transform: translate(-50%, -50%);
+  transform-origin: center;
   will-change: transform;
 }
 
@@ -139,243 +125,67 @@ a:hover { color: var(--ink-1); }
   width: 100%;
   height: 100%;
   display: block;
-  backface-visibility: hidden;
   transform-origin: center;
+}
+
+.hero__markbox {
+  position: absolute;
+  left: 24.70%;
+  top: 32.30%;
+  width: 50.95%;
+  aspect-ratio: 9936 / 9874;
+  transform: translateY(-50%);
+  transform-origin: center;
+}
+
+.hero__mark {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* the animated logo layers are decorative: never intercept pointer or selection */
 .hero__wordmark,
-.hero__mark {
+.hero__mark,
+.hero__markbox {
   pointer-events: none;
   -webkit-user-drag: none;
   user-select: none;
 }
 
-.hero__markbox {
-  position: absolute;
-  left: 24.4%;
-  top: 32%;
-  width: 51.2%;
-  aspect-ratio: 167 / 165;
-  transform: translateY(-50%);
-  transform-origin: center;
-  backface-visibility: hidden;
-  visibility: hidden;
-}
-
-.hero__mark {
-  display: block;
-  width: 100%;
-  height: 100%;
-  transform-origin: center;
-}
-
-/* copy columns */
-.hero__copy {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--mark-slot) minmax(0, 1fr);
-  align-items: center;
-  z-index: 2;
-}
-
-.hero__col { opacity: 0; }
-.hero__col--left {
-  grid-column: 1;
-  justify-self: end;
-  max-width: 420px;
-  text-align: right;
-  padding-right: 24px;
-}
-.hero__col--right {
-  grid-column: 3;
-  justify-self: start;
-  max-width: 420px;
-  text-align: left;
-  padding-left: 24px;
-}
-
-.hero__headline {
-  font-size: clamp(2.5rem, 1.8rem + 3.2vw, 4.75rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--ink-1);
-  max-width: 24ch;
-  margin-top: 14px;
-  text-wrap: balance;
-}
-.hero__col--left .hero__headline { margin-left: auto; }
-.hero__headline--sm { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.4rem); }
-
-.hero__body {
-  margin-top: 16px;
-  max-width: 34ch;
-  color: var(--ink-2);
-}
-.hero__col--left .hero__body { margin-left: auto; }
-
-/* chapter indicator + scroll hint */
-.hero__indicator {
-  position: absolute;
-  left: clamp(20px, 5vw, 64px);
-  bottom: 28px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-
-.hero__hint {
-  position: absolute;
-  left: 50%;
-  bottom: 32px;
-  transform: translateX(-50%);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  transition: opacity 240ms ease;
-}
-.hero__hint::after {
-  content: "";
-  display: block;
-  width: 1px;
-  height: 28px;
-  margin: 10px auto 0;
-  background: var(--hairline);
-}
-.hero__hint::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 2px;
-  height: 22px;
-  background: var(--accent);
-  opacity: 0.55;
-  transform: translateX(-50%);
-  animation: hint-tick 2.4s linear infinite;
-}
-@keyframes hint-tick {
-  from { transform: translate(-50%, 26px); }
-  to { transform: translate(-50%, -18px); }
-}
-
-.qa-active .hero__hint::before { animation: none; }
-
-/* reduced-motion static mark (only visible without choreography) */
-.rm-mark {
-  display: none;
-  width: 160px;
-  height: auto;
-  margin: 56px auto 0;
-}
-
 /* =========================================================================
-   GALLERY
-   ========================================================================= */
-.gallery {
-  padding-block: var(--region);
-  padding-top: 28vh;
-  border-top: 1px solid var(--hairline);
-  background: var(--stage);
-}
-
-.gallery__head { max-width: 720px; }
-
-.gallery__title {
-  margin-top: 14px;
-  font-size: clamp(1.75rem, 1.4rem + 1.8vw, 3rem);
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-  color: var(--ink-1);
-  max-width: 30ch;
-}
-
-.gallery__intro {
-  margin-top: 18px;
-  max-width: 60ch;
-  color: var(--ink-2);
-}
-
-.gallery__rows {
-  margin-top: clamp(48px, 8vh, 96px);
-  display: grid;
-  row-gap: clamp(64px, 10vh, 120px);
-}
-
-.gallery__row {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: clamp(24px, 4vw, 64px);
-  align-items: center;
-  padding-top: 24px;
-  border-top: 1px solid var(--hairline);
-  transition: border-color 220ms ease;
-}
-.gallery__row:hover { border-color: var(--accent); }
-
-.gallery__media {
-  grid-column: 1 / 8;
-  margin: 0;
-  background: var(--surface);
-  aspect-ratio: 3 / 2;
-  overflow: clip;
-}
-.gallery__media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 220ms ease;
-}
-.gallery__row:hover .gallery__media img { transform: scale(1.02); }
-
-.gallery__text { grid-column: 9 / 13; }
-
-.gallery__row:nth-child(even) .gallery__media { grid-column: 6 / 13; }
-.gallery__row:nth-child(even) .gallery__text { grid-column: 1 / 6; }
-
-.gallery__index {
-  font-family: var(--font-mono);
-  font-size: clamp(0.6875rem, 0.65rem + 0.18vw, 0.8125rem);
-  letter-spacing: 0.14em;
-  color: var(--ink-3);
-}
-
-.gallery__card-title {
-  margin-top: 10px;
-  font-size: clamp(1.125rem, 1.05rem + 0.7vw, 1.625rem);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: var(--ink-1);
-  max-width: 40ch;
-}
-
-.gallery__card-text {
-  margin-top: 12px;
-  max-width: 60ch;
-  color: var(--ink-2);
-}
-
-/* reveal-on-scroll (disabled under reduced motion) */
-.gallery__row.reveal { opacity: 0; transform: translateY(24px); }
-.gallery__row.reveal.is-in {
-  opacity: 1;
-  transform: none;
-  transition: opacity 600ms ease, transform 600ms ease;
-}
-
-/* =========================================================================
-   FOOTER
+   FOOTER — keeps its content; the logo docks half-hidden at its top edge
    ========================================================================= */
 .footer {
+  position: relative;
+  z-index: 2;                  /* desktop/tablet: buries the docked logo's lower half */
   border-top: 1px solid var(--hairline);
   padding-block: calc(var(--region) / 1.5);
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: var(--stage);
+  z-index: 1;
+}
+
+.footer > .shell { position: relative; z-index: 3; }
+
+/* the end-state mark shown statically under prefers-reduced-motion */
+.footer__endmark {
+  display: none;
+  position: absolute;
+  left: calc(var(--dock-x, 50%) - var(--dock-r, 0px));
+  top: 0;
+  width: calc(var(--dock-r, 0px) * 2);
+  height: auto;
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .footer__grid {
@@ -421,12 +231,29 @@ a:hover { color: var(--ink-1); }
 }
 .footer__credit { max-width: 60ch; }
 
-#story, #programmes, #contact { scroll-margin-top: 24px; }
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .hero { height: 300vh; }
+}
+
+@media (max-width: 640px) {
+  .hero { height: 260vh; z-index: 3; } /* the docked half shows over the footer on phones */
+  .footer__grid { grid-template-columns: 1fr; }
+  .footer__legal { flex-direction: column; }
+  /* once docked, the emblem hands off to this footer-child layer: between the
+     footer's background and its content, riding the footer rigidly */
+  .footer__endmark { top: var(--dock-drop, 0px); }
+  .docked-mobile .footer__endmark { display: block; z-index: 2; }
+  .docked-mobile .hero__markbox { visibility: hidden; }
+}
 
 /* =========================================================================
-   REDUCED MOTION — static, fully readable, no pinned choreography
+   REDUCED MOTION — static: wordmark on the stage, end state at the footer,
+   no spin and no scroll choreography.
    ========================================================================= */
-.reduced-motion .hero { height: auto; }
+.reduced-motion .hero { height: auto; z-index: auto; }
 .reduced-motion .hero__sticky {
   position: static;
   height: auto;
@@ -434,98 +261,13 @@ a:hover { color: var(--ink-1); }
 }
 .reduced-motion .hero__stage {
   position: static;
-  padding: clamp(48px, 10vh, 120px) 0 0;
+  padding: clamp(48px, 10vh, 120px) 0;
 }
-.reduced-motion .hero__persp,
 .reduced-motion .hero__frame {
   position: static;
   transform: none;
   margin: 0 auto;
   width: min(420px, 72vw);
-  perspective: none;
 }
 .reduced-motion .hero__markbox { display: none; }
-.reduced-motion .hero__copy {
-  position: static;
-  display: block;
-  margin-top: 48px;
-}
-.reduced-motion .hero__col,
-.reduced-motion .hero__col--left,
-.reduced-motion .hero__col--right {
-  opacity: 1 !important;
-  transform: none !important;
-  max-width: 60ch;
-  margin: 24px auto 0;
-  padding: 0 clamp(20px, 5vw, 64px);
-  text-align: center;
-}
-.reduced-motion .hero__col--left .hero__headline,
-.reduced-motion .hero__col--left .hero__body { margin-left: auto; margin-right: auto; }
-.reduced-motion .hero__headline { margin-inline: auto; }
-.reduced-motion .hero__body { margin-inline: auto; }
-.reduced-motion .hero__indicator,
-.reduced-motion .hero__hint { display: none; }
-.reduced-motion .rm-mark { display: block; }
-.reduced-motion .hero .shell { padding-bottom: clamp(48px, 10vh, 120px); }
-.reduced-motion .gallery { padding-top: var(--region); }
-.reduced-motion .gallery__row.reveal { opacity: 1; transform: none; }
-
-/* =========================================================================
-   RESPONSIVE
-   ========================================================================= */
-@media (max-width: 1023px) {
-  .hero { height: 320vh; }
-  .hero__frame { width: clamp(300px, 52vmin, 460px); }
-  :root { --mark-slot: clamp(120px, 16vh, 180px); }
-  .hero__col--left,
-  .hero__col--right { max-width: 320px; }
-  .hero__headline { font-size: clamp(2rem, 1.4rem + 3vw, 3.2rem); }
-  .hero__headline--sm { font-size: clamp(1.35rem, 1.1rem + 1.4vw, 2rem); }
-
-  .gallery__media { grid-column: 1 / 8; }
-  .gallery__text { grid-column: 9 / 13; }
-}
-
-@media (max-width: 640px) {
-  .hero { height: 280vh; }
-  .hero__frame { width: clamp(240px, 76vw, 340px); }
-  :root { --mark-slot: 96px; }
-
-  /* copy stacks above / below the mark band */
-  .hero__copy {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr var(--mark-slot) 1fr;
-    align-content: center;
-    row-gap: 0;
-    padding: 24px 20px;
-  }
-  .hero__col--left,
-  .hero__col--right {
-    justify-self: center;
-    max-width: 34ch;
-    text-align: center;
-    padding: 0;
-  }
-  .hero__col--left { grid-row: 1; grid-column: 1; align-self: end; padding-bottom: 16px; }
-  .hero__col--right { grid-row: 3; grid-column: 1; align-self: start; padding-top: 16px; }
-  .hero__col--left .hero__headline,
-  .hero__col--left .hero__body { margin-left: auto; margin-right: auto; }
-  .hero__headline { font-size: clamp(1.6rem, 1.2rem + 2.4vw, 2.2rem); margin-top: 10px; }
-  .hero__headline--sm { font-size: clamp(1.15rem, 1rem + 1vw, 1.5rem); }
-  .hero__body { max-width: 32ch; }
-
-  .hero__indicator { font-size: 10px; left: 16px; bottom: 16px; }
-
-  .gallery__row {
-    grid-template-columns: 1fr;
-    row-gap: 18px;
-  }
-  .gallery__media,
-  .gallery__row:nth-child(even) .gallery__media { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
-  .gallery__text,
-  .gallery__row:nth-child(even) .gallery__text { grid-column: 1 / -1; }
-
-  .footer__grid { grid-template-columns: 1fr; }
-  .footer__legal { flex-direction: column; }
-}
+.reduced-motion .footer__endmark { display: block; }
