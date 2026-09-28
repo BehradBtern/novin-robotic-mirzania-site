@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.1.0 fix round)
 
-- Revision: `865d7ee` · generated 2026-09-28T15:42:24.167Z
+- Revision: `ca0993c` · generated 2026-09-28T15:51:49.218Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/153.0.8010.54 · Edge: Edg/154.0.4258.37
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -26,7 +26,7 @@
 | g | responsive: no overflow, mark fully in width | PASS | [{"vp":"360x740","overflow":0,"markLeft":128.9,"markRight":348.6,"ok":true},{"vp":"768x1024","overflow":0,"markLeft":14.3,"markRight":758.7,"ok":true},{"vp":"1280x800","overflow":0,"markLeft":28,"markRight":744.8,"ok":true},{"vp":"1440x900","overflow":0,"markLeft":21.2,"markRight":848.5,"ok":true},{"vp":"1920x1080","ov | overflow <= 1px; mark within horizontal bounds | evidence/g/responsive.json |
 | h | reduced motion: static end state, no spin | PASS | {"hasClass":true,"frameInline":"","frameComputed":"none","markboxDisplay":"none","wordmarkOpacity":"1","endDisplay":"block","endOpacity":"1","endCenter":[432,510.8125],"footerTop":509.8125,"dock":[432,363]} | no transforms; markbox hidden; endmark at dock position; wordmark visible | evidence/h/reduced-1440-full.png |
 | i | perf: zero errors, local-only | PASS | {"consoleErrors":0,"pageErrors":0,"failed":0,"hosts":{"localhost:8123":5},"resources":5,"transferBytes":48076} | 0 errors; localhost-only; no failed requests | evidence/i/perf.json |
-| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":6.9,"frameP95Ms":7.1} | informational only | — |
+| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":6.9,"frameP95Ms":7} | informational only | — |
 | j | resize mid-sequence | PASS | {"p":[0.55,0.61875],"spin":360,"tx":-184.78360058309045} | state re-renders consistently after resize | — |
 | j | fling (wheel bursts) | PASS | {"p":1,"mapP":1} | end state == mapping ±0.002 | — |
 | j | reload mid-sequence | PASS | {"scrollY":1080,"p":0.5,"mapP":0.5} | deterministic restore | — |
@@ -41,7 +41,7 @@
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (99)
+## Evidence files (67)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -59,52 +59,32 @@
 - `qa/evidence/b/pin-0-1440x900.png`
 - `qa/evidence/b/pin-0-390x844.png`
 - `qa/evidence/b/pin-0-834x1112.png`
-- `qa/evidence/b/pin-0.1-1440x900.png`
 - `qa/evidence/b/pin-0.3-1440x900.png`
 - `qa/evidence/b/pin-0.3-390x844.png`
 - `qa/evidence/b/pin-0.3-834x1112.png`
-- `qa/evidence/b/pin-0.325-1440x900.png`
-- `qa/evidence/b/pin-0.325-390x844.png`
-- `qa/evidence/b/pin-0.325-834x1112.png`
 - `qa/evidence/b/pin-0.55-1440x900.png`
 - `qa/evidence/b/pin-0.55-390x844.png`
 - `qa/evidence/b/pin-0.55-834x1112.png`
-- `qa/evidence/b/pin-0.7-1440x900.png`
-- `qa/evidence/b/pin-0.7-390x844.png`
-- `qa/evidence/b/pin-0.7-834x1112.png`
 - `qa/evidence/b/pin-0.8-1440x900.png`
 - `qa/evidence/b/pin-0.8-390x844.png`
 - `qa/evidence/b/pin-0.8-834x1112.png`
-- `qa/evidence/b/pin-0.9-1440x900.png`
 - `qa/evidence/b/pin-1-1440x900.png`
 - `qa/evidence/b/pin-1-390x844.png`
 - `qa/evidence/b/pin-1-834x1112.png`
-- `qa/evidence/b/scroll-trace.json`
-- `qa/evidence/c/copy-1440x900.png`
-- `qa/evidence/c/copy-1920x1080.png`
-- `qa/evidence/c/copy-2560x1080.png`
-- `qa/evidence/c/copy-audit.json`
 - `qa/evidence/d/dock-audit.json`
-- `qa/evidence/d/final-1280x800.png`
-- `qa/evidence/d/final-1440x900.png`
-- `qa/evidence/d/final-1920x1080.png`
-- `qa/evidence/d/final-2560x1080.png`
-- `qa/evidence/d/final-390x844.png`
-- `qa/evidence/d/final-framing.json`
 - `qa/evidence/d/stability.json`
 - `qa/evidence/e/dock-zoom-2x.png`
 - `qa/evidence/e/sharpness.json`
 - `qa/evidence/edge/dock-1440x900.png`
-- `qa/evidence/edge/final-1440x900.png`
 - `qa/evidence/edge/intro-1440x900.png`
 - `qa/evidence/f/content-audit.txt`
 - `qa/evidence/f/footer-1440x900.png`
 - `qa/evidence/f/footer-links.json`
+- `qa/evidence/f/roundtrip-blurb.png`
 - `qa/evidence/f/roundtrip-headline.png`
+- `qa/evidence/f/roundtrip-logoswap-dock.png`
 - `qa/evidence/f/roundtrip-logoswap-final.png`
 - `qa/evidence/f/roundtrip.json`
-- `qa/evidence/g/footer-1440x900.png`
-- `qa/evidence/g/footer-links.json`
 - `qa/evidence/g/responsive.json`
 - `qa/evidence/h/gallery-6-1440x900.png`
 - `qa/evidence/h/gallery-audit.json`
@@ -125,20 +105,8 @@
 - `qa/evidence/i/resp-768x1024-q070.png`
 - `qa/evidence/i/responsive.json`
 - `qa/evidence/j/dock-live-zoom-2x.png`
-- `qa/evidence/j/reduced-1440-full.png`
-- `qa/evidence/j/reduced-390-full.png`
 - `qa/evidence/j/reduced-motion.json`
-- `qa/evidence/k/a11y.json`
-- `qa/evidence/k/focus-skip.png`
 - `qa/evidence/l/perf.json`
-- `qa/evidence/m/e1-resize.json`
-- `qa/evidence/m/e12-seam.json`
-- `qa/evidence/m/e3-reload.json`
-- `qa/evidence/m/e5-zoomproxy-720x450-final.png`
-- `qa/evidence/m/e5-zoomproxy-720x450.png`
-- `qa/evidence/m/e7-short-1280x500.png`
-- `qa/evidence/m/seam-a-pinend.png`
-- `qa/evidence/m/seam-b-unpinned.png`
 - `qa/evidence/rollback/dist-v1.0.0.zip`
 - `qa/evidence/rollback/tag-show.txt`
 - `qa/evidence/rollback/v1.0.0-intro.png`
