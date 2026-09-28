@@ -1,0 +1,52 @@
+[
+  {
+    "vp": "1280x800",
+    "frac": 0.5,
+    "rz": -14,
+    "k": 5.24,
+    "visiblePx": 727,
+    "markPx": 1454,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1440x900",
+    "frac": 0.5,
+    "rz": -14,
+    "k": 5.23,
+    "visiblePx": 816,
+    "markPx": 1633,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1920x1080",
+    "frac": 0.5,
+    "rz": -14,
+    "k": 5.64,
+    "visiblePx": 979,
+    "markPx": 1957,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "2560x1080",
+    "frac": 0.5,
+    "rz": -14,
+    "k": 5.64,
+    "visiblePx": 979,
+    "markPx": 1957,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "390x844",
+    "frac": 0.5,
+    "rz": -12,
+    "k": 4.33,
+    "visiblePx": 389,
+    "markPx": 777,
+    "overflow": 0,
+    "ok": true
+  }
+]

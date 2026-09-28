@@ -1,0 +1,58 @@
+[
+  {
+    "vp": "360x740",
+    "heroOverlapPairs": 0,
+    "rowOverlaps": 0,
+    "footerOverlaps": [],
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "768x1024",
+    "heroOverlapPairs": 0,
+    "rowOverlaps": 0,
+    "footerOverlaps": [],
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1280x800",
+    "heroOverlapPairs": 0,
+    "rowOverlaps": 0,
+    "footerOverlaps": [],
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1440x900",
+    "heroOverlapPairs": 0,
+    "rowOverlaps": 0,
+    "footerOverlaps": [],
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1920x1080",
+    "heroOverlapPairs": 0,
+    "rowOverlaps": 0,
+    "footerOverlaps": [],
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "2560x1080",
+    "heroOverlapPairs": 0,
+    "rowOverlaps": 0,
+    "footerOverlaps": [],
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1280x500",
+    "heroOverlapPairs": 0,
+    "rowOverlaps": 0,
+    "footerOverlaps": [],
+    "overflow": 0,
+    "ok": true
+  }
+]

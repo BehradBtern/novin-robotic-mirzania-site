@@ -1,0 +1,43 @@
+{
+  "count": 6,
+  "alts": [
+    68,
+    57,
+    60,
+    57,
+    56,
+    50
+  ],
+  "titles": [
+    "Automation on the factory floor",
+    "Machines for farm and field",
+    "People working beside robots",
+    "Navigation for mobile autonomy",
+    "Hands that learn to grasp",
+    "Classrooms, visits, and outreach"
+  ],
+  "texts": [
+    182,
+    180,
+    171,
+    194,
+    183,
+    192
+  ],
+  "decoded": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "mediaVsText": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ]
+}

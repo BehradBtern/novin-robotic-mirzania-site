@@ -1,0 +1,25 @@
+{
+  "rc": {
+    "hasClass": true,
+    "copyOpacity": [
+      1,
+      1
+    ],
+    "frameInline": "",
+    "frameComputed": "none",
+    "rowsOpacity": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "rmMarkDisplay": "block",
+    "rmMarkWidth": 160
+  },
+  "rc2": {
+    "frameInline": "",
+    "frameComputed": "none"
+  }
+}
