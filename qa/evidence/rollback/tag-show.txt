@@ -1,0 +1,72 @@
+﻿tag v1.0.0
+Tagger: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Mon Sep 28 17:30:35 2026 +0330
+
+Release v1.0.0 - verified revision (52fd9fd + QA evidence)
+
+commit 63e1834b28961c35fb1240573987401963b5f7e4
+Author: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Mon Sep 28 17:30:35 2026 +0330
+
+    release: v1.0.0 - verified site + QA evidence (QA revision 52fd9fd)
+
+ qa/evidence/a/intro-1280x800.png             | Bin 0 -> 43125 bytes
+ qa/evidence/a/intro-1440x900.png             | Bin 0 -> 50510 bytes
+ qa/evidence/a/intro-1920x1080.png            | Bin 0 -> 58291 bytes
+ qa/evidence/a/intro-audit.json               |  29 +
+ qa/evidence/a/nav-sweep.json                 | 110 ++++
+ qa/evidence/b/pin-0-1440x900.png             | Bin 0 -> 50510 bytes
+ qa/evidence/b/pin-0.1-1440x900.png           | Bin 0 -> 50510 bytes
+ qa/evidence/b/pin-0.325-1440x900.png         | Bin 0 -> 7592 bytes
+ qa/evidence/b/pin-0.55-1440x900.png          | Bin 0 -> 92086 bytes
+ qa/evidence/b/pin-0.7-1440x900.png           | Bin 0 -> 94877 bytes
+ qa/evidence/b/pin-0.9-1440x900.png           | Bin 0 -> 89594 bytes
+ qa/evidence/b/pin-1-1440x900.png             | Bin 0 -> 65812 bytes
+ qa/evidence/b/scroll-trace.json              | 796 +++++++++++++++++++++++++++
+ qa/evidence/c/copy-1440x900.png              | Bin 0 -> 94877 bytes
+ qa/evidence/c/copy-1920x1080.png             | Bin 0 -> 100056 bytes
+ qa/evidence/c/copy-2560x1080.png             | Bin 0 -> 103160 bytes
+ qa/evidence/c/copy-audit.json                |  53 ++
+ qa/evidence/d/final-1280x800.png             | Bin 0 -> 57912 bytes
+ qa/evidence/d/final-1440x900.png             | Bin 0 -> 65812 bytes
+ qa/evidence/d/final-1920x1080.png            | Bin 0 -> 80793 bytes
+ qa/evidence/d/final-2560x1080.png            | Bin 0 -> 83938 bytes
+ qa/evidence/d/final-390x844.png              | Bin 0 -> 36573 bytes
+ qa/evidence/d/final-framing.json             |  52 ++
+ qa/evidence/edge/final-1440x900.png          | Bin 0 -> 65812 bytes
+ qa/evidence/edge/intro-1440x900.png          | Bin 0 -> 50510 bytes
+ qa/evidence/f/content-audit.txt              |   7 +
+ qa/evidence/g/footer-1440x900.png            | Bin 0 -> 68163 bytes
+ qa/evidence/g/footer-links.json              |  53 ++
+ qa/evidence/h/gallery-6-1440x900.png         | Bin 0 -> 60040 bytes
+ qa/evidence/h/gallery-audit.json             |  43 ++
+ qa/evidence/h/variant-4-1440x900.png         | Bin 0 -> 56635 bytes
+ qa/evidence/h/variant-7-1440x900.png         | Bin 0 -> 60399 bytes
+ qa/evidence/h/variant-runs.json              |  30 +
+ qa/evidence/i/resp-1280x500-q070.png         | Bin 0 -> 66921 bytes
+ qa/evidence/i/resp-1280x500-q1.png           | Bin 0 -> 36781 bytes
+ qa/evidence/i/resp-1280x800-q070.png         | Bin 0 -> 87408 bytes
+ qa/evidence/i/resp-1440x900-q070.png         | Bin 0 -> 94877 bytes
+ qa/evidence/i/resp-1920x1080-q070.png        | Bin 0 -> 100056 bytes
+ qa/evidence/i/resp-2560x1080-q070.png        | Bin 0 -> 103160 bytes
+ qa/evidence/i/resp-360x740-q070.png          | Bin 0 -> 38937 bytes
+ qa/evidence/i/resp-768x1024-q070.png         | Bin 0 -> 69952 bytes
+ qa/evidence/i/responsive.json                |  58 ++
+ qa/evidence/j/reduced-1440-full.png          | Bin 0 -> 314484 bytes
+ qa/evidence/j/reduced-390-full.png           | Bin 0 -> 214649 bytes
+ qa/evidence/j/reduced-motion.json            |  25 +
+ qa/evidence/k/a11y.json                      | 141 +++++
+ qa/evidence/k/focus-skip.png                 | Bin 0 -> 58748 bytes
+ qa/evidence/l/perf.json                      |  59 ++
+ qa/evidence/m/e1-resize.json                 |  10 +
+ qa/evidence/m/e12-seam.json                  |   9 +
+ qa/evidence/m/e3-reload.json                 |   6 +
+ qa/evidence/m/e5-zoomproxy-720x450-final.png | Bin 0 -> 30698 bytes
+ qa/evidence/m/e5-zoomproxy-720x450.png       | Bin 0 -> 57503 bytes
+ qa/evidence/m/e7-short-1280x500.png          | Bin 0 -> 66921 bytes
+ qa/evidence/m/seam-a-pinend.png              | Bin 0 -> 140657 bytes
+ qa/evidence/m/seam-b-unpinned.png            | Bin 0 -> 140657 bytes
+ qa/qa-log.md                                 |  45 ++
+ qa/qa-report.md                              | 110 ++++
+ qa/qa-summary.json                           | 331 +++++++++++
+ 59 files changed, 1967 insertions(+)
