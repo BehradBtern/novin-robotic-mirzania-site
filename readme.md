@@ -51,6 +51,8 @@ qa/                       headless QA harness + evidence + reports (tooling; not
   If you change it, re-check text contrast (the QA report lists the measured
   ratios; teal-on-stage is ≈8.2:1 with the shipped values).
 - Save + refresh. No rebuild, no other file.
+- Keep replacement copy roughly the same length — the hero reserves fixed space for the mark
+  between the two copy columns, and very long text will tighten that gap.
 
 ## Replace the logo
 
