@@ -120,7 +120,7 @@ def main():
         parts.append('</svg>')
         return '\n'.join(parts)
 
-    content_box = [ux0, uy0, ux1, uy1]
+    content_box = [ux0, uy0, ux1 - ux0, uy1 - uy0]
     diamond_box = [diamond['x'], diamond['y'], diamond['w'], diamond['h']]
     word = build_svg(content_box, True).replace(
         'viewBox="%s">' % ' '.join(str(round(v, 2)) for v in content_box),

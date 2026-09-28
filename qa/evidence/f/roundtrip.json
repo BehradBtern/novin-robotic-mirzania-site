@@ -6,15 +6,18 @@
   ],
   "checks": {
     "editedBlurbVisible": true,
+    "editedGalleryVisible": true,
+    "galleryTitle": "EDITED PROGRAMME TITLE (content round-trip test).",
+    "galleryCount": 6,
     "domBlurb": "EDITED BLURB (content round-trip test).",
     "headerCount": 0,
     "errors": 0,
     "landingVisibleFrac": 1,
     "landingCenter": [
       720,
-      674.6
+      678.3
     ],
-    "bandCy": 674.1,
+    "bandCy": 677.9,
     "markLoaded": true,
     "logoSwapErrors": 0
   },

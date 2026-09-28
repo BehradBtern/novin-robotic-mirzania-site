@@ -113,7 +113,7 @@ a:hover { color: var(--ink-1); }
   left: 50%;
   top: 50%;
   width: var(--frame-w, clamp(300px, 56vmin, 560px));
-  aspect-ratio: 1304 / 1024;
+  aspect-ratio: 19500 / 15286;
   transform: translate(-50%, -50%);
   transform-origin: center;
   will-change: transform;
@@ -151,6 +151,38 @@ a:hover { color: var(--ink-1); }
   pointer-events: none;
   -webkit-user-drag: none;
   user-select: none;
+}
+
+/* ---------- hero side copy (beside the small symbol) ---------- */
+.hero__side {
+  position: absolute;
+  top: 50%;
+  width: min(280px, 26vw);
+  opacity: 0;
+  pointer-events: none;
+}
+.hero__side--left { left: clamp(16px, 6vw, 96px); }
+.hero__side--right { right: clamp(16px, 6vw, 96px); text-align: right; }
+
+.hero__side-kicker {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6875rem, 0.65rem + 0.18vw, 0.8125rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.hero__side-title {
+  margin-top: 10px;
+  color: var(--ink-1);
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.35;
+}
+.hero__side-body {
+  margin-top: 10px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--ink-2);
 }
 
 /* =========================================================================
@@ -233,22 +265,97 @@ a:hover { color: var(--ink-1); }
 .footer__credit { max-width: 60ch; }
 
 /* =========================================================================
+   PROGRAMMES — 4–7 photo slots with text
+   ========================================================================= */
+.gallery {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--hairline);
+  padding-block: var(--region);
+}
+
+.gallery__head { max-width: 62ch; margin-bottom: clamp(32px, 6vh, 64px); }
+
+.gallery__label {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6875rem, 0.65rem + 0.18vw, 0.8125rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.gallery__title {
+  margin-top: 12px;
+  color: var(--ink-1);
+  font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.gallery__intro { margin-top: 14px; color: var(--ink-2); }
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter);
+}
+
+.gallery__card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.gallery__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--stage);
+}
+.gallery__card figcaption { padding: 18px 20px 22px; }
+.gallery__card-title { color: var(--ink-1); font-size: 1.02rem; font-weight: 600; line-height: 1.35; }
+.gallery__card-text { margin-top: 8px; font-size: 0.875rem; color: var(--ink-2); }
+
+.gallery-reveal .gallery__card {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 480ms ease, transform 480ms ease;
+}
+.gallery-reveal .gallery__card.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .gallery-reveal .gallery__card { opacity: 1; transform: none; transition: none; }
+}
+
+/* =========================================================================
    RESPONSIVE
    ========================================================================= */
 @media (min-width: 641px) and (max-width: 1023px) {
   .hero { height: 300vh; }
+  .gallery__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
   .hero { height: 260vh; }
   .footer__grid { grid-template-columns: 1fr; }
   .footer__legal { flex-direction: column; }
+  .gallery__grid { grid-template-columns: 1fr; }
+
+  /* phones: the side copy sits above and below the small symbol instead of
+     flanking it (keeps the text readable at narrow widths) */
+  .hero__side { width: auto; left: 20px; right: 20px; }
+  .hero__side--left { top: 18%; text-align: left; }
+  .hero__side--right { top: 78%; text-align: left; }
+  .hero__side-title { font-size: 0.95rem; }
+  .hero__side-body { font-size: 0.8125rem; }
 }
 
-/* once the sequence docks, the mark hands off to the footer-child layer
-   (between the footer's background and its content, riding the footer) */
+/* once the sequence docks, the footer shows its own centred copy of the mark
+   (between the footer's background and its content); the hero's docked mark
+   stays in place and simply scrolls away with the stage */
 .docked-footer .footer__endmark { display: block; }
-.docked-footer .hero__markbox { visibility: hidden; }
 
 /* =========================================================================
    REDUCED MOTION — static: wordmark on the stage, end state at the footer,
@@ -262,13 +369,14 @@ a:hover { color: var(--ink-1); }
 }
 .reduced-motion .hero__stage {
   position: static;
-  padding: clamp(48px, 10vh, 120px) 0;
+  padding: clamp(24px, 4vh, 48px) 0;
 }
 .reduced-motion .hero__frame {
   position: static;
   transform: none;
   margin: 0 auto;
-  width: var(--frame-w, min(420px, 72vw));
+  width: min(var(--frame-w, min(420px, 72vw)), calc(100vh * 1.2757 * 0.90));
 }
 .reduced-motion .hero__markbox { display: none; }
+.reduced-motion .hero__side { display: none; }
 .reduced-motion .footer__endmark { display: block; }
