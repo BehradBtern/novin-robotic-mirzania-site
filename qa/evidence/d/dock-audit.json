@@ -1,0 +1,86 @@
+[
+  {
+    "vp": "1280x800",
+    "frac": 0.5,
+    "markCenter": [
+      385.9,
+      305.1
+    ],
+    "footerTop": 305,
+    "dockX": 384,
+    "anchorsFooter": true,
+    "xOn": true,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1440x900",
+    "frac": 0.5,
+    "markCenter": [
+      434.5,
+      383.1
+    ],
+    "footerTop": 383,
+    "dockX": 432,
+    "anchorsFooter": true,
+    "xOn": true,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1920x1080",
+    "frac": 0.5,
+    "markCenter": [
+      579.4,
+      524.1
+    ],
+    "footerTop": 524,
+    "dockX": 576,
+    "anchorsFooter": true,
+    "xOn": true,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "2560x1080",
+    "frac": 0.5,
+    "markCenter": [
+      771.4,
+      524.1
+    ],
+    "footerTop": 524,
+    "dockX": 768,
+    "anchorsFooter": true,
+    "xOn": true,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "834x1112",
+    "frac": 0.5,
+    "markCenter": [
+      419.7,
+      520.2
+    ],
+    "footerTop": 520,
+    "dockX": 417,
+    "anchorsFooter": true,
+    "xOn": true,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "390x844",
+    "frac": 0.506,
+    "markCenter": [
+      268,
+      1.4
+    ],
+    "footerTop": -32.6,
+    "dockX": 268,
+    "anchorsFooter": true,
+    "xOn": true,
+    "overflow": 0,
+    "ok": true
+  }
+]

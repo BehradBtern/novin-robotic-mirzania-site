@@ -1,10 +1,10 @@
-# Novin Robotic Mirzania — one-page website
+# Novin Robotic Mirzania — logo-sequence page
 
-A static, single-page website for the institute: a four-stage scroll-linked logo
-choreography (wordmark → flip + shrink to the mark → copy left and right → the
-mark rotates left, grows, and stays half visible at the left edge), followed by
-a six-slot gallery and a footer. **No top navigation bar** — the footer is the
-only navigation.
+A minimal single page: the institute's logo plays a scroll-linked sequence —
+it **spins clockwise** while shrinking (the wordmark turns into the symbol
+mark), **travels to the left** while growing, **descends**, and docks
+**half-hidden at the footer**, where it stays. Everything else is the footer.
+No top navigation bar.
 
 No framework, no build step: plain HTML/CSS/JS. All content lives in one file.
 
@@ -20,134 +20,117 @@ node server.js          # serves this folder, prints its URL
 Change the port with the `PORT` environment variable (`$env:PORT=9000; node server.js`).
 `npm run dev` is an alias for the same command.
 
-> The page requires JavaScript for content rendering; with JS disabled a short
-> notice is shown instead.
+> The page requires JavaScript; with JS disabled a short notice is shown.
 
 ## File map
 
 ```
-index.html                page skeleton (static chrome only; content injected from content.js)
-content.js                ✏️ THE single content source — every string, image path, and theme color
-server.js                 zero-dependency static server for local preview
-package.json              scripts: dev, qa (QA needs devDependencies only)
-assets/css/style.css      design system + layout + animation styles
-assets/js/main.js         content rendering + the four-stage scroll choreography + QA hook
-assets/logo/logo-wordmark.svg   vector lockup (diamond + "NOVIN ROBOTIC MIRZANIA" + Persian line)
-assets/logo/logo-mark.svg       vector mark (diamond only)
-assets/img/gallery-01..06.svg   placeholder artworks (replace with real photos)
-assets/favicon.svg        favicon (the mark)
-tools/make-logo-assets.py regenerate the two logo SVGs from source PNGs
-qa/                       headless QA harness + evidence + reports (tooling; not needed to serve)
+index.html                     page skeleton (logo stage + footer)
+content.js                     ✏️ THE single content source — footer copy, theme, animation tuning
+assets/css/style.css           design system + the animation styles
+assets/js/main.js              the sequence engine + QA hook
+assets/logo/logo-wordmark.svg  vector lockup (diamond + "NOVIN ROBOTIC MIRZANIA" + Persian line)
+assets/logo/logo-mark.svg      vector mark (diamond only)
+assets/logo/*@2x.png / *@3x.png  raster fallbacks (not used by default)
+assets/favicon.svg             favicon (the mark)
+tools/export-logo-from-cdr.py  regenerate the logo assets from "LOGO MIRZANIA.cdr"
+qa/                            headless QA harness + evidence + reports (tooling only)
+server.js                      zero-dependency local preview server
 ```
 
 ---
 
-## Edit copy / retheme
+## The sequence (and how to tune it)
 
-- Open **`content.js`** — every user-visible string is there: `meta`, `brand`,
-  `hero` (including the four chapter labels), `gallery` (titles, texts, alt
-  texts, image paths), `footer` (blurb, links, contact, legal).
-- **Background color**: change `theme.stage` (one token) in `content.js`.
-  If you change it, re-check text contrast (the QA report lists the measured
-  ratios; teal-on-stage is ≈8.2:1 with the shipped values).
-- Save + refresh. No rebuild, no other file.
-- Keep replacement copy roughly the same length — the hero reserves fixed space for the mark
-  between the two copy columns, and very long text will tighten that gap.
+Scroll progress drives five phases: **hold → clockwise spin + shrink (the
+wordmark swaps to the mark mid-turn) → left travel + grow → descend → dock.**
+After the pin releases, the mark rides up with the footer and rests with
+roughly half visible above the footer's edge (on phones the footer is taller
+than the screen, so the same dock reads against the top of the viewport).
+
+Tuning lives in `content.js` → `animation`:
+
+| key | default | meaning |
+| --- | --- | --- |
+| `spinTurns` | `1` | full clockwise turns during the spin (1 = 360°) |
+| `dockXFrac` | `0.30` | where the logo ends horizontally (share of viewport width) |
+| `maxRadiusVh` | `0.46` | cap for the final logo radius (share of viewport height) |
+| `edgeMarginPx` | `12` | minimum gap kept to the screen edges |
+
+Stage boundaries live in `assets/js/main.js` (the `render()` windows).
+Hero heights: 340vh desktop / 300vh tablet / 260vh phone.
+
+**Reduced motion** (`prefers-reduced-motion: reduce`): no spin — the page
+shows the static wordmark and the end state (the mark docked at the footer).
+
+**QA hook**: `?qa=<0..1>` pins the sequence for automated screenshots; it has
+no effect without the parameter.
+
+## Edit the footer copy
+
+Open **`content.js`** → `footer` — blurb, section links, contact lines, legal
+line. Theme colors live under `theme` (the `stage` token is the single
+background color). Save + refresh; no rebuild.
 
 ## Replace the logo
 
-**Drop-in (recommended):** replace these two files, keeping the same names:
+**Option A — drop-in:** replace these two files, keeping the names and a
+transparent background:
 
-- `assets/logo/logo-wordmark.svg` — lockup above text; canvas ≈ 1304×1024.
-- `assets/logo/logo-mark.svg` — mark only; canvas ≈ 167×165.
+- `assets/logo/logo-wordmark.svg` — lockup above text.
+- `assets/logo/logo-mark.svg` — mark only. (Also copy it over `assets/favicon.svg`.)
 
-The animation reads only these two files; keep a transparent background and a
-similar aspect ratio and nothing else needs changing.
+If the new artwork's diamond sits differently, update the geometry in two
+places so the spin stays continuous:
 
-**From new source PNGs:** put them at the repo root as `logo-mirzania.png`
-(wordmark) and `logo-mirzania-mark.png` (mark only), then:
+- `content.js` → `constants.wordmarkDiamondWidthFrac` / `wordmarkDiamondCenterYFrac`
+  (diamond width ÷ lockup width; diamond centre-Y ÷ lockup height)
+- `assets/css/style.css` → `.hero__markbox` (`left`, `top`, `width`, `aspect-ratio`).
+
+**Option B — regenerate from the CorelDRAW master:**
 
 ```bash
-python -m pip install vtracer   # one-time
-python tools/make-logo-assets.py
+python tools/export-logo-from-cdr.py     # needs LibreOffice installed
 ```
 
-**Important geometry note:** the flip animation keeps the diamond continuous by
-aligning the mark's box to the diamond's box inside the wordmark. Those two
-fractions live in `content.js` → `constants`
-(`wordmarkDiamondWidthFrac`, `wordmarkDiamondCenterYFrac`). If the new artwork's
-diamond sits differently, update these values (measure: diamond width ÷ lockup
-width; diamond center-Y ÷ lockup height).
-
-## Photos
-
-- Replace each `gallery.items[i].image` path in `content.js` with a real photo
-  (recommended: 3:2 aspect, ≤ ~400 KB, e.g. 1200×800 JPG/WebP). Keep each
-  `alt` meaningful — it is read by screen readers.
-- **Add or remove slots:** edit the `gallery.items` array — keep **4–7 items**.
-  The layout adapts automatically (alternating rows on desktop, stacked on
-  mobile; verified with 4, 6 and 7 items).
-
-## Accessibility & motion
-
-- `prefers-reduced-motion: reduce` → the page shows a static, fully readable
-  layout (no pinned choreography). Toggling the OS setting reloads the page.
-- Keyboard: “Skip to gallery” is the first focusable element; footer links are
-  reachable with visible focus rings; nothing focusable inside the hero.
-- Automated checks (contrast, alt text, reduced motion, overlap scans) are in
-  the QA report — see below.
-- QA hook for tooling only: `?qa=<0..1>` pins the hero progress for
-  deterministic screenshots; it has no effect without the parameter.
+This reads `LOGO MIRZANIA.cdr` through LibreOffice, rebuilds a clean SVG of
+the lockup and the mark, recolours to `#56C1C9`, writes the 2x/3x PNG
+fallbacks and prints a summary. Notes: the exporter compensates for a known
+libcdr limitation (four “I” glyphs are rebuilt from measured stem/cap
+metrics), and the resulting SVGs are validated by rendering them at large
+size — see `qa/qa-report.md` §e for the sharpness evidence.
 
 ## Deploy
 
 Upload `index.html`, `content.js` and the `assets/` folder to any static host
-(server.js / package.json / tools / qa are development tooling and are not
-required to serve the site). All asset references are relative; no external
-requests are made (the hosting platform’s strict CSP is satisfied out of the
-box). In this environment the AutoClaw preview channel handles staging; formal
+(all references are relative; the page performs **zero external requests**).
+In this environment the AutoClaw preview channel handles staging; formal
 publish is the **Publish** action in the browser panel.
 
 ## Rollback
 
-Releases are git-tagged in this repository. Current: `v1.0.0`.
+Releases are git-tagged in this repository:
 
-- Restore the code: `git checkout v1.0.0` (or `git worktree add <dir> v1.0.0`).
-- Static archive for hosts without git: `qa/evidence/rollback/dist-v1.0.0.zip`
-  (SHA-256 recorded in `qa/evidence/rollback/dist-sha256.txt`).
-- Re-upload the restored files to the host. Hosting-level rollback (CDN cache,
-  platform versions) is outside this repository — keep the archive for manual
-  restore.
-- Fixes after a release ship as `v1.0.1`; never move a published tag.
+- **`v1.1.0`** — current (clockwise-spin + footer-dock sequence, CDR-derived vector logo).
+- **`v1.0.0`** — previous behaviour (flip animation, gallery page) — kept for one-step restore.
 
-## Browser support log (honest summary)
-
-| Browser | Status | Notes |
-| --- | --- | --- |
-| Chrome (desktop) | **EXECUTED** — full automated suite | via puppeteer-core on Windows |
-| Edge (desktop) | **EXECUTED** — subset | same Chromium engine as Chrome — not independent engine coverage |
-| Firefox | **NOT PERFORMED** | not installed on the QA host; risks assessed by code inspection only |
-| Safari / iOS Safari | **NOT PERFORMED** | cannot run on Windows; inspection-based risk notes in `qa/qa-log.md` |
-| Android Chrome (device) | **NOT PERFORMED** | layouts exercised via desktop viewport emulation only |
-
-Reduced-motion checks were performed via DevTools emulation (`emulateMediaFeatures`)
-— labeled as such in the log. Full details, commands and artifacts: `qa/qa-log.md`,
-`qa/qa-report.md`.
+Restore: `git checkout v1.0.0` (or `git worktree add <dir> v1.0.0`), then
+re-upload. Static archives: `qa/evidence/rollback/dist-v1.1.0.zip` and
+`dist-v1.0.0.zip` (SHA-256 recorded next to each). Ship fixes as `v1.1.1`;
+never move a published tag.
 
 ## QA — regenerate evidence
 
 ```bash
 npm install        # dev-only: installs puppeteer-core (no browser download)
-npm run qa         # runs the full suite, writes qa/qa-report.md + qa/qa-log.md
+npm run qa         # full suite -> qa/qa-report.md + qa/evidence/**
+node qa/shot.mjs chrome <url> <w> <h> out.png [qa]   # single screenshot
 ```
 
-The harness uses puppeteer-core with the machine’s installed Chrome
-(`C:\Program Files\Google\Chrome\Application\chrome.exe`) and, for a subset,
-Edge (`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`).
-
-> Note: the Chrome/Edge `--screenshot` CLI does **not** work on some hosts
-> (a running browser session steals the launch). The harness never uses it —
-> puppeteer-core launches with its own temporary profile.
-
-Screenshots and measurement JSON land in `qa/evidence/`; a machine-readable
-summary is at `qa/qa-summary.json`.
+The harness uses puppeteer-core with the machine's installed Chrome
+(`C:\Program Files\Google\Chrome\Application\chrome.exe`) and Edge for a
+subset. The Chrome/Edge `--screenshot` CLI is not used (it fails on hosts
+with a running browser session — puppeteer-core launches with its own
+temp profile). Browser coverage is recorded honestly in `qa/qa-log.md`:
+Chrome (full) + Edge (subset, same engine); Firefox/Safari/iOS/Android were
+**not executable on the QA host** and are covered by inspection notes only.

@@ -1,0 +1,49 @@
+{
+  "links": [
+    {
+      "href": "#story",
+      "label": "Our story"
+    },
+    {
+      "href": "#story",
+      "label": "Programmes"
+    },
+    {
+      "href": "#contact",
+      "label": "Get in touch"
+    },
+    {
+      "href": "#top",
+      "label": "Back to top"
+    }
+  ],
+  "landings": [
+    {
+      "label": "Our story",
+      "href": "#story",
+      "top": 0
+    },
+    {
+      "label": "Programmes",
+      "href": "#story",
+      "top": 0
+    },
+    {
+      "label": "Get in touch",
+      "href": "#contact",
+      "top": 456
+    },
+    {
+      "label": "Back to top",
+      "href": "#top",
+      "top": 0
+    }
+  ],
+  "contactCheck": {
+    "emailText": true,
+    "emailHref": true,
+    "phoneHref": true,
+    "address": true,
+    "legal": true
+  }
+}

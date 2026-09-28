@@ -9,7 +9,20 @@
         "inFooter": true
       }
     ],
-    "fixed": []
+    "fixed": [],
+    "removed": {
+      "gallery": 0,
+      "copy": 0,
+      "indicator": 0,
+      "hint": 0,
+      "rmMark": 0
+    },
+    "bodyChildren": [
+      "A.skip-link",
+      "NOSCRIPT",
+      "SECTION#story.hero",
+      "FOOTER#footer.footer"
+    ]
   },
   {
     "w": 360,
@@ -21,7 +34,20 @@
         "inFooter": true
       }
     ],
-    "fixed": []
+    "fixed": [],
+    "removed": {
+      "gallery": 0,
+      "copy": 0,
+      "indicator": 0,
+      "hint": 0,
+      "rmMark": 0
+    },
+    "bodyChildren": [
+      "A.skip-link",
+      "NOSCRIPT",
+      "SECTION#story.hero",
+      "FOOTER#footer.footer"
+    ]
   },
   {
     "w": 360,
@@ -33,7 +59,20 @@
         "inFooter": true
       }
     ],
-    "fixed": []
+    "fixed": [],
+    "removed": {
+      "gallery": 0,
+      "copy": 0,
+      "indicator": 0,
+      "hint": 0,
+      "rmMark": 0
+    },
+    "bodyChildren": [
+      "A.skip-link",
+      "NOSCRIPT",
+      "SECTION#story.hero",
+      "FOOTER#footer.footer"
+    ]
   },
   {
     "w": 768,
@@ -45,7 +84,20 @@
         "inFooter": true
       }
     ],
-    "fixed": []
+    "fixed": [],
+    "removed": {
+      "gallery": 0,
+      "copy": 0,
+      "indicator": 0,
+      "hint": 0,
+      "rmMark": 0
+    },
+    "bodyChildren": [
+      "A.skip-link",
+      "NOSCRIPT",
+      "SECTION#story.hero",
+      "FOOTER#footer.footer"
+    ]
   },
   {
     "w": 768,
@@ -57,7 +109,20 @@
         "inFooter": true
       }
     ],
-    "fixed": []
+    "fixed": [],
+    "removed": {
+      "gallery": 0,
+      "copy": 0,
+      "indicator": 0,
+      "hint": 0,
+      "rmMark": 0
+    },
+    "bodyChildren": [
+      "A.skip-link",
+      "NOSCRIPT",
+      "SECTION#story.hero",
+      "FOOTER#footer.footer"
+    ]
   },
   {
     "w": 768,
@@ -69,7 +134,20 @@
         "inFooter": true
       }
     ],
-    "fixed": []
+    "fixed": [],
+    "removed": {
+      "gallery": 0,
+      "copy": 0,
+      "indicator": 0,
+      "hint": 0,
+      "rmMark": 0
+    },
+    "bodyChildren": [
+      "A.skip-link",
+      "NOSCRIPT",
+      "SECTION#story.hero",
+      "FOOTER#footer.footer"
+    ]
   },
   {
     "w": 1440,
@@ -81,7 +159,20 @@
         "inFooter": true
       }
     ],
-    "fixed": []
+    "fixed": [],
+    "removed": {
+      "gallery": 0,
+      "copy": 0,
+      "indicator": 0,
+      "hint": 0,
+      "rmMark": 0
+    },
+    "bodyChildren": [
+      "A.skip-link",
+      "NOSCRIPT",
+      "SECTION#story.hero",
+      "FOOTER#footer.footer"
+    ]
   },
   {
     "w": 1440,
@@ -93,7 +184,20 @@
         "inFooter": true
       }
     ],
-    "fixed": []
+    "fixed": [],
+    "removed": {
+      "gallery": 0,
+      "copy": 0,
+      "indicator": 0,
+      "hint": 0,
+      "rmMark": 0
+    },
+    "bodyChildren": [
+      "A.skip-link",
+      "NOSCRIPT",
+      "SECTION#story.hero",
+      "FOOTER#footer.footer"
+    ]
   },
   {
     "w": 1440,
@@ -105,6 +209,19 @@
         "inFooter": true
       }
     ],
-    "fixed": []
+    "fixed": [],
+    "removed": {
+      "gallery": 0,
+      "copy": 0,
+      "indicator": 0,
+      "hint": 0,
+      "rmMark": 0
+    },
+    "bodyChildren": [
+      "A.skip-link",
+      "NOSCRIPT",
+      "SECTION#story.hero",
+      "FOOTER#footer.footer"
+    ]
   }
 ]

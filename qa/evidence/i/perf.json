@@ -1,0 +1,28 @@
+{
+  "per": {
+    "errors": [],
+    "pageerrors": [],
+    "failed": [],
+    "requests": [
+      "http://localhost:8123/",
+      "http://localhost:8123/assets/css/style.css",
+      "http://localhost:8123/content.js",
+      "http://localhost:8123/assets/js/main.js",
+      "http://localhost:8123/assets/logo/logo-wordmark.svg",
+      "http://localhost:8123/assets/logo/logo-mark.svg"
+    ]
+  },
+  "pageData": {
+    "cls": 0,
+    "resources": 5,
+    "transfer": 48076,
+    "hosts": {
+      "localhost:8123": 5
+    }
+  },
+  "frames": {
+    "n": 351,
+    "median": 6.900000000000091,
+    "p95": 7.099999999999909
+  }
+}
