@@ -1,0 +1,24 @@
+﻿tag v1.3.0
+Tagger: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Mon Sep 28 20:59:02 2026 +0330
+
+Release v1.3.0 - side copy + programmes restored, full-size hero logo, dock + footer-centre landing
+
+commit 381fb91dd6f9789c08148061145d131d7464bd67
+Author: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Mon Sep 28 20:59:02 2026 +0330
+
+    docs: QA evidence for v1.3.0 (revision 1e466bb)
+
+ qa/evidence/b/dock-1440x900.png     | Bin 98811 -> 97835 bytes
+ qa/evidence/b/dock-1920x1080.png    | Bin 115860 -> 114231 bytes
+ qa/evidence/b/dock-2560x1080.png    | Bin 116635 -> 118267 bytes
+ qa/evidence/b/dock-834x1112.png     | Bin 84057 -> 84771 bytes
+ qa/evidence/edge/dock-1440x900.png  | Bin 97891 -> 97835 bytes
+ qa/evidence/f/footer-1440x900.png   | Bin 97909 -> 96811 bytes
+ qa/evidence/i/perf.json             |   2 +-
+ qa/evidence/j/dock-live-zoom-2x.png | Bin 260613 -> 260822 bytes
+ qa/qa-log.md                        |   2 +-
+ qa/qa-report.md                     |   4 ++--
+ qa/qa-summary.json                  |   8 ++++----
+ 11 files changed, 8 insertions(+), 8 deletions(-)
