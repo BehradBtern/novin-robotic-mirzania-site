@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.0 round)
 
-- Revision: `3f109ae` · generated 2026-09-28T17:23:39.687Z
+- Revision: `1e466bb` · generated 2026-09-28T17:26:54.765Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/153.0.8010.54 · Edge: Edg/154.0.4258.37
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -30,7 +30,7 @@
 | g | responsive: no overflow at max size and landing; gallery columns adapt | PASS | [{"vp":"360x740","ok":true,"overflow@0.86":0,"overflow@1":0,"galleryCols":1},{"vp":"768x1024","ok":true,"overflow@0.86":0,"overflow@1":0,"galleryCols":2},{"vp":"1280x800","ok":true,"overflow@0.86":0,"overflow@1":0,"galleryCols":3},{"vp":"1440x900","ok":true,"overflow@0.86":0,"overflow@1":0,"galleryCols":3},{"vp":"1920x | scrollWidth overflow <= 1px in both states; no horizontal scrollbar; gallery grid 3/2/1 columns by width | evidence/g/responsive.json |
 | h | reduced motion: static logo fully visible in hero and footer; gallery static | PASS | {"top":{"x":203.34375,"y":36,"r":1236.65625,"b":846},"end":{"x":615.84375,"y":548.78125,"r":824.15625,"b":755.84375},"bandCy":651.8,"frameComputed":"none","side":"none","gallery":{"count":6,"op":1,"imgOK":true,"inView":true}} | no transforms; no side copy; wordmark fully in viewport; landing centred; gallery cards visible without reveal effects | evidence/h/reduced-1440-full.png |
 | i | perf: zero errors, local-only | PASS | {"consoleErrors":0,"pageErrors":0,"failed":0,"hosts":{"localhost:8123":11},"resources":11,"transferBytes":66948} | 0 errors; localhost-only; no failed requests | evidence/i/perf.json |
-| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":6.9,"frameP95Ms":7} | informational only | — |
+| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":6.9,"frameP95Ms":7.1} | informational only | — |
 | j | resize mid-sequence | PASS | {"p":[0.55,0.61875],"spin":180,"expSpin":180} | state re-renders consistently after resize | — |
 | j | fling (wheel bursts) | PASS | {"p":1,"mapP":1} | end state == mapping ±0.002 | — |
 | j | reload mid-sequence | PASS | {"scrollY":1080,"p":0.5,"mapP":0.5} | deterministic restore | — |
