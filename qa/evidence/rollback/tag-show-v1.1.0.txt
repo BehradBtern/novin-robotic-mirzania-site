@@ -1,0 +1,17 @@
+﻿tag v1.1.0
+Tagger: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Mon Sep 28 19:23:30 2026 +0330
+
+Release v1.1.0 - clockwise spin + footer dock (verified; QA report qa/qa-report.md)
+
+commit b442a6dfa3da6820b24cd7bbcd58b405e2e259e1
+Author: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Mon Sep 28 19:23:30 2026 +0330
+
+    docs: QA evidence for v1.1.0 (revision ca0993c)
+
+ qa/evidence/i/perf.json |  4 ++--
+ qa/qa-log.md            |  2 +-
+ qa/qa-report.md         | 42 +++++-------------------------------------
+ qa/qa-summary.json      |  8 ++++----
+ 4 files changed, 12 insertions(+), 44 deletions(-)
