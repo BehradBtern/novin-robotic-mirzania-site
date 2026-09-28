@@ -1,0 +1,10 @@
+{
+  "name": "novin-robotic-mirzania-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static one-page site with a four-stage scroll-linked logo choreography for Novin Robotic Mirzania.",
+  "scripts": {
+    "dev": "node server.js",
+    "qa": "node qa/run-qa.mjs"
+  }
+}
