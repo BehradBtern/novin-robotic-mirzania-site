@@ -19,6 +19,16 @@
   <section class="hero" id="story" aria-label="Logo animation">
     <div class="hero__sticky">
       <div class="hero__stage">
+        <aside class="hero__side hero__side--left" id="hero-side-left">
+          <p class="hero__side-kicker"></p>
+          <h2 class="hero__side-title"></h2>
+          <p class="hero__side-body"></p>
+        </aside>
+        <aside class="hero__side hero__side--right" id="hero-side-right">
+          <p class="hero__side-kicker"></p>
+          <h2 class="hero__side-title"></h2>
+          <p class="hero__side-body"></p>
+        </aside>
         <div class="hero__frame" id="hero-frame">
           <img class="hero__wordmark" id="hero-wordmark" src="" alt="" aria-hidden="true" decoding="async">
           <span class="hero__markbox" id="hero-markbox">
@@ -26,6 +36,18 @@
           </span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= PROGRAMMES (4–7 photo slots + text) ================== -->
+  <section class="gallery" id="programmes" aria-label="Programmes">
+    <div class="shell">
+      <div class="gallery__head">
+        <p class="gallery__label" id="gallery-label"></p>
+        <h2 class="gallery__title" id="gallery-title"></h2>
+        <p class="gallery__intro" id="gallery-intro"></p>
+      </div>
+      <div class="gallery__grid" id="gallery-grid"><!-- cards rendered from content.js --></div>
     </div>
   </section>
 

@@ -1,8 +1,9 @@
 /* =========================================================================
    content.js — THE single content source for this website.
    -------------------------------------------------------------------------
-   Edit footer copy, theme colors, or animation tuning here. No other file
-   needs to be touched for content changes; save and refresh.
+   Edit footer copy, hero side text, photo slots, theme colors, or animation
+   tuning here. No other file needs to be touched for content changes; save
+   and refresh.
    See README.md → "Edit copy" / "Replace the logo" / "Animation tuning".
    ========================================================================= */
 window.SITE_CONTENT = {
@@ -46,6 +47,68 @@ window.SITE_CONTENT = {
     wordmarkDiamondCenterYFrac: 0.3230  // diamond center-y ÷ lockup height
   },
 
+  /* Placeholder text that appears left and right of the small symbol
+     mid-sequence. Replace freely — this is the first thing to swap. */
+  heroSide: {
+    left: {
+      kicker: "The institute",
+      title: "An institute where robotics research meets practical training",
+      body: "We study real problems, build working systems, and share what we learn with students, industry, and the public. Our work stays close to labs, fields, and classrooms."
+    },
+    right: {
+      kicker: "Who we serve",
+      title: "Research habits that hold up outside the lab",
+      body: "Our projects serve learners, researchers, and partners. We test ideas with real materials and machines, compare results, and welcome collaboration on problems worth solving together."
+    }
+  },
+
+  /* Photo slots (4–7): add or remove items freely; the grid adapts.
+     `img` points at a placeholder under assets/img/ — replace the files
+     (or point at real photos) whenever you like. */
+  gallery: {
+    sectionLabel: "Focus areas",
+    title: "Six areas of study and practice",
+    intro: "Work in our institute moves through six areas, from factory floors to farm fields, from classrooms to city streets. Each area has its own questions, tools, and the people who care about them.",
+    items: [
+      {
+        img: "assets/img/gallery-01.svg",
+        alt: "Robotic arm working on an automated production line inside a factory",
+        title: "Automation on the factory floor",
+        text: "Cells, conveyors, and inspection stations are classic robotics problems. We study sensing, control, and integration questions that arise when factories bring machines onto the floor."
+      },
+      {
+        img: "assets/img/gallery-02.svg",
+        alt: "Small field robot moving between rows of crops at sunrise",
+        title: "Machines for farm and field",
+        text: "Farm work runs on weather, soil, and timing. We look at how wheeled and tracked machines can support planting, monitoring, and harvest tasks while farmers keep the judgement calls."
+      },
+      {
+        img: "assets/img/gallery-03.svg",
+        alt: "Technician and a collaborative robot arm sharing a workbench",
+        title: "People working beside robots",
+        text: "Shared workspaces change what a task feels like. We ask how people and robots divide work, signal intentions clearly, and stay comfortable with each other through the day."
+      },
+      {
+        img: "assets/img/gallery-04.svg",
+        alt: "Autonomous mobile robot navigating a busy indoor corridor",
+        title: "Navigation for mobile autonomy",
+        text: "Moving reliably through messy spaces is hard. Our mobility work covers mapping, localisation, and path planning in corridors, warehouses, and streets, down to the edge cases that decide success."
+      },
+      {
+        img: "assets/img/gallery-05.svg",
+        alt: "Close view of a gripper holding a small household object",
+        title: "Hands that learn to grasp",
+        text: "Picking up an unfamiliar object is still an open problem. We study grippers, tactile sensing, and motion planning so robot hands can handle everyday items with care and repeatability."
+      },
+      {
+        img: "assets/img/gallery-06.svg",
+        alt: "Students gathered around a table with small robots",
+        title: "Classrooms, visits, and outreach",
+        text: "We teach courses, run lab visits, and welcome school groups. Every project produces something we can explain in plain language, because robotics belongs to everyone who wants to understand it."
+      }
+    ]
+  },
+
   /* Animation tuning (all optional to edit):
      spinTurns      — full clockwise turns across the whole sequence (1 = 360°)
      heroWidthVw/Vh — the first (hero) logo's max share of viewport width/height
@@ -53,13 +116,14 @@ window.SITE_CONTENT = {
      bigDiameterVh  — diameter of the enlarged state (share of viewport height;
                       exactly half of it hangs past the left edge)
      footerScale    — landing size inside the footer (share of footer height)
-     footerMaxPx    — absolute cap for the landing size
+     footerMaxPx    — absolute cap for the landing size (phones also cap it
+                      at half the viewport width)
      edgeMarginPx   — minimum gap kept between the logo and screen edges       */
   animation: {
     spinTurns: 1,
     heroWidthVw: 92,
-    heroWidthVh: 86,
-    heroWidthMaxPx: 1250,
+    heroWidthVh: 96,
+    heroWidthMaxPx: 1600,
     bigDiameterVh: 0.96,
     footerScale: 0.42,
     footerMaxPx: 330,
@@ -70,7 +134,7 @@ window.SITE_CONTENT = {
     blurb: "Novin Robotic Mirzania is an applied robotics institute. We research, teach, and partner with people who want machines to be useful, understandable, and well made.",
     explore: [
       { label: "Our story", anchor: "#story" },
-      { label: "Programmes", anchor: "#story" },
+      { label: "Programmes", anchor: "#programmes" },
       { label: "Get in touch", anchor: "#contact" },
       { label: "Back to top", anchor: "#top" }
     ],

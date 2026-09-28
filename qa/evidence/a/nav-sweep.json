@@ -11,16 +11,21 @@
     ],
     "fixed": [],
     "removed": {
-      "gallery": 0,
       "copy": 0,
       "indicator": 0,
       "hint": 0,
       "rmMark": 0
     },
+    "gallery": {
+      "ok": true,
+      "cards": 6,
+      "ordered": true
+    },
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -36,16 +41,21 @@
     ],
     "fixed": [],
     "removed": {
-      "gallery": 0,
       "copy": 0,
       "indicator": 0,
       "hint": 0,
       "rmMark": 0
     },
+    "gallery": {
+      "ok": true,
+      "cards": 6,
+      "ordered": true
+    },
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -61,16 +71,21 @@
     ],
     "fixed": [],
     "removed": {
-      "gallery": 0,
       "copy": 0,
       "indicator": 0,
       "hint": 0,
       "rmMark": 0
     },
+    "gallery": {
+      "ok": true,
+      "cards": 6,
+      "ordered": true
+    },
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -86,16 +101,21 @@
     ],
     "fixed": [],
     "removed": {
-      "gallery": 0,
       "copy": 0,
       "indicator": 0,
       "hint": 0,
       "rmMark": 0
     },
+    "gallery": {
+      "ok": true,
+      "cards": 6,
+      "ordered": true
+    },
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -111,16 +131,21 @@
     ],
     "fixed": [],
     "removed": {
-      "gallery": 0,
       "copy": 0,
       "indicator": 0,
       "hint": 0,
       "rmMark": 0
     },
+    "gallery": {
+      "ok": true,
+      "cards": 6,
+      "ordered": true
+    },
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -136,16 +161,21 @@
     ],
     "fixed": [],
     "removed": {
-      "gallery": 0,
       "copy": 0,
       "indicator": 0,
       "hint": 0,
       "rmMark": 0
     },
+    "gallery": {
+      "ok": true,
+      "cards": 6,
+      "ordered": true
+    },
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -161,16 +191,21 @@
     ],
     "fixed": [],
     "removed": {
-      "gallery": 0,
       "copy": 0,
       "indicator": 0,
       "hint": 0,
       "rmMark": 0
     },
+    "gallery": {
+      "ok": true,
+      "cards": 6,
+      "ordered": true
+    },
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -186,16 +221,21 @@
     ],
     "fixed": [],
     "removed": {
-      "gallery": 0,
       "copy": 0,
       "indicator": 0,
       "hint": 0,
       "rmMark": 0
     },
+    "gallery": {
+      "ok": true,
+      "cards": 6,
+      "ordered": true
+    },
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -211,16 +251,21 @@
     ],
     "fixed": [],
     "removed": {
-      "gallery": 0,
       "copy": 0,
       "indicator": 0,
       "hint": 0,
       "rmMark": 0
     },
+    "gallery": {
+      "ok": true,
+      "cards": 6,
+      "ordered": true
+    },
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   }

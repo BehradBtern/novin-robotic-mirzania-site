@@ -1,0 +1,32 @@
+[
+  {
+    "vp": "1440x900",
+    "centered": true,
+    "visible": true,
+    "noGhost": true,
+    "noOverlap": true,
+    "mcx": 718.9,
+    "mcy": 450,
+    "rMark": 162.9,
+    "ok": true,
+    "goneAt07": [
+      0,
+      0
+    ]
+  },
+  {
+    "vp": "390x844",
+    "centered": true,
+    "visible": true,
+    "noGhost": true,
+    "noOverlap": true,
+    "mcx": 194.7,
+    "mcy": 422,
+    "rMark": 50.7,
+    "ok": true,
+    "goneAt07": [
+      0,
+      0
+    ]
+  }
+]

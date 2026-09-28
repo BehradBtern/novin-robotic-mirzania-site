@@ -1,7 +1,7 @@
-// qa/roundtrip-test.mjs — supplementary verification for the v1.1.0 site.
+// qa/roundtrip-test.mjs — supplementary verification for the v1.3.0 site.
 // Against a served COPY of the site (repo untouched):
-//   (a) editing one footer string in content.js only -> appears on reload, no rebuild;
-//   (b) swapping the logo-mark.svg asset -> page loads clean and the dock still lands half-visible.
+//   (a) editing a footer string + a gallery title in content.js only -> appears on reload, no rebuild;
+//   (b) swapping the logo-mark.svg asset -> page loads clean and the landing still centres in the footer.
 // Run: node qa/roundtrip-test.mjs   (writes evidence to qa/evidence/f/roundtrip*)
 import fs from 'fs';
 import path from 'path';
@@ -11,7 +11,7 @@ import { CHROME, ROOT, TMP, delay, serve } from './lib.mjs';
 const PORT = 8125;
 const tmp = path.join(TMP, 'roundtrip');
 fs.rmSync(tmp, { recursive: true, force: true });
-for (const d of ['assets/logo', 'assets/css', 'assets/js']) {
+for (const d of ['assets/logo', 'assets/css', 'assets/js', 'assets/img']) {
   fs.mkdirSync(path.join(tmp, d), { recursive: true });
 }
 for (const f of ['index.html', 'server.js', 'content.js']) {
@@ -23,13 +23,19 @@ fs.copyFileSync(path.join(ROOT, 'assets/favicon.svg'), path.join(tmp, 'assets/fa
 for (const f of fs.readdirSync(path.join(ROOT, 'assets/logo'))) {
   fs.copyFileSync(path.join(ROOT, 'assets/logo', f), path.join(tmp, 'assets/logo', f));
 }
+for (const f of fs.readdirSync(path.join(ROOT, 'assets/img'))) {
+  fs.copyFileSync(path.join(ROOT, 'assets/img', f), path.join(tmp, 'assets/img', f));
+}
 
 // (a) edit ONE footer string in content.js only
 const EDITED = 'EDITED BLURB (content round-trip test).';
+const EDITED_TITLE = 'EDITED PROGRAMME TITLE (content round-trip test).';
 let content = fs.readFileSync(path.join(tmp, 'content.js'), 'utf8');
 const beforeA = content;
 content = content.replace('Novin Robotic Mirzania is an applied robotics institute. We research, teach, and partner with people who want machines to be useful, understandable, and well made.', EDITED);
 if (content === beforeA) throw new Error('footer blurb not found for edit');
+content = content.replace('Automation on the factory floor', EDITED_TITLE);
+if (!content.includes(EDITED_TITLE)) throw new Error('gallery title not found for edit');
 fs.writeFileSync(path.join(tmp, 'content.js'), content, 'utf8');
 
 // (b) swap the mark asset (recolour fill)
@@ -60,7 +66,13 @@ const results = { editedText: EDITED, filesChanged: ['content.js', 'assets/logo/
     blurb: document.getElementById('footer-blurb').textContent,
     headers: document.querySelectorAll('header').length
   }));
+  await page.evaluate(() => window.scrollTo(0, document.getElementById('programmes').offsetTop));
+  await delay(600);
+  const galTitle = await page.evaluate(() => document.querySelector('#programmes .gallery__card-title').textContent);
   results.checks.editedBlurbVisible = dom.blurb === EDITED;
+  results.checks.editedGalleryVisible = galTitle === EDITED_TITLE;
+  results.checks.galleryTitle = galTitle;
+  results.checks.galleryCount = await page.evaluate(() => document.querySelectorAll('#programmes .gallery__card').length);
   results.checks.domBlurb = dom.blurb;
   results.checks.headerCount = dom.headers;
   results.checks.errors = errs.length;
@@ -102,6 +114,8 @@ await browser.close();
 server.close();
 results.pass =
   results.checks.editedBlurbVisible === true &&
+  results.checks.editedGalleryVisible === true &&
+  results.checks.galleryCount === 6 &&
   results.checks.headerCount === 0 &&
   results.checks.errors === 0 &&
   results.checks.markLoaded === true &&
@@ -112,6 +126,8 @@ fs.writeFileSync(path.join(evidenceDir, 'roundtrip.json'), JSON.stringify(result
 fs.rmSync(tmp, { recursive: true, force: true });
 console.log('ROUNDTRIP', results.pass ? 'PASS' : 'FAIL', JSON.stringify({
   editedBlurbVisible: results.checks.editedBlurbVisible,
+  editedGalleryVisible: results.checks.editedGalleryVisible,
+  galleryCount: results.checks.galleryCount,
   headerCount: results.checks.headerCount,
   errors: results.checks.errors,
   markLoaded: results.checks.markLoaded,

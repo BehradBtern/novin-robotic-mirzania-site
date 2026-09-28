@@ -1,7 +1,9 @@
 /* =========================================================================
    main.js — renders content from content.js and drives the logo sequence:
-   hold → clockwise spin (+ shrink, wordmark→mark swap) → travel left (+ grow)
-   → descend → docked half-hidden at the footer (rides with it on release).
+   hold → clockwise spin (+ shrink, wordmark→mark swap) → side copy appears
+   left/right of the small symbol → rotate left + grow (half clipped at the
+   left edge) → travel down into the footer dock. Also renders the programmes
+   grid (4–7 photo slots) and the footer.
    Internal QA API: window.__heroState() returns live values (used by the QA
    harness; harmless otherwise). URL hook: ?qa=<0..1> pins progress.
    ========================================================================= */
@@ -99,6 +101,53 @@
     }
   }
 
+  /* ---------------- hero side copy (appears beside the small symbol) ------ */
+  var sideLeftEl = doc.getElementById("hero-side-left");
+  var sideRightEl = doc.getElementById("hero-side-right");
+  function fillSide(el, data) {
+    if (!el || !data) return;
+    var k = el.querySelector(".hero__side-kicker");
+    var h = el.querySelector(".hero__side-title");
+    var b = el.querySelector(".hero__side-body");
+    if (k && data.kicker) k.textContent = data.kicker;
+    if (h && data.title) h.textContent = data.title;
+    if (b && data.body) b.textContent = data.body;
+  }
+  if (C.heroSide) {
+    fillSide(sideLeftEl, C.heroSide.left);
+    fillSide(sideRightEl, C.heroSide.right);
+  }
+
+  /* ---------------- programmes gallery (4–7 photo slots + text) ----------- */
+  var galleryGrid = doc.getElementById("gallery-grid");
+  if (galleryGrid && C.gallery && Array.isArray(C.gallery.items)) {
+    setText("gallery-label", C.gallery.sectionLabel);
+    setText("gallery-title", C.gallery.title);
+    setText("gallery-intro", C.gallery.intro);
+    C.gallery.items.forEach(function (item) {
+      var fig = doc.createElement("figure");
+      fig.className = "gallery__card";
+      var img = doc.createElement("img");
+      img.className = "gallery__photo";
+      img.src = item.img;
+      img.alt = item.alt || "";
+      img.loading = "lazy";
+      img.decoding = "async";
+      var cap = doc.createElement("figcaption");
+      var h = doc.createElement("h3");
+      h.className = "gallery__card-title";
+      h.textContent = item.title;
+      var t = doc.createElement("p");
+      t.className = "gallery__card-text";
+      t.textContent = item.text;
+      cap.appendChild(h);
+      cap.appendChild(t);
+      fig.appendChild(img);
+      fig.appendChild(cap);
+      galleryGrid.appendChild(fig);
+    });
+  }
+
   /* ---------------- reduced motion ---------------- */
   var mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   var reduced = mqReduce.matches;
@@ -141,8 +190,8 @@
     {
       spinTurns: 1,
       heroWidthVw: 92,
-      heroWidthVh: 86,
-      heroWidthMaxPx: 1250,
+      heroWidthVh: 96,
+      heroWidthMaxPx: 1600,
       bigDiameterVh: 0.96,
       footerScale: 0.42,
       footerMaxPx: 330,
@@ -166,16 +215,16 @@
     var mobile = vw <= 640;
     var frameTargetW;
     if (mobile) {
-      frameTargetW = Math.min(0.88 * vw, 0.62 * vh * 1.2734, 520);
+      frameTargetW = Math.min(0.88 * vw, 0.62 * vh * 1.2757, 520);
     } else {
-      frameTargetW = Math.min((A.heroWidthVw / 100) * vw, (A.heroWidthVh / 100) * vh * 1.2734, A.heroWidthMaxPx);
+      frameTargetW = Math.min((A.heroWidthVw / 100) * vw, (A.heroWidthVh / 100) * vh * 1.2757, A.heroWidthMaxPx);
     }
     frameTargetW = Math.max(frameTargetW, 280);
     root.style.setProperty("--frame-w", frameTargetW.toFixed(2) + "px");
     geo.frameW = frameTargetW;
-    geo.frameH = frameTargetW / 1.2734;
+    geo.frameH = frameTargetW / 1.2757;
     geo.markBoxW = 0.5095 * frameTargetW;
-    geo.sC = 0.60;
+    geo.sC = 0.58;
 
     var footerH = footerEl.offsetHeight;
     geo.footerH = footerH;
@@ -185,8 +234,9 @@
     rBig = Math.max(rBig, 120);
     geo.rBig = rBig;
 
-    /* landing state: centred in the footer band at a footer-appropriate size */
-    var rFin = Math.max(Math.min(A.footerScale * footerH, A.footerMaxPx) / 2, 70);
+    /* landing state: centred in the footer band at a footer-appropriate size
+       (also capped at half the viewport width so phones keep it modest) */
+    var rFin = Math.max(Math.min(A.footerScale * footerH, A.footerMaxPx, 0.5 * vw) / 2, 70);
     geo.rFinal = rFin;
 
     /* vertical offset of the mark's centre from the frame centre inside the
@@ -196,56 +246,74 @@
     geo.kBig = (2 * rBig) / geo.markBoxW;
     geo.kFin = (2 * rFin) / geo.markBoxW;
     geo.txBig = -vw / 2;                      /* centre-x at the left edge (half clipped) */
-    geo.tyFin = vh / 2 + footerH / 2;         /* centre-y at the footer band centre when docked */
+    geo.tyDock = vh - rFin - 20;              /* docked just above the viewport bottom edge */
 
     root.style.setProperty("--dock-r", rFin.toFixed(2) + "px");
   }
 
   /* ---------------- render ---------------- */
-  var st = { p: 0, spin: 0, tx: 0, ty: 0, sF: 1, fade: 0 };
+  var st = { p: 0, spin: 0, tx: 0, ty: 0, sF: 1, fade: 0, side: 0 };
 
   function render(p) {
     p = clamp01(p);
 
-    /* one continuous clockwise turn across the whole sequence: spin + shrink,
-       then the growth, then the travel into the footer (ends at 360 = upright) */
+    /* one continuous clockwise turn: spin + shrink (0.10–0.36), hold while the
+       side copy shows (0.36–0.66), rotate-left + grow to the half-clipped
+       state (0.66–0.86), then travel down into the footer dock (0.86–0.96;
+       ends upright at 360°) */
     var spin =
-      A.spinTurns * (180 * cub(p, 0.12, 0.40) +
-        120 * cub(p, 0.40, 0.68) +
-        60 * cub(p, 0.68, 0.92));
+      A.spinTurns * (180 * cub(p, 0.10, 0.36) +
+        120 * cub(p, 0.66, 0.86) +
+        60 * cub(p, 0.86, 0.96));
 
     var sF, targetX = geo.vw / 2, targetY = geo.vh / 2;
-    if (p <= 0.40) {
+    if (p <= 0.36) {
       /* A/B: hold, then spin + shrink in place */
-      sF = 1 - 0.40 * cub(p, 0.12, 0.40);
-    } else if (p <= 0.68) {
-      /* C: centre travels to the left edge while growing — half ends up
-         off-canvas (the mark's visible half stays inside the viewport) */
-      var u = cub(p, 0.40, 0.68);
+      sF = 1 - (1 - geo.sC) * cub(p, 0.10, 0.36);
+    } else if (p <= 0.66) {
+      /* C: small symbol holds in the centre; the side copy is visible */
+      sF = geo.sC;
+    } else if (p <= 0.86) {
+      /* D: rotate left + grow — centre travels to the left edge, half ends
+         up off-canvas (the visible half stays inside the viewport) */
+      var u = cub(p, 0.66, 0.86);
       sF = geo.sC + (geo.kBig - geo.sC) * u;
       targetX = (geo.vw / 2) * (1 - u);
     } else {
-      /* D: travel to the middle of the footer while settling to landing size */
-      var v = cub(p, 0.68, 0.92);
+      /* E: travel down into the footer dock while settling to landing size */
+      var v = cub(p, 0.86, 0.96);
       sF = geo.kBig + (geo.kFin - geo.kBig) * v;
       targetX = (geo.vw / 2) * v;
-      targetY = geo.vh / 2 + (geo.vh / 2 + geo.footerH / 2) * v;
+      targetY = geo.vh / 2 + (geo.tyDock - geo.vh / 2) * v;
     }
-    var fade = seg(spin, 150, 210); /* wordmark→mark swap, hidden inside the turn */
+    var fade = seg(spin, 90, 150); /* wordmark→mark swap, done inside the turn */
 
     /* keep the MARK's centre on the target path: cancel the lockup-internal
        offset, including how it rotates with the spin (blended in after the
        turn, so the spin itself stays a natural rigid rotation) */
     var rad = spin * Math.PI / 180;
     var off = geo.offY * sF;
-    var cb = seg(p, 0.40, 0.52);
+    var cb = seg(p, 0.34, 0.44);
     var tx = (targetX - geo.vw / 2) - off * Math.sin(rad) * cb;
     var ty = (targetY - geo.vh / 2) + off * Math.cos(rad) * cb;
+
+    /* side copy fades in beside the small symbol, out before the growth */
+    var soIn = seg(p, 0.38, 0.48);
+    var so = soIn * (1 - seg(p, 0.56, 0.64));
+    var soShift = (1 - soIn) * 24;
+    if (sideLeftEl) {
+      sideLeftEl.style.opacity = so.toFixed(3);
+      sideLeftEl.style.transform = "translateY(-50%) translateX(" + (-soShift).toFixed(1) + "px)";
+    }
+    if (sideRightEl) {
+      sideRightEl.style.opacity = so.toFixed(3);
+      sideRightEl.style.transform = "translateY(-50%) translateX(" + soShift.toFixed(1) + "px)";
+    }
 
     /* docking: hand the mark over to the footer-child layer (CSS .docked-footer) */
     root.classList.toggle("docked-footer", p >= 0.999);
 
-    st.p = p; st.spin = spin; st.tx = tx; st.ty = ty; st.sF = sF; st.fade = fade; st.comp = cb;
+    st.p = p; st.spin = spin; st.tx = tx; st.ty = ty; st.sF = sF; st.fade = fade; st.comp = cb; st.side = so;
 
     frameEl.style.transform =
       "translate(-50%, -50%) translate(" + tx.toFixed(2) + "px, " + ty.toFixed(2) + "px) rotate(" +
@@ -336,6 +404,21 @@
     hio.observe(heroEl);
   }
 
+  /* programmes reveal: cards fade in as they enter; skipped under reduced
+     motion so the cards simply stay fully visible */
+  if (galleryGrid && "IntersectionObserver" in window && !reduced) {
+    root.classList.add("gallery-reveal");
+    var gio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("is-in");
+          gio.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    Array.prototype.forEach.call(galleryGrid.children, function (card) { gio.observe(card); });
+  }
+
   /* ---------------- init ---------------- */
   computeGeo();
   window.addEventListener("load", function () { onResize(); });
@@ -369,12 +452,14 @@
       ty: st.ty,
       sF: st.sF,
       fade: st.fade,
+      side: st.side || 0,
       reduced: reduced,
       qa: qaMode ? qaPinned : null,
       heroTop: geo.heroTop,
       travel: geo.travel,
       dockX: geo.vw / 2,
       dockR: geo.rFinal,
+      dockY: geo.tyDock,
       rBig: geo.rBig,
       footerH: geo.footerH,
       frame: { x: fr.x, y: fr.y, w: fr.width, h: fr.height },

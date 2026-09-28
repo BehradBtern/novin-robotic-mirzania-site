@@ -1,4 +1,4 @@
-// qa/run-qa.mjs — headless QA suite for the logo-sequence site (v1.1.0).
+// qa/run-qa.mjs — headless QA suite for the logo-sequence site (v1.3.0).
 // Captures all screenshots via puppeteer-core (never the Chrome/Edge
 // --screenshot CLI — broken on hosts with a running browser session).
 // Writes: qa/qa-report.md, qa/qa-log.md, qa/qa-summary.json, qa/evidence/**.
@@ -32,6 +32,7 @@ function add(id, entry, status, value, threshold, evidence = [], note = '') {
 const PASS = 'PASS', FAIL = 'FAIL', INFO = 'INFO', OBS = 'OBSERVED', NP = 'NOT PERFORMED';
 
 function median(arr) { const s = [...arr].sort((x, y) => x - y); return s.length ? s[Math.floor(s.length / 2)] : 0; }
+function cub(t, a, b) { const x = Math.min(1, Math.max(0, (t - a) / (b - a))); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
 
 async function waitStableScroll(page, { quiet = 3, step = 80, maxMs = 3000 } = {}) {
   const t0 = Date.now();
@@ -80,12 +81,29 @@ try {
             headers: document.querySelectorAll('header').length,
             navs: [], fixed: [],
             removed: {
-              gallery: document.querySelectorAll('.gallery__row, #programmes').length,
               copy: document.querySelectorAll('.hero__copy, #hero-copy, .hero__col').length,
               indicator: document.querySelectorAll('.hero__indicator, #hero-indicator').length,
               hint: document.querySelectorAll('.hero__hint, #hero-hint').length,
               rmMark: document.querySelectorAll('.rm-mark').length
             },
+            gallery: (function () {
+              const g = document.getElementById('programmes');
+              const s = document.getElementById('story');
+              const f = document.getElementById('footer');
+              if (!g || !s || !f) return { ok: false, cards: 0, ordered: false };
+              const ordered =
+                (s.compareDocumentPosition(g) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0 &&
+                (g.compareDocumentPosition(f) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
+              const cards = Array.from(g.querySelectorAll('.gallery__card'));
+              let content = cards.length >= 4 && cards.length <= 7;
+              cards.forEach(function (c) {
+                const img = c.querySelector('img');
+                const t = c.querySelector('.gallery__card-title');
+                const x = c.querySelector('.gallery__card-text');
+                if (!img || !img.getAttribute('alt') || !t || !t.textContent || !x || !x.textContent) content = false;
+              });
+              return { ok: ordered && content, cards: cards.length, ordered: ordered };
+            })(),
             bodyChildren: Array.from(document.body.children).map((el) => el.tagName + (el.id ? '#' + el.id : '') + (el.className ? '.' + String(el.className).split(' ')[0] : ''))
           };
           document.querySelectorAll('nav, [role=navigation]').forEach((n) => out.navs.push({ inFooter: !!n.closest('footer') }));
@@ -105,29 +123,37 @@ try {
     const navOk = sweep.every((r) => r.headers === 0 && r.fixed.length === 0 && r.navs.every((n) => n.inFooter));
     add('a', 'nav absence (9 cells)', navOk ? PASS : FAIL, navOk ? 'headers 0; no fixed/sticky outside hero; nav only in footer' : JSON.stringify(sweep.filter((r) => r.headers || r.fixed.length)), 'zero nav outside footer', ['evidence/a/nav-sweep.json']);
     const remOk = sweep.every((r) => Object.values(r.removed).every((v) => v === 0));
-    add('a', 'old elements removed from DOM', remOk ? PASS : FAIL, JSON.stringify(sweep[0].removed) + ' body=' + JSON.stringify(sweep[0].bodyChildren), 'gallery/copy/indicator/hint/rm-mark counts all 0', ['evidence/a/nav-sweep.json']);
+    add('a', 'old placeholder elements removed from DOM', remOk ? PASS : FAIL, JSON.stringify(sweep[0].removed) + ' body=' + JSON.stringify(sweep[0].bodyChildren), 'copy/indicator/hint/rm-mark counts all 0; body = skip-link + noscript + hero + programmes + footer', ['evidence/a/nav-sweep.json']);
+    const galOk = sweep.every((r) => r.gallery.ok);
+    add('a', 'programmes: 4–7 photo slots present, ordered hero→programmes→footer', galOk ? PASS : FAIL, JSON.stringify({ cards: sweep[0].gallery.cards, ordered: sweep[0].gallery.ordered }), 'gallery between hero and footer; 4–7 cards each with img/alt/title/text', ['evidence/a/nav-sweep.json']);
   } catch (e) { add('a', 'structure sweep', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
-  /* ---------- a2) source removal audit ---------- */
+  /* ---------- a2) source audit: no dead placeholders; gallery wired ---------- */
   try {
     const files = ['index.html', 'assets/css/style.css', 'assets/js/main.js', 'content.js'];
-    const needles = ['gallery', 'hero__copy', 'indicator', 'hero__hint', 'rm-mark', '#programmes'];
+    const needles = ['hero__copy', 'hero__hint', 'hero__indicator', 'rm-mark', 'chapters', 'scrollhint'];
     const lines = [];
     let total = 0;
     for (const f of files) {
-      const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
-      const counts = needles.map((n) => ({ n, c: (src.toLowerCase().split(n).length - 1) }));
+      const src = fs.readFileSync(path.join(ROOT, f), 'utf8').toLowerCase();
+      const counts = needles.map((n) => ({ n, c: (src.split(n).length - 1) }));
       const sum = counts.reduce((a, b) => a + b.c, 0);
       total += sum;
       lines.push(f + ' :: ' + counts.map((c) => c.n + '=' + c.c).join(', '));
     }
+    const cjs = fs.readFileSync(path.join(ROOT, 'content.js'), 'utf8');
+    const refs = Array.from(new Set((cjs.match(/assets\/img\/[\w.-]+\.svg/g) || [])));
+    const missing = refs.filter((r) => !fs.existsSync(path.join(ROOT, r)));
+    const slots = (cjs.match(/img:\s*"assets\/img\//g) || []).length;
     const imgDir = path.join(ROOT, 'assets', 'img');
-    const imgFiles = fs.existsSync(imgDir) ? fs.readdirSync(imgDir) : [];
-    lines.push('assets/img remaining: ' + (imgFiles.length ? imgFiles.join(', ') : '(none)'));
-    lines.push('total stale references: ' + total);
+    const imgFiles = fs.existsSync(imgDir) ? fs.readdirSync(imgDir).sort() : [];
+    lines.push('gallery refs: ' + refs.length + ' | missing files: ' + missing.length + (missing.length ? ' -> ' + missing.join(', ') : ''));
+    lines.push('slots in content.js: ' + slots + ' | assets/img: ' + (imgFiles.length ? imgFiles.join(', ') : '(none)'));
+    lines.push('total dead-placeholder references: ' + total);
     fs.writeFileSync(evPath('a', 'removal-audit.txt'), lines.join('\n') + '\n', 'utf8');
-    add('a', 'source removal audit', total === 0 && imgFiles.length === 0 ? PASS : FAIL, 'stale refs: ' + total + '; leftover img files: ' + imgFiles.length, '0 stale references; no unused gallery assets', ['evidence/a/removal-audit.txt']);
-  } catch (e) { add('a', 'source removal audit', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
+    const ok = total === 0 && missing.length === 0 && slots >= 4 && slots <= 7 && refs.length === slots && imgFiles.length >= 4;
+    add('a', 'source audit: no dead placeholders; gallery assets present', ok ? PASS : FAIL, JSON.stringify({ deadRefs: total, galleryRefs: refs.length, slots, missing: missing.length, imgFiles: imgFiles.length }), 'no hero__copy/hint/indicator/rm-mark refs; every gallery slot points at an existing file', ['evidence/a/removal-audit.txt']);
+  } catch (e) { add('a', 'source audit', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- b) intro stage ---------- */
   try {
@@ -137,17 +163,17 @@ try {
       const st = await state(page);
       const dx = +(st.frame.x + st.frame.w / 2 - w / 2).toFixed(2);
       const dy = +(st.frame.y + st.frame.h / 2 - h / 2).toFixed(2);
-      const expectedW = Math.min(0.92 * w, 0.86 * h * 1.2734, 1250);
+      const expectedW = Math.min(0.92 * w, 0.96 * h * 1.2757, 1600);
       const sizeOk = Math.abs(st.frame.w - expectedW) <= 3;
       const notClipped = st.frame.x >= -2 && st.frame.x + st.frame.w <= w + 2 && st.frame.y >= -2 && st.frame.y + st.frame.h <= h + 2;
       const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-      rows.push({ vp: w + 'x' + h, dx, dy, frameW: +st.frame.w.toFixed(1), expectedW: +expectedW.toFixed(1), sizeOk, notClipped, bg, spin: st.spin, markOpacity: st.markboxOpacity, wordOpacity: st.wordmarkOpacity });
+      rows.push({ vp: w + 'x' + h, dx, dy, frameW: +st.frame.w.toFixed(1), expectedW: +expectedW.toFixed(1), sizeOk, notClipped, bg, spin: st.spin, markOpacity: st.markboxOpacity, wordOpacity: st.wordmarkOpacity, sideOp: st.side });
       await shot(page, 'a/intro-' + w + 'x' + h + '.png');
       await page.close();
     }
     writeJson(evPath('a', 'intro-audit.json'), rows);
-    const ok = rows.every((r) => Math.abs(r.dx) <= 8 && Math.abs(r.dy) <= 8 && r.sizeOk && r.notClipped && r.bg === 'rgb(23, 25, 27)' && r.spin === 0 && r.markOpacity === 0 && r.wordOpacity === 1);
-    add('b', 'intro: big wordmark centered on dark gray, unclipped', ok ? PASS : FAIL, JSON.stringify(rows), 'hero size == min(92vw, 86vh*1.2734, 1250px) ±3; centered ±8px; fully in viewport; bg rgb(23,25,27)', ['evidence/a/intro-1440x900.png', 'evidence/a/intro-audit.json']);
+    const ok = rows.every((r) => Math.abs(r.dx) <= 8 && Math.abs(r.dy) <= 8 && r.sizeOk && r.notClipped && r.bg === 'rgb(23, 25, 27)' && r.spin === 0 && r.markOpacity === 0 && r.wordOpacity === 1 && r.sideOp === 0);
+    add('b', 'intro: big wordmark centered on dark gray, unclipped', ok ? PASS : FAIL, JSON.stringify(rows), 'hero size == min(92vw, 96vh*1.2757, 1600px) ±3; centered ±8px; fully in viewport; side copy hidden; bg rgb(23,25,27)', ['evidence/a/intro-1440x900.png', 'evidence/a/intro-audit.json']);
   } catch (e) { add('b', 'intro stage', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- c) motion trace: clockwise spin → left → down, no diagonal ---------- */
@@ -173,22 +199,24 @@ try {
     let orderOk = true, maxPosStep = 0;
     for (let i = 1; i < trace.length; i++) {
       const a = trace[i - 1], b = trace[i];
-      // B (0.12-0.40): spin in place (no frame translation)
-      if (b.p > 0.12 && b.p <= 0.40 && (Math.abs(b.tx) > 1 || Math.abs(b.ty) > 1)) orderOk = false;
-      // C (0.54-0.66): mark centre stays on the middle line, travels left
-      if (b.p > 0.54 && b.p <= 0.66 && (Math.abs(b.mcy - 450) > 4 || b.mcx > a.mcx + 2)) orderOk = false;
-      // D (0.70-0.90): mark centre travels right and down only
-      if (b.p > 0.70 && b.p <= 0.90 && (b.mcy < a.mcy - 2 || b.mcx < a.mcx - 2)) orderOk = false;
+      // B (0.12-0.34): spin in place (no frame translation)
+      if (b.p > 0.12 && b.p <= 0.34 && (Math.abs(b.tx) > 1 || Math.abs(b.ty) > 1)) orderOk = false;
+      // C hold (0.46-0.64): small mark centred, spin parked at 180
+      if (b.p > 0.46 && b.p <= 0.64 && (Math.abs(b.mcy - 450) > 4 || Math.abs(b.mcx - 720) > 4 || Math.abs(b.spin - 180) > 1)) orderOk = false;
+      // D (0.68-0.84): mark centre travels left only, on the middle line
+      if (b.p > 0.68 && b.p <= 0.84 && (b.mcx > a.mcx + 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
+      // E (0.88-0.94): mark centre travels right and down only
+      if (b.p > 0.88 && b.p <= 0.94 && (b.mcy < a.mcy - 2 || b.mcx < a.mcx - 2)) orderOk = false;
       maxPosStep = Math.max(maxPosStep, Math.abs(b.mcx - a.mcx), Math.abs(b.mcy - a.mcy));
     }
-    const cEnd = trace.reduce((acc, t) => (Math.abs(t.p - 0.68) < Math.abs(acc.p - 0.68) ? t : acc), trace[0]);
+    const cEnd = trace.reduce((acc, t) => (Math.abs(t.p - 0.86) < Math.abs(acc.p - 0.86) ? t : acc), trace[0]);
     const dEnd = trace.reduce((acc, t) => (Math.abs(t.p - 1) < Math.abs(acc.p - 1) ? t : acc), trace[0]);
     const opacityOk = trace.every((t) => Math.abs((t.wOp || 0) + (t.mOp || 0) - 1) <= 0.01);
     const traceOk = mapErr <= 0.002 && monoSpin && Math.abs(spinEnd - 360) <= 0.5 && maxSpinStep <= 162 && orderOk && opacityOk;
     writeJson(evPath('b', 'motion-trace.json'), { travel, heroTop, mapErr, monoSpin, spinEnd, maxSpinStep, maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEnd, dEnd, steps: trace });
     add('c', 'motion trace (60 steps)', traceOk ? PASS : FAIL,
       JSON.stringify({ mapErr: +mapErr.toFixed(4), monoSpin, spinEnd, maxSpinStep: +maxSpinStep.toFixed(1), maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEndTx: cEnd.tx, dEndTy: dEnd.ty }),
-      'clockwise monotonic to 360±0.5; spin in place; left travel horizontal; footer travel right+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
+      'clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; dock travel right+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
 
     // settle / oscillation / idle
     await page.evaluate(() => window.scrollTo(0, 0));
@@ -225,7 +253,7 @@ try {
     {
       const clipRows = [];
       for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [390, 844]]) {
-        const pg = await openPage(browser, { w, h, qa: 0.68 });
+        const pg = await openPage(browser, { w, h, qa: 0.86 });
         const stc = await state(pg);
         const mk = stc.markbox;
         const cx = mk.x + mk.w / 2;
@@ -241,8 +269,69 @@ try {
       add('c', 'enlarged state: half clipped at the left edge, no overflow', clipRows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(clipRows), 'visible width fraction 0.42-0.58 at max size; scrollWidth overflow 0', ['evidence/b/halfclip-audit.json', 'evidence/b/halfclip-1440x900.png']);
     }
 
+    // side-copy stage: text appears left/right of the small symbol, mark centred
+    {
+      const rows = [];
+      for (const [w, h] of [[1440, 900], [390, 844]]) {
+        const pg = await openPage(browser, { w, h, qa: 0.5 });
+        const stt = await state(pg);
+        const o = await pg.evaluate(() => {
+          const sl = document.getElementById('hero-side-left');
+          const sr = document.getElementById('hero-side-right');
+          const slr = sl.getBoundingClientRect();
+          const srr = sr.getBoundingClientRect();
+          return {
+            opL: +getComputedStyle(sl).opacity, opR: +getComputedStyle(sr).opacity,
+            sl: { x: slr.x, y: slr.y, r: slr.x + slr.width, b: slr.y + slr.height },
+            sr: { x: srr.x, y: srr.y, r: srr.x + srr.width, b: srr.y + srr.height },
+            titleL: sl.querySelector('.hero__side-title').textContent.length,
+            titleR: sr.querySelector('.hero__side-title').textContent.length
+          };
+        });
+        const mcx = stt.markbox.x + stt.markbox.w / 2;
+        const mcy = stt.markbox.y + stt.markbox.h / 2;
+        const rMark = (stt.frame.w * 0.5095) / 2; // frame.w at spin=180 equals sF * frameW
+        const centered = Math.abs(mcx - w / 2) <= 5 && Math.abs(mcy - h / 2) <= 5;
+        const visible = o.opL >= 0.9 && o.opR >= 0.9;
+        const noGhost = (stt.wordmarkOpacity || 0) <= 0.02 && (stt.markboxOpacity || 0) >= 0.98;
+        const noOverlap = w > 640
+          ? (o.sl.r + 8 <= mcx - rMark) && (o.sr.x - 8 >= mcx + rMark)
+          : (o.sl.b + 4 <= mcy - rMark) && (o.sr.y - 4 >= mcy + rMark);
+        const ok = centered && visible && noOverlap && noGhost && o.titleL > 5 && o.titleR > 5;
+        rows.push({ vp: w + 'x' + h, centered, visible, noGhost, noOverlap, mcx: +mcx.toFixed(1), mcy: +mcy.toFixed(1), rMark: +rMark.toFixed(1), ok });
+        await shot(pg, 'b/sidetext-' + w + 'x' + h + '.png');
+        await pg.close();
+        const pg2 = await openPage(browser, { w, h, qa: 0.7 });
+        const gone = await pg2.evaluate(() => [+getComputedStyle(document.getElementById('hero-side-left')).opacity, +getComputedStyle(document.getElementById('hero-side-right')).opacity]);
+        rows[rows.length - 1].goneAt07 = gone;
+        if (gone[0] > 0.05 || gone[1] > 0.05) rows[rows.length - 1].ok = false;
+        await pg2.close();
+      }
+      writeJson(evPath('b', 'sidecopy-audit.json'), rows);
+      add('c', 'side copy: text beside the small symbol, then gone before the growth', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7', ['evidence/b/sidecopy-audit.json', 'evidence/b/sidetext-1440x900.png']);
+    }
+
+    // hero end state: mark docked just above the bottom edge, upright
+    {
+      const rows = [];
+      for (const [w, h] of [[1440, 900], [834, 1112], [390, 844]]) {
+        const pg = await openPage(browser, { w, h, qa: 0.995 });
+        const stt = await state(pg);
+        const mcx = stt.markbox.x + stt.markbox.w / 2;
+        const mcy = stt.markbox.y + stt.markbox.h / 2;
+        const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+        const expY = h - stt.dockR - 20;
+        const ok = Math.abs(mcx - w / 2) <= 6 && Math.abs(mcy - expY) <= 6 && Math.abs(stt.spin - 360) <= 1.5 && (mcy + stt.dockR) <= h + 1 && overflow <= 1;
+        rows.push({ vp: w + 'x' + h, center: [+mcx.toFixed(1), +mcy.toFixed(1)], expY: +expY.toFixed(1), spin: +stt.spin.toFixed(1), overflow, ok });
+        await shot(pg, 'b/herodock-' + w + 'x' + h + '.png');
+        await pg.close();
+      }
+      writeJson(evPath('b', 'herodock-audit.json'), rows);
+      add('d', 'hero end: mark docked upright just above the bottom edge', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'centre == (vw/2, vh−dockR−20) ±6; spin 360±1.5; fully visible; no overflow', ['evidence/b/herodock-audit.json']);
+    }
+
     // stage stills at pins
-    for (const q of [0, 0.30, 0.55, 0.68, 0.80, 1.0]) {
+    for (const q of [0, 0.25, 0.5, 0.86, 0.93, 1.0]) {
       for (const [w, h] of [[1440, 900], [834, 1112], [390, 844]]) {
         const p = await openPage(browser, { w, h, qa: q });
         await shot(p, 'b/pin-' + q + '-' + w + 'x' + h + '.png');
@@ -322,7 +411,7 @@ try {
 
   /* ---------- e) sharpness evidence (vector + zoom crops) ---------- */
   try {
-    const page = await openPage(browser, { w: 1440, h: 900, qa: 0.68, dpr: 2 });
+    const page = await openPage(browser, { w: 1440, h: 900, qa: 0.86, dpr: 2 });
     const src = await page.evaluate(() => document.getElementById('hero-mark').src);
     await shot(page, 'e/mark-zoom-2x.png');
     const isSvg = /\.svg(\?|$)/.test(src);
@@ -384,23 +473,28 @@ try {
     const rows = [];
     for (const [w, h] of vps) {
       const out = { vp: w + 'x' + h, ok: true };
-      for (const q of [0.68, 1]) {
+      let gcols = 0;
+      for (const q of [0.86, 1]) {
         const page = await openPage(browser, { w, h, qa: q });
         const m = await page.evaluate((qq) => {
           const de = document.documentElement;
           const stg = window.__heroState();
           const mk = stg.markbox;
           const r = qq === 1 ? stg.dockR : stg.rBig;
-          return { overflow: de.scrollWidth - de.clientWidth, right: (mk.x + mk.w / 2) + r, bodyOverflowY: getComputedStyle(document.body).overflowY };
+          const cols = getComputedStyle(document.getElementById('gallery-grid')).gridTemplateColumns.split(' ').length;
+          return { overflow: de.scrollWidth - de.clientWidth, right: (mk.x + mk.w / 2) + r, bodyOverflowY: getComputedStyle(document.body).overflowY, cols };
         }, q);
         out['overflow@' + q] = m.overflow;
         if (m.overflow > 1 || m.right > w + 2 || m.bodyOverflowY === 'hidden') out.ok = false;
+        gcols = m.cols;
         await page.close();
       }
+      out.galleryCols = gcols;
+      if (gcols !== (w >= 1024 ? 3 : w >= 641 ? 2 : 1)) out.ok = false;
       rows.push(out);
     }
     writeJson(evPath('g', 'responsive.json'), rows);
-    add('g', 'responsive: no overflow at max size and landing', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'scrollWidth overflow <= 1px in both states; no horizontal scrollbar', ['evidence/g/responsive.json']);
+    add('g', 'responsive: no overflow at max size and landing; gallery columns adapt', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'scrollWidth overflow <= 1px in both states; no horizontal scrollbar; gallery grid 3/2/1 columns by width', ['evidence/g/responsive.json']);
   } catch (e) { add('g', 'responsive scan', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- h) reduced motion: static logo, fully visible everywhere ---------- */
@@ -422,6 +516,7 @@ try {
         frameInline: frame.style.transform,
         frameComputed: getComputedStyle(frame).transform,
         markboxDisplay: getComputedStyle(document.getElementById('hero-markbox')).display,
+        sideDisplay: getComputedStyle(document.getElementById('hero-side-left')).display,
         endDisplay: getComputedStyle(end).display,
         endOpacity: +getComputedStyle(end).opacity,
         endRect: { x: er.x, y: er.y, r: er.x + er.width, b: er.y + er.height },
@@ -432,12 +527,21 @@ try {
     });
     await shotFull(page, 'h/reduced-1440-full.png');
     const inView = (r) => r.x >= -2 && r.r <= rc.vw + 2 && r.y >= -2 && r.b <= rc.vh + 2;
-    const ok = rc.hasClass && rc.frameInline === '' && rc.frameComputed === 'none' && rc.markboxDisplay === 'none' &&
+    await page.evaluate(() => window.scrollTo(0, document.getElementById('programmes').offsetTop));
+    await delay(700);
+    const gal = await page.evaluate(() => {
+      const cards = document.querySelectorAll('#programmes .gallery__card');
+      const c0 = cards[0];
+      const r = c0.getBoundingClientRect();
+      return { count: cards.length, op: +getComputedStyle(c0).opacity, imgOK: c0.querySelector('img').naturalWidth > 0, inView: r.x >= -2 && r.x + r.width <= innerWidth + 2 };
+    });
+    const ok = rc.hasClass && rc.frameInline === '' && rc.frameComputed === 'none' && rc.markboxDisplay === 'none' && rc.sideDisplay === 'none' &&
       rc.endDisplay === 'block' && rc.endOpacity === 1 && inView(rc.endRect) && inView(top) &&
       Math.abs((rc.endRect.x + rc.endRect.r) / 2 - rc.vw / 2) <= 6 &&
-      Math.abs((rc.endRect.y + rc.endRect.b) / 2 - rc.bandCy) <= 8;
-    writeJson(evPath('h', 'reduced-motion.json'), { top, rc });
-    add('h', 'reduced motion: static logo fully visible in hero and footer', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed }), 'no transforms; wordmark fully in viewport; landing centred in the footer band and fully visible', ['evidence/h/reduced-1440-full.png']);
+      Math.abs((rc.endRect.y + rc.endRect.b) / 2 - rc.bandCy) <= 8 &&
+      gal.count >= 4 && gal.op === 1 && gal.inView;
+    writeJson(evPath('h', 'reduced-motion.json'), { top, rc, gal });
+    add('h', 'reduced motion: static logo fully visible in hero and footer; gallery static', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed, side: rc.sideDisplay, gallery: gal }), 'no transforms; no side copy; wordmark fully in viewport; landing centred; gallery cards visible without reveal effects', ['evidence/h/reduced-1440-full.png']);
     await page.close();
     const p390 = await openPage(browser, { w: 390, h: 844, reduced: true });
     await shotFull(p390, 'h/reduced-390-full.png');
@@ -512,11 +616,9 @@ try {
       await delay(500);
       await settle(page, 2500);
       const s2 = await state(page);
-      const t01 = Math.max(0, Math.min(1, (s2.p - 0.40) / 0.28));
-      const ease = t01 < 0.5 ? 4 * t01 * t01 * t01 : 1 - Math.pow(-2 * t01 + 2, 3) / 2;
-      const expSpin = 180 + 120 * ease;
-      const ok = Math.abs(s2.p - s2.pTarget) <= 0.01 && Math.abs(s2.spin - expSpin) <= 6 && Math.abs(s2.tx) > 1;
-      add('j', 'resize mid-sequence', ok ? PASS : FAIL, JSON.stringify({ p: [s1.p, s2.p], spin: s2.spin, tx: s2.tx }), 'state re-renders consistently after resize', []);
+      const expSpin = 180 * cub(s2.p, 0.10, 0.36) + 120 * cub(s2.p, 0.66, 0.86) + 60 * cub(s2.p, 0.86, 0.96);
+      const ok = Math.abs(s2.p - s2.pTarget) <= 0.01 && Math.abs(s2.spin - expSpin) <= 6;
+      add('j', 'resize mid-sequence', ok ? PASS : FAIL, JSON.stringify({ p: [s1.p, s2.p], spin: s2.spin, expSpin: +expSpin.toFixed(1) }), 'state re-renders consistently after resize', []);
       await page.close();
     }
     // E-fling
@@ -621,7 +723,7 @@ try {
     const matrix = results.map((r) => '| ' + r.id + ' | ' + r.entry + ' | ' + r.status + ' | ' + String(r.value).replace(/\|/g, '\\|').slice(0, 320) + ' | ' + r.threshold + ' | ' + (r.evidence.join('<br>') || '—') + ' |').join('\n');
 
     const report = [
-      '# QA report — logo-sequence site (v1.2.0 round)',
+      '# QA report — logo-sequence site (v1.3.0 round)',
       '',
       '- Revision: `' + env.sha + '` · generated ' + env.generatedAt,
       '- Environment: ' + env.os + ' · Node ' + env.node + ' · puppeteer-core ' + (env.puppeteer || '?'),
@@ -648,7 +750,7 @@ try {
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-report.md'), report, 'utf8');
 
     const log = [
-      '# QA log — environment, commands, honesty notes (v1.2.0)',
+      '# QA log — environment, commands, honesty notes (v1.3.0)',
       '',
       '## Environment',
       '',
@@ -687,7 +789,7 @@ try {
       '',
       '## Rollback drill',
       '',
-      'See `qa/evidence/rollback/` (tag v1.1.0 + kept v1.0.0).',
+      'See `qa/evidence/rollback/` (v1.3.0 + kept v1.2.0 / v1.1.0 / v1.0.0).',
       ''
     ].join('\n');
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-log.md'), log, 'utf8');

@@ -3,39 +3,42 @@
     "vp": "1280x800",
     "dx": 0,
     "dy": 0,
-    "frameW": 876.1,
-    "expectedW": 876.1,
+    "frameW": 979.7,
+    "expectedW": 979.7,
     "sizeOk": true,
     "notClipped": true,
     "bg": "rgb(23, 25, 27)",
     "spin": 0,
     "markOpacity": 0,
-    "wordOpacity": 1
+    "wordOpacity": 1,
+    "sideOp": 0
   },
   {
     "vp": "1440x900",
     "dx": 0,
     "dy": 0,
-    "frameW": 985.6,
-    "expectedW": 985.6,
+    "frameW": 1102.2,
+    "expectedW": 1102.2,
     "sizeOk": true,
     "notClipped": true,
     "bg": "rgb(23, 25, 27)",
     "spin": 0,
     "markOpacity": 0,
-    "wordOpacity": 1
+    "wordOpacity": 1,
+    "sideOp": 0
   },
   {
     "vp": "1920x1080",
     "dx": 0,
     "dy": 0,
-    "frameW": 1182.7,
-    "expectedW": 1182.7,
+    "frameW": 1322.6,
+    "expectedW": 1322.6,
     "sizeOk": true,
     "notClipped": true,
     "bg": "rgb(23, 25, 27)",
     "spin": 0,
     "markOpacity": 0,
-    "wordOpacity": 1
+    "wordOpacity": 1,
+    "sideOp": 0
   }
 ]
