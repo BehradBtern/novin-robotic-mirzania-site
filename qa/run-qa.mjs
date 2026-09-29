@@ -186,7 +186,7 @@ try {
     for (let i = 0; i <= STEPS; i++) {
       const y = Math.round((travel * i) / STEPS);
       await page.evaluate((yy) => window.scrollTo(0, yy), y);
-      const st = await settle(page);
+      const st = await settle(page, 4000);
       trace.push({ y, p: +st.p.toFixed(5), spin: +st.spin.toFixed(3), tx: +st.tx.toFixed(2), ty: +st.ty.toFixed(2), sF: +st.sF.toFixed(4), fade: +st.fade.toFixed(3), wOp: st.wordmarkOpacity, mOp: st.markboxOpacity, mcx: +(st.markbox.x + st.markbox.w / 2).toFixed(1), mcy: +(st.markbox.y + st.markbox.h / 2).toFixed(1) });
     }
     const mapErr = Math.max(...trace.map((t) => Math.abs(t.p - Math.min(1, Math.max(0, (t.y - heroTop) / travel)))));
