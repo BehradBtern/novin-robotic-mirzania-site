@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.2 round)
 
-- Revision: `2f2dbc3` · generated 2026-09-29T17:42:42.323Z
+- Revision: `e22ec49` · generated 2026-09-29T17:47:54.806Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/154.0.8037.58 · Edge: Edg/154.0.4258.37
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -16,7 +16,7 @@
 | a | programmes: 4–7 photo slots present, ordered hero→programmes→footer | PASS | {"cards":6,"ordered":true} | gallery between hero and footer; 4–7 cards each with img/alt/title/text | evidence/a/nav-sweep.json |
 | a | source audit: no dead placeholders; gallery assets present | PASS | {"deadRefs":0,"galleryRefs":6,"slots":6,"missing":0,"imgFiles":6} | no hero__copy/hint/indicator/rm-mark refs; every gallery slot points at an existing file | evidence/a/removal-audit.txt |
 | b | intro: big wordmark centered on dark gray, unclipped | PASS | [{"vp":"1280x800","dx":0,"dy":0,"frameW":979.7,"expectedW":979.7,"sizeOk":true,"notClipped":true,"bg":"rgb(23, 25, 27)","spin":0,"markOpacity":0,"wordOpacity":1,"sideOp":0},{"vp":"1440x900","dx":0,"dy":0,"frameW":1102.2,"expectedW":1102.2,"sizeOk":true,"notClipped":true,"bg":"rgb(23, 25, 27)","spin":0,"markOpacity":0," | hero size == min(92vw, 96vh*1.2757, 1600px) ±3; centered ±8px; fully in viewport; side copy hidden; bg rgb(23,25,27) | evidence/a/intro-1440x900.png<br>evidence/a/intro-audit.json |
-| c | motion trace (60 steps) | FAIL | {"mapErr":0.0157,"monoSpin":true,"spinEnd":360,"maxSpinStep":41.2,"maxPosStep":300.6,"orderOk":true,"opacityOk":true,"cEndTx":-719.15,"dEndTy":354.87} | clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; enlarged state at exact 45-degree pose; dock travel right+down; swap opacity sum=1 | evidence/b/motion-trace.json |
+| c | motion trace (60 steps) | PASS | {"mapErr":0,"monoSpin":true,"spinEnd":360,"maxSpinStep":41.2,"maxPosStep":300.6,"orderOk":true,"opacityOk":true,"cEndTx":-719.15,"dEndTy":354.87} | clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; enlarged state at exact 45-degree pose; dock travel right+down; swap opacity sum=1 | evidence/b/motion-trace.json |
 | c | settle / no-oscillation / idle-stability | PASS | {"settleOk":true,"p":0.41667,"mapP":0.41667,"reversals":0,"idleDelta":0} | p==mapping after stop (0.002); <=2 reversals; idle delta 0 | — |
 | c | determinism (same scrollY twice) | PASS | identical serialized transforms | identical | — |
 | c | enlarged state: half clipped, exact 45-degree pose, no overflow | PASS | [{"vp":"1280x800","visFrac":0.503,"markCx":2.6,"spin":360,"overflow":0,"ok":true},{"vp":"1440x900","visFrac":0.503,"markCx":3,"spin":360,"overflow":0,"ok":true},{"vp":"1920x1080","visFrac":0.503,"markCx":3.5,"spin":360,"overflow":0,"ok":true},{"vp":"390x844","visFrac":0.503,"markCx":2.6,"spin":360,"overflow":0,"ok":tru | visible width fraction 0.42-0.58 at max size; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0 | evidence/b/halfclip-audit.json<br>evidence/b/halfclip-1440x900.png |
@@ -40,8 +40,8 @@
 
 ## Summary
 
-- PASS: 24
-- FAIL: 1
+- PASS: 25
+- FAIL: 0
 - INFO: 1
 - OBSERVED: 0
 - NOT PERFORMED: 0
