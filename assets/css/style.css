@@ -186,13 +186,15 @@ a:hover { color: var(--ink-1); }
 }
 
 /* =========================================================================
-   FOOTER — keeps its content; the logo docks half-hidden at its top edge
+   FOOTER — columns, the sequence's landing area, and the giant animated
+   brand text (draw-in stroke + hover rainbow reveal) over a radial glow
    ========================================================================= */
 .footer {
   position: relative;
-  z-index: 2;                  /* desktop/tablet: buries the docked logo's lower half */
+  z-index: 2;
   border-top: 1px solid var(--hairline);
   padding-block: calc(var(--region) / 1.5);
+  isolation: isolate;
 }
 
 .footer::before {
@@ -200,13 +202,27 @@ a:hover { color: var(--ink-1); }
   position: absolute;
   inset: 0;
   background: var(--stage);
-  z-index: 1;
+  z-index: -2;
 }
 
-.footer > .shell { position: relative; z-index: 3; }
+/* radial glow behind the signature (supplied footer design; teal-tinted) */
+.footer__glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(125% 125% at 50% 10%, #0F0F1166 50%, #56C1C933 100%);
+}
 
-/* the landing mark: centred in the footer band, between its background and
-   its content; shown once the sequence docks (or statically in reduced motion) */
+.footer__inner { position: relative; z-index: 1; }
+
+/* the landing area: the sequence's mark docks into the centre of it;
+   always tall enough for the mark plus breathing room */
+.footer__landing {
+  position: relative;
+  height: max(clamp(300px, 42vh, 430px), calc(var(--dock-r, 110px) * 2 + 48px));
+}
+
 .footer__endmark {
   display: none;
   position: absolute;
@@ -215,11 +231,46 @@ a:hover { color: var(--ink-1); }
   width: calc(var(--dock-r, 0px) * 2);
   height: auto;
   transform: translate(-50%, -50%);
-  z-index: 2;
   pointer-events: none;
   -webkit-user-drag: none;
   user-select: none;
 }
+
+/* ---------- signature: giant outline text (draw-in + hover reveal) ---------- */
+.footer__signature { margin-top: 8px; }
+.sig {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 300 / 38;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.sig text { text-transform: uppercase; letter-spacing: 0.03em; }
+.sig__echo {
+  stroke: var(--border-strong);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.footer__signature.is-hover .sig__echo { opacity: 0.7; }
+.sig__draw {
+  stroke: var(--accent);
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+.footer__signature.is-drawn .sig__draw {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 4s ease-in-out;
+}
+.sig__rainbow {
+  stroke-width: 0.7;
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+.footer__signature.is-hover .sig__rainbow { opacity: 1; }
+.reduced-motion .sig__draw { stroke-dashoffset: 0; transition: none; }
+.reduced-motion .sig__echo, .reduced-motion .sig__rainbow { transition: none; }
 
 .footer__grid {
   display: grid;

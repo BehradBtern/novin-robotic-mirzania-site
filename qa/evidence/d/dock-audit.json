@@ -3,13 +3,15 @@
     "vp": "1280x800",
     "center": [
       640,
-      562.8
+      278.3
     ],
-    "bandCy": 562.4,
+    "bandCy": 278.3,
     "bandCx": 640,
     "frac": 1,
-    "size": 199.1,
-    "dockD": 199.1,
+    "size": 330,
+    "dockD": 330,
+    "gapAbove": 25,
+    "gapBelow": 33,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -20,13 +22,15 @@
     "vp": "1440x900",
     "center": [
       720,
-      652.3
+      360.8
     ],
-    "bandCy": 651.8,
+    "bandCy": 360.8,
     "bandCx": 720,
     "frac": 1,
-    "size": 208.3,
-    "dockD": 208.3,
+    "size": 330,
+    "dockD": 330,
+    "gapAbove": 25,
+    "gapBelow": 33,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -37,13 +41,15 @@
     "vp": "1920x1080",
     "center": [
       960,
-      812.9
+      490.4
     ],
-    "bandCy": 812.4,
+    "bandCy": 490.4,
     "bandCx": 960,
     "frac": 1,
-    "size": 224.7,
-    "dockD": 224.7,
+    "size": 330,
+    "dockD": 330,
+    "gapAbove": 51,
+    "gapBelow": 59,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -54,13 +60,15 @@
     "vp": "2560x1080",
     "center": [
       1280,
-      812.9
+      490.4
     ],
-    "bandCy": 812.4,
+    "bandCy": 490.4,
     "bandCx": 1280,
     "frac": 1,
-    "size": 224.7,
-    "dockD": 224.7,
+    "size": 330,
+    "dockD": 330,
+    "gapAbove": 51,
+    "gapBelow": 59,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -71,13 +79,15 @@
     "vp": "834x1112",
     "center": [
       417,
-      826.9
+      542.8
     ],
-    "bandCy": 826.4,
+    "bandCy": 542.8,
     "bandCx": 417,
     "frac": 1,
-    "size": 239.8,
-    "dockD": 239.8,
+    "size": 330,
+    "dockD": 330,
+    "gapAbove": 51,
+    "gapBelow": 59,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -88,13 +98,15 @@
     "vp": "390x844",
     "center": [
       195,
-      416.6
+      398
     ],
-    "bandCy": 416.1,
+    "bandCy": 398,
     "bandCx": 195,
     "frac": 1,
     "size": 195,
     "dockD": 195,
+    "gapAbove": 80.3,
+    "gapBelow": 88.3,
     "centered": true,
     "sizeOk": true,
     "upright": true,

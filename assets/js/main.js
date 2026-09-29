@@ -419,6 +419,68 @@
     Array.prototype.forEach.call(galleryGrid.children, function (card) { gio.observe(card); });
   }
 
+  /* ---------------- footer signature: draw-in + cursor reveal -------------- */
+  var sigWrap = doc.getElementById("footer-signature");
+  var sigSvg = doc.getElementById("sig-svg");
+  var revealMask = doc.getElementById("revealMask");
+  if (sigWrap && sigSvg && revealMask) {
+    var sigLabel = String(
+      (C.footer && C.footer.signature && C.footer.signature.text) ||
+      (C.brand && C.brand.name) || ""
+    ).toUpperCase();
+    Array.prototype.forEach.call(sigWrap.querySelectorAll("text"), function (t) {
+      t.textContent = sigLabel;
+    });
+
+    var maskTarget = { cx: 50, cy: 50 };
+    var maskNow = { cx: 50, cy: 50 };
+    var maskRaf = null;
+    var maskTick = function () {
+      maskNow.cx += (maskTarget.cx - maskNow.cx) * 0.18;
+      maskNow.cy += (maskTarget.cy - maskNow.cy) * 0.18;
+      revealMask.setAttribute("cx", maskNow.cx.toFixed(2) + "%");
+      revealMask.setAttribute("cy", maskNow.cy.toFixed(2) + "%");
+      if (Math.abs(maskTarget.cx - maskNow.cx) > 0.05 || Math.abs(maskTarget.cy - maskNow.cy) > 0.05) {
+        maskRaf = window.requestAnimationFrame(maskTick);
+      } else {
+        maskRaf = null;
+      }
+    };
+    var applyMask = function () {
+      revealMask.setAttribute("cx", maskTarget.cx.toFixed(2) + "%");
+      revealMask.setAttribute("cy", maskTarget.cy.toFixed(2) + "%");
+    };
+    sigWrap.addEventListener("pointerenter", function () { sigWrap.classList.add("is-hover"); });
+    sigWrap.addEventListener("pointerleave", function () { sigWrap.classList.remove("is-hover"); });
+    sigWrap.addEventListener("pointermove", function (e) {
+      var r = sigSvg.getBoundingClientRect();
+      if (r.width < 1 || r.height < 1) return;
+      maskTarget.cx = ((e.clientX - r.left) / r.width) * 100;
+      maskTarget.cy = ((e.clientY - r.top) / r.height) * 100;
+      if (reduced) {
+        applyMask();
+      } else if (maskRaf === null) {
+        maskRaf = window.requestAnimationFrame(maskTick);
+      }
+    });
+
+    if (reduced) {
+      sigWrap.classList.add("is-drawn");
+    } else if ("IntersectionObserver" in window) {
+      var sio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            sigWrap.classList.add("is-drawn");
+            sio.unobserve(sigWrap);
+          }
+        });
+      }, { threshold: 0.35 });
+      sio.observe(sigWrap);
+    } else {
+      sigWrap.classList.add("is-drawn");
+    }
+  }
+
   /* ---------------- init ---------------- */
   computeGeo();
   window.addEventListener("load", function () { onResize(); });
