@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.1 round)
 
-- Revision: `dc85848` · generated 2026-09-29T17:10:46.105Z
+- Revision: `2dcd960` · generated 2026-09-29T17:18:22.521Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/154.0.8037.58 · Edge: Edg/154.0.4258.37
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
