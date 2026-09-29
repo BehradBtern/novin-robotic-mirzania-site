@@ -5,13 +5,13 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/154.0.8037.58",
     "edge": "Edg/154.0.4258.37",
-    "generatedAt": "2026-09-29T17:42:42.323Z",
-    "sha": "2f2dbc3"
+    "generatedAt": "2026-09-29T17:47:54.806Z",
+    "sha": "e22ec49"
   },
-  "generatedAt": "2026-09-29T17:42:42.323Z",
+  "generatedAt": "2026-09-29T17:47:54.806Z",
   "counts": {
-    "PASS": 24,
-    "FAIL": 1,
+    "PASS": 25,
+    "FAIL": 0,
     "INFO": 1,
     "OBSERVED": 0,
     "NOT PERFORMED": 0
@@ -76,8 +76,8 @@
     {
       "id": "c",
       "entry": "motion trace (60 steps)",
-      "status": "FAIL",
-      "value": "{\"mapErr\":0.0157,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":41.2,\"maxPosStep\":300.6,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":-719.15,\"dEndTy\":354.87}",
+      "status": "PASS",
+      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":41.2,\"maxPosStep\":300.6,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":-719.15,\"dEndTy\":354.87}",
       "threshold": "clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; enlarged state at exact 45-degree pose; dock travel right+down; swap opacity sum=1",
       "evidence": [
         "evidence/b/motion-trace.json"
