@@ -1,0 +1,24 @@
+﻿tag v1.3.1
+Tagger: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Tue Sep 29 20:50:35 2026 +0330
+
+Release v1.3.1 - exact 45-degree pose for the enlarged state
+
+commit 3c61d81deed65f1a0a523c962faa08a603f5fd5d
+Author: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Tue Sep 29 20:50:35 2026 +0330
+
+    docs: QA evidence for v1.3.1 (revision 2dcd960)
+
+ qa/evidence/b/dock-1280x800.png     | Bin 89069 -> 87064 bytes
+ qa/evidence/b/dock-1440x900.png     | Bin 83695 -> 98721 bytes
+ qa/evidence/b/dock-1920x1080.png    | Bin 113335 -> 114085 bytes
+ qa/evidence/b/dock-2560x1080.png    | Bin 114858 -> 118267 bytes
+ qa/evidence/b/dock-834x1112.png     | Bin 83585 -> 84771 bytes
+ qa/evidence/f/footer-1440x900.png   | Bin 96827 -> 96811 bytes
+ qa/evidence/i/perf.json             |   2 +-
+ qa/evidence/j/dock-live-zoom-2x.png | Bin 263353 -> 260989 bytes
+ qa/qa-log.md                        |   2 +-
+ qa/qa-report.md                     |   2 +-
+ qa/qa-summary.json                  |   6 +++---
+ 11 files changed, 6 insertions(+), 6 deletions(-)
