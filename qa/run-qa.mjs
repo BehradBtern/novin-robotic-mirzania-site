@@ -216,7 +216,7 @@ try {
     writeJson(evPath('b', 'motion-trace.json'), { travel, heroTop, mapErr, monoSpin, spinEnd, maxSpinStep, maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEnd, dEnd, steps: trace });
     add('c', 'motion trace (60 steps)', traceOk ? PASS : FAIL,
       JSON.stringify({ mapErr: +mapErr.toFixed(4), monoSpin, spinEnd, maxSpinStep: +maxSpinStep.toFixed(1), maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEndTx: cEnd.tx, dEndTy: dEnd.ty }),
-      'clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; dock travel right+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
+      'clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; enlarged state at exact 45-degree pose; dock travel right+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
 
     // settle / oscillation / idle
     await page.evaluate(() => window.scrollTo(0, 0));
@@ -260,13 +260,14 @@ try {
         const r = stc.rBig;
         const visW = Math.max(0, Math.min(cx + r, w) - Math.max(cx - r, 0));
         const fracX = +(visW / (2 * r)).toFixed(3);
+        const spin = +stc.spin.toFixed(1);
         const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-        clipRows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), overflow, ok: fracX >= 0.42 && fracX <= 0.58 && overflow <= 1 });
+        clipRows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(spin - 360) <= 1 && overflow <= 1 });
         await shot(pg, 'b/halfclip-' + w + 'x' + h + '.png');
         await pg.close();
       }
       writeJson(evPath('b', 'halfclip-audit.json'), clipRows);
-      add('c', 'enlarged state: half clipped at the left edge, no overflow', clipRows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(clipRows), 'visible width fraction 0.42-0.58 at max size; scrollWidth overflow 0', ['evidence/b/halfclip-audit.json', 'evidence/b/halfclip-1440x900.png']);
+      add('c', 'enlarged state: half clipped, exact 45-degree pose, no overflow', clipRows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(clipRows), 'visible width fraction 0.42-0.58 at max size; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0', ['evidence/b/halfclip-audit.json', 'evidence/b/halfclip-1440x900.png']);
     }
 
     // side-copy stage: text appears left/right of the small symbol, mark centred
@@ -616,7 +617,7 @@ try {
       await delay(500);
       await settle(page, 2500);
       const s2 = await state(page);
-      const expSpin = 180 * cub(s2.p, 0.10, 0.36) + 120 * cub(s2.p, 0.66, 0.86) + 60 * cub(s2.p, 0.86, 0.96);
+      const expSpin = 180 * cub(s2.p, 0.10, 0.36) + 180 * cub(s2.p, 0.66, 0.86);
       const ok = Math.abs(s2.p - s2.pTarget) <= 0.01 && Math.abs(s2.spin - expSpin) <= 6;
       add('j', 'resize mid-sequence', ok ? PASS : FAIL, JSON.stringify({ p: [s1.p, s2.p], spin: s2.spin, expSpin: +expSpin.toFixed(1) }), 'state re-renders consistently after resize', []);
       await page.close();
@@ -723,7 +724,7 @@ try {
     const matrix = results.map((r) => '| ' + r.id + ' | ' + r.entry + ' | ' + r.status + ' | ' + String(r.value).replace(/\|/g, '\\|').slice(0, 320) + ' | ' + r.threshold + ' | ' + (r.evidence.join('<br>') || '—') + ' |').join('\n');
 
     const report = [
-      '# QA report — logo-sequence site (v1.3.0 round)',
+      '# QA report — logo-sequence site (v1.3.1 round)',
       '',
       '- Revision: `' + env.sha + '` · generated ' + env.generatedAt,
       '- Environment: ' + env.os + ' · Node ' + env.node + ' · puppeteer-core ' + (env.puppeteer || '?'),
@@ -750,7 +751,7 @@ try {
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-report.md'), report, 'utf8');
 
     const log = [
-      '# QA log — environment, commands, honesty notes (v1.3.0)',
+      '# QA log — environment, commands, honesty notes (v1.3.1)',
       '',
       '## Environment',
       '',
@@ -789,7 +790,7 @@ try {
       '',
       '## Rollback drill',
       '',
-      'See `qa/evidence/rollback/` (v1.3.0 + kept v1.2.0 / v1.1.0 / v1.0.0).',
+      'See `qa/evidence/rollback/` (v1.3.1 + kept v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
       ''
     ].join('\n');
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-log.md'), log, 'utf8');

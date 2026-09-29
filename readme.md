@@ -3,10 +3,11 @@
 A single page built around one scroll-linked sequence: the logo starts **big**
 at the top, spins clockwise while shrinking, **side copy appears left and
 right of the small symbol**, then it **rotates left and grows** — ending up
-roughly **half clipped** past the left edge — and finally travels down and
-docks, upright, just above the bottom edge, handing off to a copy **centred
-inside the footer band**. Below the sequence sits the **programmes grid**
-(4–7 photo slots with text). No top navigation bar.
+roughly **half clipped** past the left edge, arriving exactly at the mark's
+**45° diamond pose** — and finally travels down and docks, upright, just above
+the bottom edge, handing off to a copy **centred inside the footer band**.
+Below the sequence sits the **programmes grid** (4–7 photo slots with text).
+No top navigation bar.
 
 No framework, no build step: plain HTML/CSS/JS. All content lives in one file.
 
@@ -47,7 +48,8 @@ server.js                      zero-dependency local preview server
 
 Scroll progress drives six states: **hold (big logo) → clockwise spin + shrink
 (wordmark swaps to the mark mid-turn) → side copy left/right of the small
-symbol → rotate left + grow until half is clipped → travel down to the dock →
+symbol → rotate left + grow until half is clipped, arriving exactly at the
+mark's 45° pose (spin 360) → travel down to the dock holding that pose →
 settle upright, centred horizontally, just above the bottom edge** (the footer
 below the programmes grid carries its own centred copy of the mark, so the
 end state at the very bottom of the page is "logo in the middle of the
