@@ -40,5 +40,6 @@ Reduced-motion checks used DevTools emulation (`emulateMediaFeatures`) â€” 
 - Kept releases for one-step restore: v1.3.1, v1.3.0, v1.2.0, v1.1.0, v1.0.0 — tags + archives under qa/evidence/rollback/.
 - git show v1.3.2 --stat -> qa/evidence/rollback/tag-show-v1.3.2.txt
 - Worktree checkout smoke: a clean worktree of v1.3.2 served on port 8081; screenshot qa/evidence/rollback/v1.3.2-footer.png (1440x900; zero console errors; shot exit=0).
-- Archive: qa/evidence/rollback/dist-v1.3.2.zip; SHA-256: CA86B480957AE7E9E5016C67C5BDBC94B7327A788FA4B705133CF5E538CE2003
+- Archive: qa/evidence/rollback/dist-v1.3.2.zip (excludes nested rollback archives); SHA-256: 6A28401B5B34807025387B8717B8D522DBE12E5BF6B500BCF6EB028240E5720D
 - Limits: repository-level restore demonstrated on this machine; hosting/CDN rollback not covered. Remote: none configured.
+
