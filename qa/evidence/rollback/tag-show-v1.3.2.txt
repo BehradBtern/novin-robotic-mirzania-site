@@ -1,0 +1,28 @@
+﻿tag v1.3.2
+Tagger: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Tue Sep 29 21:20:26 2026 +0330
+
+Release v1.3.2 - footer rebuilt: radial glow + giant animated brand text (draw-in + hover reveal), logo landing area
+
+commit 9e3af991eb7057860192ae2d6b8c6a754f871488
+Author: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Tue Sep 29 21:20:26 2026 +0330
+
+    docs: QA evidence for v1.3.2 (revision e22ec49)
+
+ qa/evidence/b/dock-1280x800.png           | Bin 147851 -> 147804 bytes
+ qa/evidence/b/dock-1440x900.png           | Bin 173793 -> 174018 bytes
+ qa/evidence/b/dock-1920x1080.png          | Bin 216055 -> 215370 bytes
+ qa/evidence/b/dock-2560x1080.png          | Bin 241939 -> 241106 bytes
+ qa/evidence/b/dock-390x844.png            | Bin 84862 -> 84778 bytes
+ qa/evidence/b/dock-834x1112.png           | Bin 145020 -> 144544 bytes
+ qa/evidence/b/motion-trace.json           |   6 +++---
+ qa/evidence/edge/dock-1440x900.png        | Bin 172704 -> 174017 bytes
+ qa/evidence/f/footer-1440x900.png         | Bin 184907 -> 183648 bytes
+ qa/evidence/f/roundtrip-logoswap-dock.png | Bin 199312 -> 201397 bytes
+ qa/evidence/i/perf.json                   |   2 +-
+ qa/evidence/j/dock-live-zoom-2x.png       | Bin 511422 -> 498826 bytes
+ qa/qa-log.md                              |   2 +-
+ qa/qa-report.md                           |   8 ++++----
+ qa/qa-summary.json                        |  14 +++++++-------
+ 15 files changed, 16 insertions(+), 16 deletions(-)
