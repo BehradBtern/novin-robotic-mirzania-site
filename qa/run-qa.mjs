@@ -350,28 +350,39 @@ try {
       await waitStableScroll(page);
       await settle(page, 2500);
       const st = await state(page);
-      const em = await page.evaluate(() => {
+      const mets = await page.evaluate(() => {
         const el = document.getElementById('footer-endmark');
         const r = el.getBoundingClientRect();
-        return { x: r.x, y: r.y, w: r.width, h: r.height, transform: getComputedStyle(el).transform, opacity: +getComputedStyle(el).opacity, display: getComputedStyle(el).display };
+        const lz = document.getElementById('footer-landing').getBoundingClientRect();
+        const grid = document.querySelector('.footer__grid').getBoundingClientRect();
+        const sig = document.getElementById('footer-signature').getBoundingClientRect();
+        return {
+          em: { x: r.x, y: r.y, w: r.width, h: r.height, transform: getComputedStyle(el).transform, opacity: +getComputedStyle(el).opacity, display: getComputedStyle(el).display },
+          lzCy: lz.top + lz.height / 2,
+          gridBottom: grid.bottom,
+          sigTop: sig.top
+        };
       });
-      const ft = st.footer;
+      const em = mets.em;
       const cxc = em.x + em.w / 2, cyc = em.y + em.h / 2;
-      const bandCy = ft.top + ft.height / 2;
+      const bandCy = mets.lzCy;
+      const gapAbove = +(em.y - mets.gridBottom).toFixed(1);
+      const gapBelow = +(mets.sigTop - (em.y + em.h)).toFixed(1);
+      const clear = gapAbove >= 6 && gapBelow >= 6;
       const visible = Math.max(0, Math.min(em.y + em.h, h) - Math.max(em.y, 0));
       const frac = +(visible / em.h).toFixed(3);
       const centered = Math.abs(cxc - w / 2) <= 6 && Math.abs(cyc - bandCy) <= 8;
       const sizeOk = Math.abs(em.w - st.dockR * 2) <= 6;
       const upright = em.transform === 'none' || /matrix\(1, 0, 0, 1/.test(em.transform);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-      const ok = frac >= 0.9 && centered && sizeOk && upright && em.display === 'block' && em.opacity > 0.95 && overflow <= 1;
-      rows.push({ vp: w + 'x' + h, center: [+cxc.toFixed(1), +cyc.toFixed(1)], bandCy: +bandCy.toFixed(1), bandCx: w / 2, frac, size: +em.w.toFixed(1), dockD: +(st.dockR * 2).toFixed(1), centered, sizeOk, upright, overflow, ok });
+      const ok = frac >= 0.9 && centered && sizeOk && upright && clear && em.display === 'block' && em.opacity > 0.95 && overflow <= 1;
+      rows.push({ vp: w + 'x' + h, center: [+cxc.toFixed(1), +cyc.toFixed(1)], bandCy: +bandCy.toFixed(1), bandCx: w / 2, frac, size: +em.w.toFixed(1), dockD: +(st.dockR * 2).toFixed(1), gapAbove, gapBelow, centered, sizeOk, upright, overflow, ok });
       await shot(page, 'b/dock-' + w + 'x' + h + '.png');
       await page.close();
     }
     writeJson(evPath('d', 'dock-audit.json'), rows);
-    add('d', 'landing: centred in the footer band, fully visible, upright', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows),
-      'centre == (viewport/2, footer band centre) ±6/±8px; visible fraction >= 0.9; size == configured ±6; no rotation; overflow 0', ['evidence/d/dock-audit.json', 'evidence/b/dock-1440x900.png']);
+    add('d', 'landing: centred in the footer landing area, clear of columns and signature', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows),
+      'centre == (viewport/2, landing-area centre) ±6/±8px; visible fraction >= 0.9; clear of the columns and the signature (>=6px both); size == configured ±6; no rotation; overflow 0', ['evidence/d/dock-audit.json', 'evidence/b/dock-1440x900.png']);
   } catch (e) { add('d', 'dock audit', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- d2) stability: no drift after scroll/resize ---------- */
@@ -383,8 +394,8 @@ try {
     const get = () => page.evaluate(() => {
       const el = document.getElementById('footer-endmark');
       const r = el.getBoundingClientRect();
-      const ft = document.getElementById('footer').getBoundingClientRect();
-      return { x: r.x + r.width / 2, y: r.y + r.height / 2, bandCy: ft.top + ft.height / 2, w: r.width };
+      const lz = document.getElementById('footer-landing').getBoundingClientRect();
+      return { x: r.x + r.width / 2, y: r.y + r.height / 2, bandCy: lz.top + lz.height / 2, w: r.width };
     });
     const yMax = await page.evaluate(() => window.scrollY);
     await page.mouse.wheel({ deltaY: 800 });
@@ -465,6 +476,42 @@ try {
     const landOk = landings.every((l) => l.top !== null && l.top >= -40 && l.top <= 675);
     const ok = landOk && Object.values(contactCheck).every(Boolean) && links.length === 4;
     add('f', 'footer: links land + contact/legal intact', ok ? PASS : FAIL, JSON.stringify({ landings, contactCheck }), '4 links land within viewport; mailto/tel formats; texts == content', ['evidence/f/footer-links.json', 'evidence/f/footer-1440x900.png']);
+
+    /* signature: three layers, draw-in completes, hover reveal reacts */
+    const sigBase = await page.evaluate(() => {
+      const wrap = document.getElementById('footer-signature');
+      const texts = Array.from(wrap.querySelectorAll('text'));
+      return { layers: texts.length, content: texts[0] ? texts[0].textContent : '', drawn: wrap.classList.contains('is-drawn') };
+    });
+    {
+      const t0 = Date.now();
+      while (!sigBase.drawn && Date.now() - t0 < 8000) {
+        await delay(300);
+        sigBase.drawn = await page.evaluate(() => document.getElementById('footer-signature').classList.contains('is-drawn'));
+      }
+    }
+    await delay(4600);
+    const dashAfter = await page.evaluate(() => parseFloat(getComputedStyle(document.querySelector('.sig__draw')).strokeDashoffset));
+    await page.evaluate(() => document.getElementById('footer-signature').scrollIntoView({ block: 'center' }));
+    await delay(350);
+    const sigBox = await page.evaluate(() => {
+      const r = document.getElementById('sig-svg').getBoundingClientRect();
+      return { x: r.x, y: r.y, cx: r.x + r.width / 2, cy: r.y + r.height / 2, w: r.width };
+    });
+    await page.mouse.move(sigBox.cx - sigBox.w * 0.3, sigBox.cy);
+    await delay(450);
+    const hov = await page.evaluate(() => {
+      const wrap = document.getElementById('footer-signature');
+      return {
+        hoverClass: wrap.classList.contains('is-hover'),
+        echoOp: +getComputedStyle(document.querySelector('.sig__echo')).opacity,
+        maskCx: document.getElementById('revealMask').getAttribute('cx')
+      };
+    });
+    await shot(page, 'f/footer-signature-1440x900.png');
+    const sigOk = sigBase.layers === 3 && /NOVIN ROBOTIC MIRZANIA/.test(sigBase.content) && sigBase.drawn && dashAfter <= 1 && hov.hoverClass && hov.echoOp >= 0.6 && hov.maskCx !== '50.00%';
+    writeJson(evPath('f', 'signature-audit.json'), { base: sigBase, dashAfter, hov });
+    add('f', 'footer signature: draw-in completes + hover reveal reacts', sigOk ? PASS : FAIL, JSON.stringify({ layers: sigBase.layers, content: sigBase.content, drawn: sigBase.drawn, dashAfter, hoverClass: hov.hoverClass, echoOp: hov.echoOp, maskCx: hov.maskCx }), '3 text layers with the brand name; stroke draw-in finishes (dashoffset 0); hover shows the echo (0.7) and moves the reveal mask', ['evidence/f/signature-audit.json', 'evidence/f/footer-signature-1440x900.png']);
     await page.close();
   } catch (e) { add('f', 'content + footer', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
@@ -511,7 +558,7 @@ try {
       const frame = document.getElementById('hero-frame');
       const end = document.getElementById('footer-endmark');
       const er = end.getBoundingClientRect();
-      const ft = document.getElementById('footer').getBoundingClientRect();
+      const lz = document.getElementById('footer-landing').getBoundingClientRect();
       return {
         hasClass: document.documentElement.classList.contains('reduced-motion'),
         frameInline: frame.style.transform,
@@ -521,8 +568,9 @@ try {
         endDisplay: getComputedStyle(end).display,
         endOpacity: +getComputedStyle(end).opacity,
         endRect: { x: er.x, y: er.y, r: er.x + er.width, b: er.y + er.height },
-        footerTop: ft.top,
-        bandCy: ft.top + ft.height / 2,
+        bandCy: lz.top + lz.height / 2,
+        sigDrawOffset: getComputedStyle(document.querySelector('.sig__draw')).strokeDashoffset,
+        sigWidth: document.getElementById('sig-svg').getBoundingClientRect().width,
         vw: innerWidth, vh: innerHeight
       };
     });
@@ -540,9 +588,10 @@ try {
       rc.endDisplay === 'block' && rc.endOpacity === 1 && inView(rc.endRect) && inView(top) &&
       Math.abs((rc.endRect.x + rc.endRect.r) / 2 - rc.vw / 2) <= 6 &&
       Math.abs((rc.endRect.y + rc.endRect.b) / 2 - rc.bandCy) <= 8 &&
+      parseFloat(rc.sigDrawOffset) <= 1 && rc.sigWidth > 100 &&
       gal.count >= 4 && gal.op === 1 && gal.inView;
     writeJson(evPath('h', 'reduced-motion.json'), { top, rc, gal });
-    add('h', 'reduced motion: static logo fully visible in hero and footer; gallery static', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed, side: rc.sideDisplay, gallery: gal }), 'no transforms; no side copy; wordmark fully in viewport; landing centred; gallery cards visible without reveal effects', ['evidence/h/reduced-1440-full.png']);
+    add('h', 'reduced motion: static logo + signature fully rendered, gallery static', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed, side: rc.sideDisplay, sigDraw: rc.sigDrawOffset, gallery: gal }), 'no transforms; no side copy; wordmark fully in viewport; landing centred in the landing area; signature drawn statically (no dash offset); gallery cards visible without reveal effects', ['evidence/h/reduced-1440-full.png']);
     await page.close();
     const p390 = await openPage(browser, { w: 390, h: 844, reduced: true });
     await shotFull(p390, 'h/reduced-390-full.png');
@@ -685,8 +734,8 @@ try {
     const em = await p2.evaluate(() => {
       const el = document.getElementById('footer-endmark');
       const r = el.getBoundingClientRect();
-      const ft = document.getElementById('footer').getBoundingClientRect();
-      return { cy: r.y + r.height / 2, cx: r.x + r.width / 2, bandCy: ft.top + ft.height / 2, w: r.width };
+      const lz = document.getElementById('footer-landing').getBoundingClientRect();
+      return { cy: r.y + r.height / 2, cx: r.x + r.width / 2, bandCy: lz.top + lz.height / 2, w: r.width };
     });
     const centered = Math.abs(em.cx - 720) <= 6 && Math.abs(em.cy - em.bandCy) <= 8;
     const errs = p2.qa.errors.length + p2.qa.pageerrors.length;
@@ -724,7 +773,7 @@ try {
     const matrix = results.map((r) => '| ' + r.id + ' | ' + r.entry + ' | ' + r.status + ' | ' + String(r.value).replace(/\|/g, '\\|').slice(0, 320) + ' | ' + r.threshold + ' | ' + (r.evidence.join('<br>') || '—') + ' |').join('\n');
 
     const report = [
-      '# QA report — logo-sequence site (v1.3.1 round)',
+      '# QA report — logo-sequence site (v1.3.2 round)',
       '',
       '- Revision: `' + env.sha + '` · generated ' + env.generatedAt,
       '- Environment: ' + env.os + ' · Node ' + env.node + ' · puppeteer-core ' + (env.puppeteer || '?'),
@@ -751,7 +800,7 @@ try {
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-report.md'), report, 'utf8');
 
     const log = [
-      '# QA log — environment, commands, honesty notes (v1.3.1)',
+      '# QA log — environment, commands, honesty notes (v1.3.2)',
       '',
       '## Environment',
       '',
@@ -790,7 +839,7 @@ try {
       '',
       '## Rollback drill',
       '',
-      'See `qa/evidence/rollback/` (v1.3.1 + kept v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
+      'See `qa/evidence/rollback/` (v1.3.2 + kept v1.3.1 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
       ''
     ].join('\n');
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-log.md'), log, 'utf8');

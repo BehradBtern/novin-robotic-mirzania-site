@@ -93,8 +93,8 @@ const results = { editedText: EDITED, filesChanged: ['content.js', 'assets/logo/
   const em = await page.evaluate(() => {
     const el = document.getElementById('footer-endmark');
     const r = el.getBoundingClientRect();
-    const ft = document.getElementById('footer').getBoundingClientRect();
-    return { x: r.x, y: r.y, w: r.width, h: r.height, bandCy: ft.top + ft.height / 2, vw: innerWidth, vh: innerHeight };
+    const lz = document.getElementById('footer-landing').getBoundingClientRect();
+    return { x: r.x, y: r.y, w: r.width, h: r.height, bandCy: lz.top + lz.height / 2, vw: innerWidth, vh: innerHeight };
   });
   const frac = +((Math.max(0, Math.min(em.y + em.h, em.vh) - Math.max(em.y, 0))) / em.h).toFixed(3);
   results.checks.landingVisibleFrac = frac;

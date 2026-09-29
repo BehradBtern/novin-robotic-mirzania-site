@@ -1,0 +1,13 @@
+{
+  "base": {
+    "layers": 3,
+    "content": "NOVIN ROBOTIC MIRZANIA",
+    "drawn": true
+  },
+  "dashAfter": 0,
+  "hov": {
+    "hoverClass": true,
+    "echoOp": 0.7,
+    "maskCx": "20.04%"
+  }
+}

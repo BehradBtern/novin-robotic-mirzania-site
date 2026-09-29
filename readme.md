@@ -73,7 +73,15 @@ dock travel 0.86–0.96). Hero heights: 340vh desktop / 300vh tablet / 260vh pho
 
 **Reduced motion** (`prefers-reduced-motion: reduce`): no animation — the
 wordmark shows fully in the hero, no side copy, the programmes grid renders
-statically, and the mark rests fully visible, centred in the footer band.
+statically, the footer signature is drawn statically, and the mark rests fully
+visible, centred in the footer's landing area.
+
+**Footer:** columns row → the sequence's landing area (the mark docks into
+its centre) → the giant animated brand text (stroke draw-in on first view;
+hover reveals a cursor-following rainbow) over a radial glow. The text is
+`footer.signature.text` in `content.js`; the glow tint and effect colors live
+in `style.css` (`.footer__glow`, `.sig__*` — swap `--accent`/the tint for a
+different brand colour).
 
 **QA hook**: `?qa=<0..1>` pins the sequence for automated screenshots
 (`?qa=0.5` side-copy stage, `?qa=0.86` half-clipped enlarged state,
@@ -86,7 +94,8 @@ Open **`content.js`**:
 - `heroSide` — the two text blocks that appear left/right of the small symbol.
 - `gallery` — the programmes section: heading, intro, and the 4–7 photo slots
   (`img`, `alt`, `title`, `text`). Add or remove items freely; the grid adapts.
-- `footer` — blurb, section links, contact lines, legal line.
+- `footer` — blurb, section links, contact lines, legal line, and
+  `footer.signature.text` (the giant animated footer text).
 - `theme` — colors (the `stage` token is the single background color).
 
 Save + refresh; no rebuild.

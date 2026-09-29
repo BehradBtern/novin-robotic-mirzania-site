@@ -5,12 +5,12 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/154.0.8037.58",
     "edge": "Edg/154.0.4258.37",
-    "generatedAt": "2026-09-29T17:18:22.521Z",
-    "sha": "2dcd960"
+    "generatedAt": "2026-09-29T17:33:42.989Z",
+    "sha": "b251524"
   },
-  "generatedAt": "2026-09-29T17:18:22.521Z",
+  "generatedAt": "2026-09-29T17:33:42.989Z",
   "counts": {
-    "PASS": 24,
+    "PASS": 25,
     "FAIL": 0,
     "INFO": 1,
     "OBSERVED": 0,
@@ -77,7 +77,7 @@
       "id": "c",
       "entry": "motion trace (60 steps)",
       "status": "PASS",
-      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":41.2,\"maxPosStep\":300.4,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":-719.15,\"dEndTy\":382.57}",
+      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":41.2,\"maxPosStep\":300.6,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":-719.15,\"dEndTy\":354.87}",
       "threshold": "clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; enlarged state at exact 45-degree pose; dock travel right+down; swap opacity sum=1",
       "evidence": [
         "evidence/b/motion-trace.json"
@@ -130,7 +130,7 @@
       "id": "d",
       "entry": "hero end: mark docked upright just above the bottom edge",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"center\":[720.7,775.8],\"expY\":775.8,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"center\":[417.8,972.1],\"expY\":972.1,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"center\":[195.7,726.5],\"expY\":726.5,\"spin\":360,\"overflow\":0,\"ok\":true}]",
+      "value": "[{\"vp\":\"1440x900\",\"center\":[721.1,715],\"expY\":715,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"center\":[418.1,927],\"expY\":927,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"center\":[195.7,726.5],\"expY\":726.5,\"spin\":360,\"overflow\":0,\"ok\":true}]",
       "threshold": "centre == (vw/2, vh−dockR−20) ±6; spin 360±1.5; fully visible; no overflow",
       "evidence": [
         "evidence/b/herodock-audit.json"
@@ -139,10 +139,10 @@
     },
     {
       "id": "d",
-      "entry": "landing: centred in the footer band, fully visible, upright",
+      "entry": "landing: centred in the footer landing area, clear of columns and signature",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"center\":[640,562.8],\"bandCy\":562.4,\"bandCx\":640,\"frac\":1,\"size\":199.1,\"dockD\":199.1,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"center\":[720,652.3],\"bandCy\":651.8,\"bandCx\":720,\"frac\":1,\"size\":208.3,\"dockD\":208.3,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"center\":[960,812.9],\"bandCy\":812.4,\"bandCx\":960,\"frac\":1,\"size\":224.7,\"dockD\":224.7,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"2560x1080\",\"center\":[1280,812.9],\"bandCy\":812.4,\"bandCx\":1280,\"frac\":1,\"size\":224.7,\"dockD\":224.7,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"center\":[417,826.9],\"bandCy\":826.4,\"bandCx\":417,\"frac\":1,\"size\":239.8,\"dockD\":239.8,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"center\":[195,416.6],\"bandCy\":416.1,\"bandCx\":195,\"frac\":1,\"size\":195,\"dockD\":195,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true}]",
-      "threshold": "centre == (viewport/2, footer band centre) ±6/±8px; visible fraction >= 0.9; size == configured ±6; no rotation; overflow 0",
+      "value": "[{\"vp\":\"1280x800\",\"center\":[640,278.3],\"bandCy\":278.3,\"bandCx\":640,\"frac\":1,\"size\":330,\"dockD\":330,\"gapAbove\":25,\"gapBelow\":33,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"center\":[720,360.8],\"bandCy\":360.8,\"bandCx\":720,\"frac\":1,\"size\":330,\"dockD\":330,\"gapAbove\":25,\"gapBelow\":33,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"center\":[960,490.4],\"bandCy\":490.4,\"bandCx\":960,\"frac\":1,\"size\":330,\"dockD\":330,\"gapAbove\":51,\"gapBelow\":59,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"2560x1080\",\"center\":[1280,490.4],\"bandCy\":490.4,\"bandCx\":1280,\"frac\":1,\"size\":330,\"dockD\":330,\"gapAbove\":51,\"gapBelow\":59,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"center\":[417,542.8],\"bandCy\":542.8,\"bandCx\":417,\"frac\":1,\"size\":330,\"dockD\":330,\"gapAbove\":51,\"gapBelow\":59,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"center\":[195,398],\"bandCy\":398,\"bandCx\":195,\"frac\":1,\"size\":195,\"dockD\":195,\"gapAbove\":80.3,\"gapBelow\":88.3,\"centered\":true,\"sizeOk\":true,\"upright\":true,\"overflow\":0,\"ok\":true}]",
+      "threshold": "centre == (viewport/2, landing-area centre) ±6/±8px; visible fraction >= 0.9; clear of the columns and the signature (>=6px both); size == configured ±6; no rotation; overflow 0",
       "evidence": [
         "evidence/d/dock-audit.json",
         "evidence/b/dock-1440x900.png"
@@ -153,7 +153,7 @@
       "id": "d",
       "entry": "landing stability: scroll + resize",
       "status": "PASS",
-      "value": "{\"yMax\":4021,\"yAfter\":4021,\"drift\":0,\"resizeOk\":true,\"resizeBackOk\":true}",
+      "value": "{\"yMax\":4556,\"yAfter\":4556,\"drift\":0,\"resizeOk\":true,\"resizeBackOk\":true}",
       "threshold": "no scroll past max; drift 0; stays centred after resize ±8px",
       "evidence": [
         "evidence/d/stability.json"
@@ -186,11 +186,23 @@
       "id": "f",
       "entry": "footer: links land + contact/legal intact",
       "status": "PASS",
-      "value": "{\"landings\":[{\"label\":\"Our story\",\"href\":\"#story\",\"top\":0},{\"label\":\"Programmes\",\"href\":\"#programmes\",\"top\":0},{\"label\":\"Get in touch\",\"href\":\"#contact\",\"top\":476.7},{\"label\":\"Back to top\",\"href\":\"#top\",\"top\":0}],\"contactCheck\":{\"emailText\":true,\"emailHref\":true,\"phoneHref\":true,\"address\":true,\"legal\":true}}",
+      "value": "{\"landings\":[{\"label\":\"Our story\",\"href\":\"#story\",\"top\":0},{\"label\":\"Programmes\",\"href\":\"#programmes\",\"top\":0},{\"label\":\"Get in touch\",\"href\":\"#contact\",\"top\":-0.3},{\"label\":\"Back to top\",\"href\":\"#top\",\"top\":0}],\"contactCheck\":{\"emailText\":true,\"emailHref\":true,\"phoneHref\":true,\"address\":true,\"legal\":true}}",
       "threshold": "4 links land within viewport; mailto/tel formats; texts == content",
       "evidence": [
         "evidence/f/footer-links.json",
         "evidence/f/footer-1440x900.png"
+      ],
+      "note": ""
+    },
+    {
+      "id": "f",
+      "entry": "footer signature: draw-in completes + hover reveal reacts",
+      "status": "PASS",
+      "value": "{\"layers\":3,\"content\":\"NOVIN ROBOTIC MIRZANIA\",\"drawn\":true,\"dashAfter\":0,\"hoverClass\":true,\"echoOp\":0.7,\"maskCx\":\"20.04%\"}",
+      "threshold": "3 text layers with the brand name; stroke draw-in finishes (dashoffset 0); hover shows the echo (0.7) and moves the reveal mask",
+      "evidence": [
+        "evidence/f/signature-audit.json",
+        "evidence/f/footer-signature-1440x900.png"
       ],
       "note": ""
     },
@@ -207,10 +219,10 @@
     },
     {
       "id": "h",
-      "entry": "reduced motion: static logo fully visible in hero and footer; gallery static",
+      "entry": "reduced motion: static logo + signature fully rendered, gallery static",
       "status": "PASS",
-      "value": "{\"top\":{\"x\":203.34375,\"y\":36,\"r\":1236.65625,\"b\":846},\"end\":{\"x\":615.84375,\"y\":548.78125,\"r\":824.15625,\"b\":755.84375},\"bandCy\":651.8,\"frameComputed\":\"none\",\"side\":\"none\",\"gallery\":{\"count\":6,\"op\":1,\"imgOK\":true,\"inView\":true}}",
-      "threshold": "no transforms; no side copy; wordmark fully in viewport; landing centred; gallery cards visible without reveal effects",
+      "value": "{\"top\":{\"x\":203.34375,\"y\":36,\"r\":1236.65625,\"b\":846},\"end\":{\"x\":555,\"y\":196.7890625,\"r\":885,\"b\":524.8046875},\"bandCy\":360.8,\"frameComputed\":\"none\",\"side\":\"none\",\"sigDraw\":\"0px\",\"gallery\":{\"count\":6,\"op\":1,\"imgOK\":true,\"inView\":true}}",
+      "threshold": "no transforms; no side copy; wordmark fully in viewport; landing centred in the landing area; signature drawn statically (no dash offset); gallery cards visible without reveal effects",
       "evidence": [
         "evidence/h/reduced-1440-full.png"
       ],
@@ -220,7 +232,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":67008}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":70872}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
