@@ -258,13 +258,13 @@
     p = clamp01(p);
 
     /* one continuous clockwise turn: spin + shrink (0.10–0.36), hold while the
-       side copy shows (0.36–0.66), rotate-left + grow to the half-clipped
-       state (0.66–0.86), then travel down into the footer dock (0.86–0.96;
-       ends upright at 360°) */
+       side copy shows (0.36–0.66), rotate-left + grow, arriving at the
+       enlarged half-clipped state exactly at spin 360 — the mark's exact
+       45-degree diamond pose (0.66–0.86) — then travel down to the footer
+       dock holding that upright pose (0.86–0.96) */
     var spin =
       A.spinTurns * (180 * cub(p, 0.10, 0.36) +
-        120 * cub(p, 0.66, 0.86) +
-        60 * cub(p, 0.86, 0.96));
+        180 * cub(p, 0.66, 0.86));
 
     var sF, targetX = geo.vw / 2, targetY = geo.vh / 2;
     if (p <= 0.36) {
