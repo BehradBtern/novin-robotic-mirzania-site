@@ -1,0 +1,34 @@
+[
+  {
+    "vp": "1280x800",
+    "visFrac": 0.5,
+    "markCx": 0,
+    "spin": 270,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1440x900",
+    "visFrac": 0.5,
+    "markCx": 0,
+    "spin": 270,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "1920x1080",
+    "visFrac": 0.5,
+    "markCx": 0,
+    "spin": 270,
+    "overflow": 0,
+    "ok": true
+  },
+  {
+    "vp": "390x844",
+    "visFrac": 0.5,
+    "markCx": 0,
+    "spin": 270,
+    "overflow": 0,
+    "ok": true
+  }
+]

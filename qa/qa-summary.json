@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/154.0.8037.58",
     "edge": "Edg/154.0.4258.37",
-    "generatedAt": "2026-09-30T14:22:03.091Z",
-    "sha": "fafbb3a"
+    "generatedAt": "2026-09-30T16:41:59.122Z",
+    "sha": "973c379"
   },
-  "generatedAt": "2026-09-30T14:22:03.091Z",
+  "generatedAt": "2026-09-30T16:41:59.122Z",
   "counts": {
     "PASS": 26,
     "FAIL": 0,
@@ -66,8 +66,8 @@
       "id": "c",
       "entry": "motion trace (60 steps)",
       "status": "PASS",
-      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":34.1,\"maxPosStep\":435.2,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":-719.22,\"dEndTy\":354.87}",
-      "threshold": "clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; enlarged state at exact 45-degree pose; dock travel right+down; swap opacity sum=1",
+      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":34.1,\"maxPosStep\":724.9,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":719.85,\"dEndTy\":354.87}",
+      "threshold": "clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; grow left on the middle line; sweep right; enlarged state at exact 45-degree pose; dock travel left+down; swap opacity sum=1",
       "evidence": [
         "evidence/b/motion-trace.json"
       ],
@@ -93,25 +93,25 @@
     },
     {
       "id": "c",
-      "entry": "enlarged state: half clipped, exact 45-degree pose, no overflow",
+      "entry": "enlarged state (right edge): half clipped, exact 45-degree pose, no overflow",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.503,\"markCx\":2.6,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.503,\"markCx\":3,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.503,\"markCx\":3.5,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.503,\"markCx\":2.6,\"spin\":360,\"overflow\":0,\"ok\":true}]",
-      "threshold": "visible width fraction 0.42-0.58 at max size; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0",
+      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.497,\"markCx\":1282.6,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.497,\"markCx\":1443,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.497,\"markCx\":1923.5,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.497,\"markCx\":392.6,\"spin\":360,\"overflow\":0,\"ok\":true}]",
+      "threshold": "visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0",
       "evidence": [
         "evidence/b/halfclip-audit.json",
-        "evidence/b/halfclip-1440x900.png"
+        "evidence/b/bigright-1440x900.png"
       ],
       "note": ""
     },
     {
       "id": "c",
-      "entry": "big right: half clipped at the right edge, 45-degree pose",
+      "entry": "big left: half clipped at the left edge, 45-degree pose",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.5,\"markCx\":1280,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.5,\"markCx\":1440,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.5,\"markCx\":1920,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.5,\"markCx\":390,\"spin\":270,\"overflow\":0,\"ok\":true}]",
-      "threshold": "visible fraction 0.42-0.58 with the centre on the right edge; spin 270±1 (45-degree pose); overflow 0",
+      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true}]",
+      "threshold": "visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0",
       "evidence": [
-        "evidence/b/bigright-audit.json",
-        "evidence/b/bigright-1440x900.png"
+        "evidence/b/bigleft-audit.json",
+        "evidence/b/bigleft-1440x900.png"
       ],
       "note": ""
     },
@@ -119,7 +119,7 @@
       "id": "c",
       "entry": "mid-sweep: the big mark crosses the middle, fully on screen",
       "status": "PASS",
-      "value": "{\"mcx\":722.1,\"spin\":315}",
+      "value": "{\"mcx\":1082.1,\"spin\":315}",
       "threshold": "at p=0.77 the big mark sits between the edges, centred vertically",
       "evidence": [
         "evidence/b/sweep-1440x900.png"
@@ -222,7 +222,7 @@
       "id": "g",
       "entry": "responsive: no overflow at max size and landing",
       "status": "PASS",
-      "value": "[{\"vp\":\"360x740\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0},{\"vp\":\"768x1024\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0},{\"vp\":\"1280x800\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0},{\"vp\":\"1440x900\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0},{\"vp\":\"1920x1080\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0},{\"vp\":\"2560x1080\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0},{\"vp\":\"1280x500\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0}]",
+      "value": "[{\"vp\":\"360x740\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"768x1024\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1280x800\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1440x900\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1920x1080\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"2560x1080\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1280x500\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0}]",
       "threshold": "scrollWidth overflow <= 1px in both states; no horizontal scrollbar",
       "evidence": [
         "evidence/g/responsive.json"
@@ -244,7 +244,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":5},\"resources\":5,\"transferBytes\":57751}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":5},\"resources\":5,\"transferBytes\":57777}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"

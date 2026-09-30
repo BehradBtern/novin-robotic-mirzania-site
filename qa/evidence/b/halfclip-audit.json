@@ -1,32 +1,32 @@
 [
   {
     "vp": "1280x800",
-    "visFrac": 0.503,
-    "markCx": 2.6,
+    "visFrac": 0.497,
+    "markCx": 1282.6,
     "spin": 360,
     "overflow": 0,
     "ok": true
   },
   {
     "vp": "1440x900",
-    "visFrac": 0.503,
-    "markCx": 3,
+    "visFrac": 0.497,
+    "markCx": 1443,
     "spin": 360,
     "overflow": 0,
     "ok": true
   },
   {
     "vp": "1920x1080",
-    "visFrac": 0.503,
-    "markCx": 3.5,
+    "visFrac": 0.497,
+    "markCx": 1923.5,
     "spin": 360,
     "overflow": 0,
     "ok": true
   },
   {
     "vp": "390x844",
-    "visFrac": 0.503,
-    "markCx": 2.6,
+    "visFrac": 0.497,
+    "markCx": 392.6,
     "spin": 360,
     "overflow": 0,
     "ok": true
