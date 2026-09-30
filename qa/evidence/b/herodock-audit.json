@@ -6,7 +6,7 @@
       715
     ],
     "expY": 715,
-    "spin": 720,
+    "spin": 360,
     "overflow": 0,
     "ok": true
   },
@@ -17,7 +17,7 @@
       927
     ],
     "expY": 927,
-    "spin": 720,
+    "spin": 360,
     "overflow": 0,
     "ok": true
   },
@@ -28,7 +28,7 @@
       726.5
     ],
     "expY": 726.5,
-    "spin": 720,
+    "spin": 360,
     "overflow": 0,
     "ok": true
   }

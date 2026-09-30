@@ -1,13 +1,12 @@
 # Novin Robotic Mirzania — logo-sequence page
 
-A single page built around one scroll-linked sequence — two full clockwise
-turns. The page opens on the **big mark half-clipped at the right edge**; it
-**spins left across the screen** to the left edge, winds down to the small
-centred mark, **grows into the big wordmark with the text dawning in**, spins
-away into the small mark again, **side copy appears left and right**, then it
-**grows big once more at the left edge — half clipped, at the exact 45°
-diamond pose** — and dives down to dock above the bottom edge, handing off to
-a copy **centred inside the footer landing area**. Below the sequence sits the
+A single page built around one scroll-linked sequence: the logo starts **big**
+at the top, spins clockwise while shrinking, **side copy appears left and
+right of the small symbol**, then it **grows big at the right edge and spins
+left across the screen** — ending up roughly **half clipped** past the left
+edge, with both big states at the mark's **45° diamond pose** — and finally
+travels down and docks, upright, just above the bottom edge, handing off to a
+copy **centred inside the footer landing area**. Below the sequence sits the
 **programmes grid** (4–7 photo slots with text). No top navigation bar.
 
 No framework, no build step: plain HTML/CSS/JS. All content lives in one file.
@@ -47,23 +46,21 @@ server.js                      zero-dependency local preview server
 
 ## The sequence (and how to tune it)
 
-Scroll progress drives nine states: **opening — big mark half-clipped at the
-RIGHT edge → spins left across the screen, still big → winds down, shrinking
-back to the centred small mark → the wordmark dawns (the lockup grows to full
-size and settles upright) → classic spin + shrink (wordmark swaps to the mark
-mid-turn) → side copy left/right of the small symbol → big again at the LEFT
-edge, half-clipped, exact 45° pose → travel down to the dock holding that
+Scroll progress drives seven states: **hold (big logo) → clockwise spin +
+shrink (wordmark swaps to the mark mid-turn) → side copy left/right of the
+small symbol → grow big at the RIGHT edge (half past it) → spin left across
+the screen, still big, landing at the LEFT edge half-clipped — both big
+states at the mark's exact 45° pose — → travel down to the dock holding that
 pose → settle upright, centred horizontally, just above the bottom edge**
 (the footer below the programmes grid carries its own centred copy of the
 mark, so the end state at the very bottom of the page is "logo in the middle
-of the footer"). The whole journey is two full clockwise turns (720°);
-scrolling up plays everything in reverse.
+of the footer"). Scrolling up plays everything in reverse.
 
 Tuning lives in `content.js` → `animation`:
 
 | key | default | meaning |
 | --- | --- | --- |
-| `spinTurns` | `1` | scales the designed journey (the journey itself is two full clockwise turns — 720°) |
+| `spinTurns` | `1` | full clockwise turns across the whole sequence (1 = 360°) |
 | `heroWidthVw` / `heroWidthVh` | `92` / `96` | hero logo max share of viewport width / height |
 | `heroWidthMaxPx` | `1600` | absolute cap for the hero logo |
 | `bigDiameterVh` | `0.96` | diameter of the enlarged state (share of viewport height; half hangs past the left edge) |
@@ -72,10 +69,9 @@ Tuning lives in `content.js` → `animation`:
 | `edgeMarginPx` | `12` | minimum gap kept to the screen edges |
 
 Stage boundaries live in `assets/js/main.js` (the `render()` windows:
-opening hold 0–0.12, sweep left 0.12–0.26, wind-down 0.26–0.40, wordmark dawn
-0.40–0.54 (hold to 0.60), classic spin 0.60–0.72, side copy 0.72–0.86, big
-left 0.86–0.92, dock 0.92–0.98). Hero heights: 340vh desktop / 300vh tablet /
-260vh phone.
+hold 0–0.10, spin 0.10–0.34, side-copy hold 0.34–0.58, grow right 0.58–0.70,
+sweep left 0.70–0.84, dock travel 0.84–0.94). Hero heights: 340vh desktop /
+300vh tablet / 260vh phone.
 
 **Reduced motion** (`prefers-reduced-motion: reduce`): no animation — the
 wordmark shows fully in the hero, no side copy, the programmes grid renders
@@ -90,9 +86,8 @@ in `style.css` (`.footer__glow`, `.sig__*` — swap `--accent`/the tint for a
 different brand colour).
 
 **QA hook**: `?qa=<0..1>` pins the sequence for automated screenshots
-(`?qa=0.06` opening big-right, `?qa=0.19` mid-sweep, `?qa=0.78` side-copy
-stage, `?qa=0.92` the 45° big-left state, `?qa=0.995` hero dock); zero effect
-without the parameter.
+(`?qa=0.5` side-copy stage, `?qa=0.86` half-clipped enlarged state,
+`?qa=0.995` hero dock); zero effect without the parameter.
 
 ## Edit the copy
 
