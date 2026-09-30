@@ -179,12 +179,12 @@ try {
       if (b.p > 0.12 && b.p <= 0.32 && (Math.abs(b.tx) > 1 || Math.abs(b.ty) > 1)) orderOk = false;
       // C hold (0.46-0.56): small mark centred, spin parked at 180
       if (b.p > 0.46 && b.p <= 0.56 && (Math.abs(b.mcy - 450) > 4 || Math.abs(b.mcx - 720) > 4 || Math.abs(b.spin - 180) > 1)) orderOk = false;
-      // D1 (0.60-0.68): big mark grows, centre travels right only
-      if (b.p > 0.60 && b.p <= 0.68 && (b.mcx < a.mcx - 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
-      // D2 (0.72-0.82): big mark spins leftward across the screen
-      if (b.p > 0.72 && b.p <= 0.82 && (b.mcx > a.mcx + 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
-      // E (0.86-0.92): mark centre travels right and down only
-      if (b.p > 0.86 && b.p <= 0.92 && (b.mcy < a.mcy - 2 || b.mcx < a.mcx - 2)) orderOk = false;
+      // D1 (0.60-0.68): big mark grows, centre travels left only
+      if (b.p > 0.60 && b.p <= 0.68 && (b.mcx > a.mcx + 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
+      // D2 (0.72-0.82): big mark spins rightward across the screen
+      if (b.p > 0.72 && b.p <= 0.82 && (b.mcx < a.mcx - 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
+      // E (0.86-0.92): mark centre travels left and down into the dock
+      if (b.p > 0.86 && b.p <= 0.92 && (b.mcy < a.mcy - 2 || b.mcx > a.mcx + 2)) orderOk = false;
       maxPosStep = Math.max(maxPosStep, Math.abs(b.mcx - a.mcx), Math.abs(b.mcy - a.mcy));
     }
     const cEnd = trace.reduce((acc, t) => (Math.abs(t.p - 0.84) < Math.abs(acc.p - 0.84) ? t : acc), trace[0]);
@@ -194,7 +194,7 @@ try {
     writeJson(evPath('b', 'motion-trace.json'), { travel, heroTop, mapErr, monoSpin, spinEnd, maxSpinStep, maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEnd, dEnd, steps: trace });
     add('c', 'motion trace (60 steps)', traceOk ? PASS : FAIL,
       JSON.stringify({ mapErr: +mapErr.toFixed(4), monoSpin, spinEnd, maxSpinStep: +maxSpinStep.toFixed(1), maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEndTx: cEnd.tx, dEndTy: dEnd.ty }),
-      'clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; enlarged state at exact 45-degree pose; dock travel right+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
+      'clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; grow left on the middle line; sweep right; enlarged state at exact 45-degree pose; dock travel left+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
 
     // settle / oscillation / idle
     await page.evaluate(() => window.scrollTo(0, 0));
@@ -240,12 +240,12 @@ try {
         const fracX = +(visW / (2 * r)).toFixed(3);
         const spin = +stc.spin.toFixed(1);
         const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-        clipRows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(spin - 360) <= 1 && overflow <= 1 });
-        await shot(pg, 'b/halfclip-' + w + 'x' + h + '.png');
+        clipRows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(spin - 360) <= 1 && Math.abs(cx - w) <= 5 && overflow <= 1 });
+        await shot(pg, 'b/bigright-' + w + 'x' + h + '.png');
         await pg.close();
       }
       writeJson(evPath('b', 'halfclip-audit.json'), clipRows);
-      add('c', 'enlarged state: half clipped, exact 45-degree pose, no overflow', clipRows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(clipRows), 'visible width fraction 0.42-0.58 at max size; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0', ['evidence/b/halfclip-audit.json', 'evidence/b/halfclip-1440x900.png']);
+      add('c', 'enlarged state (right edge): half clipped, exact 45-degree pose, no overflow', clipRows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(clipRows), 'visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0', ['evidence/b/halfclip-audit.json', 'evidence/b/bigright-1440x900.png']);
     }
 
     // big-right state: half clipped at the right edge, 45-degree pose
@@ -261,12 +261,12 @@ try {
         const fracX = +(visW / (2 * r)).toFixed(3);
         const spin = +stc.spin.toFixed(1);
         const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-        rows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(cx - w) <= 8 && Math.abs(spin - 270) <= 1 && overflow <= 1 });
-        await shot(pg, 'b/bigright-' + w + 'x' + h + '.png');
+        rows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(cx) <= 8 && Math.abs(spin - 270) <= 1 && overflow <= 1 });
+        await shot(pg, 'b/bigleft-' + w + 'x' + h + '.png');
         await pg.close();
       }
-      writeJson(evPath('b', 'bigright-audit.json'), rows);
-      add('c', 'big right: half clipped at the right edge, 45-degree pose', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'visible fraction 0.42-0.58 with the centre on the right edge; spin 270±1 (45-degree pose); overflow 0', ['evidence/b/bigright-audit.json', 'evidence/b/bigright-1440x900.png']);
+      writeJson(evPath('b', 'bigleft-audit.json'), rows);
+      add('c', 'big left: half clipped at the left edge, 45-degree pose', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0', ['evidence/b/bigleft-audit.json', 'evidence/b/bigleft-1440x900.png']);
     }
 
     // mid-sweep: the big mark crossing the middle on its way to the left
@@ -532,7 +532,7 @@ try {
     const rows = [];
     for (const [w, h] of vps) {
       const out = { vp: w + 'x' + h, ok: true };
-      for (const q of [0.84, 1]) {
+      for (const q of [0.70, 1]) {
         const page = await openPage(browser, { w, h, qa: q });
         const m = await page.evaluate((qq) => {
           const de = document.documentElement;

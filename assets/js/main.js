@@ -1,8 +1,8 @@
 /* =========================================================================
    main.js — renders content from content.js and drives the logo sequence:
    hold → clockwise spin (+ shrink, wordmark→mark swap) → side copy appears
-   left/right of the small symbol → grow big at the right edge → spin left
-   across the screen to the left edge (both big states half clipped, 45°) →
+   left/right of the small symbol → grow big at the left edge → spin right
+   across the screen to the right edge (both big states half clipped, 45°) →
    travel down into the footer dock. Renders the footer.
    Internal QA API: window.__heroState() returns live values (used by the QA
    harness; harmless otherwise). URL hook: ?qa=<0..1> pins progress.
@@ -229,8 +229,8 @@
 
     /* one continuous clockwise turn: spin + shrink (0.10–0.34), hold while the
        side copy shows (0.34–0.58), grow into the big half-clipped state at
-       the RIGHT edge (0.58–0.70, spin 270 — the 45-degree diamond pose), spin
-       leftward across the screen to the big state at the LEFT edge
+       the LEFT edge (0.58–0.70, spin 270 — the 45-degree diamond pose), spin
+       rightward across the screen to the big state at the RIGHT edge
        (0.70–0.84, spin 360 — the same exact 45-degree pose), then travel down
        into the footer dock holding that upright pose (0.84–0.94) */
     var spin =
@@ -246,20 +246,20 @@
       /* C: small symbol holds in the centre; the side copy is visible */
       sF = geo.sC;
     } else if (p <= 0.70) {
-      /* D1: grow into the big state at the RIGHT edge — half hangs past it */
+      /* D1: grow into the big state at the LEFT edge — half hangs past it */
       var u1 = cub(p, 0.58, 0.70);
       sF = geo.sC + (geo.kBig - geo.sC) * u1;
-      targetX = geo.vw / 2 + (geo.vw / 2) * u1;
+      targetX = geo.vw / 2 - (geo.vw / 2) * u1;
     } else if (p <= 0.84) {
-      /* D2: still big — spin to the left across the screen */
+      /* D2: still big — spin to the right across the screen */
       var u2 = cub(p, 0.70, 0.84);
       sF = geo.kBig;
-      targetX = geo.vw * (1 - u2);
+      targetX = (geo.vw / 2) + (geo.vw / 2) * u2;
     } else {
       /* E: travel down into the footer dock while settling to landing size */
       var v = cub(p, 0.84, 0.94);
       sF = geo.kBig + (geo.kFin - geo.kBig) * v;
-      targetX = (geo.vw / 2) * v;
+      targetX = geo.vw - (geo.vw / 2) * v;
       targetY = geo.vh / 2 + (geo.tyDock - geo.vh / 2) * v;
     }
     var fade = seg(spin, 90, 150); /* wordmark→mark swap, done inside the turn */
