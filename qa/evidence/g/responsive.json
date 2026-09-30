@@ -2,49 +2,49 @@
   {
     "vp": "360x740",
     "ok": true,
-    "overflow@0.86": 0,
+    "overflow@0.84": 0,
     "overflow@1": 0,
     "galleryCols": 1
   },
   {
     "vp": "768x1024",
     "ok": true,
-    "overflow@0.86": 0,
+    "overflow@0.84": 0,
     "overflow@1": 0,
     "galleryCols": 2
   },
   {
     "vp": "1280x800",
     "ok": true,
-    "overflow@0.86": 0,
+    "overflow@0.84": 0,
     "overflow@1": 0,
     "galleryCols": 3
   },
   {
     "vp": "1440x900",
     "ok": true,
-    "overflow@0.86": 0,
+    "overflow@0.84": 0,
     "overflow@1": 0,
     "galleryCols": 3
   },
   {
     "vp": "1920x1080",
     "ok": true,
-    "overflow@0.86": 0,
+    "overflow@0.84": 0,
     "overflow@1": 0,
     "galleryCols": 3
   },
   {
     "vp": "2560x1080",
     "ok": true,
-    "overflow@0.86": 0,
+    "overflow@0.84": 0,
     "overflow@1": 0,
     "galleryCols": 3
   },
   {
     "vp": "1280x500",
     "ok": true,
-    "overflow@0.86": 0,
+    "overflow@0.84": 0,
     "overflow@1": 0,
     "galleryCols": 3
   }
