@@ -2,12 +2,12 @@
 
 A single page built around one scroll-linked sequence: the logo starts **big**
 at the top, spins clockwise while shrinking, **side copy appears left and
-right of the small symbol**, then it **rotates left and grows** — ending up
-roughly **half clipped** past the left edge, arriving exactly at the mark's
-**45° diamond pose** — and finally travels down and docks, upright, just above
-the bottom edge, handing off to a copy **centred inside the footer band**.
-Below the sequence sits the **programmes grid** (4–7 photo slots with text).
-No top navigation bar.
+right of the small symbol**, then it **grows big at the right edge and spins
+left across the screen** — ending up roughly **half clipped** past the left
+edge, with both big states at the mark's **45° diamond pose** — and finally
+travels down and docks, upright, just above the bottom edge, handing off to a
+copy **centred inside the footer landing area**. Below the sequence sits the
+**programmes grid** (4–7 photo slots with text). No top navigation bar.
 
 No framework, no build step: plain HTML/CSS/JS. All content lives in one file.
 
@@ -46,14 +46,15 @@ server.js                      zero-dependency local preview server
 
 ## The sequence (and how to tune it)
 
-Scroll progress drives six states: **hold (big logo) → clockwise spin + shrink
-(wordmark swaps to the mark mid-turn) → side copy left/right of the small
-symbol → rotate left + grow until half is clipped, arriving exactly at the
-mark's 45° pose (spin 360) → travel down to the dock holding that pose →
-settle upright, centred horizontally, just above the bottom edge** (the footer
-below the programmes grid carries its own centred copy of the mark, so the
-end state at the very bottom of the page is "logo in the middle of the
-footer"). Scrolling up plays everything in reverse.
+Scroll progress drives seven states: **hold (big logo) → clockwise spin +
+shrink (wordmark swaps to the mark mid-turn) → side copy left/right of the
+small symbol → grow big at the RIGHT edge (half past it) → spin left across
+the screen, still big, landing at the LEFT edge half-clipped — both big
+states at the mark's exact 45° pose — → travel down to the dock holding that
+pose → settle upright, centred horizontally, just above the bottom edge**
+(the footer below the programmes grid carries its own centred copy of the
+mark, so the end state at the very bottom of the page is "logo in the middle
+of the footer"). Scrolling up plays everything in reverse.
 
 Tuning lives in `content.js` → `animation`:
 
@@ -68,8 +69,9 @@ Tuning lives in `content.js` → `animation`:
 | `edgeMarginPx` | `12` | minimum gap kept to the screen edges |
 
 Stage boundaries live in `assets/js/main.js` (the `render()` windows:
-hold 0–0.10, spin 0.10–0.36, side-copy hold 0.36–0.66, left+grow 0.66–0.86,
-dock travel 0.86–0.96). Hero heights: 340vh desktop / 300vh tablet / 260vh phone.
+hold 0–0.10, spin 0.10–0.34, side-copy hold 0.34–0.58, grow right 0.58–0.70,
+sweep left 0.70–0.84, dock travel 0.84–0.94). Hero heights: 340vh desktop /
+300vh tablet / 260vh phone.
 
 **Reduced motion** (`prefers-reduced-motion: reduce`): no animation — the
 wordmark shows fully in the hero, no side copy, the programmes grid renders

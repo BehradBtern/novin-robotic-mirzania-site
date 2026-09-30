@@ -199,17 +199,19 @@ try {
     let orderOk = true, maxPosStep = 0;
     for (let i = 1; i < trace.length; i++) {
       const a = trace[i - 1], b = trace[i];
-      // B (0.12-0.34): spin in place (no frame translation)
-      if (b.p > 0.12 && b.p <= 0.34 && (Math.abs(b.tx) > 1 || Math.abs(b.ty) > 1)) orderOk = false;
-      // C hold (0.46-0.64): small mark centred, spin parked at 180
-      if (b.p > 0.46 && b.p <= 0.64 && (Math.abs(b.mcy - 450) > 4 || Math.abs(b.mcx - 720) > 4 || Math.abs(b.spin - 180) > 1)) orderOk = false;
-      // D (0.68-0.84): mark centre travels left only, on the middle line
-      if (b.p > 0.68 && b.p <= 0.84 && (b.mcx > a.mcx + 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
-      // E (0.88-0.94): mark centre travels right and down only
-      if (b.p > 0.88 && b.p <= 0.94 && (b.mcy < a.mcy - 2 || b.mcx < a.mcx - 2)) orderOk = false;
+      // B (0.12-0.32): spin in place (no frame translation)
+      if (b.p > 0.12 && b.p <= 0.32 && (Math.abs(b.tx) > 1 || Math.abs(b.ty) > 1)) orderOk = false;
+      // C hold (0.46-0.56): small mark centred, spin parked at 180
+      if (b.p > 0.46 && b.p <= 0.56 && (Math.abs(b.mcy - 450) > 4 || Math.abs(b.mcx - 720) > 4 || Math.abs(b.spin - 180) > 1)) orderOk = false;
+      // D1 (0.60-0.68): big mark grows, centre travels right only
+      if (b.p > 0.60 && b.p <= 0.68 && (b.mcx < a.mcx - 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
+      // D2 (0.72-0.82): big mark spins leftward across the screen
+      if (b.p > 0.72 && b.p <= 0.82 && (b.mcx > a.mcx + 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
+      // E (0.86-0.92): mark centre travels right and down only
+      if (b.p > 0.86 && b.p <= 0.92 && (b.mcy < a.mcy - 2 || b.mcx < a.mcx - 2)) orderOk = false;
       maxPosStep = Math.max(maxPosStep, Math.abs(b.mcx - a.mcx), Math.abs(b.mcy - a.mcy));
     }
-    const cEnd = trace.reduce((acc, t) => (Math.abs(t.p - 0.86) < Math.abs(acc.p - 0.86) ? t : acc), trace[0]);
+    const cEnd = trace.reduce((acc, t) => (Math.abs(t.p - 0.84) < Math.abs(acc.p - 0.84) ? t : acc), trace[0]);
     const dEnd = trace.reduce((acc, t) => (Math.abs(t.p - 1) < Math.abs(acc.p - 1) ? t : acc), trace[0]);
     const opacityOk = trace.every((t) => Math.abs((t.wOp || 0) + (t.mOp || 0) - 1) <= 0.01);
     const traceOk = mapErr <= 0.002 && monoSpin && Math.abs(spinEnd - 360) <= 0.5 && maxSpinStep <= 162 && orderOk && opacityOk;
@@ -253,7 +255,7 @@ try {
     {
       const clipRows = [];
       for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [390, 844]]) {
-        const pg = await openPage(browser, { w, h, qa: 0.86 });
+        const pg = await openPage(browser, { w, h, qa: 0.84 });
         const stc = await state(pg);
         const mk = stc.markbox;
         const cx = mk.x + mk.w / 2;
@@ -268,6 +270,39 @@ try {
       }
       writeJson(evPath('b', 'halfclip-audit.json'), clipRows);
       add('c', 'enlarged state: half clipped, exact 45-degree pose, no overflow', clipRows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(clipRows), 'visible width fraction 0.42-0.58 at max size; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0', ['evidence/b/halfclip-audit.json', 'evidence/b/halfclip-1440x900.png']);
+    }
+
+    // big-right state: half clipped at the right edge, 45-degree pose
+    {
+      const rows = [];
+      for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [390, 844]]) {
+        const pg = await openPage(browser, { w, h, qa: 0.70 });
+        const stc = await state(pg);
+        const mk = stc.markbox;
+        const cx = mk.x + mk.w / 2;
+        const r = stc.rBig;
+        const visW = Math.max(0, Math.min(cx + r, w) - Math.max(cx - r, 0));
+        const fracX = +(visW / (2 * r)).toFixed(3);
+        const spin = +stc.spin.toFixed(1);
+        const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+        rows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(cx - w) <= 8 && Math.abs(spin - 270) <= 1 && overflow <= 1 });
+        await shot(pg, 'b/bigright-' + w + 'x' + h + '.png');
+        await pg.close();
+      }
+      writeJson(evPath('b', 'bigright-audit.json'), rows);
+      add('c', 'big right: half clipped at the right edge, 45-degree pose', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'visible fraction 0.42-0.58 with the centre on the right edge; spin 270±1 (45-degree pose); overflow 0', ['evidence/b/bigright-audit.json', 'evidence/b/bigright-1440x900.png']);
+    }
+
+    // mid-sweep: the big mark crossing the middle on its way to the left
+    {
+      const pg = await openPage(browser, { w: 1440, h: 900, qa: 0.77 });
+      const stc = await state(pg);
+      const mk = stc.markbox;
+      const mcx = mk.x + mk.w / 2;
+      const ok = mcx > 200 && mcx < 1240 && Math.abs(mk.y + mk.h / 2 - 450) <= 6;
+      await shot(pg, 'b/sweep-1440x900.png');
+      add('c', 'mid-sweep: the big mark crosses the middle, fully on screen', ok ? PASS : FAIL, JSON.stringify({ mcx: +mcx.toFixed(1), spin: +stc.spin.toFixed(1) }), 'at p=0.77 the big mark sits between the edges, centred vertically', ['evidence/b/sweep-1440x900.png']);
+      await pg.close();
     }
 
     // side-copy stage: text appears left/right of the small symbol, mark centred
@@ -332,7 +367,7 @@ try {
     }
 
     // stage stills at pins
-    for (const q of [0, 0.25, 0.5, 0.86, 0.93, 1.0]) {
+    for (const q of [0, 0.25, 0.5, 0.70, 0.84, 0.93, 1.0]) {
       for (const [w, h] of [[1440, 900], [834, 1112], [390, 844]]) {
         const p = await openPage(browser, { w, h, qa: q });
         await shot(p, 'b/pin-' + q + '-' + w + 'x' + h + '.png');
@@ -423,7 +458,7 @@ try {
 
   /* ---------- e) sharpness evidence (vector + zoom crops) ---------- */
   try {
-    const page = await openPage(browser, { w: 1440, h: 900, qa: 0.86, dpr: 2 });
+    const page = await openPage(browser, { w: 1440, h: 900, qa: 0.84, dpr: 2 });
     const src = await page.evaluate(() => document.getElementById('hero-mark').src);
     await shot(page, 'e/mark-zoom-2x.png');
     const isSvg = /\.svg(\?|$)/.test(src);
@@ -522,7 +557,7 @@ try {
     for (const [w, h] of vps) {
       const out = { vp: w + 'x' + h, ok: true };
       let gcols = 0;
-      for (const q of [0.86, 1]) {
+      for (const q of [0.84, 1]) {
         const page = await openPage(browser, { w, h, qa: q });
         const m = await page.evaluate((qq) => {
           const de = document.documentElement;
@@ -666,7 +701,7 @@ try {
       await delay(500);
       await settle(page, 2500);
       const s2 = await state(page);
-      const expSpin = 180 * cub(s2.p, 0.10, 0.36) + 180 * cub(s2.p, 0.66, 0.86);
+      const expSpin = 180 * cub(s2.p, 0.10, 0.34) + 90 * cub(s2.p, 0.58, 0.70) + 90 * cub(s2.p, 0.70, 0.84);
       const ok = Math.abs(s2.p - s2.pTarget) <= 0.01 && Math.abs(s2.spin - expSpin) <= 6;
       add('j', 'resize mid-sequence', ok ? PASS : FAIL, JSON.stringify({ p: [s1.p, s2.p], spin: s2.spin, expSpin: +expSpin.toFixed(1) }), 'state re-renders consistently after resize', []);
       await page.close();
@@ -773,7 +808,7 @@ try {
     const matrix = results.map((r) => '| ' + r.id + ' | ' + r.entry + ' | ' + r.status + ' | ' + String(r.value).replace(/\|/g, '\\|').slice(0, 320) + ' | ' + r.threshold + ' | ' + (r.evidence.join('<br>') || '—') + ' |').join('\n');
 
     const report = [
-      '# QA report — logo-sequence site (v1.3.2 round)',
+      '# QA report — logo-sequence site (v1.3.3 round)',
       '',
       '- Revision: `' + env.sha + '` · generated ' + env.generatedAt,
       '- Environment: ' + env.os + ' · Node ' + env.node + ' · puppeteer-core ' + (env.puppeteer || '?'),
@@ -800,7 +835,7 @@ try {
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-report.md'), report, 'utf8');
 
     const log = [
-      '# QA log — environment, commands, honesty notes (v1.3.2)',
+      '# QA log — environment, commands, honesty notes (v1.3.3)',
       '',
       '## Environment',
       '',
@@ -839,7 +874,7 @@ try {
       '',
       '## Rollback drill',
       '',
-      'See `qa/evidence/rollback/` (v1.3.2 + kept v1.3.1 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
+      'See `qa/evidence/rollback/` (v1.3.3 + kept v1.3.2 / v1.3.1 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
       ''
     ].join('\n');
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-log.md'), log, 'utf8');

@@ -257,31 +257,37 @@
   function render(p) {
     p = clamp01(p);
 
-    /* one continuous clockwise turn: spin + shrink (0.10–0.36), hold while the
-       side copy shows (0.36–0.66), rotate-left + grow, arriving at the
-       enlarged half-clipped state exactly at spin 360 — the mark's exact
-       45-degree diamond pose (0.66–0.86) — then travel down to the footer
-       dock holding that upright pose (0.86–0.96) */
+    /* one continuous clockwise turn: spin + shrink (0.10–0.34), hold while the
+       side copy shows (0.34–0.58), grow into the big half-clipped state at
+       the RIGHT edge (0.58–0.70, spin 270 — the 45-degree diamond pose), spin
+       leftward across the screen to the big state at the LEFT edge
+       (0.70–0.84, spin 360 — the same exact 45-degree pose), then travel down
+       into the footer dock holding that upright pose (0.84–0.94) */
     var spin =
-      A.spinTurns * (180 * cub(p, 0.10, 0.36) +
-        180 * cub(p, 0.66, 0.86));
+      A.spinTurns * (180 * cub(p, 0.10, 0.34) +
+        90 * cub(p, 0.58, 0.70) +
+        90 * cub(p, 0.70, 0.84));
 
     var sF, targetX = geo.vw / 2, targetY = geo.vh / 2;
-    if (p <= 0.36) {
+    if (p <= 0.34) {
       /* A/B: hold, then spin + shrink in place */
-      sF = 1 - (1 - geo.sC) * cub(p, 0.10, 0.36);
-    } else if (p <= 0.66) {
+      sF = 1 - (1 - geo.sC) * cub(p, 0.10, 0.34);
+    } else if (p <= 0.58) {
       /* C: small symbol holds in the centre; the side copy is visible */
       sF = geo.sC;
-    } else if (p <= 0.86) {
-      /* D: rotate left + grow — centre travels to the left edge, half ends
-         up off-canvas (the visible half stays inside the viewport) */
-      var u = cub(p, 0.66, 0.86);
-      sF = geo.sC + (geo.kBig - geo.sC) * u;
-      targetX = (geo.vw / 2) * (1 - u);
+    } else if (p <= 0.70) {
+      /* D1: grow into the big state at the RIGHT edge — half hangs past it */
+      var u1 = cub(p, 0.58, 0.70);
+      sF = geo.sC + (geo.kBig - geo.sC) * u1;
+      targetX = geo.vw / 2 + (geo.vw / 2) * u1;
+    } else if (p <= 0.84) {
+      /* D2: still big — spin to the left across the screen */
+      var u2 = cub(p, 0.70, 0.84);
+      sF = geo.kBig;
+      targetX = geo.vw * (1 - u2);
     } else {
       /* E: travel down into the footer dock while settling to landing size */
-      var v = cub(p, 0.86, 0.96);
+      var v = cub(p, 0.84, 0.94);
       sF = geo.kBig + (geo.kFin - geo.kBig) * v;
       targetX = (geo.vw / 2) * v;
       targetY = geo.vh / 2 + (geo.tyDock - geo.vh / 2) * v;
@@ -298,8 +304,8 @@
     var ty = (targetY - geo.vh / 2) + off * Math.cos(rad) * cb;
 
     /* side copy fades in beside the small symbol, out before the growth */
-    var soIn = seg(p, 0.38, 0.48);
-    var so = soIn * (1 - seg(p, 0.56, 0.64));
+    var soIn = seg(p, 0.36, 0.44);
+    var so = soIn * (1 - seg(p, 0.50, 0.56));
     var soShift = (1 - soIn) * 24;
     if (sideLeftEl) {
       sideLeftEl.style.opacity = so.toFixed(3);
