@@ -1,10 +1,10 @@
-# QA log — environment, commands, honesty notes (v1.3.3)
+﻿# QA log â€” environment, commands, honesty notes (v1.3.3)
 
 ## Environment
 
-- OS: win32 x64 · Node: v22.22.0 · puppeteer-core: 25.12.0
-- Chrome: Chrome/154.0.8037.58 · Edge: Edg/154.0.4258.37
-- Revision: fe38c43 · 2026-09-30T13:27:49.851Z
+- OS: win32 x64 Â· Node: v22.22.0 Â· puppeteer-core: 25.12.0
+- Chrome: Chrome/154.0.8037.58 Â· Edge: Edg/154.0.4258.37
+- Revision: fe38c43 Â· 2026-09-30T13:27:49.851Z
 
 ## How to re-run
 
@@ -18,13 +18,13 @@ node qa/shot.mjs chrome <url> <w> <h> out.png [qa]
 
 | Browser | Status | Notes |
 |---------|--------|-------|
-| Chrome | EXECUTED — full suite | via puppeteer-core |
-| Edge | EXECUTED — subset | same Chromium engine as Chrome — not independent coverage |
-| Firefox | NOT PERFORMED — not installed | inspection-based notes only |
-| Safari / iOS Safari | NOT PERFORMED — cannot run on Windows | inspection-based notes only |
-| Android Chrome (device) | NOT PERFORMED — no device | viewport emulation only |
+| Chrome | EXECUTED â€” full suite | via puppeteer-core |
+| Edge | EXECUTED â€” subset | same Chromium engine as Chrome â€” not independent coverage |
+| Firefox | NOT PERFORMED â€” not installed | inspection-based notes only |
+| Safari / iOS Safari | NOT PERFORMED â€” cannot run on Windows | inspection-based notes only |
+| Android Chrome (device) | NOT PERFORMED â€” no device | viewport emulation only |
 
-Reduced-motion checks used DevTools emulation (`emulateMediaFeatures`) — labeled, not a real OS test.
+Reduced-motion checks used DevTools emulation (`emulateMediaFeatures`) â€” labeled, not a real OS test.
 
 ## Code-inspection risk notes (NOT test results)
 
@@ -35,6 +35,10 @@ Reduced-motion checks used DevTools emulation (`emulateMediaFeatures`) — label
 - scroll-driven animations API: absent (safe).
 - overflow: clip: used (Safari 16+; hidden fallback present on the sticky).
 
-## Rollback drill
-
-See `qa/evidence/rollback/` (v1.3.3 + kept v1.3.2 / v1.3.1 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).
+## Revert (Ctrl+Z) — executed evidence (v1.3.5)
+- User request: undo the v1.3.4 reorder. The tree was restored to the v1.3.3 content via git checkout v1.3.3 -- . and committed.
+- Revert commit: 0b899ba; annotated tag v1.3.5 -> 0b899bafbf950c10df126e5b102b2386f23c15bc.
+- The reverted tree equals the v1.3.3 released tree (which passed its own full QA: 27 PASS / 0 FAIL at revision fe38c43).
+- Worktree smoke: clean worktree of v1.3.5 served on port 8081; screenshot qa/evidence/rollback/v1.3.5-intro.png (1440x900; shot exit=0).
+- Archive: qa/evidence/rollback/dist-v1.3.5.zip; SHA-256: 8CB48B4330F7C5482C7460B1021EEF9B6DDAC96B8061D074287E13929D869E01
+- v1.3.4 remains available in history and as its own archive (dist-v1.3.4.zip) if this needs to be flipped back.
