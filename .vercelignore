@@ -3,3 +3,6 @@ tools/
 *.cdr
 server.js
 README.md
+package.json
+package-lock.json
+.env.local
