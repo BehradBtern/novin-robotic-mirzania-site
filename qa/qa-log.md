@@ -42,3 +42,7 @@ Reduced-motion checks used DevTools emulation (`emulateMediaFeatures`) â€” 
 - Worktree checkout smoke: a clean worktree of v1.3.6 served on port 8081; screenshot qa/evidence/rollback/v1.3.6-intro.png (1440x900; shot exit=0).
 - Archive: qa/evidence/rollback/dist-v1.3.6.zip (excludes nested rollback archives); SHA-256: 111B60221D27860914F3F953CFB9D9F0690F134E3A1804DE985D13EA666614E5
 - Limits: repository-level restore demonstrated on this machine; hosting/CDN rollback not covered. Remote: none configured.
+
+## Publication (v1.3.6)
+- GitHub mirror (private): https://github.com/BehradBtern/novin-robotic-mirzania-site — main + tags v1.0.0..v1.3.6 pushed 2026-09-30. Note: the mirror's history has qa/evidence/rollback/*.zip stripped (GitHub 100 MB file limit: the original nested dist-v1.3.2.zip was 104.71 MB); SHAs on the mirror differ from this canonical repo. Build artifacts, QA evidence and rollback archives remain canonical here.
+- Vercel production: https://novin-robotic-mirzania-site.vercel.app (project novin-robotic-mirzania-site, scope behradbtems-projects; static deploy via vercel.json @vercel/static; aliased after a successful 7s build).
