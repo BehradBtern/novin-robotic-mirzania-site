@@ -1,0 +1,39 @@
+﻿tag v1.3.6
+Tagger: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Wed Sep 30 17:56:16 2026 +0330
+
+Release v1.3.6 - programmes ('Focus areas') section removed
+
+commit 62b0706ae2c2b64555bfed098cd3265fde3b6611
+Author: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Wed Sep 30 17:56:16 2026 +0330
+
+    docs: QA evidence for v1.3.6 (revision fafbb3a; programmes section removed)
+
+ qa/evidence/a/nav-sweep.json                |  63 ++++------------------------
+ qa/evidence/a/removal-audit.txt             |  11 +++--
+ qa/evidence/b/dock-1280x800.png             | Bin 147876 -> 145557 bytes
+ qa/evidence/b/dock-1440x900.png             | Bin 174021 -> 170158 bytes
+ qa/evidence/b/dock-1920x1080.png            | Bin 214759 -> 213168 bytes
+ qa/evidence/b/dock-2560x1080.png            | Bin 241106 -> 238490 bytes
+ qa/evidence/b/dock-390x844.png              | Bin 84778 -> 81714 bytes
+ qa/evidence/b/dock-834x1112.png             | Bin 144631 -> 141767 bytes
+ qa/evidence/d/dock-audit.json               |  20 ++++-----
+ qa/evidence/d/stability.json                |   4 +-
+ qa/evidence/edge/dock-1440x900.png          | Bin 173391 -> 170152 bytes
+ qa/evidence/f/footer-1440x900.png           | Bin 184311 -> 181094 bytes
+ qa/evidence/f/footer-links.json             |  11 +----
+ qa/evidence/f/footer-signature-1440x900.png | Bin 210734 -> 207869 bytes
+ qa/evidence/f/roundtrip-blurb.png           | Bin 73389 -> 193725 bytes
+ qa/evidence/f/roundtrip-logoswap-dock.png   | Bin 201067 -> 196966 bytes
+ qa/evidence/f/roundtrip.json                |   7 +---
+ qa/evidence/g/responsive.json               |  21 ++++------
+ qa/evidence/h/reduced-1440-full.png         | Bin 385061 -> 273637 bytes
+ qa/evidence/h/reduced-390-full.png          | Bin 235269 -> 125003 bytes
+ qa/evidence/h/reduced-motion.json           |  12 ++----
+ qa/evidence/i/perf.json                     |  18 +++-----
+ qa/evidence/j/dock-live-zoom-2x.png         | Bin 497299 -> 483703 bytes
+ qa/qa-log.md                                |  30 ++++++-------
+ qa/qa-report.md                             |  53 ++++++++++++++++-------
+ qa/qa-summary.json                          |  55 ++++++++++--------------
+ 26 files changed, 119 insertions(+), 186 deletions(-)
