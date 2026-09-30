@@ -110,7 +110,7 @@ window.SITE_CONTENT = {
   },
 
   /* Animation tuning (all optional to edit):
-     spinTurns      — scales the designed journey (two full clockwise turns = 720°)
+     spinTurns      — full clockwise turns across the whole sequence (1 = 360°)
      heroWidthVw/Vh — the first (hero) logo's max share of viewport width/height
      heroWidthMaxPx — absolute cap for the hero logo
      bigDiameterVh  — diameter of the enlarged state (share of viewport height;
