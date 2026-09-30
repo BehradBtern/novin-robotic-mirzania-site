@@ -155,25 +155,28 @@ try {
     add('a', 'source audit: no dead placeholders; gallery assets present', ok ? PASS : FAIL, JSON.stringify({ deadRefs: total, galleryRefs: refs.length, slots, missing: missing.length, imgFiles: imgFiles.length }), 'no hero__copy/hint/indicator/rm-mark refs; every gallery slot points at an existing file', ['evidence/a/removal-audit.txt']);
   } catch (e) { add('a', 'source audit', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
-  /* ---------- b) intro stage ---------- */
+  /* ---------- b) opening: the sequence starts on the big mark at the right ---------- */
   try {
     const rows = [];
     for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080]]) {
       const page = await openPage(browser, { w, h, qa: 0 });
       const st = await state(page);
-      const dx = +(st.frame.x + st.frame.w / 2 - w / 2).toFixed(2);
-      const dy = +(st.frame.y + st.frame.h / 2 - h / 2).toFixed(2);
-      const expectedW = Math.min(0.92 * w, 0.96 * h * 1.2757, 1600);
-      const sizeOk = Math.abs(st.frame.w - expectedW) <= 3;
-      const notClipped = st.frame.x >= -2 && st.frame.x + st.frame.w <= w + 2 && st.frame.y >= -2 && st.frame.y + st.frame.h <= h + 2;
+      const mb = st.markbox;
+      const cx = mb.x + mb.w / 2, cy = mb.y + mb.h / 2;
+      const expW = st.rBig * 2;
+      const sizeOk = Math.abs(mb.w - expW) <= 6;
+      const rightOk = Math.abs(cx - w) <= 5;
+      const centYOk = Math.abs(cy - h / 2) <= 5;
+      const vert = mb.y >= 6 && mb.y + mb.h <= h - 6;
       const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-      rows.push({ vp: w + 'x' + h, dx, dy, frameW: +st.frame.w.toFixed(1), expectedW: +expectedW.toFixed(1), sizeOk, notClipped, bg, spin: st.spin, markOpacity: st.markboxOpacity, wordOpacity: st.wordmarkOpacity, sideOp: st.side });
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      rows.push({ vp: w + 'x' + h, cx: +cx.toFixed(1), cy: +cy.toFixed(1), markW: +mb.w.toFixed(1), expW: +expW.toFixed(1), sizeOk, rightOk, centYOk, vert, bg, spin: st.spin, markOpacity: st.markboxOpacity, wordOpacity: st.wordmarkOpacity, sideOp: st.side, overflow });
       await shot(page, 'a/intro-' + w + 'x' + h + '.png');
       await page.close();
     }
     writeJson(evPath('a', 'intro-audit.json'), rows);
-    const ok = rows.every((r) => Math.abs(r.dx) <= 8 && Math.abs(r.dy) <= 8 && r.sizeOk && r.notClipped && r.bg === 'rgb(23, 25, 27)' && r.spin === 0 && r.markOpacity === 0 && r.wordOpacity === 1 && r.sideOp === 0);
-    add('b', 'intro: big wordmark centered on dark gray, unclipped', ok ? PASS : FAIL, JSON.stringify(rows), 'hero size == min(92vw, 96vh*1.2757, 1600px) ±3; centered ±8px; fully in viewport; side copy hidden; bg rgb(23,25,27)', ['evidence/a/intro-1440x900.png', 'evidence/a/intro-audit.json']);
+    const ok = rows.every((r) => r.sizeOk && r.rightOk && r.centYOk && r.vert && r.bg === 'rgb(23, 25, 27)' && r.spin === 0 && r.markOpacity === 1 && r.wordOpacity === 0 && r.sideOp === 0 && r.overflow <= 1);
+    add('b', 'opening: big mark half-clipped at the right edge, 45-degree pose', ok ? PASS : FAIL, JSON.stringify(rows), 'mark width == 2×rBig ±6; centre on the right edge ±5; vertically centred; fully in viewport vertically; wordmark hidden; spin 0; bg rgb(23,25,27); no overflow', ['evidence/a/intro-1440x900.png', 'evidence/a/intro-audit.json']);
   } catch (e) { add('b', 'intro stage', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- c) motion trace: clockwise spin → left → down, no diagonal ---------- */
@@ -187,7 +190,7 @@ try {
       const y = Math.round((travel * i) / STEPS);
       await page.evaluate((yy) => window.scrollTo(0, yy), y);
       const st = await settle(page, 4000);
-      trace.push({ y, p: +st.p.toFixed(5), spin: +st.spin.toFixed(3), tx: +st.tx.toFixed(2), ty: +st.ty.toFixed(2), sF: +st.sF.toFixed(4), fade: +st.fade.toFixed(3), wOp: st.wordmarkOpacity, mOp: st.markboxOpacity, mcx: +(st.markbox.x + st.markbox.w / 2).toFixed(1), mcy: +(st.markbox.y + st.markbox.h / 2).toFixed(1) });
+      trace.push({ y, p: +st.p.toFixed(5), spin: +st.spin.toFixed(3), tx: +st.tx.toFixed(2), ty: +st.ty.toFixed(2), sF: +st.sF.toFixed(4), fade: +st.fade.toFixed(3), wOp: st.wordmarkOpacity, mOp: st.markboxOpacity, mcx: +(st.markbox.x + st.markbox.w / 2).toFixed(1), mcy: +(st.markbox.y + st.markbox.h / 2).toFixed(1), fcx: +(st.frame.x + st.frame.w / 2).toFixed(1), fcy: +(st.frame.y + st.frame.h / 2).toFixed(1) });
     }
     const mapErr = Math.max(...trace.map((t) => Math.abs(t.p - Math.min(1, Math.max(0, (t.y - heroTop) / travel)))));
     let monoSpin = true, maxSpinStep = 0, spinEnd = trace[trace.length - 1].spin;
@@ -199,26 +202,30 @@ try {
     let orderOk = true, maxPosStep = 0;
     for (let i = 1; i < trace.length; i++) {
       const a = trace[i - 1], b = trace[i];
-      // B (0.12-0.32): spin in place (no frame translation)
-      if (b.p > 0.12 && b.p <= 0.32 && (Math.abs(b.tx) > 1 || Math.abs(b.ty) > 1)) orderOk = false;
-      // C hold (0.46-0.56): small mark centred, spin parked at 180
-      if (b.p > 0.46 && b.p <= 0.56 && (Math.abs(b.mcy - 450) > 4 || Math.abs(b.mcx - 720) > 4 || Math.abs(b.spin - 180) > 1)) orderOk = false;
-      // D1 (0.60-0.68): big mark grows, centre travels right only
-      if (b.p > 0.60 && b.p <= 0.68 && (b.mcx < a.mcx - 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
-      // D2 (0.72-0.82): big mark spins leftward across the screen
-      if (b.p > 0.72 && b.p <= 0.82 && (b.mcx > a.mcx + 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
-      // E (0.86-0.92): mark centre travels right and down only
-      if (b.p > 0.86 && b.p <= 0.92 && (b.mcy < a.mcy - 2 || b.mcx < a.mcx - 2)) orderOk = false;
+      // P1 hold (0.02-0.10): big mark parked on the right edge
+      if (b.p > 0.02 && b.p <= 0.10 && (Math.abs(b.mcx - 1440) > 6 || Math.abs(b.mcy - 450) > 6 || Math.abs(b.spin) > 1)) orderOk = false;
+      // P2 (0.14-0.24): the big mark spins leftward across, on the middle line
+      if (b.p > 0.14 && b.p <= 0.24 && (b.mcx > a.mcx + 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
+      // P3 (0.28-0.38): winds down, drifting from the left edge to the centre
+      if (b.p > 0.28 && b.p <= 0.38 && (b.mcx < a.mcx - 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
+      // P4-P6 (0.44-0.72): the lockup drives — the frame stays centred
+      if (b.p > 0.44 && b.p <= 0.72 && (Math.abs(b.fcx - 720) > 5 || Math.abs(b.fcy - 450) > 5)) orderOk = false;
+      // P7 (0.78-0.84): side-copy stage — small mark centred
+      if (b.p > 0.78 && b.p <= 0.84 && (Math.abs(b.mcx - 720) > 5 || Math.abs(b.mcy - 450) > 5)) orderOk = false;
+      // P8 (0.87-0.91): big again, travelling left to the edge
+      if (b.p > 0.87 && b.p <= 0.91 && (b.mcx > a.mcx + 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
+      // P9 (0.94-0.97): travels right and down into the dock
+      if (b.p > 0.94 && b.p <= 0.97 && (b.mcy < a.mcy - 2 || b.mcx < a.mcx - 2)) orderOk = false;
       maxPosStep = Math.max(maxPosStep, Math.abs(b.mcx - a.mcx), Math.abs(b.mcy - a.mcy));
     }
-    const cEnd = trace.reduce((acc, t) => (Math.abs(t.p - 0.84) < Math.abs(acc.p - 0.84) ? t : acc), trace[0]);
+    const cEnd = trace.reduce((acc, t) => (Math.abs(t.p - 0.92) < Math.abs(acc.p - 0.92) ? t : acc), trace[0]);
     const dEnd = trace.reduce((acc, t) => (Math.abs(t.p - 1) < Math.abs(acc.p - 1) ? t : acc), trace[0]);
     const opacityOk = trace.every((t) => Math.abs((t.wOp || 0) + (t.mOp || 0) - 1) <= 0.01);
-    const traceOk = mapErr <= 0.002 && monoSpin && Math.abs(spinEnd - 360) <= 0.5 && maxSpinStep <= 162 && orderOk && opacityOk;
+    const traceOk = mapErr <= 0.002 && monoSpin && Math.abs(spinEnd - 720) <= 0.5 && maxSpinStep <= 162 && orderOk && opacityOk;
     writeJson(evPath('b', 'motion-trace.json'), { travel, heroTop, mapErr, monoSpin, spinEnd, maxSpinStep, maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEnd, dEnd, steps: trace });
     add('c', 'motion trace (60 steps)', traceOk ? PASS : FAIL,
       JSON.stringify({ mapErr: +mapErr.toFixed(4), monoSpin, spinEnd, maxSpinStep: +maxSpinStep.toFixed(1), maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEndTx: cEnd.tx, dEndTy: dEnd.ty }),
-      'clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; enlarged state at exact 45-degree pose; dock travel right+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
+      'clockwise monotonic to 720±0.5 (two turns); opening right-edge hold; leftward sweep; wind-down to centre; lockup-centred stanza; side-copy hold; final 45-degree pose; dock travel right+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
 
     // settle / oscillation / idle
     await page.evaluate(() => window.scrollTo(0, 0));
@@ -255,7 +262,7 @@ try {
     {
       const clipRows = [];
       for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [390, 844]]) {
-        const pg = await openPage(browser, { w, h, qa: 0.84 });
+        const pg = await openPage(browser, { w, h, qa: 0.92 });
         const stc = await state(pg);
         const mk = stc.markbox;
         const cx = mk.x + mk.w / 2;
@@ -264,19 +271,19 @@ try {
         const fracX = +(visW / (2 * r)).toFixed(3);
         const spin = +stc.spin.toFixed(1);
         const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-        clipRows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(spin - 360) <= 1 && overflow <= 1 });
+        clipRows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(spin - 720) <= 1 && overflow <= 1 });
         await shot(pg, 'b/halfclip-' + w + 'x' + h + '.png');
         await pg.close();
       }
       writeJson(evPath('b', 'halfclip-audit.json'), clipRows);
-      add('c', 'enlarged state: half clipped, exact 45-degree pose, no overflow', clipRows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(clipRows), 'visible width fraction 0.42-0.58 at max size; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0', ['evidence/b/halfclip-audit.json', 'evidence/b/halfclip-1440x900.png']);
+      add('c', 'enlarged state: half clipped, exact 45-degree pose, no overflow', clipRows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(clipRows), 'visible width fraction 0.42-0.58 at max size; spin 720±1 (exact 45-degree diamond pose); scrollWidth overflow 0', ['evidence/b/halfclip-audit.json', 'evidence/b/halfclip-1440x900.png']);
     }
 
     // big-right state: half clipped at the right edge, 45-degree pose
     {
       const rows = [];
       for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [390, 844]]) {
-        const pg = await openPage(browser, { w, h, qa: 0.70 });
+        const pg = await openPage(browser, { w, h, qa: 0.06 });
         const stc = await state(pg);
         const mk = stc.markbox;
         const cx = mk.x + mk.w / 2;
@@ -285,23 +292,23 @@ try {
         const fracX = +(visW / (2 * r)).toFixed(3);
         const spin = +stc.spin.toFixed(1);
         const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-        rows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(cx - w) <= 8 && Math.abs(spin - 270) <= 1 && overflow <= 1 });
+        rows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(cx - w) <= 5 && Math.abs(spin) <= 1 && overflow <= 1 });
         await shot(pg, 'b/bigright-' + w + 'x' + h + '.png');
         await pg.close();
       }
       writeJson(evPath('b', 'bigright-audit.json'), rows);
-      add('c', 'big right: half clipped at the right edge, 45-degree pose', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'visible fraction 0.42-0.58 with the centre on the right edge; spin 270±1 (45-degree pose); overflow 0', ['evidence/b/bigright-audit.json', 'evidence/b/bigright-1440x900.png']);
+      add('c', 'big right: half clipped at the right edge, 45-degree pose', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'visible fraction 0.42-0.58 with the centre on the right edge; spin 0±1 (45-degree pose); overflow 0', ['evidence/b/bigright-audit.json', 'evidence/b/bigright-1440x900.png']);
     }
 
     // mid-sweep: the big mark crossing the middle on its way to the left
     {
-      const pg = await openPage(browser, { w: 1440, h: 900, qa: 0.77 });
+      const pg = await openPage(browser, { w: 1440, h: 900, qa: 0.19 });
       const stc = await state(pg);
       const mk = stc.markbox;
       const mcx = mk.x + mk.w / 2;
       const ok = mcx > 200 && mcx < 1240 && Math.abs(mk.y + mk.h / 2 - 450) <= 6;
       await shot(pg, 'b/sweep-1440x900.png');
-      add('c', 'mid-sweep: the big mark crosses the middle, fully on screen', ok ? PASS : FAIL, JSON.stringify({ mcx: +mcx.toFixed(1), spin: +stc.spin.toFixed(1) }), 'at p=0.77 the big mark sits between the edges, centred vertically', ['evidence/b/sweep-1440x900.png']);
+      add('c', 'mid-sweep: the big mark crosses the middle, fully on screen', ok ? PASS : FAIL, JSON.stringify({ mcx: +mcx.toFixed(1), spin: +stc.spin.toFixed(1) }), 'at p=0.19 the big mark sits between the edges, centred vertically', ['evidence/b/sweep-1440x900.png']);
       await pg.close();
     }
 
@@ -309,7 +316,7 @@ try {
     {
       const rows = [];
       for (const [w, h] of [[1440, 900], [390, 844]]) {
-        const pg = await openPage(browser, { w, h, qa: 0.5 });
+        const pg = await openPage(browser, { w, h, qa: 0.78 });
         const stt = await state(pg);
         const o = await pg.evaluate(() => {
           const sl = document.getElementById('hero-side-left');
@@ -337,14 +344,14 @@ try {
         rows.push({ vp: w + 'x' + h, centered, visible, noGhost, noOverlap, mcx: +mcx.toFixed(1), mcy: +mcy.toFixed(1), rMark: +rMark.toFixed(1), ok });
         await shot(pg, 'b/sidetext-' + w + 'x' + h + '.png');
         await pg.close();
-        const pg2 = await openPage(browser, { w, h, qa: 0.7 });
+        const pg2 = await openPage(browser, { w, h, qa: 0.87 });
         const gone = await pg2.evaluate(() => [+getComputedStyle(document.getElementById('hero-side-left')).opacity, +getComputedStyle(document.getElementById('hero-side-right')).opacity]);
         rows[rows.length - 1].goneAt07 = gone;
         if (gone[0] > 0.05 || gone[1] > 0.05) rows[rows.length - 1].ok = false;
         await pg2.close();
       }
       writeJson(evPath('b', 'sidecopy-audit.json'), rows);
-      add('c', 'side copy: text beside the small symbol, then gone before the growth', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7', ['evidence/b/sidecopy-audit.json', 'evidence/b/sidetext-1440x900.png']);
+      add('c', 'side copy: text beside the small symbol, then gone before the growth', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'both blocks fully visible + clear of the mark at p=0.78; centred mark; wordmark fully swapped (no ghost); hidden by p=0.87', ['evidence/b/sidecopy-audit.json', 'evidence/b/sidetext-1440x900.png']);
     }
 
     // hero end state: mark docked just above the bottom edge, upright
@@ -357,17 +364,17 @@ try {
         const mcy = stt.markbox.y + stt.markbox.h / 2;
         const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
         const expY = h - stt.dockR - 20;
-        const ok = Math.abs(mcx - w / 2) <= 6 && Math.abs(mcy - expY) <= 6 && Math.abs(stt.spin - 360) <= 1.5 && (mcy + stt.dockR) <= h + 1 && overflow <= 1;
+        const ok = Math.abs(mcx - w / 2) <= 6 && Math.abs(mcy - expY) <= 6 && Math.abs(stt.spin - 720) <= 1.5 && (mcy + stt.dockR) <= h + 1 && overflow <= 1;
         rows.push({ vp: w + 'x' + h, center: [+mcx.toFixed(1), +mcy.toFixed(1)], expY: +expY.toFixed(1), spin: +stt.spin.toFixed(1), overflow, ok });
         await shot(pg, 'b/herodock-' + w + 'x' + h + '.png');
         await pg.close();
       }
       writeJson(evPath('b', 'herodock-audit.json'), rows);
-      add('d', 'hero end: mark docked upright just above the bottom edge', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'centre == (vw/2, vh−dockR−20) ±6; spin 360±1.5; fully visible; no overflow', ['evidence/b/herodock-audit.json']);
+      add('d', 'hero end: mark docked upright just above the bottom edge', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'centre == (vw/2, vh−dockR−20) ±6; spin 720±1.5; fully visible; no overflow', ['evidence/b/herodock-audit.json']);
     }
 
     // stage stills at pins
-    for (const q of [0, 0.25, 0.5, 0.70, 0.84, 0.93, 1.0]) {
+    for (const q of [0.06, 0.19, 0.56, 0.66, 0.78, 0.92, 1.0]) {
       for (const [w, h] of [[1440, 900], [834, 1112], [390, 844]]) {
         const p = await openPage(browser, { w, h, qa: q });
         await shot(p, 'b/pin-' + q + '-' + w + 'x' + h + '.png');
@@ -458,7 +465,7 @@ try {
 
   /* ---------- e) sharpness evidence (vector + zoom crops) ---------- */
   try {
-    const page = await openPage(browser, { w: 1440, h: 900, qa: 0.84, dpr: 2 });
+    const page = await openPage(browser, { w: 1440, h: 900, qa: 0.92, dpr: 2 });
     const src = await page.evaluate(() => document.getElementById('hero-mark').src);
     await shot(page, 'e/mark-zoom-2x.png');
     const isSvg = /\.svg(\?|$)/.test(src);
@@ -557,7 +564,7 @@ try {
     for (const [w, h] of vps) {
       const out = { vp: w + 'x' + h, ok: true };
       let gcols = 0;
-      for (const q of [0.84, 1]) {
+      for (const q of [0.92, 1]) {
         const page = await openPage(browser, { w, h, qa: q });
         const m = await page.evaluate((qq) => {
           const de = document.documentElement;
@@ -701,7 +708,7 @@ try {
       await delay(500);
       await settle(page, 2500);
       const s2 = await state(page);
-      const expSpin = 180 * cub(s2.p, 0.10, 0.34) + 90 * cub(s2.p, 0.58, 0.70) + 90 * cub(s2.p, 0.70, 0.84);
+      const expSpin = 90 * cub(s2.p, 0.12, 0.26) + 90 * cub(s2.p, 0.26, 0.40) + 180 * cub(s2.p, 0.40, 0.54) + 180 * cub(s2.p, 0.60, 0.72) + 180 * cub(s2.p, 0.86, 0.92);
       const ok = Math.abs(s2.p - s2.pTarget) <= 0.01 && Math.abs(s2.spin - expSpin) <= 6;
       add('j', 'resize mid-sequence', ok ? PASS : FAIL, JSON.stringify({ p: [s1.p, s2.p], spin: s2.spin, expSpin: +expSpin.toFixed(1) }), 'state re-renders consistently after resize', []);
       await page.close();
@@ -808,7 +815,7 @@ try {
     const matrix = results.map((r) => '| ' + r.id + ' | ' + r.entry + ' | ' + r.status + ' | ' + String(r.value).replace(/\|/g, '\\|').slice(0, 320) + ' | ' + r.threshold + ' | ' + (r.evidence.join('<br>') || '—') + ' |').join('\n');
 
     const report = [
-      '# QA report — logo-sequence site (v1.3.3 round)',
+      '# QA report — logo-sequence site (v1.3.4 round)',
       '',
       '- Revision: `' + env.sha + '` · generated ' + env.generatedAt,
       '- Environment: ' + env.os + ' · Node ' + env.node + ' · puppeteer-core ' + (env.puppeteer || '?'),
@@ -835,7 +842,7 @@ try {
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-report.md'), report, 'utf8');
 
     const log = [
-      '# QA log — environment, commands, honesty notes (v1.3.3)',
+      '# QA log — environment, commands, honesty notes (v1.3.4)',
       '',
       '## Environment',
       '',
@@ -874,7 +881,7 @@ try {
       '',
       '## Rollback drill',
       '',
-      'See `qa/evidence/rollback/` (v1.3.3 + kept v1.3.2 / v1.3.1 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
+      'See `qa/evidence/rollback/` (v1.3.4 + kept v1.3.3 / v1.3.2 / v1.3.1 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
       ''
     ].join('\n');
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-log.md'), log, 'utf8');

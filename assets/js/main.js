@@ -257,55 +257,78 @@
   function render(p) {
     p = clamp01(p);
 
-    /* one continuous clockwise turn: spin + shrink (0.10–0.34), hold while the
-       side copy shows (0.34–0.58), grow into the big half-clipped state at
-       the RIGHT edge (0.58–0.70, spin 270 — the 45-degree diamond pose), spin
-       leftward across the screen to the big state at the LEFT edge
-       (0.70–0.84, spin 360 — the same exact 45-degree pose), then travel down
-       into the footer dock holding that upright pose (0.84–0.94) */
+    /* one continuous clockwise journey — two full turns (720°). The page opens
+       on the big half-clipped state at the RIGHT edge (0–0.12); the big mark
+       spins left across the screen to the LEFT edge (0.12–0.26); winds down,
+       shrinking back to the centred small mark (0.26–0.40); the wordmark
+       dawns in as the lockup grows and settles upright (0.40–0.54, hold to
+       0.60); the classic spin + shrink with the wordmark→mark swap
+       (0.60–0.72); the side copy (0.72–0.86); the big half-clipped state at
+       the LEFT edge again — exact 45-degree pose (0.86–0.92); then down into
+       the footer dock (0.92–0.98). */
     var spin =
-      A.spinTurns * (180 * cub(p, 0.10, 0.34) +
-        90 * cub(p, 0.58, 0.70) +
-        90 * cub(p, 0.70, 0.84));
+      A.spinTurns * (90 * cub(p, 0.12, 0.26) +
+        90 * cub(p, 0.26, 0.40) +
+        180 * cub(p, 0.40, 0.54) +
+        180 * cub(p, 0.60, 0.72) +
+        180 * cub(p, 0.86, 0.92));
 
     var sF, targetX = geo.vw / 2, targetY = geo.vh / 2;
-    if (p <= 0.34) {
-      /* A/B: hold, then spin + shrink in place */
-      sF = 1 - (1 - geo.sC) * cub(p, 0.10, 0.34);
-    } else if (p <= 0.58) {
-      /* C: small symbol holds in the centre; the side copy is visible */
-      sF = geo.sC;
-    } else if (p <= 0.70) {
-      /* D1: grow into the big state at the RIGHT edge — half hangs past it */
-      var u1 = cub(p, 0.58, 0.70);
-      sF = geo.sC + (geo.kBig - geo.sC) * u1;
-      targetX = geo.vw / 2 + (geo.vw / 2) * u1;
-    } else if (p <= 0.84) {
-      /* D2: still big — spin to the left across the screen */
-      var u2 = cub(p, 0.70, 0.84);
+    if (p <= 0.12) {
+      /* P1: the big half-clipped mark holds at the RIGHT edge */
       sF = geo.kBig;
-      targetX = geo.vw * (1 - u2);
+      targetX = geo.vw;
+    } else if (p <= 0.26) {
+      /* P2: still big — spins left across the screen */
+      var u1 = cub(p, 0.12, 0.26);
+      sF = geo.kBig;
+      targetX = geo.vw * (1 - u1);
+    } else if (p <= 0.40) {
+      /* P3: winds down — shrink, drifting from the left edge back to centre */
+      var u2 = cub(p, 0.26, 0.40);
+      sF = geo.kBig + (geo.sC - geo.kBig) * u2;
+      targetX = (geo.vw / 2) * u2;
+    } else if (p <= 0.60) {
+      /* P4/P5: the wordmark dawns — the lockup grows to full size and settles
+         upright as the text fades in over the last part of the turn */
+      var u3 = cub(p, 0.40, 0.54);
+      sF = geo.sC + (1 - geo.sC) * u3;
+    } else if (p <= 0.72) {
+      /* P6: classic spin + shrink with the wordmark→mark swap */
+      var u4 = cub(p, 0.60, 0.72);
+      sF = 1 - (1 - geo.sC) * u4;
+    } else if (p <= 0.86) {
+      /* P7: side copy stage — small mark centred */
+      sF = geo.sC;
+    } else if (p <= 0.92) {
+      /* P8: big again at the LEFT edge — half-clipped, exact 45-degree pose */
+      var u5 = cub(p, 0.86, 0.92);
+      sF = geo.sC + (geo.kBig - geo.sC) * u5;
+      targetX = (geo.vw / 2) * (1 - u5);
     } else {
-      /* E: travel down into the footer dock while settling to landing size */
-      var v = cub(p, 0.84, 0.94);
+      /* P9: travel down into the footer dock while settling to landing size */
+      var v = cub(p, 0.92, 0.98);
       sF = geo.kBig + (geo.kFin - geo.kBig) * v;
       targetX = (geo.vw / 2) * v;
       targetY = geo.vh / 2 + (geo.tyDock - geo.vh / 2) * v;
     }
-    var fade = seg(spin, 90, 150); /* wordmark→mark swap, done inside the turn */
+    /* wordmark visibility: hidden while the big mark drives the opening,
+       dawns in as the lockup settles upright, holds, then swaps out during
+       the classic turn */
+    var fade = seg(spin, 240, 330) * (1 - seg(spin, 390, 450));
 
     /* keep the MARK's centre on the target path: cancel the lockup-internal
        offset, including how it rotates with the spin (blended in after the
        turn, so the spin itself stays a natural rigid rotation) */
     var rad = spin * Math.PI / 180;
     var off = geo.offY * sF;
-    var cb = seg(p, 0.34, 0.44);
+    var cb = (1 - seg(p, 0.40, 0.46)) + seg(p, 0.72, 0.76);
     var tx = (targetX - geo.vw / 2) - off * Math.sin(rad) * cb;
     var ty = (targetY - geo.vh / 2) + off * Math.cos(rad) * cb;
 
     /* side copy fades in beside the small symbol, out before the growth */
-    var soIn = seg(p, 0.36, 0.44);
-    var so = soIn * (1 - seg(p, 0.50, 0.56));
+    var soIn = seg(p, 0.73, 0.77);
+    var so = soIn * (1 - seg(p, 0.82, 0.86));
     var soShift = (1 - soIn) * 24;
     if (sideLeftEl) {
       sideLeftEl.style.opacity = so.toFixed(3);
@@ -324,8 +347,8 @@
     frameEl.style.transform =
       "translate(-50%, -50%) translate(" + tx.toFixed(2) + "px, " + ty.toFixed(2) + "px) rotate(" +
       spin.toFixed(2) + "deg) scale(" + sF.toFixed(4) + ")";
-    wordmarkEl.style.opacity = (1 - fade).toFixed(3);
-    markboxEl.style.opacity = fade.toFixed(3);
+    wordmarkEl.style.opacity = fade.toFixed(3);
+    markboxEl.style.opacity = (1 - fade).toFixed(3);
   }
 
   /* ---------------- loop ---------------- */
