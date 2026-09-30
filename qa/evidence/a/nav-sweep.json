@@ -16,16 +16,11 @@
       "hint": 0,
       "rmMark": 0
     },
-    "gallery": {
-      "ok": true,
-      "cards": 6,
-      "ordered": true
-    },
+    "galleryGone": 0,
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -46,16 +41,11 @@
       "hint": 0,
       "rmMark": 0
     },
-    "gallery": {
-      "ok": true,
-      "cards": 6,
-      "ordered": true
-    },
+    "galleryGone": 0,
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -76,16 +66,11 @@
       "hint": 0,
       "rmMark": 0
     },
-    "gallery": {
-      "ok": true,
-      "cards": 6,
-      "ordered": true
-    },
+    "galleryGone": 0,
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -106,16 +91,11 @@
       "hint": 0,
       "rmMark": 0
     },
-    "gallery": {
-      "ok": true,
-      "cards": 6,
-      "ordered": true
-    },
+    "galleryGone": 0,
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -136,16 +116,11 @@
       "hint": 0,
       "rmMark": 0
     },
-    "gallery": {
-      "ok": true,
-      "cards": 6,
-      "ordered": true
-    },
+    "galleryGone": 0,
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -166,16 +141,11 @@
       "hint": 0,
       "rmMark": 0
     },
-    "gallery": {
-      "ok": true,
-      "cards": 6,
-      "ordered": true
-    },
+    "galleryGone": 0,
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -196,16 +166,11 @@
       "hint": 0,
       "rmMark": 0
     },
-    "gallery": {
-      "ok": true,
-      "cards": 6,
-      "ordered": true
-    },
+    "galleryGone": 0,
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -226,16 +191,11 @@
       "hint": 0,
       "rmMark": 0
     },
-    "gallery": {
-      "ok": true,
-      "cards": 6,
-      "ordered": true
-    },
+    "galleryGone": 0,
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   },
@@ -256,16 +216,11 @@
       "hint": 0,
       "rmMark": 0
     },
-    "gallery": {
-      "ok": true,
-      "cards": 6,
-      "ordered": true
-    },
+    "galleryGone": 0,
     "bodyChildren": [
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#programmes.gallery",
       "FOOTER#footer.footer"
     ]
   }

@@ -1,7 +1,6 @@
-index.html :: hero__copy=0, hero__hint=0, hero__indicator=0, rm-mark=0, chapters=0, scrollhint=0
-assets/css/style.css :: hero__copy=0, hero__hint=0, hero__indicator=0, rm-mark=0, chapters=0, scrollhint=0
-assets/js/main.js :: hero__copy=0, hero__hint=0, hero__indicator=0, rm-mark=0, chapters=0, scrollhint=0
-content.js :: hero__copy=0, hero__hint=0, hero__indicator=0, rm-mark=0, chapters=0, scrollhint=0
-gallery refs: 6 | missing files: 0
-slots in content.js: 6 | assets/img: gallery-01.svg, gallery-02.svg, gallery-03.svg, gallery-04.svg, gallery-05.svg, gallery-06.svg
+index.html :: hero__copy=0, hero__hint=0, hero__indicator=0, rm-mark=0, chapters=0, scrollhint=0, gallery=0, #programmes=0
+assets/css/style.css :: hero__copy=0, hero__hint=0, hero__indicator=0, rm-mark=0, chapters=0, scrollhint=0, gallery=0, #programmes=0
+assets/js/main.js :: hero__copy=0, hero__hint=0, hero__indicator=0, rm-mark=0, chapters=0, scrollhint=0, gallery=0, #programmes=0
+content.js :: hero__copy=0, hero__hint=0, hero__indicator=0, rm-mark=0, chapters=0, scrollhint=0, gallery=0, #programmes=0
+assets/img: (none — removed)
 total dead-placeholder references: 0
