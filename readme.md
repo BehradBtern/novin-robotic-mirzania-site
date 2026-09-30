@@ -2,8 +2,8 @@
 
 A single page built around one scroll-linked sequence: the logo starts **big**
 at the top, spins clockwise while shrinking, **side copy appears left and
-right of the small symbol**, then it **grows big at the right edge and spins
-left across the screen** — ending up roughly **half clipped** past the left
+right of the small symbol**, then it **grows big at the left edge and spins
+right across the screen** — ending up roughly **half clipped** past the right
 edge, with both big states at the mark's **45° diamond pose** — and finally
 travels down and docks, upright, just above the bottom edge, handing off to a
 copy **centred inside the footer landing area**. No top navigation bar.
@@ -46,8 +46,8 @@ server.js                      zero-dependency local preview server
 
 Scroll progress drives seven states: **hold (big logo) → clockwise spin +
 shrink (wordmark swaps to the mark mid-turn) → side copy left/right of the
-small symbol → grow big at the RIGHT edge (half past it) → spin left across
-the screen, still big, landing at the LEFT edge half-clipped — both big
+small symbol → grow big at the LEFT edge (half past it) → spin right across
+the screen, still big, landing at the RIGHT edge half-clipped — both big
 states at the mark's exact 45° pose — → travel down to the dock holding that
 pose → settle upright, centred horizontally, just above the bottom edge**
 (the footer carries its own centred copy of the
@@ -67,8 +67,8 @@ Tuning lives in `content.js` → `animation`:
 | `edgeMarginPx` | `12` | minimum gap kept to the screen edges |
 
 Stage boundaries live in `assets/js/main.js` (the `render()` windows:
-hold 0–0.10, spin 0.10–0.34, side-copy hold 0.34–0.58, grow right 0.58–0.70,
-sweep left 0.70–0.84, dock travel 0.84–0.94). Hero heights: 340vh desktop /
+hold 0–0.10, spin 0.10–0.34, side-copy hold 0.34–0.58, grow left 0.58–0.70,
+sweep right 0.70–0.84, dock travel 0.84–0.94). Hero heights: 340vh desktop /
 300vh tablet / 260vh phone.
 
 **Reduced motion** (`prefers-reduced-motion: reduce`): no animation — the
