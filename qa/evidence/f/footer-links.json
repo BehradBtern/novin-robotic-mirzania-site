@@ -5,10 +5,6 @@
       "label": "Our story"
     },
     {
-      "href": "#programmes",
-      "label": "Programmes"
-    },
-    {
       "href": "#contact",
       "label": "Get in touch"
     },
@@ -24,14 +20,9 @@
       "top": 0
     },
     {
-      "label": "Programmes",
-      "href": "#programmes",
-      "top": 0
-    },
-    {
       "label": "Get in touch",
       "href": "#contact",
-      "top": -0.3
+      "top": 0
     },
     {
       "label": "Back to top",
