@@ -316,83 +316,16 @@ a:hover { color: var(--ink-1); }
 .footer__credit { max-width: 60ch; }
 
 /* =========================================================================
-   PROGRAMMES — 4–7 photo slots with text
-   ========================================================================= */
-.gallery {
-  position: relative;
-  z-index: 2;
-  border-top: 1px solid var(--hairline);
-  padding-block: var(--region);
-}
-
-.gallery__head { max-width: 62ch; margin-bottom: clamp(32px, 6vh, 64px); }
-
-.gallery__label {
-  font-family: var(--font-mono);
-  font-size: clamp(0.6875rem, 0.65rem + 0.18vw, 0.8125rem);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-.gallery__title {
-  margin-top: 12px;
-  color: var(--ink-1);
-  font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.25rem);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-}
-.gallery__intro { margin-top: 14px; color: var(--ink-2); }
-
-.gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gutter);
-}
-
-.gallery__card {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: 14px;
-  overflow: hidden;
-}
-.gallery__photo {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  background: var(--stage);
-}
-.gallery__card figcaption { padding: 18px 20px 22px; }
-.gallery__card-title { color: var(--ink-1); font-size: 1.02rem; font-weight: 600; line-height: 1.35; }
-.gallery__card-text { margin-top: 8px; font-size: 0.875rem; color: var(--ink-2); }
-
-.gallery-reveal .gallery__card {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 480ms ease, transform 480ms ease;
-}
-.gallery-reveal .gallery__card.is-in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) {
-  .gallery-reveal .gallery__card { opacity: 1; transform: none; transition: none; }
-}
-
-/* =========================================================================
    RESPONSIVE
    ========================================================================= */
 @media (min-width: 641px) and (max-width: 1023px) {
   .hero { height: 300vh; }
-  .gallery__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
   .hero { height: 260vh; }
   .footer__grid { grid-template-columns: 1fr; }
   .footer__legal { flex-direction: column; }
-  .gallery__grid { grid-template-columns: 1fr; }
 
   /* phones: the side copy sits above and below the small symbol instead of
      flanking it (keeps the text readable at narrow widths) */

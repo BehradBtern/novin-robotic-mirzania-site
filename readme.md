@@ -6,8 +6,7 @@ right of the small symbol**, then it **grows big at the right edge and spins
 left across the screen** — ending up roughly **half clipped** past the left
 edge, with both big states at the mark's **45° diamond pose** — and finally
 travels down and docks, upright, just above the bottom edge, handing off to a
-copy **centred inside the footer landing area**. Below the sequence sits the
-**programmes grid** (4–7 photo slots with text). No top navigation bar.
+copy **centred inside the footer landing area**. No top navigation bar.
 
 No framework, no build step: plain HTML/CSS/JS. All content lives in one file.
 
@@ -28,14 +27,13 @@ Change the port with the `PORT` environment variable (`$env:PORT=9000; node serv
 ## File map
 
 ```
-index.html                     page skeleton (logo stage + side copy + programmes + footer)
-content.js                     ✏️ THE single content source — copy, photo slots, theme, animation tuning
+index.html                     page skeleton (logo stage + side copy + footer)
+content.js                     ✏️ THE single content source — copy, theme, animation tuning
 assets/css/style.css           design system + the animation styles
 assets/js/main.js              the sequence engine + QA hook
 assets/logo/logo-wordmark.svg  vector lockup (diamond + "NOVIN ROBOTIC MIRZANIA" + Persian line)
 assets/logo/logo-mark.svg      vector mark (diamond only)
 assets/logo/*@2x.png / *@3x.png  raster fallbacks (not used by default)
-assets/img/gallery-0*.svg      programme photo placeholders — swap for real photos
 assets/favicon.svg             favicon (the mark)
 tools/export-logo-from-cdr.py  regenerate the logo assets from "LOGO MIRZANIA.cdr"
 qa/                            headless QA harness + evidence + reports (tooling only)
@@ -52,7 +50,7 @@ small symbol → grow big at the RIGHT edge (half past it) → spin left across
 the screen, still big, landing at the LEFT edge half-clipped — both big
 states at the mark's exact 45° pose — → travel down to the dock holding that
 pose → settle upright, centred horizontally, just above the bottom edge**
-(the footer below the programmes grid carries its own centred copy of the
+(the footer carries its own centred copy of the
 mark, so the end state at the very bottom of the page is "logo in the middle
 of the footer"). Scrolling up plays everything in reverse.
 
@@ -74,8 +72,8 @@ sweep left 0.70–0.84, dock travel 0.84–0.94). Hero heights: 340vh desktop /
 300vh tablet / 260vh phone.
 
 **Reduced motion** (`prefers-reduced-motion: reduce`): no animation — the
-wordmark shows fully in the hero, no side copy, the programmes grid renders
-statically, the footer signature is drawn statically, and the mark rests fully
+wordmark shows fully in the hero, no side copy, the footer signature
+is drawn statically, and the mark rests fully
 visible, centred in the footer's landing area.
 
 **Footer:** columns row → the sequence's landing area (the mark docks into
@@ -94,19 +92,11 @@ different brand colour).
 Open **`content.js`**:
 
 - `heroSide` — the two text blocks that appear left/right of the small symbol.
-- `gallery` — the programmes section: heading, intro, and the 4–7 photo slots
-  (`img`, `alt`, `title`, `text`). Add or remove items freely; the grid adapts.
 - `footer` — blurb, section links, contact lines, legal line, and
   `footer.signature.text` (the giant animated footer text).
 - `theme` — colors (the `stage` token is the single background color).
 
 Save + refresh; no rebuild.
-
-## Replace the photos
-
-The six files in `assets/img/` are placeholder illustrations. Either overwrite
-them (keep the names) or add real photos anywhere and point `gallery.items[].img`
-at them. Use roughly 4:3 images; `object-fit: cover` handles the rest.
 
 ## Replace the logo
 
@@ -147,15 +137,18 @@ publish is the **Publish** action in the browser panel.
 
 Releases are git-tagged in this repository:
 
-- **`v1.3.0`** — current (bigger hero, side copy restored, programmes grid, dock + footer-centre landing).
+- **`v1.3.6`** — current (programmes section removed; sequence as of v1.3.3).
+- **`v1.3.5`** — the v1.3.3 sequence, re-tagged after the revert (Ctrl+Z of v1.3.4).
+- **`v1.3.4`** — the reordered sequence (big right first; undone on request).
+- **`v1.3.3`** — big right phase added after the side copy; wordmark intro first.
 - **`v1.2.0`** — logo-only page (bigger hero, half-clipped growth, footer-centre landing).
 - **`v1.1.0`** — small hero, footer-top dock.
 - **`v1.0.0`** — original (flip animation, gallery page).
 
-Restore: `git checkout v1.3.0` (or any tag), then re-upload. Static archives:
-`qa/evidence/rollback/dist-v1.3.0.zip` (SHA-256 next to it), plus the older
-`dist-v1.2.0.zip` / `dist-v1.1.0.zip` / `dist-v1.0.0.zip`. Ship fixes as
-`v1.3.1`; never move a published tag.
+Restore: `git checkout v1.3.6` (or any tag), then re-upload. Static archives:
+`qa/evidence/rollback/dist-v1.3.6.zip` (SHA-256 next to it), plus the older
+`dist-v1.3.5.zip` … `dist-v1.0.0.zip`. Ship fixes as
+`v1.3.7`; never move a published tag.
 
 ## QA — regenerate evidence
 

@@ -86,24 +86,7 @@ try {
               hint: document.querySelectorAll('.hero__hint, #hero-hint').length,
               rmMark: document.querySelectorAll('.rm-mark').length
             },
-            gallery: (function () {
-              const g = document.getElementById('programmes');
-              const s = document.getElementById('story');
-              const f = document.getElementById('footer');
-              if (!g || !s || !f) return { ok: false, cards: 0, ordered: false };
-              const ordered =
-                (s.compareDocumentPosition(g) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0 &&
-                (g.compareDocumentPosition(f) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
-              const cards = Array.from(g.querySelectorAll('.gallery__card'));
-              let content = cards.length >= 4 && cards.length <= 7;
-              cards.forEach(function (c) {
-                const img = c.querySelector('img');
-                const t = c.querySelector('.gallery__card-title');
-                const x = c.querySelector('.gallery__card-text');
-                if (!img || !img.getAttribute('alt') || !t || !t.textContent || !x || !x.textContent) content = false;
-              });
-              return { ok: ordered && content, cards: cards.length, ordered: ordered };
-            })(),
+            galleryGone: document.querySelectorAll('#programmes, .gallery, .gallery__card').length,
             bodyChildren: Array.from(document.body.children).map((el) => el.tagName + (el.id ? '#' + el.id : '') + (el.className ? '.' + String(el.className).split(' ')[0] : ''))
           };
           document.querySelectorAll('nav, [role=navigation]').forEach((n) => out.navs.push({ inFooter: !!n.closest('footer') }));
@@ -122,16 +105,14 @@ try {
     writeJson(evPath('a', 'nav-sweep.json'), sweep);
     const navOk = sweep.every((r) => r.headers === 0 && r.fixed.length === 0 && r.navs.every((n) => n.inFooter));
     add('a', 'nav absence (9 cells)', navOk ? PASS : FAIL, navOk ? 'headers 0; no fixed/sticky outside hero; nav only in footer' : JSON.stringify(sweep.filter((r) => r.headers || r.fixed.length)), 'zero nav outside footer', ['evidence/a/nav-sweep.json']);
-    const remOk = sweep.every((r) => Object.values(r.removed).every((v) => v === 0));
-    add('a', 'old placeholder elements removed from DOM', remOk ? PASS : FAIL, JSON.stringify(sweep[0].removed) + ' body=' + JSON.stringify(sweep[0].bodyChildren), 'copy/indicator/hint/rm-mark counts all 0; body = skip-link + noscript + hero + programmes + footer', ['evidence/a/nav-sweep.json']);
-    const galOk = sweep.every((r) => r.gallery.ok);
-    add('a', 'programmes: 4–7 photo slots present, ordered hero→programmes→footer', galOk ? PASS : FAIL, JSON.stringify({ cards: sweep[0].gallery.cards, ordered: sweep[0].gallery.ordered }), 'gallery between hero and footer; 4–7 cards each with img/alt/title/text', ['evidence/a/nav-sweep.json']);
+    const remOk = sweep.every((r) => Object.values(r.removed).every((v) => v === 0) && r.galleryGone === 0);
+    add('a', 'old placeholder elements removed from DOM (incl. the programmes section)', remOk ? PASS : FAIL, JSON.stringify(sweep[0].removed) + ' galleryGone=' + sweep[0].galleryGone + ' body=' + JSON.stringify(sweep[0].bodyChildren), 'copy/indicator/hint/rm-mark/gallery counts all 0; body = skip-link + noscript + hero + footer', ['evidence/a/nav-sweep.json']);
   } catch (e) { add('a', 'structure sweep', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
-  /* ---------- a2) source audit: no dead placeholders; gallery wired ---------- */
+  /* ---------- a2) source audit: no dead placeholders; programmes removed ---------- */
   try {
     const files = ['index.html', 'assets/css/style.css', 'assets/js/main.js', 'content.js'];
-    const needles = ['hero__copy', 'hero__hint', 'hero__indicator', 'rm-mark', 'chapters', 'scrollhint'];
+    const needles = ['hero__copy', 'hero__hint', 'hero__indicator', 'rm-mark', 'chapters', 'scrollhint', 'gallery', '#programmes'];
     const lines = [];
     let total = 0;
     for (const f of files) {
@@ -141,18 +122,13 @@ try {
       total += sum;
       lines.push(f + ' :: ' + counts.map((c) => c.n + '=' + c.c).join(', '));
     }
-    const cjs = fs.readFileSync(path.join(ROOT, 'content.js'), 'utf8');
-    const refs = Array.from(new Set((cjs.match(/assets\/img\/[\w.-]+\.svg/g) || [])));
-    const missing = refs.filter((r) => !fs.existsSync(path.join(ROOT, r)));
-    const slots = (cjs.match(/img:\s*"assets\/img\//g) || []).length;
     const imgDir = path.join(ROOT, 'assets', 'img');
     const imgFiles = fs.existsSync(imgDir) ? fs.readdirSync(imgDir).sort() : [];
-    lines.push('gallery refs: ' + refs.length + ' | missing files: ' + missing.length + (missing.length ? ' -> ' + missing.join(', ') : ''));
-    lines.push('slots in content.js: ' + slots + ' | assets/img: ' + (imgFiles.length ? imgFiles.join(', ') : '(none)'));
+    lines.push('assets/img: ' + (imgFiles.length ? imgFiles.join(', ') : '(none — removed)'));
     lines.push('total dead-placeholder references: ' + total);
     fs.writeFileSync(evPath('a', 'removal-audit.txt'), lines.join('\n') + '\n', 'utf8');
-    const ok = total === 0 && missing.length === 0 && slots >= 4 && slots <= 7 && refs.length === slots && imgFiles.length >= 4;
-    add('a', 'source audit: no dead placeholders; gallery assets present', ok ? PASS : FAIL, JSON.stringify({ deadRefs: total, galleryRefs: refs.length, slots, missing: missing.length, imgFiles: imgFiles.length }), 'no hero__copy/hint/indicator/rm-mark refs; every gallery slot points at an existing file', ['evidence/a/removal-audit.txt']);
+    const ok = total === 0 && imgFiles.length === 0;
+    add('a', 'source audit: no dead placeholders; programmes assets removed', ok ? PASS : FAIL, JSON.stringify({ deadRefs: total, imgFiles: imgFiles.length }), 'no hero__copy/hint/indicator/rm-mark/gallery refs in shipped files; assets/img empty', ['evidence/a/removal-audit.txt']);
   } catch (e) { add('a', 'source audit', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- b) intro stage ---------- */
@@ -509,8 +485,8 @@ try {
     });
     writeJson(evPath('f', 'footer-links.json'), { links, landings, contactCheck });
     const landOk = landings.every((l) => l.top !== null && l.top >= -40 && l.top <= 675);
-    const ok = landOk && Object.values(contactCheck).every(Boolean) && links.length === 4;
-    add('f', 'footer: links land + contact/legal intact', ok ? PASS : FAIL, JSON.stringify({ landings, contactCheck }), '4 links land within viewport; mailto/tel formats; texts == content', ['evidence/f/footer-links.json', 'evidence/f/footer-1440x900.png']);
+    const ok = landOk && Object.values(contactCheck).every(Boolean) && links.length === 3;
+    add('f', 'footer: links land + contact/legal intact', ok ? PASS : FAIL, JSON.stringify({ landings, contactCheck }), '3 links land within viewport; mailto/tel formats; texts == content', ['evidence/f/footer-links.json', 'evidence/f/footer-1440x900.png']);
 
     /* signature: three layers, draw-in completes, hover reveal reacts */
     const sigBase = await page.evaluate(() => {
@@ -556,7 +532,6 @@ try {
     const rows = [];
     for (const [w, h] of vps) {
       const out = { vp: w + 'x' + h, ok: true };
-      let gcols = 0;
       for (const q of [0.84, 1]) {
         const page = await openPage(browser, { w, h, qa: q });
         const m = await page.evaluate((qq) => {
@@ -564,20 +539,16 @@ try {
           const stg = window.__heroState();
           const mk = stg.markbox;
           const r = qq === 1 ? stg.dockR : stg.rBig;
-          const cols = getComputedStyle(document.getElementById('gallery-grid')).gridTemplateColumns.split(' ').length;
-          return { overflow: de.scrollWidth - de.clientWidth, right: (mk.x + mk.w / 2) + r, bodyOverflowY: getComputedStyle(document.body).overflowY, cols };
+          return { overflow: de.scrollWidth - de.clientWidth, right: (mk.x + mk.w / 2) + r, bodyOverflowY: getComputedStyle(document.body).overflowY };
         }, q);
         out['overflow@' + q] = m.overflow;
         if (m.overflow > 1 || m.right > w + 2 || m.bodyOverflowY === 'hidden') out.ok = false;
-        gcols = m.cols;
         await page.close();
       }
-      out.galleryCols = gcols;
-      if (gcols !== (w >= 1024 ? 3 : w >= 641 ? 2 : 1)) out.ok = false;
       rows.push(out);
     }
     writeJson(evPath('g', 'responsive.json'), rows);
-    add('g', 'responsive: no overflow at max size and landing; gallery columns adapt', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'scrollWidth overflow <= 1px in both states; no horizontal scrollbar; gallery grid 3/2/1 columns by width', ['evidence/g/responsive.json']);
+    add('g', 'responsive: no overflow at max size and landing', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'scrollWidth overflow <= 1px in both states; no horizontal scrollbar', ['evidence/g/responsive.json']);
   } catch (e) { add('g', 'responsive scan', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- h) reduced motion: static logo, fully visible everywhere ---------- */
@@ -611,22 +582,13 @@ try {
     });
     await shotFull(page, 'h/reduced-1440-full.png');
     const inView = (r) => r.x >= -2 && r.r <= rc.vw + 2 && r.y >= -2 && r.b <= rc.vh + 2;
-    await page.evaluate(() => window.scrollTo(0, document.getElementById('programmes').offsetTop));
-    await delay(700);
-    const gal = await page.evaluate(() => {
-      const cards = document.querySelectorAll('#programmes .gallery__card');
-      const c0 = cards[0];
-      const r = c0.getBoundingClientRect();
-      return { count: cards.length, op: +getComputedStyle(c0).opacity, imgOK: c0.querySelector('img').naturalWidth > 0, inView: r.x >= -2 && r.x + r.width <= innerWidth + 2 };
-    });
     const ok = rc.hasClass && rc.frameInline === '' && rc.frameComputed === 'none' && rc.markboxDisplay === 'none' && rc.sideDisplay === 'none' &&
       rc.endDisplay === 'block' && rc.endOpacity === 1 && inView(rc.endRect) && inView(top) &&
       Math.abs((rc.endRect.x + rc.endRect.r) / 2 - rc.vw / 2) <= 6 &&
       Math.abs((rc.endRect.y + rc.endRect.b) / 2 - rc.bandCy) <= 8 &&
-      parseFloat(rc.sigDrawOffset) <= 1 && rc.sigWidth > 100 &&
-      gal.count >= 4 && gal.op === 1 && gal.inView;
-    writeJson(evPath('h', 'reduced-motion.json'), { top, rc, gal });
-    add('h', 'reduced motion: static logo + signature fully rendered, gallery static', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed, side: rc.sideDisplay, sigDraw: rc.sigDrawOffset, gallery: gal }), 'no transforms; no side copy; wordmark fully in viewport; landing centred in the landing area; signature drawn statically (no dash offset); gallery cards visible without reveal effects', ['evidence/h/reduced-1440-full.png']);
+      parseFloat(rc.sigDrawOffset) <= 1 && rc.sigWidth > 100;
+    writeJson(evPath('h', 'reduced-motion.json'), { top, rc });
+    add('h', 'reduced motion: static logo + signature fully rendered', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed, side: rc.sideDisplay, sigDraw: rc.sigDrawOffset }), 'no transforms; no side copy; wordmark fully in viewport; landing centred in the landing area; signature drawn statically (no dash offset)', ['evidence/h/reduced-1440-full.png']);
     await page.close();
     const p390 = await openPage(browser, { w: 390, h: 844, reduced: true });
     await shotFull(p390, 'h/reduced-390-full.png');
@@ -808,7 +770,7 @@ try {
     const matrix = results.map((r) => '| ' + r.id + ' | ' + r.entry + ' | ' + r.status + ' | ' + String(r.value).replace(/\|/g, '\\|').slice(0, 320) + ' | ' + r.threshold + ' | ' + (r.evidence.join('<br>') || '—') + ' |').join('\n');
 
     const report = [
-      '# QA report — logo-sequence site (v1.3.3 round)',
+      '# QA report — logo-sequence site (v1.3.6 round)',
       '',
       '- Revision: `' + env.sha + '` · generated ' + env.generatedAt,
       '- Environment: ' + env.os + ' · Node ' + env.node + ' · puppeteer-core ' + (env.puppeteer || '?'),
@@ -835,7 +797,7 @@ try {
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-report.md'), report, 'utf8');
 
     const log = [
-      '# QA log — environment, commands, honesty notes (v1.3.3)',
+      '# QA log — environment, commands, honesty notes (v1.3.6)',
       '',
       '## Environment',
       '',
@@ -874,7 +836,7 @@ try {
       '',
       '## Rollback drill',
       '',
-      'See `qa/evidence/rollback/` (v1.3.3 + kept v1.3.2 / v1.3.1 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
+      'See `qa/evidence/rollback/` (v1.3.6 + kept v1.3.5 / v1.3.4 / v1.3.3 / v1.3.2 / v1.3.1 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
       ''
     ].join('\n');
     fs.writeFileSync(path.join(ROOT, 'qa', 'qa-log.md'), log, 'utf8');
