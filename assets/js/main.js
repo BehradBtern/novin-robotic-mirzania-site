@@ -1,9 +1,9 @@
 /* =========================================================================
    main.js — renders content from content.js and drives the logo sequence:
    hold → clockwise spin (+ shrink, wordmark→mark swap) → side copy appears
-   left/right of the small symbol → rotate left + grow (half clipped at the
-   left edge) → travel down into the footer dock. Also renders the programmes
-   grid (4–7 photo slots) and the footer.
+   left/right of the small symbol → grow big at the right edge → spin left
+   across the screen to the left edge (both big states half clipped, 45°) →
+   travel down into the footer dock. Renders the footer.
    Internal QA API: window.__heroState() returns live values (used by the QA
    harness; harmless otherwise). URL hook: ?qa=<0..1> pins progress.
    ========================================================================= */
@@ -116,36 +116,6 @@
   if (C.heroSide) {
     fillSide(sideLeftEl, C.heroSide.left);
     fillSide(sideRightEl, C.heroSide.right);
-  }
-
-  /* ---------------- programmes gallery (4–7 photo slots + text) ----------- */
-  var galleryGrid = doc.getElementById("gallery-grid");
-  if (galleryGrid && C.gallery && Array.isArray(C.gallery.items)) {
-    setText("gallery-label", C.gallery.sectionLabel);
-    setText("gallery-title", C.gallery.title);
-    setText("gallery-intro", C.gallery.intro);
-    C.gallery.items.forEach(function (item) {
-      var fig = doc.createElement("figure");
-      fig.className = "gallery__card";
-      var img = doc.createElement("img");
-      img.className = "gallery__photo";
-      img.src = item.img;
-      img.alt = item.alt || "";
-      img.loading = "lazy";
-      img.decoding = "async";
-      var cap = doc.createElement("figcaption");
-      var h = doc.createElement("h3");
-      h.className = "gallery__card-title";
-      h.textContent = item.title;
-      var t = doc.createElement("p");
-      t.className = "gallery__card-text";
-      t.textContent = item.text;
-      cap.appendChild(h);
-      cap.appendChild(t);
-      fig.appendChild(img);
-      fig.appendChild(cap);
-      galleryGrid.appendChild(fig);
-    });
   }
 
   /* ---------------- reduced motion ---------------- */
@@ -408,21 +378,6 @@
       });
     }, { rootMargin: "10%" });
     hio.observe(heroEl);
-  }
-
-  /* programmes reveal: cards fade in as they enter; skipped under reduced
-     motion so the cards simply stay fully visible */
-  if (galleryGrid && "IntersectionObserver" in window && !reduced) {
-    root.classList.add("gallery-reveal");
-    var gio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add("is-in");
-          gio.unobserve(en.target);
-        }
-      });
-    }, { rootMargin: "0px 0px -8% 0px" });
-    Array.prototype.forEach.call(galleryGrid.children, function (card) { gio.observe(card); });
   }
 
   /* ---------------- footer signature: draw-in + cursor reveal -------------- */
