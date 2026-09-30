@@ -1,0 +1,50 @@
+﻿tag v1.3.7
+Tagger: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Wed Sep 30 20:15:11 2026 +0330
+
+Release v1.3.7 - big phases swapped: big at the LEFT edge first, then spin right across to the RIGHT edge, then dock (45-degree pose at both)
+
+commit 1cea35041a953169fa4433f741b0995e2c204e83
+Author: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Wed Sep 30 20:15:11 2026 +0330
+
+    docs: QA evidence for v1.3.7 (revision 973c379; big phases swapped: left first, then right)
+
+ qa/evidence/b/bigleft-1280x800.png        | Bin 0 -> 28470 bytes
+ qa/evidence/b/bigleft-1440x900.png        | Bin 0 -> 36034 bytes
+ qa/evidence/b/bigleft-1920x1080.png       | Bin 0 -> 42246 bytes
+ qa/evidence/b/bigleft-390x844.png         | Bin 0 -> 22512 bytes
+ qa/evidence/b/bigleft-audit.json          |  34 +++++++++++
+ qa/evidence/b/bigright-1280x800.png       | Bin 29636 -> 28730 bytes
+ qa/evidence/b/bigright-1440x900.png       | Bin 33046 -> 35349 bytes
+ qa/evidence/b/bigright-1920x1080.png      | Bin 42373 -> 41817 bytes
+ qa/evidence/b/bigright-390x844.png        | Bin 25138 -> 21896 bytes
+ qa/evidence/b/dock-1280x800.png           | Bin 145557 -> 145660 bytes
+ qa/evidence/b/dock-1440x900.png           | Bin 170158 -> 170152 bytes
+ qa/evidence/b/dock-1920x1080.png          | Bin 213168 -> 212940 bytes
+ qa/evidence/b/dock-2560x1080.png          | Bin 238490 -> 238491 bytes
+ qa/evidence/b/dock-390x844.png            | Bin 81714 -> 81706 bytes
+ qa/evidence/b/halfclip-audit.json         |  16 ++---
+ qa/evidence/b/motion-trace.json           |  94 +++++++++++++++---------------
+ qa/evidence/b/pin-0.7-1440x900.png        | Bin 33046 -> 36034 bytes
+ qa/evidence/b/pin-0.7-390x844.png         | Bin 25138 -> 22512 bytes
+ qa/evidence/b/pin-0.7-834x1112.png        | Bin 42880 -> 41609 bytes
+ qa/evidence/b/pin-0.84-1440x900.png       | Bin 33468 -> 35349 bytes
+ qa/evidence/b/pin-0.84-390x844.png        | Bin 24692 -> 21896 bytes
+ qa/evidence/b/pin-0.84-834x1112.png       | Bin 43259 -> 40669 bytes
+ qa/evidence/b/pin-0.93-1440x900.png       | Bin 33704 -> 33805 bytes
+ qa/evidence/b/pin-0.93-390x844.png        | Bin 13915 -> 13579 bytes
+ qa/evidence/b/pin-0.93-834x1112.png       | Bin 36039 -> 35991 bytes
+ qa/evidence/b/sweep-1440x900.png          | Bin 55681 -> 55565 bytes
+ qa/evidence/e/mark-zoom-2x.png            | Bin 79506 -> 81798 bytes
+ qa/evidence/edge/dock-1440x900.png        | Bin 170152 -> 170158 bytes
+ qa/evidence/f/footer-1440x900.png         | Bin 181094 -> 180493 bytes
+ qa/evidence/f/roundtrip-blurb.png         | Bin 193725 -> 192858 bytes
+ qa/evidence/f/roundtrip-logoswap-dock.png | Bin 196966 -> 197266 bytes
+ qa/evidence/g/responsive.json             |  14 ++---
+ qa/evidence/i/perf.json                   |   4 +-
+ qa/evidence/j/dock-live-zoom-2x.png       | Bin 483703 -> 482825 bytes
+ qa/qa-log.md                              |  34 +++++------
+ qa/qa-report.md                           |  24 +++++---
+ qa/qa-summary.json                        |  34 +++++------
+ 37 files changed, 144 insertions(+), 110 deletions(-)
