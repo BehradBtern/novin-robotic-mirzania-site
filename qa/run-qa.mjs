@@ -208,8 +208,8 @@ try {
       if (b.p > 0.14 && b.p <= 0.24 && (b.mcx > a.mcx + 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
       // P3 (0.28-0.38): winds down, drifting from the left edge to the centre
       if (b.p > 0.28 && b.p <= 0.38 && (b.mcx < a.mcx - 2 || Math.abs(b.mcy - 450) > 6)) orderOk = false;
-      // P4-P6 (0.44-0.72): the lockup drives — the frame stays centred
-      if (b.p > 0.44 && b.p <= 0.72 && (Math.abs(b.fcx - 720) > 5 || Math.abs(b.fcy - 450) > 5)) orderOk = false;
+      // P4-P6 (0.48-0.72): the lockup drives — the frame stays centred (after the compensation blend)
+      if (b.p > 0.48 && b.p <= 0.72 && (Math.abs(b.fcx - 720) > 5 || Math.abs(b.fcy - 450) > 5)) orderOk = false;
       // P7 (0.78-0.84): side-copy stage — small mark centred
       if (b.p > 0.78 && b.p <= 0.84 && (Math.abs(b.mcx - 720) > 5 || Math.abs(b.mcy - 450) > 5)) orderOk = false;
       // P8 (0.87-0.91): big again, travelling left to the edge

@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/154.0.8037.58",
     "edge": "Edg/154.0.4258.37",
-    "generatedAt": "2026-09-30T13:27:49.851Z",
-    "sha": "fe38c43"
+    "generatedAt": "2026-09-30T13:49:31.166Z",
+    "sha": "93f502c"
   },
-  "generatedAt": "2026-09-30T13:27:49.851Z",
+  "generatedAt": "2026-09-30T13:49:31.166Z",
   "counts": {
     "PASS": 27,
     "FAIL": 0,
@@ -63,10 +63,10 @@
     },
     {
       "id": "b",
-      "entry": "intro: big wordmark centered on dark gray, unclipped",
+      "entry": "opening: big mark half-clipped at the right edge, 45-degree pose",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"dx\":0,\"dy\":0,\"frameW\":979.7,\"expectedW\":979.7,\"sizeOk\":true,\"notClipped\":true,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1,\"sideOp\":0},{\"vp\":\"1440x900\",\"dx\":0,\"dy\":0,\"frameW\":1102.2,\"expectedW\":1102.2,\"sizeOk\":true,\"notClipped\":true,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1,\"sideOp\":0},{\"vp\":\"1920x1080\",\"dx\":0,\"dy\":0,\"frameW\":1322.6,\"expectedW\":1322.6,\"sizeOk\":true,\"notClipped\":true,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":0,\"wordOpacity\":1,\"sideOp\":0}]",
-      "threshold": "hero size == min(92vw, 96vh*1.2757, 1600px) ±3; centered ±8px; fully in viewport; side copy hidden; bg rgb(23,25,27)",
+      "value": "[{\"vp\":\"1280x800\",\"cx\":1282.6,\"cy\":400,\"markW\":768,\"expW\":768,\"sizeOk\":true,\"rightOk\":true,\"centYOk\":true,\"vert\":true,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":1,\"wordOpacity\":0,\"sideOp\":0,\"overflow\":0},{\"vp\":\"1440x900\",\"cx\":1443,\"cy\":450,\"markW\":864,\"expW\":864,\"sizeOk\":true,\"rightOk\":true,\"centYOk\":true,\"vert\":true,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":1,\"wordOpacity\":0,\"sideOp\":0,\"overflow\":0},{\"vp\":\"1920x1080\",\"cx\":1923.5,\"cy\":540,\"markW\":1036.8,\"expW\":1036.8,\"sizeOk\":true,\"rightOk\":true,\"centYOk\":true,\"vert\":true,\"bg\":\"rgb(23, 25, 27)\",\"spin\":0,\"markOpacity\":1,\"wordOpacity\":0,\"sideOp\":0,\"overflow\":0}]",
+      "threshold": "mark width == 2×rBig ±6; centre on the right edge ±5; vertically centred; fully in viewport vertically; wordmark hidden; spin 0; bg rgb(23,25,27); no overflow",
       "evidence": [
         "evidence/a/intro-1440x900.png",
         "evidence/a/intro-audit.json"
@@ -77,8 +77,8 @@
       "id": "c",
       "entry": "motion trace (60 steps)",
       "status": "PASS",
-      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":34.1,\"maxPosStep\":435.2,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":-719.22,\"dEndTy\":354.87}",
-      "threshold": "clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; left travel on the middle line; enlarged state at exact 45-degree pose; dock travel right+down; swap opacity sum=1",
+      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":720,\"maxSpinStep\":111,\"maxPosStep\":454.4,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":-719,\"dEndTy\":354.87}",
+      "threshold": "clockwise monotonic to 720±0.5 (two turns); opening right-edge hold; leftward sweep; wind-down to centre; lockup-centred stanza; side-copy hold; final 45-degree pose; dock travel right+down; swap opacity sum=1",
       "evidence": [
         "evidence/b/motion-trace.json"
       ],
@@ -106,8 +106,8 @@
       "id": "c",
       "entry": "enlarged state: half clipped, exact 45-degree pose, no overflow",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.503,\"markCx\":2.6,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.503,\"markCx\":3,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.503,\"markCx\":3.5,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.503,\"markCx\":2.6,\"spin\":360,\"overflow\":0,\"ok\":true}]",
-      "threshold": "visible width fraction 0.42-0.58 at max size; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0",
+      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.503,\"markCx\":2.6,\"spin\":720,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.503,\"markCx\":3,\"spin\":720,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.503,\"markCx\":3.5,\"spin\":720,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.503,\"markCx\":2.6,\"spin\":720,\"overflow\":0,\"ok\":true}]",
+      "threshold": "visible width fraction 0.42-0.58 at max size; spin 720±1 (exact 45-degree diamond pose); scrollWidth overflow 0",
       "evidence": [
         "evidence/b/halfclip-audit.json",
         "evidence/b/halfclip-1440x900.png"
@@ -118,8 +118,8 @@
       "id": "c",
       "entry": "big right: half clipped at the right edge, 45-degree pose",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.5,\"markCx\":1280,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.5,\"markCx\":1440,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.5,\"markCx\":1920,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.5,\"markCx\":390,\"spin\":270,\"overflow\":0,\"ok\":true}]",
-      "threshold": "visible fraction 0.42-0.58 with the centre on the right edge; spin 270±1 (45-degree pose); overflow 0",
+      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.497,\"markCx\":1282.6,\"spin\":0,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.497,\"markCx\":1443,\"spin\":0,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.497,\"markCx\":1923.5,\"spin\":0,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.497,\"markCx\":392.6,\"spin\":0,\"overflow\":0,\"ok\":true}]",
+      "threshold": "visible fraction 0.42-0.58 with the centre on the right edge; spin 0±1 (45-degree pose); overflow 0",
       "evidence": [
         "evidence/b/bigright-audit.json",
         "evidence/b/bigright-1440x900.png"
@@ -130,8 +130,8 @@
       "id": "c",
       "entry": "mid-sweep: the big mark crosses the middle, fully on screen",
       "status": "PASS",
-      "value": "{\"mcx\":722.1,\"spin\":315}",
-      "threshold": "at p=0.77 the big mark sits between the edges, centred vertically",
+      "value": "{\"mcx\":722.1,\"spin\":45}",
+      "threshold": "at p=0.19 the big mark sits between the edges, centred vertically",
       "evidence": [
         "evidence/b/sweep-1440x900.png"
       ],
@@ -142,7 +142,7 @@
       "entry": "side copy: text beside the small symbol, then gone before the growth",
       "status": "PASS",
       "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"mcx\":718.9,\"mcy\":450,\"rMark\":162.9,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"mcx\":194.7,\"mcy\":422,\"rMark\":50.7,\"ok\":true,\"goneAt07\":[0,0]}]",
-      "threshold": "both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7",
+      "threshold": "both blocks fully visible + clear of the mark at p=0.78; centred mark; wordmark fully swapped (no ghost); hidden by p=0.87",
       "evidence": [
         "evidence/b/sidecopy-audit.json",
         "evidence/b/sidetext-1440x900.png"
@@ -153,8 +153,8 @@
       "id": "d",
       "entry": "hero end: mark docked upright just above the bottom edge",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"center\":[721.1,715],\"expY\":715,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"center\":[418.1,927],\"expY\":927,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"center\":[195.7,726.5],\"expY\":726.5,\"spin\":360,\"overflow\":0,\"ok\":true}]",
-      "threshold": "centre == (vw/2, vh−dockR−20) ±6; spin 360±1.5; fully visible; no overflow",
+      "value": "[{\"vp\":\"1440x900\",\"center\":[721.1,715],\"expY\":715,\"spin\":720,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"center\":[418.1,927],\"expY\":927,\"spin\":720,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"center\":[195.7,726.5],\"expY\":726.5,\"spin\":720,\"overflow\":0,\"ok\":true}]",
+      "threshold": "centre == (vw/2, vh−dockR−20) ±6; spin 720±1.5; fully visible; no overflow",
       "evidence": [
         "evidence/b/herodock-audit.json"
       ],
@@ -233,7 +233,7 @@
       "id": "g",
       "entry": "responsive: no overflow at max size and landing; gallery columns adapt",
       "status": "PASS",
-      "value": "[{\"vp\":\"360x740\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0,\"galleryCols\":1},{\"vp\":\"768x1024\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0,\"galleryCols\":2},{\"vp\":\"1280x800\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0,\"galleryCols\":3},{\"vp\":\"1440x900\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0,\"galleryCols\":3},{\"vp\":\"1920x1080\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0,\"galleryCols\":3},{\"vp\":\"2560x1080\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0,\"galleryCols\":3},{\"vp\":\"1280x500\",\"ok\":true,\"overflow@0.84\":0,\"overflow@1\":0,\"galleryCols\":3}]",
+      "value": "[{\"vp\":\"360x740\",\"ok\":true,\"overflow@0.92\":0,\"overflow@1\":0,\"galleryCols\":1},{\"vp\":\"768x1024\",\"ok\":true,\"overflow@0.92\":0,\"overflow@1\":0,\"galleryCols\":2},{\"vp\":\"1280x800\",\"ok\":true,\"overflow@0.92\":0,\"overflow@1\":0,\"galleryCols\":3},{\"vp\":\"1440x900\",\"ok\":true,\"overflow@0.92\":0,\"overflow@1\":0,\"galleryCols\":3},{\"vp\":\"1920x1080\",\"ok\":true,\"overflow@0.92\":0,\"overflow@1\":0,\"galleryCols\":3},{\"vp\":\"2560x1080\",\"ok\":true,\"overflow@0.92\":0,\"overflow@1\":0,\"galleryCols\":3},{\"vp\":\"1280x500\",\"ok\":true,\"overflow@0.92\":0,\"overflow@1\":0,\"galleryCols\":3}]",
       "threshold": "scrollWidth overflow <= 1px in both states; no horizontal scrollbar; gallery grid 3/2/1 columns by width",
       "evidence": [
         "evidence/g/responsive.json"
@@ -255,7 +255,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":71175}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":72267}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
@@ -266,7 +266,7 @@
       "id": "i",
       "entry": "CLS + frame cadence (headless)",
       "status": "INFO",
-      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7.1}",
+      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7}",
       "threshold": "informational only",
       "evidence": [],
       "note": ""
@@ -275,7 +275,7 @@
       "id": "j",
       "entry": "resize mid-sequence",
       "status": "PASS",
-      "value": "{\"p\":[0.55,0.61875],\"spin\":192.1219889322917,\"expSpin\":192.1}",
+      "value": "{\"p\":[0.55,0.61875],\"spin\":362.74658203125,\"expSpin\":362.7}",
       "threshold": "state re-renders consistently after resize",
       "evidence": [],
       "note": ""
