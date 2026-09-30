@@ -1,0 +1,5 @@
+qa/
+tools/
+*.cdr
+server.js
+README.md
