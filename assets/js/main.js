@@ -254,7 +254,7 @@
       /* D2: still big — spin to the right across the screen */
       var u2 = cub(p, 0.70, 0.84);
       sF = geo.kBig;
-      targetX = (geo.vw / 2) + (geo.vw / 2) * u2;
+      targetX = geo.vw * u2;
     } else {
       /* E: travel down into the footer dock while settling to landing size */
       var v = cub(p, 0.84, 0.94);
