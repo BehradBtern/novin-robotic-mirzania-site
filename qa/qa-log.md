@@ -42,3 +42,7 @@ Reduced-motion checks used DevTools emulation (`emulateMediaFeatures`) â€” 
 - Worktree checkout smoke: a clean worktree of v1.3.7 served on port 8081; screenshot qa/evidence/rollback/v1.3.7-bigleft.png (1440x900; shot exit=0).
 - Archive: qa/evidence/rollback/dist-v1.3.7.zip (excludes nested rollback archives); SHA-256: D3409377CFD6791C7D26E8942900AF7E1B0F3A38CDD38B02E2B8365E01C70CCB
 - Limits: repository-level restore demonstrated on this machine; hosting/CDN rollback not covered. Remote: none configured.
+
+## Publication update (2026-10-01/02)
+- Vercel: production redeployed with the v1.3.7 swapped order (deploy Ready in 8s); verified via the alias: https://novin-robotic-mirzania-site.vercel.app/assets/js/main.js contains the left-first motion code.
+- GitHub mirror: push blocked - the Windows GCM credential for github.com was invalidated by repeated credential-store persist failures (cmdkey now shows no github entry; git credential fill errors). The rebuilt mirror (v1.3.7, archives stripped) is staged at .cluster\robotics-site\github-mirror and ready to force-push once GitHub auth is restored (user re-login or a PAT).
