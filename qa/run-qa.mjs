@@ -190,11 +190,11 @@ try {
     const cEnd = trace.reduce((acc, t) => (Math.abs(t.p - 0.84) < Math.abs(acc.p - 0.84) ? t : acc), trace[0]);
     const dEnd = trace.reduce((acc, t) => (Math.abs(t.p - 1) < Math.abs(acc.p - 1) ? t : acc), trace[0]);
     const opacityOk = trace.every((t) => Math.abs((t.wOp || 0) + (t.mOp || 0) - 1) <= 0.01);
-    const traceOk = mapErr <= 0.002 && monoSpin && Math.abs(spinEnd - 360) <= 0.5 && maxSpinStep <= 162 && orderOk && opacityOk;
+    const traceOk = mapErr <= 0.002 && monoSpin && Math.abs(spinEnd - 360) <= 0.5 && maxSpinStep <= 162 && maxPosStep <= 500 && orderOk && opacityOk;
     writeJson(evPath('b', 'motion-trace.json'), { travel, heroTop, mapErr, monoSpin, spinEnd, maxSpinStep, maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEnd, dEnd, steps: trace });
     add('c', 'motion trace (60 steps)', traceOk ? PASS : FAIL,
       JSON.stringify({ mapErr: +mapErr.toFixed(4), monoSpin, spinEnd, maxSpinStep: +maxSpinStep.toFixed(1), maxPosStep: +maxPosStep.toFixed(1), orderOk, opacityOk, cEndTx: cEnd.tx, dEndTy: dEnd.ty }),
-      'clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; grow left on the middle line; sweep right; enlarged state at exact 45-degree pose; dock travel left+down; swap opacity sum=1', ['evidence/b/motion-trace.json']);
+      'clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; grow left on the middle line; sweep right; enlarged state at exact 45-degree pose; dock travel left+down; no position jumps (max step <= 500px/sample); swap opacity sum=1', ['evidence/b/motion-trace.json']);
 
     // settle / oscillation / idle
     await page.evaluate(() => window.scrollTo(0, 0));
