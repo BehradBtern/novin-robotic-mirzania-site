@@ -1,0 +1,30 @@
+﻿tag v1.3.8
+Tagger: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Fri Oct 2 10:16:18 2026 +0330
+
+Release v1.3.8 - fix: smooth left-to-right sweep (no jump at p=0.70)
+
+commit 943911fcf52444ef7d5c4e2860994b02730a10f8
+Author: BehradBtern <koochakimaryam5998@gmail.com>
+Date:   Fri Oct 2 10:16:17 2026 +0330
+
+    docs: QA evidence for v1.3.8 (revision 204064d; smooth left-to-right sweep, jump guard)
+
+ qa/evidence/b/dock-1280x800.png           | Bin 145660 -> 173986 bytes
+ qa/evidence/b/dock-1440x900.png           | Bin 170152 -> 173099 bytes
+ qa/evidence/b/dock-1920x1080.png          | Bin 212940 -> 225177 bytes
+ qa/evidence/b/dock-2560x1080.png          | Bin 238491 -> 248708 bytes
+ qa/evidence/b/dock-390x844.png            | Bin 81706 -> 82073 bytes
+ qa/evidence/b/dock-834x1112.png           | Bin 141767 -> 149041 bytes
+ qa/evidence/b/motion-trace.json           |  38 +++++++++++++++---------------
+ qa/evidence/b/sweep-1440x900.png          | Bin 55565 -> 55681 bytes
+ qa/evidence/edge/dock-1440x900.png        | Bin 170158 -> 187920 bytes
+ qa/evidence/f/footer-1440x900.png         | Bin 180493 -> 190635 bytes
+ qa/evidence/f/roundtrip-blurb.png         | Bin 192858 -> 194533 bytes
+ qa/evidence/f/roundtrip-logoswap-dock.png | Bin 197266 -> 197508 bytes
+ qa/evidence/i/perf.json                   |   8 +++----
+ qa/evidence/j/dock-live-zoom-2x.png       | Bin 482825 -> 516399 bytes
+ qa/qa-log.md                              |  34 ++++++++++----------------
+ qa/qa-report.md                           |  19 ++++++++-------
+ qa/qa-summary.json                        |  20 ++++++++--------
+ 17 files changed, 57 insertions(+), 62 deletions(-)
