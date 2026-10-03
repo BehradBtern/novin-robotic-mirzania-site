@@ -51,10 +51,9 @@
   /* ---------------- images ---------------- */
   var logoWordmark = C.logos ? C.logos.wordmark : "";
   var logoMark = C.logos ? C.logos.mark : "";
-  ["hero-wordmark", "footer-logo"].forEach(function (id) {
-    var el = doc.getElementById(id);
-    if (el && logoWordmark) el.src = logoWordmark;
-  });
+  var logoFooterLeft = C.logos ? (C.logos.footerLeft || C.logos.wordmark) : "";
+  var heroWordmarkEl = doc.getElementById("hero-wordmark");
+  if (heroWordmarkEl && logoWordmark) heroWordmarkEl.src = logoWordmark;
   ["hero-mark", "footer-endmark"].forEach(function (id) {
     var el = doc.getElementById(id);
     if (el && logoMark) el.src = logoMark;
@@ -62,8 +61,9 @@
   /* re-measure once late resources (e.g. the footer logo) change the footer height */
   var flogo = doc.getElementById("footer-logo");
   if (flogo) {
-    flogo.setAttribute("width", "1304");
-    flogo.setAttribute("height", "1022");
+    if (logoFooterLeft) flogo.src = logoFooterLeft;
+    flogo.setAttribute("width", "1195");
+    flogo.setAttribute("height", "1187");
     flogo.addEventListener("load", function () { onResize(); });
     flogo.addEventListener("error", function () { onResize(); });
     if (flogo.complete) window.requestAnimationFrame(function () { onResize(); });
