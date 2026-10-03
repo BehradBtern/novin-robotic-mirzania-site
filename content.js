@@ -35,7 +35,9 @@ window.SITE_CONTENT = {
 
   logos: {
     wordmark: "assets/logo/logo-wordmark.svg",
-    mark: "assets/logo/logo-mark.svg"
+    mark: "assets/logo/logo-mark.svg",
+    /* the footer's left-column logo (exported from the supplied PSD) */
+    footerLeft: "assets/logo/logo-footer-left.svg"
   },
 
   /* Geometric constants of the wordmark artwork, used by the spin so the
