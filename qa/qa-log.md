@@ -45,3 +45,9 @@ See `qa/evidence/rollback/` (v1.3.6 + kept v1.3.5 / v1.3.4 / v1.3.3 / v1.3.2 / v
 - Kept releases for one-step restore: v1.3.7, v1.3.6, v1.3.5, v1.3.4, v1.3.3, v1.3.2, v1.3.1, v1.3.0, v1.2.0, v1.1.0, v1.0.0.
 - Worktree smoke: v1.3.8 served on 8081; screenshot qa/evidence/rollback/v1.3.8-sweepstart.png (qa=0.71; shot exit=0).
 - Archive: qa/evidence/rollback/dist-v1.3.8.zip; SHA-256: 89FDDBAB10957C5F506F0ECCA06C544263B82340AB3357719B694057E51CD0D6
+
+## GitHub mirror incident + recovery (2026-10-02/03)
+- A user-run push from the mirror went to a stale remote (origin still pointed at this local repo after an interrupted mirror rebuild). It force-updated 11 local tags (v1.1.0-v1.3.8) to mirror-rewritten commits; main was rejected; no worktree changes.
+- Recovery: original annotated tag objects located as dangling objects and identified by message; all 11 tags restored via update-ref; peels verified against the originals; gc pruned the mirror objects (0 dangling remain).
+- GCM headless persist failures blocked CLI pushes; the stored GitHub credential was read via the Windows Credential Manager API in-process (never printed) and used transiently to force-push.
+- Final remote state: github main = 4424c7a; all tags v1.0.0-v1.3.8 present (verified by ls-remote; mirror SHAs differ from canonical by design, archives stripped from mirror history).
