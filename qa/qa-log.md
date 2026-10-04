@@ -45,3 +45,7 @@ See `qa/evidence/rollback/` (v1.3.6 + kept v1.3.5 / v1.3.4 / v1.3.3 / v1.3.2 / v
 - Kept releases for one-step restore: v1.3.9, v1.3.8, ... v1.0.0.
 - Worktree smoke: v1.4.0 served on 8081; shot qa/evidence/rollback/v1.4.0-symbol.png (qa=0.5; exit=0).
 - Archive: qa/evidence/rollback/dist-v1.4.0.zip; SHA-256: 56C7BD513B07A92372382AAC7242A7CF0B378FC40616234648516D9E3E1EBC37
+
+## GitHub mirror lag (2026-10-04)
+- Mirror rebuilt at v1.4.0 (main 75c43dc, 14 tags, staged in .cluster\robotics-site\github-mirror).
+- Push blocked: the stored GitHub OAuth token (gho_) read via CredMan was rejected ("Invalid username or token") - it expired/revoked since the Oct 3 push. Remote currently at the v1.3.8-era mirror (main 4424c7a). Fix: run git push -f origin main --tags in the mirror folder from a user terminal (interactive GCM re-login), or provide a PAT.
