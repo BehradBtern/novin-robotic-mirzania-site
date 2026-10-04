@@ -9,20 +9,19 @@
       "http://localhost:8123/content.js",
       "http://localhost:8123/assets/js/main.js",
       "http://localhost:8123/assets/logo/logo-wordmark.svg",
-      "http://localhost:8123/assets/logo/logo-mark.svg",
-      "http://localhost:8123/assets/logo/logo-footer-left.svg"
+      "http://localhost:8123/assets/logo/logo-mark.svg"
     ]
   },
   "pageData": {
     "cls": 0,
-    "resources": 6,
-    "transfer": 145346,
+    "resources": 5,
+    "transfer": 133183,
     "hosts": {
-      "localhost:8123": 6
+      "localhost:8123": 5
     }
   },
   "frames": {
-    "n": 177,
+    "n": 175,
     "median": 16.699999999999818,
     "p95": 16.799999999999955
   }

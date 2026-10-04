@@ -35,7 +35,7 @@ fs.writeFileSync(path.join(tmp, 'content.js'), content, 'utf8');
 // (b) swap the mark asset (recolour fill)
 let mark = fs.readFileSync(path.join(tmp, 'assets/logo/logo-mark.svg'), 'utf8');
 const beforeB = mark;
-mark = mark.split('#56C1C9').join('#7AD3D9');
+mark = mark.replace(/#[0-9A-Fa-f]{6}/g, '#7AD3D9');
 if (mark === beforeB) throw new Error('logo colour not found for swap');
 fs.writeFileSync(path.join(tmp, 'assets/logo/logo-mark.svg'), mark, 'utf8');
 
