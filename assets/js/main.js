@@ -196,29 +196,17 @@
     geo.markBoxW = 0.5095 * frameTargetW;
     geo.sC = 0.58;
 
-    var footerH = footerEl.offsetHeight;
-    geo.footerH = footerH;
-
     /* enlarged state: exactly half hangs past the left edge (single-axis clip) */
     var rBig = Math.min((A.bigDiameterVh * vh) / 2, vw - A.edgeMarginPx);
     rBig = Math.max(rBig, 120);
     geo.rBig = rBig;
-
-    /* landing state: centred in the footer band at a footer-appropriate size
-       (also capped at half the viewport width so phones keep it modest) */
-    var rFin = Math.max(Math.min(A.footerScale * footerH, A.footerMaxPx, 0.5 * vw) / 2, 70);
-    geo.rFinal = rFin;
 
     /* vertical offset of the mark's centre from the frame centre inside the
        wordmark lockup (cancelled by the compensation term in render) */
     geo.offY = (0.5 - ((C.constants && C.constants.wordmarkDiamondCenterYFrac) || 0.3203)) * geo.frameH;
 
     geo.kBig = (2 * rBig) / geo.markBoxW;
-    geo.kFin = (2 * rFin) / geo.markBoxW;
     geo.txBig = -vw / 2;                      /* centre-x at the left edge (half clipped) */
-    geo.tyDock = vh - rFin - 20;              /* docked just above the viewport bottom edge */
-
-    root.style.setProperty("--dock-r", rFin.toFixed(2) + "px");
   }
 
   /* ---------------- render ---------------- */
@@ -231,8 +219,7 @@
        side copy shows (0.34–0.58), grow into the big half-clipped state at
        the LEFT edge (0.58–0.70, spin 270 — the 45-degree diamond pose), spin
        rightward across the screen to the big state at the RIGHT edge
-       (0.70–0.84, spin 360 — the same exact 45-degree pose), then travel down
-       into the footer dock holding that upright pose (0.84–0.94) */
+       (0.70–0.84, spin 360 — the same exact 45-degree pose) */
     var spin =
       A.spinTurns * (180 * cub(p, 0.10, 0.34) +
         90 * cub(p, 0.58, 0.70) +
@@ -250,17 +237,11 @@
       var u1 = cub(p, 0.58, 0.70);
       sF = geo.sC + (geo.kBig - geo.sC) * u1;
       targetX = geo.vw / 2 - (geo.vw / 2) * u1;
-    } else if (p <= 0.84) {
+    } else {
       /* D2: still big — spin to the right across the screen */
       var u2 = cub(p, 0.70, 0.84);
       sF = geo.kBig;
       targetX = geo.vw * u2;
-    } else {
-      /* E: travel down into the footer dock while settling to landing size */
-      var v = cub(p, 0.84, 0.94);
-      sF = geo.kBig + (geo.kFin - geo.kBig) * v;
-      targetX = geo.vw - (geo.vw / 2) * v;
-      targetY = geo.vh / 2 + (geo.tyDock - geo.vh / 2) * v;
     }
     var fade = seg(spin, 90, 150); /* wordmark→mark swap, done inside the turn */
 
@@ -285,9 +266,6 @@
       sideRightEl.style.opacity = so.toFixed(3);
       sideRightEl.style.transform = "translateY(-50%) translateX(" + soShift.toFixed(1) + "px)";
     }
-
-    /* docking: hand the mark over to the footer-child layer (CSS .docked-footer) */
-    root.classList.toggle("docked-footer", p >= 0.999);
 
     st.p = p; st.spin = spin; st.tx = tx; st.ty = ty; st.sF = sF; st.fade = fade; st.comp = cb; st.side = so;
 
