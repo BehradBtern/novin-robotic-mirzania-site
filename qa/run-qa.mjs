@@ -261,12 +261,13 @@ try {
         const fracX = +(visW / (2 * r)).toFixed(3);
         const spin = +stc.spin.toFixed(1);
         const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-        rows.push({ vp: w + 'x' + h, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(cx) <= 8 && Math.abs(spin - 270) <= 1 && overflow <= 1 });
+        const ogOp = await pg.evaluate(() => { const el = document.getElementById('hero-mark-og'); return el ? +getComputedStyle(el).opacity : -1; });
+        rows.push({ vp: w + 'x' + h, ogOp, visFrac: fracX, markCx: +cx.toFixed(1), spin, overflow, ok: fracX >= 0.42 && fracX <= 0.58 && Math.abs(cx) <= 8 && Math.abs(spin - 270) <= 1 && overflow <= 1 && ogOp >= 0.95 });
         await shot(pg, 'b/bigleft-' + w + 'x' + h + '.png');
         await pg.close();
       }
       writeJson(evPath('b', 'bigleft-audit.json'), rows);
-      add('c', 'big left: half clipped at the left edge, 45-degree pose', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0', ['evidence/b/bigleft-audit.json', 'evidence/b/bigleft-1440x900.png']);
+      add('c', 'big left: OG art, half clipped at the left edge, 45-degree pose', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG art opacity 1', ['evidence/b/bigleft-audit.json', 'evidence/b/bigleft-1440x900.png']);
     }
 
     // mid-sweep: the big mark crossing the middle on its way to the left
@@ -300,6 +301,12 @@ try {
             titleR: sr.querySelector('.hero__side-title').textContent.length
           };
         });
+        const ffq = await pg.evaluate(async () => {
+          await document.fonts.ready;
+          const b = document.querySelector('#hero-side-left .hero__side-body');
+          const el = document.getElementById('hero-mark-og');
+          return { og0: el ? +getComputedStyle(el).opacity : -1, ff: b ? getComputedStyle(b).fontFamily : '', fontOk: document.fonts.check('16px "Cormorant Garamond"') };
+        });
         const mcx = stt.markbox.x + stt.markbox.w / 2;
         const mcy = stt.markbox.y + stt.markbox.h / 2;
         const rMark = (stt.frame.w * 0.5095) / 2; // frame.w at spin=180 equals sF * frameW
@@ -309,8 +316,8 @@ try {
         const noOverlap = w > 640
           ? (o.sl.r + 8 <= mcx - rMark) && (o.sr.x - 8 >= mcx + rMark)
           : (o.sl.b + 4 <= mcy - rMark) && (o.sr.y - 4 >= mcy + rMark);
-        const ok = centered && visible && noOverlap && noGhost && o.titleL > 5 && o.titleR > 5;
-        rows.push({ vp: w + 'x' + h, centered, visible, noGhost, noOverlap, mcx: +mcx.toFixed(1), mcy: +mcy.toFixed(1), rMark: +rMark.toFixed(1), ok });
+        const ok = centered && visible && noOverlap && noGhost && o.titleL > 5 && o.titleR > 5 && ffq.og0 <= 0.05 && /Cormorant/i.test(ffq.ff) && ffq.fontOk === true;
+        rows.push({ vp: w + 'x' + h, centered, visible, noGhost, noOverlap, og0: ffq.og0, ff: ffq.ff.slice(0, 42), fontOk: ffq.fontOk, mcx: +mcx.toFixed(1), mcy: +mcy.toFixed(1), rMark: +rMark.toFixed(1), ok });
         await shot(pg, 'b/sidetext-' + w + 'x' + h + '.png');
         await pg.close();
         const pg2 = await openPage(browser, { w, h, qa: 0.7 });
@@ -320,7 +327,7 @@ try {
         await pg2.close();
       }
       writeJson(evPath('b', 'sidecopy-audit.json'), rows);
-      add('c', 'side copy: text beside the small symbol, then gone before the growth', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7', ['evidence/b/sidecopy-audit.json', 'evidence/b/sidetext-1440x900.png']);
+      add('c', 'side copy: serif type beside the small symbol, then gone before the growth', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; OG art still hidden', ['evidence/b/sidecopy-audit.json', 'evidence/b/sidetext-1440x900.png']);
     }
 
     // hero end state: mark docked just above the bottom edge, upright
