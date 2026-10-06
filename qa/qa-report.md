@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.6 round)
 
-- Revision: `dff602a` · generated 2026-10-06T18:07:21.134Z
+- Revision: `420332b` · generated 2026-10-06T18:23:29.085Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/154.0.8037.95 · Edge: Edg/154.0.4258.53
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -21,7 +21,7 @@
 | c | enlarged state (right edge): half clipped, exact 45-degree pose, no overflow | PASS | [{"vp":"1280x800","visFrac":0.497,"markCx":1282.6,"spin":360,"overflow":0,"ok":true},{"vp":"1440x900","visFrac":0.497,"markCx":1443,"spin":360,"overflow":0,"ok":true},{"vp":"1920x1080","visFrac":0.497,"markCx":1923.5,"spin":360,"overflow":0,"ok":true},{"vp":"390x844","visFrac":0.497,"markCx":392.6,"spin":360,"overflow" | visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0 | evidence/b/halfclip-audit.json<br>evidence/b/bigright-1440x900.png |
 | c | big left: half clipped at the left edge, 45-degree pose | PASS | [{"vp":"1280x800","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1440x900","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1920x1080","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"390x844","ogGone":0,"visFrac":0.5,"markCx":0,"s | visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG overlay gone | evidence/b/bigleft-audit.json<br>evidence/b/bigleft-1440x900.png |
 | c | mid-sweep: the big mark crosses the middle, fully on screen | PASS | {"mcx":722.1,"spin":315} | at p=0.77 the big mark sits between the edges, centred vertically | evidence/b/sweep-1440x900.png |
-| c | side copy: serif type beside the small symbol, then gone before the growth | PASS | [{"vp":"1440x900","centered":true,"visible":true,"noGhost":true,"noOverlap":true,"ogCount":0,"ff":"\"Cormorant Garamond\", Georgia, \"Times New ","fontOk":true,"mcx":718.9,"mcy":450,"rMark":162.9,"ok":true,"goneAt07":[0,0]},{"vp":"390x844","centered":true,"visible":true,"noGhost":true,"noOverlap":true,"ogCount":0,"ff": | both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay | evidence/b/sidecopy-audit.json<br>evidence/b/sidetext-1440x900.png |
+| c | side copy: serif type beside the small symbol, then gone before the growth | PASS | [{"vp":"1440x900","centered":true,"visible":true,"noGhost":true,"noOverlap":true,"ogCount":0,"ff":"\"Cormorant Garamond\", Georgia, \"Times New ","fontOk":true,"mcx":718.7,"mcy":450,"rMark":190.9,"ok":true,"goneAt07":[0,0]},{"vp":"390x844","centered":true,"visible":true,"noGhost":true,"noOverlap":true,"ogCount":0,"ff": | both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay | evidence/b/sidecopy-audit.json<br>evidence/b/sidetext-1440x900.png |
 | d | hero end: mark docked upright just above the bottom edge | PASS | [{"vp":"1440x900","center":[721,734.9],"expY":734.9,"spin":360,"overflow":0,"ok":true},{"vp":"834x1112","center":[418,940.4],"expY":940.4,"spin":360,"overflow":0,"ok":true},{"vp":"390x844","center":[195.7,726.5],"expY":726.5,"spin":360,"overflow":0,"ok":true}] | centre == (vw/2, vh−dockR−20) ±6; spin 360±1.5; fully visible; no overflow | evidence/b/herodock-audit.json |
 | d | footer: giant text present; the big logo above it removed | PASS | {"endmark":0,"landing":0,"sigLayers":3,"sigW":1180,"overflow":0} | no endmark/landing elements; signature has 3 layers spanning the footer; no overflow | evidence/d/dock-audit.json<br>evidence/d/footer-1440x900.png |
 | d2 | footer stability: page height steady across scrolling | PASS | {"h1":3751,"h2":3751} | scrollHeight shift <= 2px | — |
@@ -47,7 +47,7 @@
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (137)
+## Evidence files (146)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -139,6 +139,7 @@
 - `qa/evidence/d/rollback-v1.4.3-big-og.png`
 - `qa/evidence/d/rollback-v1.4.4-big.png`
 - `qa/evidence/d/rollback-v1.4.5-founder.png`
+- `qa/evidence/d/rollback-v1.4.6-founder.png`
 - `qa/evidence/d/stability.json`
 - `qa/evidence/e/mark-zoom-2x.png`
 - `qa/evidence/e/sharpness.json`
@@ -177,12 +178,20 @@
 - `qa/evidence/j/reduced-motion.json`
 - `qa/evidence/probe/big-og-1440.png`
 - `qa/evidence/probe/big-reverted-1440.png`
+- `qa/evidence/probe/bottom-viewport.png`
 - `qa/evidence/probe/dock-og-1440.png`
+- `qa/evidence/probe/el-brand.png`
+- `qa/evidence/probe/el-dockedmark.png`
+- `qa/evidence/probe/el-logo.png`
 - `qa/evidence/probe/founder-bigger-1440.png`
 - `qa/evidence/probe/founder-bigger-390.png`
 - `qa/evidence/probe/founder-longer-1440.png`
+- `qa/evidence/probe/mark-bigger-1440.png`
 - `qa/evidence/probe/mid-crossfade-1440.png`
 - `qa/evidence/probe/prod-big-og-1440.png`
 - `qa/evidence/probe/prod-founder-1440.png`
+- `qa/evidence/probe/prod-founder-longer-1440.png`
 - `qa/evidence/probe/prod-reverted-1440.png`
 - `qa/evidence/probe/side-serif-1440.png`
+- `qa/evidence/probe/zoom-brand.png`
+- `qa/evidence/probe/zoom-top.png`
