@@ -83,6 +83,8 @@ window.SITE_CONTENT = {
   },
 
   footer: {
+    /* the giant animated footer text (uppercased automatically) */
+    signature: { text: "Novin Robotic Mirzania" },
     blurb: "Novin Robotic Mirzania is an applied robotics institute. We research, teach, and partner with people who want machines to be useful, understandable, and well made.",
     explore: [
       { label: "Our story", anchor: "#story" },

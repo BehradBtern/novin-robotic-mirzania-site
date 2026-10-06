@@ -216,25 +216,41 @@ a:hover { color: var(--ink-1); }
 
 .footer__inner { position: relative; z-index: 1; }
 
-/* the landing area: the sequence's mark docks into the centre of it;
-   always tall enough for the mark plus breathing room */
-.footer__landing {
-  position: relative;
-  height: max(clamp(300px, 42vh, 430px), calc(var(--dock-r, 110px) * 2 + 48px));
-}
-
-.footer__endmark {
-  display: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: calc(var(--dock-r, 0px) * 2);
+/* ---------- signature: giant outline text (draw-in + hover reveal) ---------- */
+.footer__signature { margin-top: clamp(32px, 5vh, 56px); }
+.sig {
+  display: block;
+  width: 100%;
   height: auto;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  -webkit-user-drag: none;
+  aspect-ratio: 300 / 38;
+  cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
 }
+.sig text { text-transform: uppercase; letter-spacing: 0.03em; }
+.sig__echo {
+  stroke: var(--border-strong);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.footer__signature.is-hover .sig__echo { opacity: 0.7; }
+.sig__draw {
+  stroke: var(--accent);
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+.footer__signature.is-drawn .sig__draw {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 4s ease-in-out;
+}
+.sig__rainbow {
+  stroke-width: 0.7;
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+.footer__signature.is-hover .sig__rainbow { opacity: 1; }
+.reduced-motion .sig__draw { stroke-dashoffset: 0; transition: none; }
+.reduced-motion .sig__echo, .reduced-motion .sig__rainbow { transition: none; }
 
 .footer__grid {
   display: grid;
@@ -307,11 +323,6 @@ a:hover { color: var(--ink-1); }
   }
 }
 
-/* once the sequence docks, the footer shows its own centred copy of the mark
-   (between the footer's background and its content); the hero's docked mark
-   stays in place and simply scrolls away with the stage */
-.docked-footer .footer__endmark { display: block; }
-
 /* =========================================================================
    REDUCED MOTION — static: wordmark on the stage, end state at the footer,
    no spin and no scroll choreography.
@@ -334,4 +345,3 @@ a:hover { color: var(--ink-1); }
 }
 .reduced-motion .hero__markbox { display: none; }
 .reduced-motion .hero__side { display: none; }
-.reduced-motion .footer__endmark { display: block; }

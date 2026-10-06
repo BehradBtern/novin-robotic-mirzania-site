@@ -78,16 +78,13 @@ const results = { editedText: EDITED, filesChanged: ['content.js', 'assets/logo/
   await page.waitForFunction('document.documentElement.dataset.ready === "true"');
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
   await delay(700);
-  const em = await page.evaluate(() => {
-    const el = document.getElementById('footer-endmark');
+  const sig = await page.evaluate(() => {
+    const el = document.getElementById('footer-signature');
     const r = el.getBoundingClientRect();
-    const lz = document.getElementById('footer-landing').getBoundingClientRect();
-    return { x: r.x, y: r.y, w: r.width, h: r.height, bandCy: lz.top + lz.height / 2, vw: innerWidth, vh: innerHeight };
+    return { w: r.width };
   });
-  const frac = +((Math.max(0, Math.min(em.y + em.h, em.vh) - Math.max(em.y, 0))) / em.h).toFixed(3);
-  results.checks.landingVisibleFrac = frac;
-  results.checks.landingCenter = [+(em.x + em.w / 2).toFixed(1), +(em.y + em.h / 2).toFixed(1)];
-  results.checks.bandCy = +em.bandCy.toFixed(1);
+  results.checks.signatureVisible = sig.w > 300;
+  results.checks.signatureWidth = Math.round(sig.w);
   const loaded = await page.evaluate(() => {
     const i = document.getElementById('hero-mark');
     return i.decode().then(() => true).catch(() => i.complete);
@@ -106,8 +103,7 @@ results.pass =
   results.checks.errors === 0 &&
   results.checks.markLoaded === true &&
   results.checks.logoSwapErrors === 0 &&
-  results.checks.landingVisibleFrac >= 0.9 &&
-  Math.abs(results.checks.landingCenter[0] - 720) <= 6;
+  results.checks.signatureVisible === true;
 fs.writeFileSync(path.join(evidenceDir, 'roundtrip.json'), JSON.stringify(results, null, 2));
 fs.rmSync(tmp, { recursive: true, force: true });
 console.log('ROUNDTRIP', results.pass ? 'PASS' : 'FAIL', JSON.stringify({
@@ -116,7 +112,7 @@ console.log('ROUNDTRIP', results.pass ? 'PASS' : 'FAIL', JSON.stringify({
   errors: results.checks.errors,
   markLoaded: results.checks.markLoaded,
   logoSwapErrors: results.checks.logoSwapErrors,
-  landingVisibleFrac: results.checks.landingVisibleFrac,
-  landingCenter: results.checks.landingCenter
+  signatureVisible: results.checks.signatureVisible,
+  signatureWidth: results.checks.signatureWidth
 }));
 process.exitCode = results.pass ? 0 : 1;

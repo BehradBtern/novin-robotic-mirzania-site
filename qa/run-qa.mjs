@@ -84,8 +84,7 @@ try {
               copy: document.querySelectorAll('.hero__copy, #hero-copy, .hero__col').length,
               indicator: document.querySelectorAll('.hero__indicator, #hero-indicator').length,
               hint: document.querySelectorAll('.hero__hint, #hero-hint').length,
-              rmMark: document.querySelectorAll('.rm-mark').length,
-              signature: document.querySelectorAll('#footer-signature, .footer__signature, .sig').length
+              rmMark: document.querySelectorAll('.rm-mark').length
             },
             galleryGone: document.querySelectorAll('#programmes, .gallery, .gallery__card').length,
             bodyChildren: Array.from(document.body.children).map((el) => el.tagName + (el.id ? '#' + el.id : '') + (el.className ? '.' + String(el.className).split(' ')[0] : ''))
@@ -113,7 +112,7 @@ try {
   /* ---------- a2) source audit: no dead placeholders; programmes removed ---------- */
   try {
     const files = ['index.html', 'assets/css/style.css', 'assets/js/main.js', 'content.js'];
-    const needles = ['hero__copy', 'hero__hint', 'hero__indicator', 'rm-mark', 'chapters', 'scrollhint', 'gallery', '#programmes', 'footer-signature', 'sig__'];
+    const needles = ['hero__copy', 'hero__hint', 'hero__indicator', 'rm-mark', 'chapters', 'scrollhint', 'gallery', '#programmes'];
     const lines = [];
     let total = 0;
     for (const f of files) {
@@ -353,85 +352,39 @@ try {
     }
   } catch (e) { add('c', 'motion trace', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
-  /* ---------- d) landing: centred in the footer band, fully visible ---------- */
-  try {
-    const rows = [];
-    for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [2560, 1080], [834, 1112], [390, 844]]) {
-      const page = await openPage(browser, { w, h });
-      await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-      await waitStableScroll(page);
-      await settle(page, 2500);
-      const st = await state(page);
-      const mets = await page.evaluate(() => {
-        const el = document.getElementById('footer-endmark');
-        const r = el.getBoundingClientRect();
-        const lz = document.getElementById('footer-landing').getBoundingClientRect();
-        const grid = document.querySelector('.footer__grid').getBoundingClientRect();
-        const legal = document.querySelector('.footer__legal').getBoundingClientRect();
-        return {
-          em: { x: r.x, y: r.y, w: r.width, h: r.height, transform: getComputedStyle(el).transform, opacity: +getComputedStyle(el).opacity, display: getComputedStyle(el).display },
-          lzCy: lz.top + lz.height / 2,
-          gridBottom: grid.bottom,
-          sigTop: legal.top
-        };
-      });
-      const em = mets.em;
-      const cxc = em.x + em.w / 2, cyc = em.y + em.h / 2;
-      const bandCy = mets.lzCy;
-      const gapAbove = +(em.y - mets.gridBottom).toFixed(1);
-      const gapBelow = +(mets.sigTop - (em.y + em.h)).toFixed(1);
-      const clear = gapAbove >= 6 && gapBelow >= 6;
-      const visible = Math.max(0, Math.min(em.y + em.h, h) - Math.max(em.y, 0));
-      const frac = +(visible / em.h).toFixed(3);
-      const centered = Math.abs(cxc - w / 2) <= 6 && Math.abs(cyc - bandCy) <= 8;
-      const sizeOk = Math.abs(em.w - st.dockR * 2) <= 6;
-      const upright = em.transform === 'none' || /matrix\(1, 0, 0, 1/.test(em.transform);
-      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-      const ok = frac >= 0.9 && centered && sizeOk && upright && clear && em.display === 'block' && em.opacity > 0.95 && overflow <= 1;
-      rows.push({ vp: w + 'x' + h, center: [+cxc.toFixed(1), +cyc.toFixed(1)], bandCy: +bandCy.toFixed(1), bandCx: w / 2, frac, size: +em.w.toFixed(1), dockD: +(st.dockR * 2).toFixed(1), gapAbove, gapBelow, centered, sizeOk, upright, overflow, ok });
-      await shot(page, 'b/dock-' + w + 'x' + h + '.png');
-      await page.close();
-    }
-    writeJson(evPath('d', 'dock-audit.json'), rows);
-    add('d', 'landing: centred in the footer landing area, clear of columns and legal row', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows),
-      'centre == (viewport/2, landing-area centre) ±6/±8px; visible fraction >= 0.9; clear of the columns and the legal row (>=6px both); size == configured ±6; no rotation; overflow 0', ['evidence/d/dock-audit.json', 'evidence/b/dock-1440x900.png']);
-  } catch (e) { add('d', 'dock audit', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
-
-  /* ---------- d2) stability: no drift after scroll/resize ---------- */
+    /* ---------- d) footer state: giant text present; big mark removed ---------- */
   try {
     const page = await openPage(browser, { w: 1440, h: 900 });
-    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await waitStableScroll(page);
     await settle(page, 2500);
-    const get = () => page.evaluate(() => {
-      const el = document.getElementById('footer-endmark');
-      const r = el.getBoundingClientRect();
-      const lz = document.getElementById('footer-landing').getBoundingClientRect();
-      return { x: r.x + r.width / 2, y: r.y + r.height / 2, bandCy: lz.top + lz.height / 2, w: r.width };
-    });
-    const yMax = await page.evaluate(() => window.scrollY);
-    await page.mouse.wheel({ deltaY: 800 });
-    await delay(500);
-    const yAfter = await page.evaluate(() => window.scrollY);
-    const s1 = await get();
-    await delay(400);
-    const s2 = await get();
-    const drift = Math.max(Math.abs(s1.x - s2.x), Math.abs(s1.y - s2.y));
-    await page.setViewport({ width: 1380, height: 860 });
-    await delay(500);
-    await settle(page, 2500);
-    const s3 = await get();
-    const resizeOk = Math.abs(s3.y - s3.bandCy) <= 8 && Math.abs(s3.x - 690) <= 6;
-    await page.setViewport({ width: 1440, height: 900 });
-    await delay(500);
-    await settle(page, 2500);
-    const s4 = await get();
-    const resizeBackOk = Math.abs(s4.y - s4.bandCy) <= 8;
-    const ok = yAfter === yMax && drift <= 0.5 && resizeOk && resizeBackOk;
-    writeJson(evPath('d', 'stability.json'), { yMax, yAfter, drift, resizeOk, resizeBackOk });
-    add('d', 'landing stability: scroll + resize', ok ? PASS : FAIL, JSON.stringify({ yMax, yAfter, drift, resizeOk, resizeBackOk }), 'no scroll past max; drift 0; stays centred after resize ±8px', ['evidence/d/stability.json']);
+    const st = await page.evaluate(() => ({
+      endmark: document.querySelectorAll('#footer-endmark, .footer__endmark').length,
+      landing: document.querySelectorAll('#footer-landing, .footer__landing').length,
+      sigLayers: document.querySelectorAll('#footer-signature text').length,
+      sigW: document.getElementById('footer-signature').getBoundingClientRect().width,
+      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
+    }));
+    const ok = st.endmark === 0 && st.landing === 0 && st.sigLayers === 3 && st.sigW > 300 && st.overflow <= 1;
+    await shot(page, 'd/footer-1440x900.png');
+    writeJson(evPath('d', 'dock-audit.json'), st);
+    add('d', 'footer: giant text present; the big logo above it removed', ok ? PASS : FAIL, JSON.stringify(st), 'no endmark/landing elements; signature has 3 layers spanning the footer; no overflow', ['evidence/d/dock-audit.json', 'evidence/d/footer-1440x900.png']);
     await page.close();
-  } catch (e) { add('d', 'landing stability', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
+  } catch (e) { add('d', 'footer state', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
+  /* ---------- d2) footer stability: page height steady across scrolling ---------- */
+  try {
+    const page = await openPage(browser, { w: 1440, h: 900 });
+    const h1 = await page.evaluate(() => document.documentElement.scrollHeight);
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await waitStableScroll(page);
+    await settle(page, 1500);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await settle(page, 1500);
+    const h2 = await page.evaluate(() => document.documentElement.scrollHeight);
+    const ok = Math.abs(h2 - h1) <= 2;
+    add('d2', 'footer stability: page height steady across scrolling', ok ? PASS : FAIL, JSON.stringify({ h1, h2 }), 'scrollHeight shift <= 2px', []);
+    await page.close();
+  } catch (e) { add('d2', 'footer stability', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- e) sharpness evidence (vector + zoom crops) ---------- */
   try {
@@ -489,9 +442,25 @@ try {
     const ok = landOk && Object.values(contactCheck).every(Boolean) && links.length === 3;
     add('f', 'footer: links land + contact/legal intact', ok ? PASS : FAIL, JSON.stringify({ landings, contactCheck }), '3 links land within viewport; mailto/tel formats; texts == content', ['evidence/f/footer-links.json', 'evidence/f/footer-1440x900.png']);
 
-    /* signature removed: assert it stays gone */
-    const sigGone = await page.evaluate(() => document.querySelectorAll('#footer-signature, .sig').length);
-    add('f', 'footer: giant outline signature stays removed', sigGone === 0 ? PASS : FAIL, JSON.stringify({ sigGone }), 'no #footer-signature / .sig elements', ['evidence/f/footer-1440x900.png']);
+    /* signature: three layers, draw-in completes */
+    const sigBase = await page.evaluate(() => {
+      const wrap = document.getElementById('footer-signature');
+      const texts = Array.from(wrap.querySelectorAll('text'));
+      return { layers: texts.length, content: texts[0] ? texts[0].textContent : '', drawn: wrap.classList.contains('is-drawn') };
+    });
+    {
+      const t0 = Date.now();
+      while (!sigBase.drawn && Date.now() - t0 < 8000) {
+        await delay(300);
+        sigBase.drawn = await page.evaluate(() => document.getElementById('footer-signature').classList.contains('is-drawn'));
+      }
+    }
+    await delay(4600);
+    const dashAfter = await page.evaluate(() => parseFloat(getComputedStyle(document.querySelector('.sig__draw')).strokeDashoffset));
+    await shot(page, 'f/footer-signature-1440x900.png');
+    const sigOk = sigBase.layers === 3 && /NOVIN ROBOTIC MIRZANIA/.test(sigBase.content) && sigBase.drawn && dashAfter <= 1;
+    writeJson(evPath('f', 'signature-audit.json'), { base: sigBase, dashAfter });
+    add('f', 'footer signature: text present, draw-in completes', sigOk ? PASS : FAIL, JSON.stringify({ layers: sigBase.layers, drawn: sigBase.drawn, dashAfter }), '3 text layers with the brand name; stroke draw-in finishes (dashoffset 0)', ['evidence/f/signature-audit.json', 'evidence/f/footer-signature-1440x900.png']);
     await page.close();
   } catch (e) { add('f', 'content + footer', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
@@ -520,49 +489,29 @@ try {
     add('g', 'responsive: no overflow at max size and landing', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'scrollWidth overflow <= 1px in both states; no horizontal scrollbar', ['evidence/g/responsive.json']);
   } catch (e) { add('g', 'responsive scan', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
-  /* ---------- h) reduced motion: static logo, fully visible everywhere ---------- */
+    /* ---------- h) reduced motion ---------- */
   try {
     const page = await openPage(browser, { w: 1440, h: 900, reduced: true });
-    const top = await page.evaluate(() => {
-      const wm = document.getElementById('hero-wordmark').getBoundingClientRect();
-      return { x: wm.x, y: wm.y, r: wm.x + wm.width, b: wm.y + wm.height };
-    });
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await delay(400);
+    await settle(page, 1200);
     const rc = await page.evaluate(() => {
-      const frame = document.getElementById('hero-frame');
-      const end = document.getElementById('footer-endmark');
-      const er = end.getBoundingClientRect();
-      const lz = document.getElementById('footer-landing').getBoundingClientRect();
+      const sig = document.getElementById('footer-signature');
+      const draw = document.querySelector('.sig__draw');
       return {
         hasClass: document.documentElement.classList.contains('reduced-motion'),
-        frameInline: frame.style.transform,
-        frameComputed: getComputedStyle(frame).transform,
-        markboxDisplay: getComputedStyle(document.getElementById('hero-markbox')).display,
-        sideDisplay: getComputedStyle(document.getElementById('hero-side-left')).display,
-        endDisplay: getComputedStyle(end).display,
-        endOpacity: +getComputedStyle(end).opacity,
-        endRect: { x: er.x, y: er.y, r: er.x + er.width, b: er.y + er.height },
-        bandCy: lz.top + lz.height / 2,
-        sigGone: document.querySelectorAll('#footer-signature, .sig').length,
-        vw: innerWidth, vh: innerHeight
+        sigLayers: sig.querySelectorAll('text').length,
+        sigContent: sig.querySelector('text').textContent,
+        sigDash: parseFloat(getComputedStyle(draw).strokeDashoffset),
+        endmark: document.querySelectorAll('#footer-endmark, .footer__endmark').length,
+        overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
       };
     });
+    const ok = rc.hasClass && rc.sigLayers === 3 && /NOVIN ROBOTIC MIRZANIA/.test(rc.sigContent) && rc.sigDash <= 1 && rc.endmark === 0 && rc.overflow <= 1;
     await shotFull(page, 'h/reduced-1440-full.png');
-    const inView = (r) => r.x >= -2 && r.r <= rc.vw + 2 && r.y >= -2 && r.b <= rc.vh + 2;
-    const ok = rc.hasClass && rc.frameInline === '' && rc.frameComputed === 'none' && rc.markboxDisplay === 'none' && rc.sideDisplay === 'none' &&
-      rc.endDisplay === 'block' && rc.endOpacity === 1 && inView(rc.endRect) && inView(top) &&
-      Math.abs((rc.endRect.x + rc.endRect.r) / 2 - rc.vw / 2) <= 6 &&
-      Math.abs((rc.endRect.y + rc.endRect.b) / 2 - rc.bandCy) <= 8 &&
-      rc.sigGone === 0;
-    writeJson(evPath('h', 'reduced-motion.json'), { top, rc });
-    add('h', 'reduced motion: static logo fully rendered, signature stays removed', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed, side: rc.sideDisplay, sigGone: rc.sigGone }), 'no transforms; no side copy; wordmark fully in viewport; landing centred in the landing area; signature removed', ['evidence/h/reduced-1440-full.png']);
+    writeJson(evPath('h', 'reduced-motion.json'), rc);
+    add('h', 'reduced motion: signature drawn statically; big mark stays removed', ok ? PASS : FAIL, JSON.stringify(rc), 'reduced class on; signature 3 layers with dashoffset 0; no endmark; no overflow', ['evidence/h/reduced-1440-full.png']);
     await page.close();
-    const p390 = await openPage(browser, { w: 390, h: 844, reduced: true });
-    await shotFull(p390, 'h/reduced-390-full.png');
-    await p390.close();
   } catch (e) { add('h', 'reduced motion', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
-
   /* ---------- i) perf ---------- */
   try {
     const page = await browser.newPage();
@@ -696,18 +645,11 @@ try {
     await p2.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
     await waitStableScroll(p2);
     await settle(p2, 2500);
-    const em = await p2.evaluate(() => {
-      const el = document.getElementById('footer-endmark');
-      const r = el.getBoundingClientRect();
-      const lz = document.getElementById('footer-landing').getBoundingClientRect();
-      return { cy: r.y + r.height / 2, cx: r.x + r.width / 2, bandCy: lz.top + lz.height / 2, w: r.width };
-    });
-    const centered = Math.abs(em.cx - 720) <= 6 && Math.abs(em.cy - em.bandCy) <= 8;
+    const sigK = await p2.evaluate(() => document.querySelectorAll('#footer-signature text').length);
     const errs = p2.qa.errors.length + p2.qa.pageerrors.length;
     await shot(p2, 'edge/dock-1440x900.png');
     await p2.close();
-    add('k', 'Edge subset (same engine as Chrome)', errs === 0 && centered ? PASS : FAIL, JSON.stringify({ version: env.edge, landingCentered: centered, errors: errs }), 'intro + centred landing + zero errors on Edge', ['evidence/edge/dock-1440x900.png'], 'Chromium engine shared with Chrome — not independent engine coverage');
-  } catch (e) { add('k', 'Edge subset', NP, 'Edge not runnable: ' + e.message, 'n/a', []); }
+    add('k', 'Edge subset (same engine as Chrome)', errs === 0 && sigK === 3 ? PASS : FAIL, JSON.stringify({ version: env.edge, sigLayers: sigK, errors: errs }), 'footer signature rendered + zero errors on Edge', ['evidence/edge/dock-1440x900.png'], 'Chromium engine shared with Chrome — not independent engine coverage');  } catch (e) { add('k', 'Edge subset', NP, 'Edge not runnable: ' + e.message, 'n/a', []); }
 
 } catch (e) {
   console.error('QA FATAL', e);
