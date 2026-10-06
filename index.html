@@ -41,12 +41,13 @@
 
   <!-- ================================== FOOTER =================================== -->
   <!-- Columns, then the sequence's landing area (the mark docks into its centre),
-       then the giant animated brand text over a radial glow. -->
+       then the legal row. -->
   <footer class="footer" id="footer">
     <div class="footer__glow" aria-hidden="true"></div>
     <div class="shell footer__inner">
       <div class="footer__grid">
         <div class="footer__brand">
+          <img class="footer__logo" id="footer-logo" src="" alt="" decoding="async" loading="lazy">
           <p class="footer__blurb" id="footer-blurb"></p>
         </div>
         <div class="footer__col" id="contact">
@@ -63,30 +64,9 @@
         </nav>
       </div>
 
-      <!-- signature: three text layers — outline echo, stroke draw-in, and the
-           cursor-following rainbow reveal (ported from the supplied snippet) -->
-      <div class="footer__signature" id="footer-signature" aria-hidden="true">
-        <svg class="sig" id="sig-svg" viewBox="0 0 300 38" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" focusable="false">
-          <defs>
-            <linearGradient id="textGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="0">
-              <stop offset="0%" stop-color="#eab308"/>
-              <stop offset="25%" stop-color="#ef4444"/>
-              <stop offset="50%" stop-color="#80eeb4"/>
-              <stop offset="75%" stop-color="#06b6d4"/>
-              <stop offset="100%" stop-color="#8b5cf6"/>
-            </linearGradient>
-            <radialGradient id="revealMask" gradientUnits="userSpaceOnUse" cx="50%" cy="50%" r="20%">
-              <stop offset="0%" stop-color="white"/>
-              <stop offset="100%" stop-color="black"/>
-            </radialGradient>
-            <mask id="textMask">
-              <rect x="0" y="0" width="100%" height="100%" fill="url(#revealMask)"/>
-            </mask>
-          </defs>
-          <text class="sig__echo" x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" stroke-width="0.3" fill="transparent" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="21"></text>
-          <text class="sig__draw" x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" stroke-width="0.3" fill="transparent" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="21"></text>
-          <text class="sig__rainbow" x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" stroke-width="0.3" fill="transparent" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="21" stroke="url(#textGradient)" mask="url(#textMask)"></text>
-        </svg>
+      <!-- the sequence's landing area: the mark docks into the centre of it -->
+      <div class="footer__landing" id="footer-landing">
+        <img class="footer__endmark" id="footer-endmark" src="" alt="" aria-hidden="true" decoding="async">
       </div>
 
       <div class="footer__legal">

@@ -218,8 +218,22 @@ a:hover { color: var(--ink-1); }
 
 /* the landing area: the sequence's mark docks into the centre of it;
    always tall enough for the mark plus breathing room */
+.footer__landing {
+  position: relative;
+  height: max(clamp(300px, 42vh, 430px), calc(var(--dock-r, 110px) * 2 + 48px));
+}
+
 .footer__endmark {
   display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--dock-r, 0px) * 2);
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 /* ---------- signature: giant outline text (draw-in + hover reveal) ---------- */
@@ -314,15 +328,25 @@ a:hover { color: var(--ink-1); }
   .footer__legal { flex-direction: column; }
 
   /* phones: the side copy sits above and below the small symbol instead of
-     flanking it (keeps the text readable at narrow widths) */
+     flanking it (keeps the text readable at narrow widths); long bodies are
+     clamped so the symbol never gets crowded */
   .hero__side { width: auto; left: 20px; right: 20px; }
   .hero__side--left { top: 18%; text-align: left; }
-  .hero__side--right { top: 78%; text-align: left; }
+  .hero__side--right { top: 80%; text-align: left; }
   .hero__side-title { font-size: 0.95rem; }
-  .hero__side-body { font-size: 0.8125rem; }
+  .hero__side-body {
+    font-size: 0.8125rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
-
+/* once the sequence docks, the footer shows its own centred copy of the mark
+   (between the footer's background and its content); the hero's docked mark
+   stays in place and simply scrolls away with the stage */
+.docked-footer .footer__endmark { display: block; }
 
 /* =========================================================================
    REDUCED MOTION — static: wordmark on the stage, end state at the footer,
@@ -346,3 +370,4 @@ a:hover { color: var(--ink-1); }
 }
 .reduced-motion .hero__markbox { display: none; }
 .reduced-motion .hero__side { display: none; }
+.reduced-motion .footer__endmark { display: block; }

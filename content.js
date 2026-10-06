@@ -50,9 +50,9 @@ window.SITE_CONTENT = {
      mid-sequence. Replace freely — this is the first thing to swap. */
   heroSide: {
     left: {
-      kicker: "The institute",
-      title: "An institute where robotics research meets practical training",
-      body: "We study real problems, build working systems, and share what we learn with students, industry, and the public. Our work stays close to labs, fields, and classrooms."
+      kicker: "The founder",
+      title: "From Bijar to international robotics stages",
+      body: "Hadis Mirzania is the founder and head coach of Iran’s National Student Robotics Team. Originally from Bijar, Kurdistan Province, and now based in Tehran, she has successfully brought students from both Kurdistan and Tehran to national and international stages. For seven consecutive years, she has helped school-aged students achieve podium finishes in international robotics competitions, while also serving as a referee in university-level competitions across Iran. She is also the founder of her own institute, Novin Robotic Mirzania, which provides robotics classes for students of all ages. More recently, the institute has expanded its reach around the globe through online classes powered by Google Meet. Her journey from Bijar to international robotics stages is a testament to the idea that where you come from does not have to determine where you can go—hard work, passion, and dedication can open doors anywhere."
     },
     right: {
       kicker: "Who we serve",
