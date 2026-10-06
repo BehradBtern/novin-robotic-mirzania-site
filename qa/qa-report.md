@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.6 round)
 
-- Revision: `aac84c8` · generated 2026-10-06T17:55:54.301Z
+- Revision: `dff602a` · generated 2026-10-06T18:07:21.134Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/154.0.8037.95 · Edge: Edg/154.0.4258.53
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -31,8 +31,8 @@
 | f | footer signature: text present, draw-in completes | PASS | {"layers":3,"drawn":true,"dashAfter":0} | 3 text layers with the brand name; stroke draw-in finishes (dashoffset 0) | evidence/f/signature-audit.json<br>evidence/f/footer-signature-1440x900.png |
 | g | responsive: no overflow at max size and landing | PASS | [{"vp":"360x740","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"768x1024","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1280x800","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1440x900","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1920x1080","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"2560x1080"," | scrollWidth overflow <= 1px in both states; no horizontal scrollbar | evidence/g/responsive.json |
 | h | reduced motion: signature drawn statically; big mark stays removed | PASS | {"hasClass":true,"sigLayers":3,"sigContent":"NOVIN ROBOTIC MIRZANIA","sigDash":0,"endmark":0,"overflow":0} | reduced class on; signature 3 layers with dashoffset 0; no endmark; no overflow | evidence/h/reduced-1440-full.png |
-| i | perf: zero errors, local-only | PASS | {"consoleErrors":0,"pageErrors":0,"failed":0,"hosts":{"localhost:8123":6},"resources":6,"transferBytes":172273} | 0 errors; localhost-only; no failed requests | evidence/i/perf.json |
-| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":16.7,"frameP95Ms":16.8} | informational only | — |
+| i | perf: zero errors, local-only | PASS | {"consoleErrors":0,"pageErrors":0,"failed":0,"hosts":{"localhost:8123":6},"resources":6,"transferBytes":172298} | 0 errors; localhost-only; no failed requests | evidence/i/perf.json |
+| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":6.9,"frameP95Ms":7.1} | informational only | — |
 | j | resize mid-sequence | PASS | {"p":[0.55,0.61875],"spin":192.1219889322917,"expSpin":192.1} | state re-renders consistently after resize | — |
 | j | fling (wheel bursts) | PASS | {"p":1,"mapP":1} | end state == mapping ±0.002 | — |
 | j | reload mid-sequence | PASS | {"scrollY":1080,"p":0.5,"mapP":0.5} | deterministic restore | — |
@@ -47,7 +47,7 @@
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (134)
+## Evidence files (137)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -138,6 +138,7 @@
 - `qa/evidence/d/rollback-v1.4.2-intro.png`
 - `qa/evidence/d/rollback-v1.4.3-big-og.png`
 - `qa/evidence/d/rollback-v1.4.4-big.png`
+- `qa/evidence/d/rollback-v1.4.5-founder.png`
 - `qa/evidence/d/stability.json`
 - `qa/evidence/e/mark-zoom-2x.png`
 - `qa/evidence/e/sharpness.json`
@@ -179,7 +180,9 @@
 - `qa/evidence/probe/dock-og-1440.png`
 - `qa/evidence/probe/founder-bigger-1440.png`
 - `qa/evidence/probe/founder-bigger-390.png`
+- `qa/evidence/probe/founder-longer-1440.png`
 - `qa/evidence/probe/mid-crossfade-1440.png`
 - `qa/evidence/probe/prod-big-og-1440.png`
+- `qa/evidence/probe/prod-founder-1440.png`
 - `qa/evidence/probe/prod-reverted-1440.png`
 - `qa/evidence/probe/side-serif-1440.png`

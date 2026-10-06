@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/154.0.8037.95",
     "edge": "Edg/154.0.4258.53",
-    "generatedAt": "2026-10-06T17:55:54.301Z",
-    "sha": "aac84c8"
+    "generatedAt": "2026-10-06T18:07:21.134Z",
+    "sha": "dff602a"
   },
-  "generatedAt": "2026-10-06T17:55:54.301Z",
+  "generatedAt": "2026-10-06T18:07:21.134Z",
   "counts": {
     "PASS": 26,
     "FAIL": 0,
@@ -242,7 +242,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":6},\"resources\":6,\"transferBytes\":172273}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":6},\"resources\":6,\"transferBytes\":172298}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
@@ -253,7 +253,7 @@
       "id": "i",
       "entry": "CLS + frame cadence (headless)",
       "status": "INFO",
-      "value": "{\"cls\":0,\"frameMedianMs\":16.7,\"frameP95Ms\":16.8}",
+      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7.1}",
       "threshold": "informational only",
       "evidence": [],
       "note": ""
