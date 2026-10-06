@@ -58,3 +58,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.4.5 -> peeled commit 4dd8bca (code revision 5b2dd90).
 - Change: founder column (left side copy) +20% type (kicker/title/body), moved closer to the mark (left clamp 6vw -> 9vw); mobile anchor 18% -> 22% so the larger block clears the top edge. Rollback path = git tags.
 - Worktree smoke: v1.4.5 served on 8081 -> leftX=129.6, titleFs=24px, bodyFs=16.8px, fontOk=true, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.5-founder.png.
+
+## Rollback drill (lite) — v1.4.6
+- Annotated tag v1.4.6 -> peeled commit 7d301e6 (code revision 8c6fb9c).
+- Change: founder column widened 280px -> min(340px, 27vw) so each line runs longer (title back to 2 lines; block shorter, desktop bottom margin improved). Rollback path = git tags.
+- Worktree smoke: v1.4.6 served on 8081 -> w=340, titleFs=24px, fontOk=true, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.6-founder.png.
