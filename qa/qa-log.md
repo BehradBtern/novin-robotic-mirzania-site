@@ -43,3 +43,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.4.2 -> commit 667a5709ac8f370e6b01f064c6d6047bd932228c (QA revision 8a5be7e on the same tree).
 - Change: giant outline footer text restored (draw-in + hover); the footer's big centred mark and its landing area removed (per user correction). Rollback path = git tags (dist zip archives no longer produced — user removed the archive-tracking pattern).
 - Worktree smoke: v1.4.2 served on 8081; shot qa/evidence/d/rollback-v1.4.2-intro.png.
+
+## Rollback drill (lite) — v1.4.3
+- Annotated tag v1.4.3 -> peeled commit a89943b (code revision 2e4d7d5).
+- Change: the grown phase reveals the original (OG) mark art via a 0.575-0.615 crossfade; Cormorant Garamond (self-hosted variable woff2, latin) for the founder/side texts and the footer blurb; QA adds OG-opacity + font-load pins; roundtrip copy list now includes assets/fonts/; qa-log regeneration preserves appended drill notes.
+- Worktree smoke: v1.4.3 served on 8081 -> og=1, fontOk=true, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.3-big-og.png.
