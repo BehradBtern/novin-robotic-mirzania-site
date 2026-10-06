@@ -1,7 +1,7 @@
 [
   {
     "vp": "1280x800",
-    "ogOp": 1,
+    "ogGone": 0,
     "visFrac": 0.5,
     "markCx": 0,
     "spin": 270,
@@ -10,7 +10,7 @@
   },
   {
     "vp": "1440x900",
-    "ogOp": 1,
+    "ogGone": 0,
     "visFrac": 0.5,
     "markCx": 0,
     "spin": 270,
@@ -19,7 +19,7 @@
   },
   {
     "vp": "1920x1080",
-    "ogOp": 1,
+    "ogGone": 0,
     "visFrac": 0.5,
     "markCx": 0,
     "spin": 270,
@@ -28,7 +28,7 @@
   },
   {
     "vp": "390x844",
-    "ogOp": 1,
+    "ogGone": 0,
     "visFrac": 0.5,
     "markCx": 0,
     "spin": 270,

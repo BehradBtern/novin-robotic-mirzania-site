@@ -10,21 +10,20 @@
       "http://localhost:8123/assets/js/main.js",
       "http://localhost:8123/assets/fonts/cormorant-garamond-latin.woff2",
       "http://localhost:8123/assets/logo/logo-wordmark.svg",
-      "http://localhost:8123/assets/logo/logo-mark.svg",
-      "http://localhost:8123/assets/logo/logo-mark-og.svg"
+      "http://localhost:8123/assets/logo/logo-mark.svg"
     ]
   },
   "pageData": {
     "cls": 0,
-    "resources": 7,
-    "transfer": 184176,
+    "resources": 6,
+    "transfer": 171826,
     "hosts": {
-      "localhost:8123": 7
+      "localhost:8123": 6
     }
   },
   "frames": {
     "n": 156,
     "median": 16.699999999999818,
-    "p95": 16.800000000000182
+    "p95": 16.899999999999636
   }
 }

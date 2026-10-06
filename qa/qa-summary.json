@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/154.0.8037.95",
     "edge": "Edg/154.0.4258.53",
-    "generatedAt": "2026-10-06T16:42:42.505Z",
-    "sha": "d6cfcfa"
+    "generatedAt": "2026-10-06T16:52:39.450Z",
+    "sha": "c636dac"
   },
-  "generatedAt": "2026-10-06T16:42:42.505Z",
+  "generatedAt": "2026-10-06T16:52:39.450Z",
   "counts": {
     "PASS": 26,
     "FAIL": 0,
@@ -105,10 +105,10 @@
     },
     {
       "id": "c",
-      "entry": "big left: OG art, half clipped at the left edge, 45-degree pose",
+      "entry": "big left: half clipped at the left edge, 45-degree pose",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"ogOp\":1,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"ogOp\":1,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"ogOp\":1,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"ogOp\":1,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true}]",
-      "threshold": "visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG art opacity 1",
+      "value": "[{\"vp\":\"1280x800\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true}]",
+      "threshold": "visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG overlay gone",
       "evidence": [
         "evidence/b/bigleft-audit.json",
         "evidence/b/bigleft-1440x900.png"
@@ -130,8 +130,8 @@
       "id": "c",
       "entry": "side copy: serif type beside the small symbol, then gone before the growth",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"og0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":718.9,\"mcy\":450,\"rMark\":162.9,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"og0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":194.7,\"mcy\":422,\"rMark\":50.7,\"ok\":true,\"goneAt07\":[0,0]}]",
-      "threshold": "both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; OG art still hidden",
+      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":718.9,\"mcy\":450,\"rMark\":162.9,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":194.7,\"mcy\":422,\"rMark\":50.7,\"ok\":true,\"goneAt07\":[0,0]}]",
+      "threshold": "both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay",
       "evidence": [
         "evidence/b/sidecopy-audit.json",
         "evidence/b/sidetext-1440x900.png"
@@ -242,7 +242,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":7},\"resources\":7,\"transferBytes\":184176}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":6},\"resources\":6,\"transferBytes\":171826}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
@@ -253,7 +253,7 @@
       "id": "i",
       "entry": "CLS + frame cadence (headless)",
       "status": "INFO",
-      "value": "{\"cls\":0,\"frameMedianMs\":16.7,\"frameP95Ms\":16.8}",
+      "value": "{\"cls\":0,\"frameMedianMs\":16.7,\"frameP95Ms\":16.9}",
       "threshold": "informational only",
       "evidence": [],
       "note": ""
