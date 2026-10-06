@@ -84,7 +84,8 @@ try {
               copy: document.querySelectorAll('.hero__copy, #hero-copy, .hero__col').length,
               indicator: document.querySelectorAll('.hero__indicator, #hero-indicator').length,
               hint: document.querySelectorAll('.hero__hint, #hero-hint').length,
-              rmMark: document.querySelectorAll('.rm-mark').length
+              rmMark: document.querySelectorAll('.rm-mark').length,
+              signature: document.querySelectorAll('#footer-signature, .footer__signature, .sig').length
             },
             galleryGone: document.querySelectorAll('#programmes, .gallery, .gallery__card').length,
             bodyChildren: Array.from(document.body.children).map((el) => el.tagName + (el.id ? '#' + el.id : '') + (el.className ? '.' + String(el.className).split(' ')[0] : ''))
@@ -112,7 +113,7 @@ try {
   /* ---------- a2) source audit: no dead placeholders; programmes removed ---------- */
   try {
     const files = ['index.html', 'assets/css/style.css', 'assets/js/main.js', 'content.js'];
-    const needles = ['hero__copy', 'hero__hint', 'hero__indicator', 'rm-mark', 'chapters', 'scrollhint', 'gallery', '#programmes'];
+    const needles = ['hero__copy', 'hero__hint', 'hero__indicator', 'rm-mark', 'chapters', 'scrollhint', 'gallery', '#programmes', 'footer-signature', 'sig__'];
     const lines = [];
     let total = 0;
     for (const f of files) {
@@ -366,12 +367,12 @@ try {
         const r = el.getBoundingClientRect();
         const lz = document.getElementById('footer-landing').getBoundingClientRect();
         const grid = document.querySelector('.footer__grid').getBoundingClientRect();
-        const sig = document.getElementById('footer-signature').getBoundingClientRect();
+        const legal = document.querySelector('.footer__legal').getBoundingClientRect();
         return {
           em: { x: r.x, y: r.y, w: r.width, h: r.height, transform: getComputedStyle(el).transform, opacity: +getComputedStyle(el).opacity, display: getComputedStyle(el).display },
           lzCy: lz.top + lz.height / 2,
           gridBottom: grid.bottom,
-          sigTop: sig.top
+          sigTop: legal.top
         };
       });
       const em = mets.em;
@@ -392,8 +393,8 @@ try {
       await page.close();
     }
     writeJson(evPath('d', 'dock-audit.json'), rows);
-    add('d', 'landing: centred in the footer landing area, clear of columns and signature', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows),
-      'centre == (viewport/2, landing-area centre) ±6/±8px; visible fraction >= 0.9; clear of the columns and the signature (>=6px both); size == configured ±6; no rotation; overflow 0', ['evidence/d/dock-audit.json', 'evidence/b/dock-1440x900.png']);
+    add('d', 'landing: centred in the footer landing area, clear of columns and legal row', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows),
+      'centre == (viewport/2, landing-area centre) ±6/±8px; visible fraction >= 0.9; clear of the columns and the legal row (>=6px both); size == configured ±6; no rotation; overflow 0', ['evidence/d/dock-audit.json', 'evidence/b/dock-1440x900.png']);
   } catch (e) { add('d', 'dock audit', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- d2) stability: no drift after scroll/resize ---------- */
@@ -488,41 +489,9 @@ try {
     const ok = landOk && Object.values(contactCheck).every(Boolean) && links.length === 3;
     add('f', 'footer: links land + contact/legal intact', ok ? PASS : FAIL, JSON.stringify({ landings, contactCheck }), '3 links land within viewport; mailto/tel formats; texts == content', ['evidence/f/footer-links.json', 'evidence/f/footer-1440x900.png']);
 
-    /* signature: three layers, draw-in completes, hover reveal reacts */
-    const sigBase = await page.evaluate(() => {
-      const wrap = document.getElementById('footer-signature');
-      const texts = Array.from(wrap.querySelectorAll('text'));
-      return { layers: texts.length, content: texts[0] ? texts[0].textContent : '', drawn: wrap.classList.contains('is-drawn') };
-    });
-    {
-      const t0 = Date.now();
-      while (!sigBase.drawn && Date.now() - t0 < 8000) {
-        await delay(300);
-        sigBase.drawn = await page.evaluate(() => document.getElementById('footer-signature').classList.contains('is-drawn'));
-      }
-    }
-    await delay(4600);
-    const dashAfter = await page.evaluate(() => parseFloat(getComputedStyle(document.querySelector('.sig__draw')).strokeDashoffset));
-    await page.evaluate(() => document.getElementById('footer-signature').scrollIntoView({ block: 'center' }));
-    await delay(350);
-    const sigBox = await page.evaluate(() => {
-      const r = document.getElementById('sig-svg').getBoundingClientRect();
-      return { x: r.x, y: r.y, cx: r.x + r.width / 2, cy: r.y + r.height / 2, w: r.width };
-    });
-    await page.mouse.move(sigBox.cx - sigBox.w * 0.3, sigBox.cy);
-    await delay(450);
-    const hov = await page.evaluate(() => {
-      const wrap = document.getElementById('footer-signature');
-      return {
-        hoverClass: wrap.classList.contains('is-hover'),
-        echoOp: +getComputedStyle(document.querySelector('.sig__echo')).opacity,
-        maskCx: document.getElementById('revealMask').getAttribute('cx')
-      };
-    });
-    await shot(page, 'f/footer-signature-1440x900.png');
-    const sigOk = sigBase.layers === 3 && /NOVIN ROBOTIC MIRZANIA/.test(sigBase.content) && sigBase.drawn && dashAfter <= 1 && hov.hoverClass && hov.echoOp >= 0.6 && hov.maskCx !== '50.00%';
-    writeJson(evPath('f', 'signature-audit.json'), { base: sigBase, dashAfter, hov });
-    add('f', 'footer signature: draw-in completes + hover reveal reacts', sigOk ? PASS : FAIL, JSON.stringify({ layers: sigBase.layers, content: sigBase.content, drawn: sigBase.drawn, dashAfter, hoverClass: hov.hoverClass, echoOp: hov.echoOp, maskCx: hov.maskCx }), '3 text layers with the brand name; stroke draw-in finishes (dashoffset 0); hover shows the echo (0.7) and moves the reveal mask', ['evidence/f/signature-audit.json', 'evidence/f/footer-signature-1440x900.png']);
+    /* signature removed: assert it stays gone */
+    const sigGone = await page.evaluate(() => document.querySelectorAll('#footer-signature, .sig').length);
+    add('f', 'footer: giant outline signature stays removed', sigGone === 0 ? PASS : FAIL, JSON.stringify({ sigGone }), 'no #footer-signature / .sig elements', ['evidence/f/footer-1440x900.png']);
     await page.close();
   } catch (e) { add('f', 'content + footer', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
@@ -575,8 +544,7 @@ try {
         endOpacity: +getComputedStyle(end).opacity,
         endRect: { x: er.x, y: er.y, r: er.x + er.width, b: er.y + er.height },
         bandCy: lz.top + lz.height / 2,
-        sigDrawOffset: getComputedStyle(document.querySelector('.sig__draw')).strokeDashoffset,
-        sigWidth: document.getElementById('sig-svg').getBoundingClientRect().width,
+        sigGone: document.querySelectorAll('#footer-signature, .sig').length,
         vw: innerWidth, vh: innerHeight
       };
     });
@@ -586,9 +554,9 @@ try {
       rc.endDisplay === 'block' && rc.endOpacity === 1 && inView(rc.endRect) && inView(top) &&
       Math.abs((rc.endRect.x + rc.endRect.r) / 2 - rc.vw / 2) <= 6 &&
       Math.abs((rc.endRect.y + rc.endRect.b) / 2 - rc.bandCy) <= 8 &&
-      parseFloat(rc.sigDrawOffset) <= 1 && rc.sigWidth > 100;
+      rc.sigGone === 0;
     writeJson(evPath('h', 'reduced-motion.json'), { top, rc });
-    add('h', 'reduced motion: static logo + signature fully rendered', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed, side: rc.sideDisplay, sigDraw: rc.sigDrawOffset }), 'no transforms; no side copy; wordmark fully in viewport; landing centred in the landing area; signature drawn statically (no dash offset)', ['evidence/h/reduced-1440-full.png']);
+    add('h', 'reduced motion: static logo fully rendered, signature stays removed', ok ? PASS : FAIL, JSON.stringify({ top, end: rc.endRect, bandCy: +rc.bandCy.toFixed(1), frameComputed: rc.frameComputed, side: rc.sideDisplay, sigGone: rc.sigGone }), 'no transforms; no side copy; wordmark fully in viewport; landing centred in the landing area; signature removed', ['evidence/h/reduced-1440-full.png']);
     await page.close();
     const p390 = await openPage(browser, { w: 390, h: 844, reduced: true });
     await shotFull(p390, 'h/reduced-390-full.png');

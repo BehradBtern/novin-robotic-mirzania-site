@@ -15,13 +15,13 @@
   "pageData": {
     "cls": 0,
     "resources": 5,
-    "transfer": 133183,
+    "transfer": 130464,
     "hosts": {
       "localhost:8123": 5
     }
   },
   "frames": {
-    "n": 175,
+    "n": 166,
     "median": 16.699999999999818,
     "p95": 16.799999999999955
   }

@@ -205,7 +205,7 @@ a:hover { color: var(--ink-1); }
   z-index: -2;
 }
 
-/* radial glow behind the signature (supplied footer design; teal-tinted) */
+/* radial glow (supplied footer design; teal-tinted) */
 .footer__glow {
   position: absolute;
   inset: 0;
@@ -235,42 +235,6 @@ a:hover { color: var(--ink-1); }
   -webkit-user-drag: none;
   user-select: none;
 }
-
-/* ---------- signature: giant outline text (draw-in + hover reveal) ---------- */
-.footer__signature { margin-top: 8px; }
-.sig {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 300 / 38;
-  cursor: pointer;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.sig text { text-transform: uppercase; letter-spacing: 0.03em; }
-.sig__echo {
-  stroke: var(--border-strong);
-  opacity: 0;
-  transition: opacity 300ms ease;
-}
-.footer__signature.is-hover .sig__echo { opacity: 0.7; }
-.sig__draw {
-  stroke: var(--accent);
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-}
-.footer__signature.is-drawn .sig__draw {
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 4s ease-in-out;
-}
-.sig__rainbow {
-  stroke-width: 0.7;
-  opacity: 0;
-  transition: opacity 250ms ease;
-}
-.footer__signature.is-hover .sig__rainbow { opacity: 1; }
-.reduced-motion .sig__draw { stroke-dashoffset: 0; transition: none; }
-.reduced-motion .sig__echo, .reduced-motion .sig__rainbow { transition: none; }
 
 .footer__grid {
   display: grid;

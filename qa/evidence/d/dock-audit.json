@@ -3,15 +3,15 @@
     "vp": "1280x800",
     "center": [
       640,
-      278.1
+      432.1
     ],
-    "bandCy": 278.1,
+    "bandCy": 432.1,
     "bandCx": 640,
     "frac": 1,
     "size": 330,
     "dockD": 330,
     "gapAbove": 25.1,
-    "gapBelow": 33.1,
+    "gapBelow": 73.1,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -22,15 +22,15 @@
     "vp": "1440x900",
     "center": [
       720,
-      360.1
+      518.1
     ],
-    "bandCy": 360.1,
+    "bandCy": 518.1,
     "bandCx": 720,
     "frac": 1,
     "size": 330,
     "dockD": 330,
     "gapAbove": 25.1,
-    "gapBelow": 33.1,
+    "gapBelow": 79.1,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -41,15 +41,15 @@
     "vp": "1920x1080",
     "center": [
       960,
-      489.5
+      647.5
     ],
-    "bandCy": 489.5,
+    "bandCy": 647.5,
     "bandCx": 960,
     "frac": 1,
     "size": 330,
     "dockD": 330,
     "gapAbove": 51.1,
-    "gapBelow": 59.1,
+    "gapBelow": 115.1,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -60,15 +60,15 @@
     "vp": "2560x1080",
     "center": [
       1280,
-      489.5
+      647.5
     ],
-    "bandCy": 489.5,
+    "bandCy": 647.5,
     "bandCx": 1280,
     "frac": 1,
     "size": 330,
     "dockD": 330,
     "gapAbove": 51.1,
-    "gapBelow": 59.1,
+    "gapBelow": 115.1,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -79,15 +79,15 @@
     "vp": "834x1112",
     "center": [
       417,
-      543.1
+      646.1
     ],
-    "bandCy": 543.1,
+    "bandCy": 646.1,
     "bandCx": 417,
     "frac": 1,
     "size": 330,
     "dockD": 330,
     "gapAbove": 51.1,
-    "gapBelow": 59.1,
+    "gapBelow": 115.1,
     "centered": true,
     "sizeOk": true,
     "upright": true,
@@ -98,15 +98,15 @@
     "vp": "390x844",
     "center": [
       195,
-      398
+      450
     ],
-    "bandCy": 398,
+    "bandCy": 450,
     "bandCx": 195,
     "frac": 1,
     "size": 195,
     "dockD": 195,
     "gapAbove": 80.4,
-    "gapBelow": 88.4,
+    "gapBelow": 131,
     "centered": true,
     "sizeOk": true,
     "upright": true,

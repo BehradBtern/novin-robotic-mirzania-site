@@ -72,16 +72,10 @@ sweep right 0.70–0.84, dock travel 0.84–0.94). Hero heights: 340vh desktop /
 300vh tablet / 260vh phone.
 
 **Reduced motion** (`prefers-reduced-motion: reduce`): no animation — the
-wordmark shows fully in the hero, no side copy, the footer signature
-is drawn statically, and the mark rests fully
+wordmark shows fully in the hero, no side copy, and the mark rests fully
 visible, centred in the footer's landing area.
 
-**Footer:** columns row → the sequence's landing area (the mark docks into
-its centre) → the giant animated brand text (stroke draw-in on first view;
-hover reveals a cursor-following rainbow) over a radial glow. The text is
-`footer.signature.text` in `content.js`; the glow tint and effect colors live
-in `style.css` (`.footer__glow`, `.sig__*` — swap `--accent`/the tint for a
-different brand colour).
+**Footer:** columns row → the sequence's landing area (the mark docks into its centre) → the legal row, over a radial glow (tint in `style.css`, `.footer__glow`).
 
 **QA hook**: `?qa=<0..1>` pins the sequence for automated screenshots
 (`?qa=0.5` side-copy stage, `?qa=0.86` half-clipped enlarged state,
@@ -92,8 +86,7 @@ different brand colour).
 Open **`content.js`**:
 
 - `heroSide` — the two text blocks that appear left/right of the small symbol.
-- `footer` — blurb, section links, contact lines, legal line, and
-  `footer.signature.text` (the giant animated footer text).
+- `footer` — blurb, section links, contact lines, legal line.
 - `theme` — colors (the `stage` token is the single background color).
 
 Save + refresh; no rebuild.
