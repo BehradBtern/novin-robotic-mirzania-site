@@ -68,3 +68,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.4.7 -> peeled commit 7294bd9 (code revision 560ab8b).
 - Change: the small mark beside the founder text enlarged (side-copy scale geo.sC 0.58 -> 0.68, ~+17% diameter: 326px -> 382px at 1440). Chosen bound: 0.72 would collide with the widened founder column at 1280 (QA no-overlap margin). Rollback path = git tags.
 - Worktree smoke: v1.4.7 served on 8081 -> markW=382, fontOk=true, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.7-mark.png.
+
+## Rollback drill (lite) — v1.4.8
+- Annotated tag v1.4.8 -> peeled commit 64fae85 (code revision 849ac04).
+- Change: side-copy mark +15% (geo.sC 0.68 -> 0.782: 382px -> 439px at 1440). Added a narrow-width clearance guard: below ~1350px the scale tapers (1280 -> 0.692) so the mark never touches the widened founder column; floor at the old 0.58. Rollback path = git tags.
+- Worktree smoke: v1.4.8 served on 8081 -> markW=439, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.8-mark.png.
