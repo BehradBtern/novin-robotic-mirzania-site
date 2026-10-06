@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.6 round)
 
-- Revision: `1a473a0` · generated 2026-10-06T16:37:37.878Z
+- Revision: `d6cfcfa` · generated 2026-10-06T16:42:42.505Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/154.0.8037.95 · Edge: Edg/154.0.4258.53
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -47,7 +47,7 @@
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (127)
+## Evidence files (128)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -136,6 +136,7 @@
 - `qa/evidence/d/dock-audit.json`
 - `qa/evidence/d/footer-1440x900.png`
 - `qa/evidence/d/rollback-v1.4.2-intro.png`
+- `qa/evidence/d/rollback-v1.4.3-big-og.png`
 - `qa/evidence/d/stability.json`
 - `qa/evidence/e/mark-zoom-2x.png`
 - `qa/evidence/e/sharpness.json`

@@ -753,10 +753,16 @@ try {
       '',
       '## Rollback drill',
       '',
-      'See `qa/evidence/rollback/` (v1.3.6 + kept v1.3.5 / v1.3.4 / v1.3.3 / v1.3.2 / v1.3.1 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0).',
+      'Rollback path: annotated git tags (per release). Dist zip archives are no longer produced; older archives live in git history.',
       ''
     ].join('\n');
-    fs.writeFileSync(path.join(ROOT, 'qa', 'qa-log.md'), log, 'utf8');
+    let qaLogPreserved = '';
+    try {
+      const prevLog = fs.readFileSync(path.join(ROOT, 'qa', 'qa-log.md'), 'utf8');
+      const cut = prevLog.indexOf('## Rollback drill (lite)');
+      if (cut >= 0) qaLogPreserved = prevLog.slice(cut).trimEnd() + '\n';
+    } catch (e) { /* first run: no previous log */ }
+    fs.writeFileSync(path.join(ROOT, 'qa', 'qa-log.md'), log + (qaLogPreserved ? '\n' + qaLogPreserved : ''), 'utf8');
 
     writeJson(path.join(ROOT, 'qa', 'qa-summary.json'), { env, generatedAt: env.generatedAt, counts, results });
     console.log('\nWROTE qa/qa-report.md, qa/qa-log.md, qa/qa-summary.json');
