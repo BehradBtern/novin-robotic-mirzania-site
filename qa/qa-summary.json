@@ -5,12 +5,12 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/154.0.8037.95",
     "edge": "Edg/154.0.4258.53",
-    "generatedAt": "2026-10-06T18:39:13.573Z",
-    "sha": "6a8c8c6"
+    "generatedAt": "2026-10-06T19:04:35.986Z",
+    "sha": "cadb272"
   },
-  "generatedAt": "2026-10-06T18:39:13.573Z",
+  "generatedAt": "2026-10-06T19:04:35.986Z",
   "counts": {
-    "PASS": 26,
+    "PASS": 27,
     "FAIL": 0,
     "INFO": 1,
     "OBSERVED": 0,
@@ -128,9 +128,20 @@
     },
     {
       "id": "c",
+      "entry": "phase 2: blueprint diagram fills the spin (circle drawn in, both labels set)",
+      "status": "PASS",
+      "value": "{\"op\":1,\"dash\":60,\"gapY\":1}",
+      "threshold": "diagram visible mid-phase (opacity ~1), circle drawn in (dashoffset < 943), top/bottom labels populated",
+      "evidence": [
+        "evidence/b/phase2-diagram.png"
+      ],
+      "note": ""
+    },
+    {
+      "id": "c",
       "entry": "side copy: serif type beside the small symbol, then gone before the growth",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":718.5,\"mcy\":450,\"rMark\":219.6,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":194.5,\"mcy\":422,\"rMark\":68.4,\"ok\":true,\"goneAt07\":[0,0]}]",
+      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"diag0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":718.5,\"mcy\":450,\"rMark\":219.6,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"diag0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":194.5,\"mcy\":422,\"rMark\":68.4,\"ok\":true,\"goneAt07\":[0,0]}]",
       "threshold": "both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay",
       "evidence": [
         "evidence/b/sidecopy-audit.json",
@@ -242,7 +253,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":6},\"resources\":6,\"transferBytes\":172708}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":6},\"resources\":6,\"transferBytes\":174857}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
@@ -253,7 +264,7 @@
       "id": "i",
       "entry": "CLS + frame cadence (headless)",
       "status": "INFO",
-      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7.1}",
+      "value": "{\"cls\":0,\"frameMedianMs\":16.7,\"frameP95Ms\":16.8}",
       "threshold": "informational only",
       "evidence": [],
       "note": ""
