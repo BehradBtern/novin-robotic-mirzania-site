@@ -45,3 +45,8 @@ See `qa/evidence/rollback/` (v1.3.6 + kept v1.3.5 / v1.3.4 / v1.3.3 / v1.3.2 / v
 - Kept releases for one-step restore: v1.4.0, v1.3.9, ... v1.0.0.
 - Worktree smoke: v1.4.1 served on 8081; shot qa/evidence/rollback/v1.4.1-founder.png (qa=0.5; exit=0).
 - Archive: qa/evidence/rollback/dist-v1.4.1.zip; SHA-256: 
+
+## Publication update (2026-10-06)
+- Vercel production redeployed: founder side-copy text live; footer giant-outline signature removed; sequence mark = PSD artwork; verified via prod fetches (content.js / logo-mark.svg).
+- GitHub: main pushed 7cbb59c..a305094 (fast-forward onto the user's cleaned history; 0 large objects reachable); tag v1.4.1 pushed; tag v1.4.0 force-corrected to the canonical commit. Older tags on the remote remain the mirror-era variants (content-equivalent).
+- The qa/evidence/rollback archives were removed from tracking by the user intent (kept only in delivery packs / git history).
