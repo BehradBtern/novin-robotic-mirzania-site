@@ -73,3 +73,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.4.8 -> peeled commit 64fae85 (code revision 849ac04).
 - Change: side-copy mark +15% (geo.sC 0.68 -> 0.782: 382px -> 439px at 1440). Added a narrow-width clearance guard: below ~1350px the scale tapers (1280 -> 0.692) so the mark never touches the widened founder column; floor at the old 0.58. Rollback path = git tags.
 - Worktree smoke: v1.4.8 served on 8081 -> markW=439, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.8-mark.png.
+
+## Rollback drill (lite) — v1.4.9
+- Annotated tag v1.4.9 -> peeled commit bbad4d4 (code revision 367a481).
+- Change: phase-2 blueprint diagram (spin guide) fills the previously empty spin/shrink stretch: hairline circle with 4 ticks + counter-rotating dashed ring + two mono labels (Institute for applied robotics / Novin Robotic Mirzania). The diagram tracks the mark’s actual centre (off×cos(rad)×(1-cb)) so the diamond stays centred inside the circle; fades out as the side copy arrives. QA now 27 checks (new phase-2 diagram probe incl. centring). Rollback path = git tags.
+- Worktree smoke: v1.4.9 served on 8081 -> diagOp=1 at p=0.24, labels set, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.9-diagram.png.
