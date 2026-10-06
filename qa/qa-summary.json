@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/154.0.8037.95",
     "edge": "Edg/154.0.4258.53",
-    "generatedAt": "2026-10-06T13:58:31.388Z",
-    "sha": "8a5be7e"
+    "generatedAt": "2026-10-06T16:37:37.878Z",
+    "sha": "1a473a0"
   },
-  "generatedAt": "2026-10-06T13:58:31.388Z",
+  "generatedAt": "2026-10-06T16:37:37.878Z",
   "counts": {
     "PASS": 26,
     "FAIL": 0,
@@ -105,10 +105,10 @@
     },
     {
       "id": "c",
-      "entry": "big left: half clipped at the left edge, 45-degree pose",
+      "entry": "big left: OG art, half clipped at the left edge, 45-degree pose",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true}]",
-      "threshold": "visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0",
+      "value": "[{\"vp\":\"1280x800\",\"ogOp\":1,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"ogOp\":1,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"ogOp\":1,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"ogOp\":1,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true}]",
+      "threshold": "visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG art opacity 1",
       "evidence": [
         "evidence/b/bigleft-audit.json",
         "evidence/b/bigleft-1440x900.png"
@@ -128,10 +128,10 @@
     },
     {
       "id": "c",
-      "entry": "side copy: text beside the small symbol, then gone before the growth",
+      "entry": "side copy: serif type beside the small symbol, then gone before the growth",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"mcx\":718.9,\"mcy\":450,\"rMark\":162.9,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"mcx\":194.7,\"mcy\":422,\"rMark\":50.7,\"ok\":true,\"goneAt07\":[0,0]}]",
-      "threshold": "both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7",
+      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"og0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":718.9,\"mcy\":450,\"rMark\":162.9,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"og0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":194.7,\"mcy\":422,\"rMark\":50.7,\"ok\":true,\"goneAt07\":[0,0]}]",
+      "threshold": "both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; OG art still hidden",
       "evidence": [
         "evidence/b/sidecopy-audit.json",
         "evidence/b/sidetext-1440x900.png"
@@ -242,7 +242,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":5},\"resources\":5,\"transferBytes\":133319}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":7},\"resources\":7,\"transferBytes\":184176}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
