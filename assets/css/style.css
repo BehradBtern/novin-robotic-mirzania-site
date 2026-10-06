@@ -172,7 +172,7 @@ a:hover { color: var(--ink-1); }
   opacity: 0;
   pointer-events: none;
 }
-.hero__side--left { left: clamp(16px, 6vw, 96px); }
+.hero__side--left { left: clamp(24px, 9vw, 140px); }
 .hero__side--right { right: clamp(16px, 6vw, 96px); text-align: right; }
 
 .hero__side-kicker {
@@ -206,6 +206,11 @@ a:hover { color: var(--ink-1); }
 .footer__blurb {
   font-weight: 500;
 }
+
+/* founder column: 20% larger type, tucked a little closer to the mark */
+.hero__side--left .hero__side-kicker { font-size: clamp(0.825rem, 0.78rem + 0.22vw, 0.975rem); }
+.hero__side--left .hero__side-title { font-size: clamp(1.2rem, 1.08rem + 0.6vw, 1.5rem); }
+.hero__side--left .hero__side-body { font-size: 1.05rem; }
 
 /* =========================================================================
    FOOTER — columns, the sequence's landing area, and the giant animated
@@ -333,7 +338,7 @@ a:hover { color: var(--ink-1); }
      flanking it (keeps the text readable at narrow widths); long bodies are
      clamped so the symbol never gets crowded */
   .hero__side { width: auto; left: 20px; right: 20px; }
-  .hero__side--left { top: 18%; text-align: left; }
+  .hero__side--left { top: 22%; text-align: left; }
   .hero__side--right { top: 80%; text-align: left; }
   .hero__side-title { font-size: 0.95rem; }
   .hero__side-body {
@@ -343,6 +348,8 @@ a:hover { color: var(--ink-1); }
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  .hero__side--left .hero__side-title { font-size: 1.14rem; }
+  .hero__side--left .hero__side-body { font-size: 0.975rem; }
 }
 
 /* =========================================================================
