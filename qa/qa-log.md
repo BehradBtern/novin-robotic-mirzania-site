@@ -48,3 +48,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.4.3 -> peeled commit a89943b (code revision 2e4d7d5).
 - Change: the grown phase reveals the original (OG) mark art via a 0.575-0.615 crossfade; Cormorant Garamond (self-hosted variable woff2, latin) for the founder/side texts and the footer blurb; QA adds OG-opacity + font-load pins; roundtrip copy list now includes assets/fonts/; qa-log regeneration preserves appended drill notes.
 - Worktree smoke: v1.4.3 served on 8081 -> og=1, fontOk=true, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.3-big-og.png.
+
+## Rollback drill (lite) — v1.4.4
+- Annotated tag v1.4.4 -> peeled commit 2b5d821 (code revert revision fb883c7).
+- Change: reverted the big-phase OG overlay (element, styles, content key, JS crossfade, asset removed; QA pins inverted to “OG gone”) — Cormorant Garamond texts retained. Rollback path = git tags.
+- Worktree smoke: v1.4.4 served on 8081 -> ogCount=0, fontOk=true, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.4-big.png.
