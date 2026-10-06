@@ -118,6 +118,12 @@
     fillSide(sideRightEl, C.heroSide.right);
   }
 
+  /* ---------------- phase-2 diagram labels ---------------- */
+  if (C.heroDiagram) {
+    setText("diagram-top", C.heroDiagram.top);
+    setText("diagram-bottom", C.heroDiagram.bottom);
+  }
+
   /* ---------------- reduced motion ---------------- */
   var mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   var reduced = mqReduce.matches;
@@ -146,6 +152,9 @@
   var wordmarkEl = doc.getElementById("hero-wordmark");
   var markboxEl = doc.getElementById("hero-markbox");
   var markEl = doc.getElementById("hero-mark");
+  var diagEl = doc.getElementById("hero-diagram");
+  var diaCircle = doc.getElementById("diagram-circle");
+  var diaRing = doc.getElementById("diagram-ring");
   var footerEl = doc.getElementById("footer");
   var stickyEl = doc.querySelector(".hero__sticky");
 
@@ -292,6 +301,15 @@
       sideRightEl.style.opacity = so.toFixed(3);
       sideRightEl.style.transform = "translateY(-50%) translateX(" + soShift.toFixed(1) + "px)";
     }
+
+    /* phase-2 blueprint diagram: fades in with the spin, departs as the side copy arrives */
+    if (diagEl) {
+      var dop = seg(p, 0.13, 0.22) * (1 - seg(p, 0.35, 0.42));
+      diagEl.style.opacity = dop.toFixed(3);
+      diagEl.style.transform = "translate(-50%, -50%) translateY(" + (-off * Math.cos(rad) * (1 - cb)).toFixed(1) + "px)";
+    }
+    if (diaCircle) diaCircle.style.strokeDashoffset = (943 * (1 - seg(p, 0.13, 0.26))).toFixed(1);
+    if (diaRing) diaRing.setAttribute("transform", "rotate(" + (-90 * seg(p, 0.13, 0.42)).toFixed(2) + ")");
 
     /* docking: hand the mark over to the footer-child layer (CSS .docked-footer) */
     root.classList.toggle("docked-footer", p >= 0.999);

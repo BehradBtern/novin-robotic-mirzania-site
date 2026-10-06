@@ -175,6 +175,39 @@ a:hover { color: var(--ink-1); }
 .hero__side--left { left: clamp(24px, 9vw, 140px); width: min(340px, 27vw); }
 .hero__side--right { right: clamp(16px, 6vw, 96px); text-align: right; }
 
+/* ---------- phase-2 blueprint diagram (spin guide) ---------- */
+.hero__diagram {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(64vh, 74vw, 680px);
+  opacity: 0;
+  pointer-events: none;
+}
+.hero__diagram-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.dia__circle {
+  stroke: rgba(86, 193, 201, 0.20);
+  stroke-width: 1;
+  stroke-dasharray: 943;
+  stroke-dashoffset: 943;
+}
+.dia__ticks line { stroke: rgba(86, 193, 201, 0.26); stroke-width: 1; }
+.dia__dashed { stroke: rgba(86, 193, 201, 0.12); stroke-width: 1; stroke-dasharray: 3 9; }
+.hero__diagram-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: clamp(0.625rem, 0.6rem + 0.15vw, 0.75rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.hero__diagram-label--top { bottom: calc(100% + 16px); }
+.hero__diagram-label--bottom { top: calc(100% + 16px); }
+
 .hero__side-kicker {
   font-family: var(--font-mono);
   font-size: clamp(0.6875rem, 0.65rem + 0.18vw, 0.8125rem);
@@ -373,4 +406,5 @@ a:hover { color: var(--ink-1); }
   width: min(var(--frame-w, min(420px, 72vw)), calc(100vh * 1.2757 * 0.90));
 }
 .reduced-motion .hero__markbox { display: none; }
+.reduced-motion .hero__diagram { display: none; }
 .reduced-motion .hero__side { display: none; }

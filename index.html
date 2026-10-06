@@ -19,6 +19,22 @@
   <section class="hero" id="story" aria-label="Logo animation">
     <div class="hero__sticky">
       <div class="hero__stage">
+        <div class="hero__diagram" id="hero-diagram" aria-hidden="true">
+          <svg class="hero__diagram-svg" viewBox="-160 -160 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle class="dia__circle" id="diagram-circle" cx="0" cy="0" r="150"/>
+            <g class="dia__ticks" aria-hidden="true">
+              <line x1="0" y1="-150" x2="0" y2="-134"/>
+              <line x1="150" y1="0" x2="134" y2="0"/>
+              <line x1="0" y1="150" x2="0" y2="134"/>
+              <line x1="-150" y1="0" x2="-134" y2="0"/>
+            </g>
+            <g class="dia__ring" id="diagram-ring">
+              <circle class="dia__dashed" cx="0" cy="0" r="126"/>
+            </g>
+          </svg>
+          <p class="hero__diagram-label hero__diagram-label--top" id="diagram-top"></p>
+          <p class="hero__diagram-label hero__diagram-label--bottom" id="diagram-bottom"></p>
+        </div>
         <aside class="hero__side hero__side--left" id="hero-side-left">
           <p class="hero__side-kicker"></p>
           <h2 class="hero__side-title"></h2>
