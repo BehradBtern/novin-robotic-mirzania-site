@@ -194,7 +194,14 @@
     geo.frameW = frameTargetW;
     geo.frameH = frameTargetW / 1.2757;
     geo.markBoxW = 0.5095 * frameTargetW;
-    geo.sC = 0.68;
+    geo.sC = 0.782; /* side-copy mark: +15% over the previous 0.68 */
+    if (!mobile) {
+      /* keep the enlarged mark clear of the founder column on narrower desktops */
+      var fLeft = Math.max(24, Math.min(0.09 * vw, 140));
+      var fWidth = Math.min(340, 0.27 * vw);
+      var sSafe = (0.5 * vw - fLeft - fWidth - 12) / ((0.5095 * frameTargetW) / 2);
+      geo.sC = Math.max(Math.min(geo.sC, sSafe), 0.58);
+    }
 
     var footerH = footerEl.offsetHeight;
     geo.footerH = footerH;
