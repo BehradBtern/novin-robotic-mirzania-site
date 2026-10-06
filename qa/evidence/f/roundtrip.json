@@ -9,12 +9,8 @@
     "domBlurb": "EDITED BLURB (content round-trip test).",
     "headerCount": 0,
     "errors": 0,
-    "landingVisibleFrac": 1,
-    "landingCenter": [
-      720,
-      518.1
-    ],
-    "bandCy": 518.1,
+    "signatureVisible": true,
+    "signatureWidth": 1180,
     "markLoaded": true,
     "logoSwapErrors": 0
   },
