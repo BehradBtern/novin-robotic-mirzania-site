@@ -154,12 +154,6 @@ a:hover { color: var(--ink-1); }
   height: 100%;
 }
 
-/* the original (OG) mark artwork, revealed when the sequence grows big */
-.hero__mark--og {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-}
 
 /* the animated logo layers are decorative: never intercept pointer or selection */
 .hero__wordmark,

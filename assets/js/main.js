@@ -51,7 +51,6 @@
   /* ---------------- images ---------------- */
   var logoWordmark = C.logos ? C.logos.wordmark : "";
   var logoMark = C.logos ? C.logos.mark : "";
-  var logoMarkOg = C.logos ? C.logos.markOg : "";
   ["hero-wordmark", "footer-logo"].forEach(function (id) {
     var el = doc.getElementById(id);
     if (el && logoWordmark) el.src = logoWordmark;
@@ -60,8 +59,6 @@
     var el = doc.getElementById(id);
     if (el && logoMark) el.src = logoMark;
   });
-  var ogSrcEl = doc.getElementById("hero-mark-og");
-  if (ogSrcEl && logoMarkOg) ogSrcEl.src = logoMarkOg;
   /* re-measure once late resources (e.g. the footer logo) change the footer height */
   var flogo = doc.getElementById("footer-logo");
   if (flogo) {
@@ -149,7 +146,6 @@
   var wordmarkEl = doc.getElementById("hero-wordmark");
   var markboxEl = doc.getElementById("hero-markbox");
   var markEl = doc.getElementById("hero-mark");
-  var ogEl = doc.getElementById("hero-mark-og");
   var footerEl = doc.getElementById("footer");
   var stickyEl = doc.querySelector(".hero__sticky");
 
@@ -300,7 +296,6 @@
       spin.toFixed(2) + "deg) scale(" + sF.toFixed(4) + ")";
     wordmarkEl.style.opacity = (1 - fade).toFixed(3);
     markboxEl.style.opacity = fade.toFixed(3);
-    if (ogEl) ogEl.style.opacity = seg(p, 0.575, 0.615).toFixed(3);
   }
 
   /* ---------------- loop ---------------- */

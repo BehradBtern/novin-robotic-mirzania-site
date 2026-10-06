@@ -35,8 +35,7 @@ window.SITE_CONTENT = {
 
   logos: {
     wordmark: "assets/logo/logo-wordmark.svg",
-    mark: "assets/logo/logo-mark.svg",
-    markOg: "assets/logo/logo-mark-og.svg"
+    mark: "assets/logo/logo-mark.svg"
   },
 
   /* Geometric constants of the wordmark artwork, used by the spin so the
