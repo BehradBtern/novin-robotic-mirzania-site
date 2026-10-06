@@ -194,7 +194,7 @@
     geo.frameW = frameTargetW;
     geo.frameH = frameTargetW / 1.2757;
     geo.markBoxW = 0.5095 * frameTargetW;
-    geo.sC = 0.58;
+    geo.sC = 0.68;
 
     var footerH = footerEl.offsetHeight;
     geo.footerH = footerH;
