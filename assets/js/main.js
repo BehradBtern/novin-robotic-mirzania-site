@@ -155,6 +155,8 @@
   var diagEl = doc.getElementById("hero-diagram");
   var diaCircle = doc.getElementById("diagram-circle");
   var diaRing = doc.getElementById("diagram-ring");
+  var mtxWrap = doc.getElementById("hero-matrix");
+  var mtxCanvas = doc.getElementById("matrix-canvas");
   var footerEl = doc.getElementById("footer");
   var stickyEl = doc.querySelector(".hero__sticky");
 
@@ -311,6 +313,17 @@
     if (diaCircle) diaCircle.style.strokeDashoffset = (943 * (1 - seg(p, 0.13, 0.26))).toFixed(1);
     if (diaRing) diaRing.setAttribute("transform", "rotate(" + (-90 * seg(p, 0.13, 0.42)).toFixed(2) + ")");
 
+    /* binary rain: morphs in as the spin begins, dissolves before the side copy */
+    if (mtxWrap) {
+      var morphIn = seg(p, 0.09, 0.24);
+      var morphOut = seg(p, 0.33, 0.40);
+      var mop = seg(p, 0.09, 0.17) * (1 - morphOut);
+      mtxWrap.style.opacity = mop.toFixed(3);
+      mtxWrap.style.transform = "scale(" + (1.04 - 0.04 * morphIn + 0.03 * morphOut).toFixed(4) + ")";
+      var wantMtx = mop > 0.01 && !reduced;
+      if (wantMtx !== mtx.running) mtxSetActive(wantMtx);
+    }
+
     /* docking: hand the mark over to the footer-child layer (CSS .docked-footer) */
     root.classList.toggle("docked-footer", p >= 0.999);
 
@@ -321,6 +334,99 @@
       spin.toFixed(2) + "deg) scale(" + sF.toFixed(4) + ")";
     wordmarkEl.style.opacity = (1 - fade).toFixed(3);
     markboxEl.style.opacity = fade.toFixed(3);
+  }
+
+  /* ---------------- phase-2 binary rain (matrix) ---------------- */
+  var mtx = {
+    ready: false, running: false, raf: null, lastT: 0, t0: 0,
+    w: 0, h: 0, dpr: 1, cols: [], ctx: null
+  };
+
+  function mtxSetup() {
+    if (!mtxCanvas) return;
+    var dpr = Math.min(1.5, window.devicePixelRatio || 1);
+    var w = mtxCanvas.clientWidth || window.innerWidth;
+    var h = mtxCanvas.clientHeight || window.innerHeight;
+    mtx.dpr = dpr;
+    mtx.w = w; mtx.h = h;
+    mtxCanvas.width = Math.max(1, Math.round(w * dpr));
+    mtxCanvas.height = Math.max(1, Math.round(h * dpr));
+    mtx.ctx = mtxCanvas.getContext("2d");
+    var fs = 14 * dpr;
+    var cw = fs * 1.15;
+    var nCols = Math.max(8, Math.ceil(mtxCanvas.width / cw));
+    mtx.cols = [];
+    for (var i = 0; i < nCols; i++) {
+      mtx.cols.push({
+        x: i * cw + cw / 2,
+        y: -Math.random() * mtxCanvas.height * 1.5,
+        speed: (140 + Math.random() * 240) * dpr,
+        cells: 7 + Math.floor(Math.random() * 14),
+        fs: fs,
+        seed: Math.random() * 100,
+        alpha: 0.32 + Math.random() * 0.44,
+        delay: Math.random() * 0.6
+      });
+    }
+    mtx.ready = true;
+  }
+
+  function mtxDraw(t) {
+    var ctx = mtx.ctx;
+    if (!ctx) return;
+    var W = mtxCanvas.width, H = mtxCanvas.height;
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = "600 " + (14 * mtx.dpr).toFixed(0) + "px ui-monospace, Consolas, 'Liberation Mono', monospace";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    var dt = Math.min(0.05, (t - mtx.lastT) || 0.016);
+    mtx.lastT = t;
+    var age = t - mtx.t0;
+    for (var i = 0; i < mtx.cols.length; i++) {
+      var c = mtx.cols[i];
+      if (age < c.delay) continue;
+      c.y += c.speed * dt;
+      var trail = c.cells * c.fs;
+      if (c.y - trail > H) {
+        c.y = -trail - Math.random() * H * 0.4;
+        c.speed = (140 + Math.random() * 240) * mtx.dpr;
+        c.cells = 7 + Math.floor(Math.random() * 14);
+        c.seed = Math.random() * 100;
+      }
+      for (var k = 0; k < c.cells; k++) {
+        var gy = c.y - k * c.fs;
+        if (gy < -c.fs || gy > H) continue;
+        var f = 1 - k / c.cells;
+        var a = c.alpha * f * f;
+        if (k === 0) a = Math.min(0.92, a * 1.8);
+        var hh = Math.sin(c.seed * 12.9898 + k * 78.233 + Math.floor(t * 6) * 37.719) * 43758.5453;
+        hh = hh - Math.floor(hh);
+        var ch = hh < 0.5 ? "0" : "1";
+        ctx.fillStyle = k === 0 ? "rgba(122, 211, 217, " + a.toFixed(3) + ")" : "rgba(86, 193, 201, " + a.toFixed(3) + ")";
+        ctx.fillText(ch, c.x, gy);
+      }
+    }
+  }
+
+  function mtxTick(ms) {
+    if (!mtx.running) return;
+    mtxDraw(ms / 1000);
+    mtx.raf = window.requestAnimationFrame(mtxTick);
+  }
+
+  function mtxSetActive(on) {
+    if (!mtxCanvas) return;
+    if (on && !mtx.running) {
+      if (!mtx.ready) mtxSetup();
+      mtx.running = true;
+      mtx.t0 = performance.now() / 1000;
+      mtx.lastT = mtx.t0;
+      mtx.raf = window.requestAnimationFrame(mtxTick);
+    } else if (!on && mtx.running) {
+      mtx.running = false;
+      if (mtx.raf) { window.cancelAnimationFrame(mtx.raf); mtx.raf = null; }
+      if (mtx.ctx) mtx.ctx.clearRect(0, 0, mtxCanvas.width, mtxCanvas.height);
+    }
   }
 
   /* ---------------- loop ---------------- */
@@ -379,6 +485,8 @@
     window.requestAnimationFrame(function () {
       resizeScheduled = false;
       computeGeo();
+      mtx.ready = false;
+      if (mtx.running) mtxSetup();
       if (qaMode) {
         render(qaPinned);
         return;

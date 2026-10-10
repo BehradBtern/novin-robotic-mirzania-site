@@ -282,9 +282,10 @@ try {
       await pg.close();
     }
 
-    // phase 2: the blueprint diagram fills the spin/shrink stretch
+    // phase 2: the blueprint diagram + binary rain fill the spin/shrink stretch
     {
       const pg = await openPage(browser, { w: 1440, h: 900, qa: 0.24 });
+      await delay(500);
       const d = await pg.evaluate(() => {
         const el = document.getElementById('hero-diagram');
         const cir = document.getElementById('diagram-circle');
@@ -292,18 +293,33 @@ try {
         const bot = document.getElementById('diagram-bottom');
         const cr = cir ? cir.getBoundingClientRect() : null;
         const mr = document.getElementById('hero-markbox').getBoundingClientRect();
+        const mw = document.getElementById('hero-matrix');
+        const cv = document.getElementById('matrix-canvas');
+        let lit = -1;
+        try {
+          const cx = cv.getContext('2d');
+          const img = cx.getImageData(0, 0, cv.width, Math.min(260, cv.height));
+          const da = img.data; lit = 0;
+          for (let i = 3; i < da.length; i += 4) if (da[i] > 6) lit++;
+        } catch (e) { lit = -1; }
         return {
           op: el ? +(+getComputedStyle(el).opacity).toFixed(3) : -1,
           dash: cir ? +parseFloat(getComputedStyle(cir).strokeDashoffset).toFixed(1) : -1,
           gapY: cr ? Math.abs((cr.y + cr.height / 2) - (mr.y + mr.height / 2)) : -1,
           top: top ? top.textContent.trim() : '',
-          bot: bot ? bot.textContent.trim() : ''
+          bot: bot ? bot.textContent.trim() : '',
+          mtxOp: mw ? +(+getComputedStyle(mw).opacity).toFixed(3) : -1,
+          lit
         };
       });
-      const ok = d.op >= 0.9 && d.dash < 943 && d.gapY <= 40 && /applied robotics/i.test(d.top) && /mirzania/i.test(d.bot);
+      const ok = d.op >= 0.9 && d.dash < 943 && d.gapY <= 40 && /applied robotics/i.test(d.top) && /mirzania/i.test(d.bot) && d.mtxOp >= 0.9 && d.lit > 40;
       await shot(pg, 'b/phase2-diagram.png');
-      add('c', 'phase 2: blueprint diagram fills the spin (circle drawn in, both labels set)', ok ? PASS : FAIL, JSON.stringify({ op: d.op, dash: Math.round(d.dash), gapY: Math.round(d.gapY) }), 'diagram visible mid-phase (opacity ~1), circle drawn in (dashoffset < 943), top/bottom labels populated', ['evidence/b/phase2-diagram.png']);
+      add('c', 'phase 2: diagram + binary rain (0/1) fill the spin; rain morphs in/out', ok ? PASS : FAIL, JSON.stringify({ op: d.op, dash: Math.round(d.dash), gapY: Math.round(d.gapY), mtxOp: d.mtxOp, lit: d.lit }), 'diagram visible (opacity ~1, circle drawn, labels set, centred on the mark); binary rain visible (opacity ~1) and drawing glyphs (lit pixels > 40)', ['evidence/b/phase2-diagram.png']);
       await pg.close();
+      const pg2b = await openPage(browser, { w: 1440, h: 900, qa: 0.37 });
+      const mout = await pg2b.evaluate(() => +getComputedStyle(document.getElementById('hero-matrix')).opacity);
+      add('c', 'phase 2: rain morph-out is a smooth partial fade', mout > 0.03 && mout < 0.97 ? PASS : FAIL, JSON.stringify({ mtxOp: +mout.toFixed(3) }), 'at p=0.37 the rain is mid-fade (0.03 < opacity < 0.97)', []);
+      await pg2b.close();
     }
 
     // side-copy stage: text appears left/right of the small symbol, mark centred
@@ -330,7 +346,8 @@ try {
           const b = document.querySelector('#hero-side-left .hero__side-body');
           const ogCount = document.querySelectorAll('#hero-mark-og, .hero__mark--og').length;
           const dg = document.getElementById('hero-diagram');
-          return { ogCount, diag0: dg ? +getComputedStyle(dg).opacity : -1, ff: b ? getComputedStyle(b).fontFamily : '', fontOk: document.fonts.check('16px "Cormorant Garamond"') };
+          const mw = document.getElementById('hero-matrix');
+          return { ogCount, diag0: dg ? +getComputedStyle(dg).opacity : -1, mtx0: mw ? +getComputedStyle(mw).opacity : -1, ff: b ? getComputedStyle(b).fontFamily : '', fontOk: document.fonts.check('16px "Cormorant Garamond"') };
         });
         const mcx = stt.markbox.x + stt.markbox.w / 2;
         const mcy = stt.markbox.y + stt.markbox.h / 2;
@@ -341,8 +358,8 @@ try {
         const noOverlap = w > 640
           ? (o.sl.r + 8 <= mcx - rMark) && (o.sr.x - 8 >= mcx + rMark)
           : (o.sl.b + 4 <= mcy - rMark) && (o.sr.y - 4 >= mcy + rMark);
-        const ok = centered && visible && noOverlap && noGhost && o.titleL > 5 && o.titleR > 5 && ffq.ogCount === 0 && /Cormorant/i.test(ffq.ff) && ffq.fontOk === true && ffq.diag0 <= 0.02;
-        rows.push({ vp: w + 'x' + h, centered, visible, noGhost, noOverlap, ogCount: ffq.ogCount, diag0: ffq.diag0, ff: ffq.ff.slice(0, 42), fontOk: ffq.fontOk, mcx: +mcx.toFixed(1), mcy: +mcy.toFixed(1), rMark: +rMark.toFixed(1), ok });
+        const ok = centered && visible && noOverlap && noGhost && o.titleL > 5 && o.titleR > 5 && ffq.ogCount === 0 && /Cormorant/i.test(ffq.ff) && ffq.fontOk === true && ffq.diag0 <= 0.02 && ffq.mtx0 <= 0.03;
+        rows.push({ vp: w + 'x' + h, centered, visible, noGhost, noOverlap, ogCount: ffq.ogCount, diag0: ffq.diag0, mtx0: ffq.mtx0, ff: ffq.ff.slice(0, 42), fontOk: ffq.fontOk, mcx: +mcx.toFixed(1), mcy: +mcy.toFixed(1), rMark: +rMark.toFixed(1), ok });
         await shot(pg, 'b/sidetext-' + w + 'x' + h + '.png');
         await pg.close();
         const pg2 = await openPage(browser, { w, h, qa: 0.7 });
