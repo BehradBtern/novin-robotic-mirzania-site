@@ -61,12 +61,6 @@ window.SITE_CONTENT = {
     }
   },
 
-  /* Phase-2 blueprint diagram: labels for the spin guide */
-  heroDiagram: {
-    top: "Institute for applied robotics",
-    bottom: "Novin Robotic Mirzania"
-  },
-
   /* Animation tuning (all optional to edit):
      spinTurns      — full clockwise turns across the whole sequence (1 = 360°)
      heroWidthVw/Vh — the first (hero) logo's max share of viewport width/height

@@ -118,12 +118,6 @@
     fillSide(sideRightEl, C.heroSide.right);
   }
 
-  /* ---------------- phase-2 diagram labels ---------------- */
-  if (C.heroDiagram) {
-    setText("diagram-top", C.heroDiagram.top);
-    setText("diagram-bottom", C.heroDiagram.bottom);
-  }
-
   /* ---------------- reduced motion ---------------- */
   var mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   var reduced = mqReduce.matches;
@@ -152,9 +146,6 @@
   var wordmarkEl = doc.getElementById("hero-wordmark");
   var markboxEl = doc.getElementById("hero-markbox");
   var markEl = doc.getElementById("hero-mark");
-  var diagEl = doc.getElementById("hero-diagram");
-  var diaCircle = doc.getElementById("diagram-circle");
-  var diaRing = doc.getElementById("diagram-ring");
   var mtxWrap = doc.getElementById("hero-matrix");
   var mtxCanvas = doc.getElementById("matrix-canvas");
   var footerEl = doc.getElementById("footer");
@@ -304,20 +295,11 @@
       sideRightEl.style.transform = "translateY(-50%) translateX(" + soShift.toFixed(1) + "px)";
     }
 
-    /* phase-2 blueprint diagram: fades in with the spin, departs as the side copy arrives */
-    if (diagEl) {
-      var dop = seg(p, 0.13, 0.22) * (1 - seg(p, 0.35, 0.42));
-      diagEl.style.opacity = dop.toFixed(3);
-      diagEl.style.transform = "translate(-50%, -50%) translateY(" + (-off * Math.cos(rad) * (1 - cb)).toFixed(1) + "px)";
-    }
-    if (diaCircle) diaCircle.style.strokeDashoffset = (943 * (1 - seg(p, 0.13, 0.26))).toFixed(1);
-    if (diaRing) diaRing.setAttribute("transform", "rotate(" + (-90 * seg(p, 0.13, 0.42)).toFixed(2) + ")");
-
-    /* binary rain: morphs in as the spin begins, dissolves before the side copy */
+    /* binary rain: lives with the founder text — morphs in as it appears, out before the growth */
     if (mtxWrap) {
-      var morphIn = seg(p, 0.09, 0.24);
-      var morphOut = seg(p, 0.33, 0.40);
-      var mop = seg(p, 0.09, 0.17) * (1 - morphOut);
+      var morphIn = seg(p, 0.34, 0.48);
+      var morphOut = seg(p, 0.51, 0.58);
+      var mop = seg(p, 0.34, 0.42) * (1 - morphOut);
       mtxWrap.style.opacity = mop.toFixed(3);
       mtxWrap.style.transform = "scale(" + (1.04 - 0.04 * morphIn + 0.03 * morphOut).toFixed(4) + ")";
       var wantMtx = mop > 0.01 && !reduced;
