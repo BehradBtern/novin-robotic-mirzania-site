@@ -101,52 +101,52 @@
     }
   }
 
-  /* ---------------- international places ---------------- */
-  if (C.places) {
-    setText("places-kicker", C.places.kicker);
-    var pintro = doc.getElementById("places-intro");
-    if (pintro) {
-      if (C.places.intro) pintro.textContent = C.places.intro;
-      else pintro.remove();
+  /* ---------------- international places (overlay in the big-left phase) ----------------
+     Five flag+name rows that form a staircase on the right side while the mark
+     grows big at the left edge; they fade/slide in row by row and clear out
+     before the mark sweeps to the right. */
+  var placesEl = doc.getElementById("hero-places");
+  var hpRows = [];
+  if (placesEl && C.places && Array.isArray(C.places.items)) {
+    placesEl.innerHTML = "";
+    if (C.places.kicker) {
+      var pk = doc.createElement("p");
+      pk.className = "hp-kicker";
+      pk.textContent = C.places.kicker;
+      placesEl.appendChild(pk);
+      hpRows.push(pk);
     }
-    var pl = doc.getElementById("places-list");
-    if (pl && Array.isArray(C.places.items)) {
-      pl.innerHTML = "";
-      C.places.items.forEach(function (it) {
-        var row = doc.createElement("div");
-        row.className = "place";
-        var chip = doc.createElement("span");
-        chip.className = "place__flag";
-        var img = doc.createElement("img");
-        img.src = it.flag || "";
-        img.alt = "";
-        img.setAttribute("aria-hidden", "true");
-        img.decoding = "async";
-        chip.appendChild(img);
-        var body = doc.createElement("div");
-        body.className = "place__body";
-        if (it.year) {
-          var yr = doc.createElement("span");
-          yr.className = "place__year";
-          yr.textContent = it.year;
-          body.appendChild(yr);
-        }
-        var nm = doc.createElement("span");
-        nm.className = "place__name";
-        nm.textContent = it.country || "";
-        body.appendChild(nm);
-        if (it.text) {
-          var tx = doc.createElement("p");
-          tx.className = "place__text";
-          tx.textContent = it.text;
-          body.appendChild(tx);
-        }
-        row.appendChild(chip);
-        row.appendChild(body);
-        pl.appendChild(row);
-      });
-    }
+    C.places.items.forEach(function (it) {
+      var row = doc.createElement("div");
+      row.className = "hp-row";
+      var chip = doc.createElement("span");
+      chip.className = "hp-flag";
+      var img = doc.createElement("img");
+      img.src = it.flag || "";
+      img.alt = "";
+      img.setAttribute("aria-hidden", "true");
+      img.decoding = "async";
+      chip.appendChild(img);
+      row.appendChild(chip);
+      var nm = doc.createElement("span");
+      nm.className = "hp-name";
+      nm.textContent = it.country || "";
+      row.appendChild(nm);
+      if (it.year) {
+        var yr = doc.createElement("span");
+        yr.className = "hp-year";
+        yr.textContent = it.year;
+        row.appendChild(yr);
+      }
+      placesEl.appendChild(row);
+      hpRows.push(row);
+    });
   }
+  /* staircase timing per viewport: desktops hold the full set while the mark
+     is big at the left; phones use a shorter, lower window before the mark
+     fills the screen */
+  var PL_D = { in0: 0.615, pd: 0.003, dur: 0.028, out0: 0.700, odur: 0.045, step: 26, slide: 24 };
+  var PL_M = { in0: 0.606, pd: 0.002, dur: 0.024, out0: 0.628, odur: 0.030, step: 0, slide: 16 };
 
   /* ---------------- hero side copy (appears beside the small symbol) ------ */
   var sideLeftEl = doc.getElementById("hero-side-left");
@@ -351,6 +351,18 @@
       mtxWrap.style.transform = "scale(" + (1.04 - 0.04 * morphIn + 0.03 * morphOut).toFixed(4) + ")";
       var wantMtx = mop > 0.01 && !reduced;
       if (wantMtx !== mtx.running) mtxSetActive(wantMtx);
+    }
+
+    /* international places: staircase on the right while the mark grows big left */
+    if (hpRows.length) {
+      var PL = geo.vw <= 640 ? PL_M : PL_D;
+      for (var pj = 0; pj < hpRows.length; pj++) {
+        var pIn = PL.in0 + pj * PL.pd;
+        var pOut = PL.out0 + pj * PL.pd;
+        var rp = seg(p, pIn, pIn + PL.dur) * (1 - seg(p, pOut, pOut + PL.odur));
+        hpRows[pj].style.opacity = rp.toFixed(3);
+        hpRows[pj].style.transform = "translateX(" + (-pj * PL.step - (1 - rp) * PL.slide).toFixed(1) + "px)";
+      }
     }
 
     /* docking: hand the mark over to the footer-child layer (CSS .docked-footer) */

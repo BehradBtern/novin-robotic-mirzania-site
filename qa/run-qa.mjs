@@ -313,29 +313,59 @@ try {
       await pg3b.close();
     }
 
-    // international places: 5 rows, flags loaded, no overflow
+    // international places overlay: staircase on the right during the big-left phase
     {
       const rows = [];
-      for (const [w, h] of [[1440, 900], [390, 844]]) {
-        const pg = await openPage(browser, { w, h });
-        await pg.evaluate(() => { const el = document.getElementById('places'); if (el) el.scrollIntoView({ block: 'start' }); });
-        await delay(500);
+      for (const [w, h] of [[1440, 900], [1280, 800]]) {
+        const pg = await openPage(browser, { w, h, qa: 0.66 });
+        await delay(300);
         const d = await pg.evaluate(() => {
-          const items = Array.from(document.querySelectorAll('.place'));
-          const flags = items.map((el) => { const im = el.querySelector('img'); return im ? !!(im.complete && im.naturalWidth > 0) : false; });
-          return {
-            n: items.length,
-            flagsOk: flags.length === 5 && flags.every(Boolean),
-            names: items.map((el) => (el.querySelector('.place__name') || {}).textContent || ''),
-            overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
-          };
+          const wrap = document.getElementById('hero-places');
+          const items = Array.from(wrap.querySelectorAll('.hp-row'));
+          const ops = items.map((el) => parseFloat(el.style.opacity || '0'));
+          const flags = items.map((el) => { const im = el.querySelector('img'); return !!(im && im.complete && im.naturalWidth > 0); });
+          const mk = document.getElementById('hero-mark').getBoundingClientRect();
+          const lefts = items.map((el) => Math.round(el.getBoundingClientRect().left));
+          const gaps = items.map((el) => Math.round(el.getBoundingClientRect().left - mk.right));
+          return { n: items.length, minOp: Math.min(...ops), flagsOk: flags.length === 5 && flags.every(Boolean),
+            minGap: Math.min(...gaps), lefts, band: document.querySelectorAll('#places-list, section.places').length,
+            overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
         });
-        rows.push({ vp: w + 'x' + h, n: d.n, flagsOk: d.flagsOk, names: d.names, overflow: d.overflow });
-        await shot(pg, 'd/places-' + w + 'x' + h + '.png');
+        rows.push({ vp: w + 'x' + h, n: d.n, minOp: d.minOp, flagsOk: d.flagsOk, minGap: d.minGap, lefts: d.lefts, band: d.band, overflow: d.overflow });
+        await shot(pg, 'd/hero-places-' + w + 'x' + h + '.png');
         await pg.close();
       }
-      const ok = rows.every((r) => r.n === 5 && r.flagsOk && r.overflow <= 1);
-      add('d', 'international places: 5 rows with flags loaded, no overflow', ok ? PASS : FAIL, JSON.stringify(rows), 'five place rows; every flag image loaded (naturalWidth > 0); no horizontal overflow at 1440 and 390', ['evidence/d/places-1440x900.png', 'evidence/d/places-390x844.png']);
+      const stepOk = rows.every((r) => r.lefts.length === 5 && r.lefts.every((x, i) => i === 0 || x < r.lefts[i - 1]));
+      const ok = rows.every((r) => r.n === 5 && r.minOp >= 0.95 && r.flagsOk && r.minGap >= 4 && r.band === 0 && r.overflow <= 1);
+      add('d', 'international places overlay (staircase right of the big-left phase)', ok && stepOk ? PASS : FAIL, JSON.stringify(rows), 'at p=0.66 (1440/1280): 5 rows fully visible, flags loaded, row left edges stepping (staircase), clear of the mark, standalone section gone', ['evidence/d/hero-places-1440x900.png', 'evidence/d/hero-places-1280x800.png']);
+
+      const offs = [];
+      for (const qv of [0.24, 0.58, 0.88]) {
+        const pg = await openPage(browser, { w: 1440, h: 900, qa: qv });
+        await delay(250);
+        const m = await pg.evaluate(() => Math.max(0, ...Array.from(document.querySelectorAll('#hero-places .hp-row')).map((el) => parseFloat(el.style.opacity || '0'))));
+        offs.push({ qa: qv, maxOp: m });
+        await pg.close();
+      }
+      const offOk = offs.every((r) => r.maxOp <= 0.05);
+      add('d', 'places overlay hidden outside its window (spin, founder copy, dock)', offOk ? PASS : FAIL, JSON.stringify(offs), 'rows invisible (op <= 0.05) at p=0.24, 0.58, 0.88', []);
+
+      const pg2 = await openPage(browser, { w: 390, h: 844, qa: 0.63 });
+      await delay(250);
+      const m2 = await pg2.evaluate(() => {
+        const items = Array.from(document.querySelectorAll('#hero-places .hp-row'));
+        const ops = items.map((el) => parseFloat(el.style.opacity || '0'));
+        const flags = items.map((el) => { const im = el.querySelector('img'); return !!(im && im.complete && im.naturalWidth > 0); });
+        return { some: ops.filter((v) => v >= 0.3).length >= 3, minOp: Math.min(...ops), flagsOk: flags.every(Boolean), overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+      });
+      await shot(pg2, 'd/hero-places-390x844.png');
+      await pg2.close();
+      const m3pg = await openPage(browser, { w: 390, h: 844, qa: 0.72 });
+      await delay(250);
+      const m3 = await m3pg.evaluate(() => Math.max(0, ...Array.from(document.querySelectorAll('#hero-places .hp-row')).map((el) => parseFloat(el.style.opacity || '0'))));
+      await m3pg.close();
+      const mobOk = m2.some && m2.flagsOk && m2.overflow <= 1 && m3 <= 0.05;
+      add('d', 'places overlay on phones (compact, clears before the mark fills)', mobOk ? PASS : FAIL, JSON.stringify({ at063: m2, at072: m3 }), 'at 390 wide: rows visible around p=0.63 with flags loaded, no overflow, gone by p=0.72', ['evidence/d/hero-places-390x844.png']);
     }
 
     // side-copy stage: text appears left/right of the small symbol, mark centred
