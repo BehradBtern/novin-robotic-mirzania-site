@@ -93,3 +93,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.6.0 -> peeled commit f1ac029 (code revision be7f28d).
 - Change: new “International places” section between the story and the footer: five flag+name rows (India, Malaysia, Turkey, United Kingdom, United States) rendered from content.js (places.items); flags copied into assets/flags/; optional year + text fields per row (hidden until filled). QA now 30 checks (rows + flag loads + no overflow); roundtrip also copies assets/flags. Rollback path = git tags.
 - Worktree smoke: v1.6.0 served on 8081 -> 5 rows, flagsOk=true, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.0-places.png.
+
+## Rollback drill (lite) — v1.6.1
+- Annotated tag v1.6.1 -> peeled commit 016c2f2 (code revision fd2d05f).
+- Change: the international places feature moved into the animation — five flag+name rows form a staircase on the right side while the mark grows big at the left (desktop window p 0.615–0.76; compact lower window on phones); the standalone page section was removed. QA now 32 checks (staircase stepping, mark clearance, in/out windows, phones); independent verifier ran 17 probes (all consistent, 0 errors).
+- Worktree smoke: v1.6.1 served on 8081 -> rows 5, ops all 1, flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.1-places.png.
