@@ -88,3 +88,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.5.1 -> peeled commit 6d59c51 (code revision 101204b).
 - Change: binary rain moved from the spin phase to the founder-text phase (morph-in 0.34–0.42 with the side copy, morph-out 0.51–0.58 before the growth); the guide/hologram diagram (circle, ticks, labels, content key) fully removed. QA now 29 checks (founder-rain + morph-out + spin-off + diagram-gone). Rollback path = git tags.
 - Worktree smoke: v1.5.1 served on 8081 -> mtxOp=1 at p=0.47, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.5.1-rain.png.
+
+## Rollback drill (lite) — v1.6.0
+- Annotated tag v1.6.0 -> peeled commit f1ac029 (code revision be7f28d).
+- Change: new “International places” section between the story and the footer: five flag+name rows (India, Malaysia, Turkey, United Kingdom, United States) rendered from content.js (places.items); flags copied into assets/flags/; optional year + text fields per row (hidden until filled). QA now 30 checks (rows + flag loads + no overflow); roundtrip also copies assets/flags. Rollback path = git tags.
+- Worktree smoke: v1.6.0 served on 8081 -> 5 rows, flagsOk=true, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.0-places.png.
