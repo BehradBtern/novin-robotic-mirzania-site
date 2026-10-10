@@ -78,3 +78,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.4.9 -> peeled commit bbad4d4 (code revision 367a481).
 - Change: phase-2 blueprint diagram (spin guide) fills the previously empty spin/shrink stretch: hairline circle with 4 ticks + counter-rotating dashed ring + two mono labels (Institute for applied robotics / Novin Robotic Mirzania). The diagram tracks the mark’s actual centre (off×cos(rad)×(1-cb)) so the diamond stays centred inside the circle; fades out as the side copy arrives. QA now 27 checks (new phase-2 diagram probe incl. centring). Rollback path = git tags.
 - Worktree smoke: v1.4.9 served on 8081 -> diagOp=1 at p=0.24, labels set, sig=3, zero errors; shot qa/evidence/d/rollback-v1.4.9-diagram.png.
+
+## Rollback drill (lite) — v1.5.0
+- Annotated tag v1.5.0 -> peeled commit ee8a133 (code revision 94fe046).
+- Change: phase-2 binary rain (matrix 0/1) on a canvas behind the diagram/mark: morphs in (wrapper opacity + scale 1.04 -> 1.0 + staggered column materialisation) and morphs out (dissolve before the side copy). rAF loop runs only while the phase is active; cleared on deactivate; hidden in reduced motion; DPR capped at 1.5; resize-safe. QA now 28 checks (rain lit-pixel probe + morph-out probe). Rollback path = git tags.
+- Worktree smoke: v1.5.0 served on 8081 -> mtxOp=1, lit=3235, sig=3, zero errors; shot qa/evidence/d/rollback-v1.5.0-matrix.png.
