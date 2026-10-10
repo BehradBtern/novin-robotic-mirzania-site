@@ -101,6 +101,53 @@
     }
   }
 
+  /* ---------------- international places ---------------- */
+  if (C.places) {
+    setText("places-kicker", C.places.kicker);
+    var pintro = doc.getElementById("places-intro");
+    if (pintro) {
+      if (C.places.intro) pintro.textContent = C.places.intro;
+      else pintro.remove();
+    }
+    var pl = doc.getElementById("places-list");
+    if (pl && Array.isArray(C.places.items)) {
+      pl.innerHTML = "";
+      C.places.items.forEach(function (it) {
+        var row = doc.createElement("div");
+        row.className = "place";
+        var chip = doc.createElement("span");
+        chip.className = "place__flag";
+        var img = doc.createElement("img");
+        img.src = it.flag || "";
+        img.alt = "";
+        img.setAttribute("aria-hidden", "true");
+        img.decoding = "async";
+        chip.appendChild(img);
+        var body = doc.createElement("div");
+        body.className = "place__body";
+        if (it.year) {
+          var yr = doc.createElement("span");
+          yr.className = "place__year";
+          yr.textContent = it.year;
+          body.appendChild(yr);
+        }
+        var nm = doc.createElement("span");
+        nm.className = "place__name";
+        nm.textContent = it.country || "";
+        body.appendChild(nm);
+        if (it.text) {
+          var tx = doc.createElement("p");
+          tx.className = "place__text";
+          tx.textContent = it.text;
+          body.appendChild(tx);
+        }
+        row.appendChild(chip);
+        row.appendChild(body);
+        pl.appendChild(row);
+      });
+    }
+  }
+
   /* ---------------- hero side copy (appears beside the small symbol) ------ */
   var sideLeftEl = doc.getElementById("hero-side-left");
   var sideRightEl = doc.getElementById("hero-side-right");

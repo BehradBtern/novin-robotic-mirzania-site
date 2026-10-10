@@ -313,6 +313,31 @@ try {
       await pg3b.close();
     }
 
+    // international places: 5 rows, flags loaded, no overflow
+    {
+      const rows = [];
+      for (const [w, h] of [[1440, 900], [390, 844]]) {
+        const pg = await openPage(browser, { w, h });
+        await pg.evaluate(() => { const el = document.getElementById('places'); if (el) el.scrollIntoView({ block: 'start' }); });
+        await delay(500);
+        const d = await pg.evaluate(() => {
+          const items = Array.from(document.querySelectorAll('.place'));
+          const flags = items.map((el) => { const im = el.querySelector('img'); return im ? !!(im.complete && im.naturalWidth > 0) : false; });
+          return {
+            n: items.length,
+            flagsOk: flags.length === 5 && flags.every(Boolean),
+            names: items.map((el) => (el.querySelector('.place__name') || {}).textContent || ''),
+            overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
+          };
+        });
+        rows.push({ vp: w + 'x' + h, n: d.n, flagsOk: d.flagsOk, names: d.names, overflow: d.overflow });
+        await shot(pg, 'd/places-' + w + 'x' + h + '.png');
+        await pg.close();
+      }
+      const ok = rows.every((r) => r.n === 5 && r.flagsOk && r.overflow <= 1);
+      add('d', 'international places: 5 rows with flags loaded, no overflow', ok ? PASS : FAIL, JSON.stringify(rows), 'five place rows; every flag image loaded (naturalWidth > 0); no horizontal overflow at 1440 and 390', ['evidence/d/places-1440x900.png', 'evidence/d/places-390x844.png']);
+    }
+
     // side-copy stage: text appears left/right of the small symbol, mark centred
     {
       const rows = [];

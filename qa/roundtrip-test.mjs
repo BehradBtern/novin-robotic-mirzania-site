@@ -11,7 +11,7 @@ import { CHROME, ROOT, TMP, delay, serve } from './lib.mjs';
 const PORT = 8125;
 const tmp = path.join(TMP, 'roundtrip');
 fs.rmSync(tmp, { recursive: true, force: true });
-for (const d of ['assets/logo', 'assets/fonts', 'assets/css', 'assets/js']) {
+for (const d of ['assets/logo', 'assets/fonts', 'assets/flags', 'assets/css', 'assets/js']) {
   fs.mkdirSync(path.join(tmp, d), { recursive: true });
 }
 for (const f of ['index.html', 'server.js', 'content.js']) {
@@ -25,6 +25,9 @@ for (const f of fs.readdirSync(path.join(ROOT, 'assets/logo'))) {
 }
 for (const f of fs.readdirSync(path.join(ROOT, 'assets/fonts'))) {
   fs.copyFileSync(path.join(ROOT, 'assets/fonts', f), path.join(tmp, 'assets/fonts', f));
+}
+for (const f of fs.readdirSync(path.join(ROOT, 'assets/flags'))) {
+  fs.copyFileSync(path.join(ROOT, 'assets/flags', f), path.join(tmp, 'assets/flags', f));
 }
 
 // (a) edit ONE footer string in content.js only
