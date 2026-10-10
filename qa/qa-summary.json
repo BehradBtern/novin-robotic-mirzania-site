@@ -3,14 +3,14 @@
     "os": "win32 x64",
     "node": "v22.22.0",
     "puppeteer": "25.12.0",
-    "chrome": "Chrome/154.0.8037.95",
-    "edge": "Edg/154.0.4258.53",
-    "generatedAt": "2026-10-06T19:04:35.986Z",
-    "sha": "cadb272"
+    "chrome": "Chrome/154.0.8037.98",
+    "edge": "Edg/155.0.4283.45",
+    "generatedAt": "2026-10-10T14:20:23.718Z",
+    "sha": "c5b48f6"
   },
-  "generatedAt": "2026-10-06T19:04:35.986Z",
+  "generatedAt": "2026-10-10T14:20:23.718Z",
   "counts": {
-    "PASS": 27,
+    "PASS": 28,
     "FAIL": 0,
     "INFO": 1,
     "OBSERVED": 0,
@@ -128,10 +128,10 @@
     },
     {
       "id": "c",
-      "entry": "phase 2: blueprint diagram fills the spin (circle drawn in, both labels set)",
+      "entry": "phase 2: diagram + binary rain (0/1) fill the spin; rain morphs in/out",
       "status": "PASS",
-      "value": "{\"op\":1,\"dash\":60,\"gapY\":1}",
-      "threshold": "diagram visible mid-phase (opacity ~1), circle drawn in (dashoffset < 943), top/bottom labels populated",
+      "value": "{\"op\":1,\"dash\":60,\"gapY\":1,\"mtxOp\":1,\"lit\":5727}",
+      "threshold": "diagram visible (opacity ~1, circle drawn, labels set, centred on the mark); binary rain visible (opacity ~1) and drawing glyphs (lit pixels > 40)",
       "evidence": [
         "evidence/b/phase2-diagram.png"
       ],
@@ -139,9 +139,18 @@
     },
     {
       "id": "c",
+      "entry": "phase 2: rain morph-out is a smooth partial fade",
+      "status": "PASS",
+      "value": "{\"mtxOp\":0.394}",
+      "threshold": "at p=0.37 the rain is mid-fade (0.03 < opacity < 0.97)",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "id": "c",
       "entry": "side copy: serif type beside the small symbol, then gone before the growth",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"diag0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":718.5,\"mcy\":450,\"rMark\":219.6,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"diag0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":194.5,\"mcy\":422,\"rMark\":68.4,\"ok\":true,\"goneAt07\":[0,0]}]",
+      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"diag0\":0,\"mtx0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":718.5,\"mcy\":450,\"rMark\":219.6,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"diag0\":0,\"mtx0\":0,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":194.5,\"mcy\":422,\"rMark\":68.4,\"ok\":true,\"goneAt07\":[0,0]}]",
       "threshold": "both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay",
       "evidence": [
         "evidence/b/sidecopy-audit.json",
@@ -253,7 +262,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":6},\"resources\":6,\"transferBytes\":174857}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":6},\"resources\":6,\"transferBytes\":179209}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
@@ -309,7 +318,7 @@
       "id": "k",
       "entry": "Edge subset (same engine as Chrome)",
       "status": "PASS",
-      "value": "{\"version\":\"Edg/154.0.4258.53\",\"sigLayers\":3,\"errors\":0}",
+      "value": "{\"version\":\"Edg/155.0.4283.45\",\"sigLayers\":3,\"errors\":0}",
       "threshold": "footer signature rendered + zero errors on Edge",
       "evidence": [
         "evidence/edge/dock-1440x900.png"
