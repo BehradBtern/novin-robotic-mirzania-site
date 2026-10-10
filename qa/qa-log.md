@@ -83,3 +83,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.5.0 -> peeled commit ee8a133 (code revision 94fe046).
 - Change: phase-2 binary rain (matrix 0/1) on a canvas behind the diagram/mark: morphs in (wrapper opacity + scale 1.04 -> 1.0 + staggered column materialisation) and morphs out (dissolve before the side copy). rAF loop runs only while the phase is active; cleared on deactivate; hidden in reduced motion; DPR capped at 1.5; resize-safe. QA now 28 checks (rain lit-pixel probe + morph-out probe). Rollback path = git tags.
 - Worktree smoke: v1.5.0 served on 8081 -> mtxOp=1, lit=3235, sig=3, zero errors; shot qa/evidence/d/rollback-v1.5.0-matrix.png.
+
+## Rollback drill (lite) — v1.5.1
+- Annotated tag v1.5.1 -> peeled commit 6d59c51 (code revision 101204b).
+- Change: binary rain moved from the spin phase to the founder-text phase (morph-in 0.34–0.42 with the side copy, morph-out 0.51–0.58 before the growth); the guide/hologram diagram (circle, ticks, labels, content key) fully removed. QA now 29 checks (founder-rain + morph-out + spin-off + diagram-gone). Rollback path = git tags.
+- Worktree smoke: v1.5.1 served on 8081 -> mtxOp=1 at p=0.47, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.5.1-rain.png.
