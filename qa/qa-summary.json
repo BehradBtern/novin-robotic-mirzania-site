@@ -5,12 +5,12 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/154.0.8037.98",
     "edge": "Edg/155.0.4283.45",
-    "generatedAt": "2026-10-10T18:19:56.955Z",
-    "sha": "dac34f4"
+    "generatedAt": "2026-10-10T18:38:35.529Z",
+    "sha": "514a726"
   },
-  "generatedAt": "2026-10-10T18:19:56.955Z",
+  "generatedAt": "2026-10-10T18:38:35.529Z",
   "counts": {
-    "PASS": 30,
+    "PASS": 32,
     "FAIL": 0,
     "INFO": 1,
     "OBSERVED": 0,
@@ -32,7 +32,7 @@
       "id": "a",
       "entry": "old placeholder elements removed from DOM (incl. the programmes section)",
       "status": "PASS",
-      "value": "{\"copy\":0,\"indicator\":0,\"hint\":0,\"rmMark\":0} galleryGone=0 body=[\"A.skip-link\",\"NOSCRIPT\",\"SECTION#story.hero\",\"SECTION#places.places\",\"FOOTER#footer.footer\"]",
+      "value": "{\"copy\":0,\"indicator\":0,\"hint\":0,\"rmMark\":0} galleryGone=0 body=[\"A.skip-link\",\"NOSCRIPT\",\"SECTION#story.hero\",\"FOOTER#footer.footer\"]",
       "threshold": "copy/indicator/hint/rm-mark/gallery counts all 0; body = skip-link + noscript + hero + footer",
       "evidence": [
         "evidence/a/nav-sweep.json"
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":6570,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":7534,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -157,13 +157,33 @@
     },
     {
       "id": "d",
-      "entry": "international places: 5 rows with flags loaded, no overflow",
+      "entry": "international places overlay (staircase right of the big-left phase)",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"n\":5,\"flagsOk\":true,\"names\":[\"India\",\"Malaysia\",\"Turkey\",\"United Kingdom\",\"United States\"],\"overflow\":0},{\"vp\":\"390x844\",\"n\":5,\"flagsOk\":true,\"names\":[\"India\",\"Malaysia\",\"Turkey\",\"United Kingdom\",\"United States\"],\"overflow\":0}]",
-      "threshold": "five place rows; every flag image loaded (naturalWidth > 0); no horizontal overflow at 1440 and 390",
+      "value": "[{\"vp\":\"1440x900\",\"n\":5,\"minOp\":1,\"flagsOk\":true,\"minGap\":208,\"lefts\":[898,872,846,820,794],\"band\":0,\"overflow\":0},{\"vp\":\"1280x800\",\"n\":5,\"minOp\":1,\"flagsOk\":true,\"minGap\":173,\"lefts\":[793,767,741,715,689],\"band\":0,\"overflow\":0}]",
+      "threshold": "at p=0.66 (1440/1280): 5 rows fully visible, flags loaded, row left edges stepping (staircase), clear of the mark, standalone section gone",
       "evidence": [
-        "evidence/d/places-1440x900.png",
-        "evidence/d/places-390x844.png"
+        "evidence/d/hero-places-1440x900.png",
+        "evidence/d/hero-places-1280x800.png"
+      ],
+      "note": ""
+    },
+    {
+      "id": "d",
+      "entry": "places overlay hidden outside its window (spin, founder copy, dock)",
+      "status": "PASS",
+      "value": "[{\"qa\":0.24,\"maxOp\":0},{\"qa\":0.58,\"maxOp\":0},{\"qa\":0.88,\"maxOp\":0}]",
+      "threshold": "rows invisible (op <= 0.05) at p=0.24, 0.58, 0.88",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "id": "d",
+      "entry": "places overlay on phones (compact, clears before the mark fills)",
+      "status": "PASS",
+      "value": "{\"at063\":{\"some\":true,\"minOp\":0.624,\"flagsOk\":true,\"overflow\":0},\"at072\":0}",
+      "threshold": "at 390 wide: rows visible around p=0.63 with flags loaded, no overflow, gone by p=0.72",
+      "evidence": [
+        "evidence/d/hero-places-390x844.png"
       ],
       "note": ""
     },
@@ -206,7 +226,7 @@
       "id": "d2",
       "entry": "footer stability: page height steady across scrolling",
       "status": "PASS",
-      "value": "{\"h1\":4550,\"h2\":4550}",
+      "value": "{\"h1\":3751,\"h2\":3751}",
       "threshold": "scrollHeight shift <= 2px",
       "evidence": [],
       "note": ""
@@ -237,7 +257,7 @@
       "id": "f",
       "entry": "footer: links land + contact/legal intact",
       "status": "PASS",
-      "value": "{\"landings\":[{\"label\":\"Our story\",\"href\":\"#story\",\"top\":0},{\"label\":\"Get in touch\",\"href\":\"#contact\",\"top\":282.4},{\"label\":\"Back to top\",\"href\":\"#top\",\"top\":0}],\"contactCheck\":{\"emailText\":true,\"emailHref\":true,\"phoneHref\":true,\"address\":true,\"legal\":true}}",
+      "value": "{\"landings\":[{\"label\":\"Our story\",\"href\":\"#story\",\"top\":0},{\"label\":\"Get in touch\",\"href\":\"#contact\",\"top\":282},{\"label\":\"Back to top\",\"href\":\"#top\",\"top\":0}],\"contactCheck\":{\"emailText\":true,\"emailHref\":true,\"phoneHref\":true,\"address\":true,\"legal\":true}}",
       "threshold": "3 links land within viewport; mailto/tel formats; texts == content",
       "evidence": [
         "evidence/f/footer-links.json",
@@ -283,7 +303,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":185850}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":186488}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"

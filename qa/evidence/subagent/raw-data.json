@@ -1,0 +1,5431 @@
+{
+  "startedAt": "2026-10-10T18:44:31.897Z",
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "base": "http://localhost:8080/",
+  "probes": [
+    {
+      "tag": "desk-p0.24",
+      "width": 1440,
+      "height": 900,
+      "p": 0.24,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.24",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-50px)",
+            "rect": {
+              "x": 873.61,
+              "y": 319.97,
+              "left": 873.61,
+              "right": 1303.61,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 882.61,
+                "y": 334.97,
+                "left": 882.61,
+                "right": 924.61,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-76px)",
+            "rect": {
+              "x": 847.61,
+              "y": 377.97,
+              "left": 847.61,
+              "right": 1277.61,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 870.61,
+                "y": 392.97,
+                "left": 870.61,
+                "right": 884.61,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-102px)",
+            "rect": {
+              "x": 821.61,
+              "y": 435.97,
+              "left": 821.61,
+              "right": 1251.61,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 830.61,
+                "y": 450.97,
+                "left": 830.61,
+                "right": 872.61,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-128px)",
+            "rect": {
+              "x": 795.61,
+              "y": 493.97,
+              "left": 795.61,
+              "right": 1225.61,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 803.61,
+                "y": 509.77,
+                "left": 803.61,
+                "right": 847.59,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-154px)",
+            "rect": {
+              "x": 769.61,
+              "y": 551.97,
+              "left": 769.61,
+              "right": 1199.61,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 792.23,
+                "y": 566.97,
+                "left": 792.23,
+                "right": 806.97,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 899.61,
+            "y": 290.03,
+            "left": 899.61,
+            "right": 1329.61,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": 489.12,
+          "y": 198.61,
+          "left": 489.12,
+          "right": 1152.81,
+          "top": 198.61,
+          "bottom": 862.82,
+          "width": 663.69,
+          "height": 664.21
+        },
+        "markbox": {
+          "x": 489.12,
+          "y": 198.61,
+          "left": 489.12,
+          "right": 1152.81,
+          "top": 198.61,
+          "bottom": 862.82,
+          "width": 663.69,
+          "height": 664.21
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.24,
+          "pTarget": 0.24,
+          "spin": 127.91666666666663,
+          "tx": 0,
+          "ty": 0,
+          "sF": 0.8450787037037037,
+          "fade": 0.6933225362225643,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.24,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": 145.778076171875,
+            "y": -141.7654571533203,
+            "w": 1148.44384765625,
+            "h": 1183.531005859375
+          },
+          "markbox": {
+            "x": 489.11566162109375,
+            "y": 198.60714721679688,
+            "w": 663.6912231445312,
+            "h": 664.2091064453125
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(0px, 0px) rotate(127.92deg) scale(0.8451)",
+          "wordmarkOpacity": 0.307,
+          "markboxOpacity": 0.693
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "desk-p0.58",
+      "width": 1440,
+      "height": 900,
+      "p": 0.58,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.58",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-50px)",
+            "rect": {
+              "x": 873.61,
+              "y": 319.97,
+              "left": 873.61,
+              "right": 1303.61,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 882.61,
+                "y": 334.97,
+                "left": 882.61,
+                "right": 924.61,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-76px)",
+            "rect": {
+              "x": 847.61,
+              "y": 377.97,
+              "left": 847.61,
+              "right": 1277.61,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 870.61,
+                "y": 392.97,
+                "left": 870.61,
+                "right": 884.61,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-102px)",
+            "rect": {
+              "x": 821.61,
+              "y": 435.97,
+              "left": 821.61,
+              "right": 1251.61,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 830.61,
+                "y": 450.97,
+                "left": 830.61,
+                "right": 872.61,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-128px)",
+            "rect": {
+              "x": 795.61,
+              "y": 493.97,
+              "left": 795.61,
+              "right": 1225.61,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 803.61,
+                "y": 509.77,
+                "left": 803.61,
+                "right": 847.59,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-154px)",
+            "rect": {
+              "x": 769.61,
+              "y": 551.97,
+              "left": 769.61,
+              "right": 1199.61,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 792.23,
+                "y": 566.97,
+                "left": 792.23,
+                "right": 806.97,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 899.61,
+            "y": 290.03,
+            "left": 899.61,
+            "right": 1329.61,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": 498.93,
+          "y": 231.81,
+          "left": 498.93,
+          "right": 938.07,
+          "top": 231.81,
+          "bottom": 668.2,
+          "width": 439.14,
+          "height": 436.39
+        },
+        "markbox": {
+          "x": 498.93,
+          "y": 231.81,
+          "left": 498.93,
+          "right": 938.07,
+          "top": 231.81,
+          "bottom": 668.2,
+          "width": 439.14,
+          "height": 436.39
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.58,
+          "pTarget": 0.58,
+          "spin": 180,
+          "tx": -1.4645513841740504e-14,
+          "ty": -119.589696,
+          "sF": 0.782,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.58,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": 289.044677734375,
+            "y": -7.413998603820801,
+            "w": 861.91064453125,
+            "h": 675.6480102539062
+          },
+          "markbox": {
+            "x": 498.9261474609375,
+            "y": 231.81080627441406,
+            "w": 439.14190673828125,
+            "h": 436.39263916015625
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(0px, -119.59px) rotate(180deg) scale(0.782)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "edge-desk-p0.615",
+      "width": 1440,
+      "height": 900,
+      "p": 0.615,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.615",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-50px)",
+            "rect": {
+              "x": 873.61,
+              "y": 319.97,
+              "left": 873.61,
+              "right": 1303.61,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 882.61,
+                "y": 334.97,
+                "left": 882.61,
+                "right": 924.61,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-76px)",
+            "rect": {
+              "x": 847.61,
+              "y": 377.97,
+              "left": 847.61,
+              "right": 1277.61,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 870.61,
+                "y": 392.97,
+                "left": 870.61,
+                "right": 884.61,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-102px)",
+            "rect": {
+              "x": 821.61,
+              "y": 435.97,
+              "left": 821.61,
+              "right": 1251.61,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 830.61,
+                "y": 450.97,
+                "left": 830.61,
+                "right": 872.61,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-128px)",
+            "rect": {
+              "x": 795.61,
+              "y": 493.97,
+              "left": 795.61,
+              "right": 1225.61,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 803.61,
+                "y": 509.77,
+                "left": 803.61,
+                "right": 847.59,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-154px)",
+            "rect": {
+              "x": 769.61,
+              "y": 551.97,
+              "left": 769.61,
+              "right": 1199.61,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 792.23,
+                "y": 566.97,
+                "left": 792.23,
+                "right": 806.97,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 899.61,
+            "y": 290.03,
+            "left": 899.61,
+            "right": 1329.61,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": 372.05,
+          "y": 176.15,
+          "left": 372.05,
+          "right": 921.78,
+          "top": 176.15,
+          "bottom": 723.37,
+          "width": 549.73,
+          "height": 547.22
+        },
+        "markbox": {
+          "x": 372.05,
+          "y": 176.15,
+          "left": 372.05,
+          "right": 921.78,
+          "top": 176.15,
+          "bottom": 723.37,
+          "width": 549.73,
+          "height": 547.22
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.615,
+          "pTarget": 0.615,
+          "spin": 188.93229166666669,
+          "tx": -51.10712533248409,
+          "ty": -129.48261237835004,
+          "sF": 0.8570843038107063,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.615,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": 144.79722595214844,
+            "y": -118.57970428466797,
+            "w": 1048.185546875,
+            "h": 878.1994018554688
+          },
+          "markbox": {
+            "x": 372.0516662597656,
+            "y": 176.14926147460938,
+            "w": 549.726806640625,
+            "h": 547.2177734375
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-51.11px, -129.48px) rotate(188.93deg) scale(0.8571)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "desk-p0.63",
+      "width": 1440,
+      "height": 900,
+      "p": 0.63,
+      "shot": "1440-p0.63.png",
+      "data": {
+        "ready": "true",
+        "qa": "0.63",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0.394",
+            "opacity": 0.394,
+            "computedOpacity": 0.394,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-40.6px)",
+            "rect": {
+              "x": 883.01,
+              "y": 319.97,
+              "left": 883.01,
+              "right": 1313.01,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 892.01,
+                "y": 334.97,
+                "left": 892.01,
+                "right": 934.01,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.244",
+            "opacity": 0.244,
+            "computedOpacity": 0.244,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-70.2px)",
+            "rect": {
+              "x": 853.41,
+              "y": 377.97,
+              "left": 853.41,
+              "right": 1283.41,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 876.41,
+                "y": 392.97,
+                "left": 876.41,
+                "right": 890.41,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.118",
+            "opacity": 0.118,
+            "computedOpacity": 0.118,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-99.2px)",
+            "rect": {
+              "x": 824.41,
+              "y": 435.97,
+              "left": 824.41,
+              "right": 1254.41,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 833.41,
+                "y": 450.97,
+                "left": 833.41,
+                "right": 875.41,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.032",
+            "opacity": 0.032,
+            "computedOpacity": 0.032,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-127.2px)",
+            "rect": {
+              "x": 796.41,
+              "y": 493.97,
+              "left": 796.41,
+              "right": 1226.41,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 804.41,
+                "y": 509.77,
+                "left": 804.41,
+                "right": 848.39,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-154px)",
+            "rect": {
+              "x": 769.61,
+              "y": 551.97,
+              "left": 769.61,
+              "right": 1199.61,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 792.23,
+                "y": 566.97,
+                "left": 792.23,
+                "right": 806.97,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0.553",
+          "opacity": 0.553,
+          "rect": {
+            "x": 912.91,
+            "y": 290.03,
+            "left": 912.91,
+            "right": 1342.91,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": 134.84,
+          "y": 74.86,
+          "left": 134.84,
+          "right": 885.05,
+          "top": 74.86,
+          "bottom": 823.46,
+          "width": 750.21,
+          "height": 748.6
+        },
+        "markbox": {
+          "x": 134.84,
+          "y": 74.86,
+          "left": 134.84,
+          "right": 885.05,
+          "top": 74.86,
+          "bottom": 823.46,
+          "width": 750.21,
+          "height": 748.6
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.63,
+          "pTarget": 0.63,
+          "spin": 206.04166666666674,
+          "tx": -141.13343213052724,
+          "ty": -137.5262915300943,
+          "sF": 1.0009046758329627,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.63,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": -106.54470825195312,
+            "y": -318.17315673828125,
+            "w": 1370.829345703125,
+            "h": 1261.286376953125
+          },
+          "markbox": {
+            "x": 134.83518981933594,
+            "y": 74.86341094970703,
+            "w": 750.21337890625,
+            "h": 748.5965576171875
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-141.13px, -137.53px) rotate(206.04deg) scale(1.0009)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "shotPath": "D:\\novin3d\\qa\\evidence\\subagent\\1440-p0.63.png",
+      "cropPath": "D:\\novin3d\\qa\\evidence\\subagent\\1440-p0.63-places.png"
+    },
+    {
+      "tag": "desk-p0.66",
+      "width": 1440,
+      "height": 900,
+      "p": 0.66,
+      "shot": "1440-p0.66.png",
+      "data": {
+        "ready": "true",
+        "qa": "0.66",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-26px)",
+            "rect": {
+              "x": 897.61,
+              "y": 319.97,
+              "left": 897.61,
+              "right": 1327.61,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 906.61,
+                "y": 334.97,
+                "left": 906.61,
+                "right": 948.61,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-52px)",
+            "rect": {
+              "x": 871.61,
+              "y": 377.97,
+              "left": 871.61,
+              "right": 1301.61,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 894.61,
+                "y": 392.97,
+                "left": 894.61,
+                "right": 908.61,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-78px)",
+            "rect": {
+              "x": 845.61,
+              "y": 435.97,
+              "left": 845.61,
+              "right": 1275.61,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 854.61,
+                "y": 450.97,
+                "left": 854.61,
+                "right": 896.61,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-104px)",
+            "rect": {
+              "x": 819.61,
+              "y": 493.97,
+              "left": 819.61,
+              "right": 1249.61,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 827.61,
+                "y": 509.77,
+                "left": 827.61,
+                "right": 871.59,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-130px)",
+            "rect": {
+              "x": 793.61,
+              "y": 551.97,
+              "left": 793.61,
+              "right": 1223.61,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 816.23,
+                "y": 566.97,
+                "left": 816.23,
+                "right": 830.97,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "1",
+          "opacity": 1,
+          "rect": {
+            "x": 923.61,
+            "y": 290.03,
+            "left": 923.61,
+            "right": 1353.61,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": -373.64,
+          "y": -34.19,
+          "left": -373.64,
+          "right": 585.66,
+          "top": -34.19,
+          "bottom": 928.83,
+          "width": 959.3,
+          "height": 963.02
+        },
+        "markbox": {
+          "x": -373.64,
+          "y": -34.19,
+          "left": -373.64,
+          "right": 585.66,
+          "top": -34.19,
+          "bottom": 928.83,
+          "width": 959.3,
+          "height": 963.02
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.66,
+          "pTarget": 0.66,
+          "spin": 256.66666666666674,
+          "tx": -401.06849297002935,
+          "ty": -50.307691318714625,
+          "sF": 1.4264553656522412,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.66,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": -461.9659729003906,
+            "y": -507.3470764160156,
+            "w": 1561.7918701171875,
+            "h": 1814.0740966796875
+          },
+          "markbox": {
+            "x": -373.6400146484375,
+            "y": -34.1898078918457,
+            "w": 959.3006591796875,
+            "h": 963.0242919921875
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-401.07px, -50.31px) rotate(256.67deg) scale(1.4265)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "shotPath": "D:\\novin3d\\qa\\evidence\\subagent\\1440-p0.66.png",
+      "cropPath": "D:\\novin3d\\qa\\evidence\\subagent\\1440-p0.66-places.png"
+    },
+    {
+      "tag": "edge-desk-p0.647",
+      "width": 1440,
+      "height": 900,
+      "p": 0.647,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.647",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-26px)",
+            "rect": {
+              "x": 897.61,
+              "y": 319.97,
+              "left": 897.61,
+              "right": 1327.61,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 906.61,
+                "y": 334.97,
+                "left": 906.61,
+                "right": 948.61,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.985",
+            "opacity": 0.985,
+            "computedOpacity": 0.985,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-52.3px)",
+            "rect": {
+              "x": 871.31,
+              "y": 377.97,
+              "left": 871.31,
+              "right": 1301.31,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 894.31,
+                "y": 392.97,
+                "left": 894.31,
+                "right": 908.31,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.916",
+            "opacity": 0.916,
+            "computedOpacity": 0.916,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-80px)",
+            "rect": {
+              "x": 843.61,
+              "y": 435.97,
+              "left": 843.61,
+              "right": 1273.61,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 852.61,
+                "y": 450.97,
+                "left": 852.61,
+                "right": 894.61,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.802",
+            "opacity": 0.802,
+            "computedOpacity": 0.802,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-108.8px)",
+            "rect": {
+              "x": 814.81,
+              "y": 493.97,
+              "left": 814.81,
+              "right": 1244.81,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 822.81,
+                "y": 509.77,
+                "left": 822.81,
+                "right": 866.79,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.658",
+            "opacity": 0.658,
+            "computedOpacity": 0.658,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-138.2px)",
+            "rect": {
+              "x": 785.41,
+              "y": 551.97,
+              "left": 785.41,
+              "right": 1215.41,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 808.03,
+                "y": 566.97,
+                "left": 808.03,
+                "right": 822.77,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "1",
+          "opacity": 1,
+          "rect": {
+            "x": 923.61,
+            "y": 290.03,
+            "left": 923.61,
+            "right": 1353.61,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": -243.58,
+          "y": -43.29,
+          "left": -243.58,
+          "right": 737.3,
+          "top": -43.29,
+          "bottom": 939.12,
+          "width": 980.88,
+          "height": 982.42
+        },
+        "markbox": {
+          "x": -243.58,
+          "y": -43.29,
+          "left": -243.58,
+          "right": 737.3,
+          "top": -43.29,
+          "bottom": 939.12,
+          "width": 980.88,
+          "height": 982.42
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.647,
+          "pTarget": 0.647,
+          "spin": 238.98395833333345,
+          "tx": -304.3975476775844,
+          "ty": -100.69243157242398,
+          "sF": 1.277815588286847,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.647,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": -420.359375,
+            "y": -538.6410522460938,
+            "w": 1671.9188232421875,
+            "h": 1775.902099609375
+          },
+          "markbox": {
+            "x": -243.58193969726562,
+            "y": -43.29380416870117,
+            "w": 980.8817138671875,
+            "h": 982.4165649414062
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-304.4px, -100.69px) rotate(238.98deg) scale(1.2778)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "edge-desk-p0.705",
+      "width": 1440,
+      "height": 900,
+      "p": 0.705,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.705",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0.994",
+            "opacity": 0.994,
+            "computedOpacity": 0.994,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-26.1px)",
+            "rect": {
+              "x": 897.51,
+              "y": 319.97,
+              "left": 897.51,
+              "right": 1327.51,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 906.51,
+                "y": 334.97,
+                "left": 906.51,
+                "right": 948.51,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-52px)",
+            "rect": {
+              "x": 871.61,
+              "y": 377.97,
+              "left": 871.61,
+              "right": 1301.61,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 894.61,
+                "y": 392.97,
+                "left": 894.61,
+                "right": 908.61,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-78px)",
+            "rect": {
+              "x": 845.61,
+              "y": 435.97,
+              "left": 845.61,
+              "right": 1275.61,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 854.61,
+                "y": 450.97,
+                "left": 854.61,
+                "right": 896.61,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-104px)",
+            "rect": {
+              "x": 819.61,
+              "y": 493.97,
+              "left": 819.61,
+              "right": 1249.61,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 827.61,
+                "y": 509.77,
+                "left": 827.61,
+                "right": 871.59,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "1",
+            "opacity": 1,
+            "computedOpacity": 1,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-130px)",
+            "rect": {
+              "x": 793.61,
+              "y": 551.97,
+              "left": 793.61,
+              "right": 1223.61,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 816.23,
+                "y": 566.97,
+                "left": 816.23,
+                "right": 830.97,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0.966",
+          "opacity": 0.966,
+          "rect": {
+            "x": 922.81,
+            "y": 290.03,
+            "left": 922.81,
+            "right": 1352.81,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": -429.17,
+          "y": 14.9,
+          "left": -429.17,
+          "right": 429.68,
+          "top": 14.9,
+          "bottom": 879.16,
+          "width": 858.86,
+          "height": 864.26
+        },
+        "markbox": {
+          "x": -429.17,
+          "y": 14.9,
+          "left": -429.17,
+          "right": 429.68,
+          "top": 14.9,
+          "bottom": 879.16,
+          "width": 858.86,
+          "height": 864.26
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.705,
+          "pTarget": 0.705,
+          "spin": 270.0163994169096,
+          "tx": -484.4526058246527,
+          "ty": 0.06734417444387479,
+          "sF": 1.5385345596787172,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.705,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": -429.3778991699219,
+            "y": -398.0196533203125,
+            "w": 1329.8558349609375,
+            "h": 1696.1793212890625
+          },
+          "markbox": {
+            "x": -429.1716003417969,
+            "y": 14.899303436279297,
+            "w": 858.8565673828125,
+            "h": 864.2635498046875
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-484.45px, 0.07px) rotate(270.02deg) scale(1.5385)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "desk-p0.72",
+      "width": 1440,
+      "height": 900,
+      "p": 0.72,
+      "shot": "1440-p0.72.png",
+      "data": {
+        "ready": "true",
+        "qa": "0.72",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0.68",
+            "opacity": 0.68,
+            "computedOpacity": 0.68,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-33.7px)",
+            "rect": {
+              "x": 889.91,
+              "y": 319.97,
+              "left": 889.91,
+              "right": 1319.91,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 898.91,
+                "y": 334.97,
+                "left": 898.91,
+                "right": 940.91,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.77",
+            "opacity": 0.77,
+            "computedOpacity": 0.77,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-57.5px)",
+            "rect": {
+              "x": 866.11,
+              "y": 377.97,
+              "left": 866.11,
+              "right": 1296.11,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 889.11,
+                "y": 392.97,
+                "left": 889.11,
+                "right": 903.11,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.85",
+            "opacity": 0.85,
+            "computedOpacity": 0.85,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-81.6px)",
+            "rect": {
+              "x": 842.01,
+              "y": 435.97,
+              "left": 842.01,
+              "right": 1272.01,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 851.01,
+                "y": 450.97,
+                "left": 851.01,
+                "right": 893.01,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.916",
+            "opacity": 0.916,
+            "computedOpacity": 0.916,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-106px)",
+            "rect": {
+              "x": 817.61,
+              "y": 493.97,
+              "left": 817.61,
+              "right": 1247.61,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 825.61,
+                "y": 509.77,
+                "left": 825.61,
+                "right": 869.59,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.966",
+            "opacity": 0.966,
+            "computedOpacity": 0.966,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-130.8px)",
+            "rect": {
+              "x": 792.81,
+              "y": 551.97,
+              "left": 792.81,
+              "right": 1222.81,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 815.43,
+                "y": 566.97,
+                "left": 815.43,
+                "right": 830.17,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0.583",
+          "opacity": 0.583,
+          "rect": {
+            "x": 913.61,
+            "y": 290.03,
+            "left": 913.61,
+            "right": 1343.61,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": -420.28,
+          "y": 7.27,
+          "left": -420.28,
+          "right": 453.96,
+          "top": 7.27,
+          "bottom": 886.82,
+          "width": 874.24,
+          "height": 879.55
+        },
+        "markbox": {
+          "x": -420.28,
+          "y": 7.27,
+          "left": -420.28,
+          "right": 453.96,
+          "top": 7.27,
+          "bottom": 886.82,
+          "width": 874.24,
+          "height": 879.55
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.72,
+          "pTarget": 0.72,
+          "spin": 271.04956268221576,
+          "tx": -467.9614590767859,
+          "ty": 4.309786181116729,
+          "sF": 1.5385345596787172,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.72,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": -428.0173034667969,
+            "y": -405.5846862792969,
+            "w": 1360.1146240234375,
+            "h": 1719.7894287109375
+          },
+          "markbox": {
+            "x": -420.2821350097656,
+            "y": 7.266054630279541,
+            "w": 874.2430419921875,
+            "h": 879.5517578125
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-467.96px, 4.31px) rotate(271.05deg) scale(1.5385)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "shotPath": "D:\\novin3d\\qa\\evidence\\subagent\\1440-p0.72.png",
+      "cropPath": "D:\\novin3d\\qa\\evidence\\subagent\\1440-p0.72-places.png"
+    },
+    {
+      "tag": "edge-desk-p0.755",
+      "width": 1440,
+      "height": 900,
+      "p": 0.755,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.755",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-50px)",
+            "rect": {
+              "x": 873.61,
+              "y": 319.97,
+              "left": 873.61,
+              "right": 1303.61,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 882.61,
+                "y": 334.97,
+                "left": 882.61,
+                "right": 924.61,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-76px)",
+            "rect": {
+              "x": 847.61,
+              "y": 377.97,
+              "left": 847.61,
+              "right": 1277.61,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 870.61,
+                "y": 392.97,
+                "left": 870.61,
+                "right": 884.61,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-102px)",
+            "rect": {
+              "x": 821.61,
+              "y": 435.97,
+              "left": 821.61,
+              "right": 1251.61,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 830.61,
+                "y": 450.97,
+                "left": 830.61,
+                "right": 872.61,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.006",
+            "opacity": 0.006,
+            "computedOpacity": 0.006,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-127.9px)",
+            "rect": {
+              "x": 795.71,
+              "y": 493.97,
+              "left": 795.71,
+              "right": 1225.71,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 803.71,
+                "y": 509.77,
+                "left": 803.71,
+                "right": 847.69,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.034",
+            "opacity": 0.034,
+            "computedOpacity": 0.034,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-153.2px)",
+            "rect": {
+              "x": 770.41,
+              "y": 551.97,
+              "left": 770.41,
+              "right": 1200.41,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 793.03,
+                "y": 566.97,
+                "left": 793.03,
+                "right": 807.77,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 899.61,
+            "y": 290.03,
+            "left": 899.61,
+            "right": 1329.61,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": -208.79,
+          "y": -113.39,
+          "left": -208.79,
+          "right": 909.47,
+          "top": -113.39,
+          "bottom": 1007.87,
+          "width": 1118.26,
+          "height": 1121.27
+        },
+        "markbox": {
+          "x": -208.79,
+          "y": -113.39,
+          "left": -208.79,
+          "right": 909.47,
+          "top": -113.39,
+          "bottom": 1007.87,
+          "width": 1118.26,
+          "height": 1121.27
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.755,
+          "pTarget": 0.755,
+          "spin": 291.8276239067056,
+          "tx": -152.34136994787403,
+          "ty": 87.48260104022489,
+          "sF": 1.5385345596787172,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.755,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": -364.5912780761719,
+            "y": -496.72491455078125,
+            "w": 1864.5025634765625,
+            "h": 2068.409912109375
+          },
+          "markbox": {
+            "x": -208.7909393310547,
+            "y": -113.39350128173828,
+            "w": 1118.257568359375,
+            "h": 1121.2672119140625
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-152.34px, 87.48px) rotate(291.83deg) scale(1.5385)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "desk-p0.88",
+      "width": 1440,
+      "height": 900,
+      "p": 0.88,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.88",
+        "innerWidth": 1440,
+        "innerHeight": 900,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-50px)",
+            "rect": {
+              "x": 873.61,
+              "y": 319.97,
+              "left": 873.61,
+              "right": 1303.61,
+              "top": 319.97,
+              "bottom": 377.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 882.61,
+                "y": 334.97,
+                "left": 882.61,
+                "right": 924.61,
+                "top": 334.97,
+                "bottom": 362.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-76px)",
+            "rect": {
+              "x": 847.61,
+              "y": 377.97,
+              "left": 847.61,
+              "right": 1277.61,
+              "top": 377.97,
+              "bottom": 435.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 870.61,
+                "y": 392.97,
+                "left": 870.61,
+                "right": 884.61,
+                "top": 392.97,
+                "bottom": 420.97,
+                "width": 14,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-102px)",
+            "rect": {
+              "x": 821.61,
+              "y": 435.97,
+              "left": 821.61,
+              "right": 1251.61,
+              "top": 435.97,
+              "bottom": 493.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 830.61,
+                "y": 450.97,
+                "left": 830.61,
+                "right": 872.61,
+                "top": 450.97,
+                "bottom": 478.97,
+                "width": 42,
+                "height": 28
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-128px)",
+            "rect": {
+              "x": 795.61,
+              "y": 493.97,
+              "left": 795.61,
+              "right": 1225.61,
+              "top": 493.97,
+              "bottom": 551.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 803.61,
+                "y": 509.77,
+                "left": 803.61,
+                "right": 847.59,
+                "top": 509.77,
+                "bottom": 536.16,
+                "width": 43.98,
+                "height": 26.39
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-154px)",
+            "rect": {
+              "x": 769.61,
+              "y": 551.97,
+              "left": 769.61,
+              "right": 1199.61,
+              "top": 551.97,
+              "bottom": 609.97,
+              "width": 430,
+              "height": 58
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 792.23,
+                "y": 566.97,
+                "left": 792.23,
+                "right": 806.97,
+                "top": 566.97,
+                "bottom": 594.97,
+                "width": 14.73,
+                "height": 28
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 899.61,
+            "y": 290.03,
+            "left": 899.61,
+            "right": 1329.61,
+            "top": 290.03,
+            "bottom": 307.97,
+            "width": 430,
+            "height": 17.94
+          }
+        },
+        "mark": {
+          "x": 899.58,
+          "y": 166.61,
+          "left": 899.58,
+          "right": 1616.69,
+          "top": 166.61,
+          "bottom": 879.23,
+          "width": 717.12,
+          "height": 712.63
+        },
+        "markbox": {
+          "x": 899.58,
+          "y": 166.61,
+          "left": 899.58,
+          "right": 1616.69,
+          "top": 166.61,
+          "bottom": 879.23,
+          "width": 717.12,
+          "height": 712.63
+        },
+        "places": {
+          "x": 923.61,
+          "y": 290.03,
+          "left": 923.61,
+          "right": 1353.61,
+          "top": 290.03,
+          "bottom": 609.97,
+          "width": 430,
+          "height": 319.94
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 1440,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.88,
+          "pTarget": 0.88,
+          "spin": 360,
+          "tx": 535.6799999999994,
+          "ty": 268.2163094859749,
+          "sF": 1.2769700086705817,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.88,
+          "heroTop": 0,
+          "travel": 2160,
+          "dockX": 720,
+          "dockR": 145.10999999999999,
+          "dockY": 734.89,
+          "rBig": 432,
+          "footerH": 691,
+          "frame": {
+            "x": 551.9332885742188,
+            "y": 166.55599975585938,
+            "w": 1407.493408203125,
+            "h": 1103.3280029296875
+          },
+          "markbox": {
+            "x": 899.5765380859375,
+            "y": 166.6058807373047,
+            "w": 717.1153564453125,
+            "h": 712.6257934570312
+          },
+          "footer": {
+            "top": 3060,
+            "height": 690.78125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(535.68px, 268.22px) rotate(360deg) scale(1.277)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "edge-phone-p0.606",
+      "width": 390,
+      "height": 844,
+      "p": 0.606,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.606",
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 627.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 627.13,
+              "bottom": 667.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 19.3,
+                "y": 637.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 637.13,
+                "bottom": 657.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 667.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 667.13,
+              "bottom": 707.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 29.3,
+                "y": 677.13,
+                "left": 29.3,
+                "right": 39.3,
+                "top": 677.13,
+                "bottom": 697.13,
+                "width": 10,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 707.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 707.13,
+              "bottom": 747.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 19.3,
+                "y": 717.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 717.13,
+                "bottom": 737.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 747.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 747.13,
+              "bottom": 787.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 17.63,
+                "y": 757.13,
+                "left": 17.63,
+                "right": 50.96,
+                "top": 757.13,
+                "bottom": 777.13,
+                "width": 33.33,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 787.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 787.13,
+              "bottom": 827.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 29.04,
+                "y": 797.13,
+                "left": 29.04,
+                "right": 39.55,
+                "top": 797.13,
+                "bottom": 817.13,
+                "width": 10.52,
+                "height": 20
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 11.3,
+            "y": 605.3,
+            "left": 11.3,
+            "right": 346.7,
+            "top": 605.3,
+            "bottom": 621.13,
+            "width": 335.39,
+            "height": 15.83
+          }
+        },
+        "mark": {
+          "x": 100.58,
+          "y": 336.5,
+          "left": 100.58,
+          "right": 272.45,
+          "top": 336.5,
+          "bottom": 507.42,
+          "width": 171.86,
+          "height": 170.92
+        },
+        "markbox": {
+          "x": 100.58,
+          "y": 336.5,
+          "left": 100.58,
+          "right": 272.45,
+          "top": 336.5,
+          "bottom": 507.42,
+          "width": 171.86,
+          "height": 170.92
+        },
+        "places": {
+          "x": 27.3,
+          "y": 605.3,
+          "left": 27.3,
+          "right": 362.7,
+          "top": 605.3,
+          "bottom": 827.13,
+          "width": 335.39,
+          "height": 221.83
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 390,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.606,
+          "pTarget": 0.606,
+          "spin": 183.6616666666667,
+          "tx": -5.1172838890939945,
+          "ty": -44.00835334919442,
+          "sF": 0.9260845033818729,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.606,
+          "heroTop": 0,
+          "travel": 1350,
+          "dockX": 195,
+          "dockR": 97.5,
+          "dockY": 726.5,
+          "rBig": 378,
+          "footerH": 907,
+          "frame": {
+            "x": 23.339284896850586,
+            "y": 243.53207397460938,
+            "w": 333.0814208984375,
+            "h": 268.9158630371094
+          },
+          "markbox": {
+            "x": 100.58404541015625,
+            "y": 336.5041809082031,
+            "w": 171.86431884765625,
+            "h": 170.91812133789062
+          },
+          "footer": {
+            "top": 2194.390625,
+            "height": 907.328125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-5.12px, -44.01px) rotate(183.66deg) scale(0.9261)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "phone-p0.62",
+      "width": 390,
+      "height": 844,
+      "p": 0.62,
+      "shot": "390-p0.62.png",
+      "data": {
+        "ready": "true",
+        "qa": "0.62",
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0.5",
+            "opacity": 0.5,
+            "computedOpacity": 0.5,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-8px)",
+            "rect": {
+              "x": 19.3,
+              "y": 627.13,
+              "left": 19.3,
+              "right": 354.7,
+              "top": 627.13,
+              "bottom": 667.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 27.3,
+                "y": 637.13,
+                "left": 27.3,
+                "right": 57.3,
+                "top": 637.13,
+                "bottom": 657.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.376",
+            "opacity": 0.376,
+            "computedOpacity": 0.376,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-10px)",
+            "rect": {
+              "x": 17.3,
+              "y": 667.13,
+              "left": 17.3,
+              "right": 352.7,
+              "top": 667.13,
+              "bottom": 707.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 35.3,
+                "y": 677.13,
+                "left": 35.3,
+                "right": 45.3,
+                "top": 677.13,
+                "bottom": 697.13,
+                "width": 10,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.259",
+            "opacity": 0.259,
+            "computedOpacity": 0.259,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-11.9px)",
+            "rect": {
+              "x": 15.4,
+              "y": 707.13,
+              "left": 15.4,
+              "right": 350.8,
+              "top": 707.13,
+              "bottom": 747.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 23.4,
+                "y": 717.13,
+                "left": 23.4,
+                "right": 53.4,
+                "top": 717.13,
+                "bottom": 737.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.156",
+            "opacity": 0.156,
+            "computedOpacity": 0.156,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-13.5px)",
+            "rect": {
+              "x": 13.8,
+              "y": 747.13,
+              "left": 13.8,
+              "right": 349.2,
+              "top": 747.13,
+              "bottom": 787.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 20.13,
+                "y": 757.13,
+                "left": 20.13,
+                "right": 53.46,
+                "top": 757.13,
+                "bottom": 777.13,
+                "width": 33.33,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.074",
+            "opacity": 0.074,
+            "computedOpacity": 0.074,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-14.8px)",
+            "rect": {
+              "x": 12.5,
+              "y": 787.13,
+              "left": 12.5,
+              "right": 347.9,
+              "top": 787.13,
+              "bottom": 827.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 30.24,
+                "y": 797.13,
+                "left": 30.24,
+                "right": 40.75,
+                "top": 797.13,
+                "bottom": 817.13,
+                "width": 10.52,
+                "height": 20
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0.624",
+          "opacity": 0.624,
+          "rect": {
+            "x": 21.3,
+            "y": 605.3,
+            "left": 21.3,
+            "right": 356.7,
+            "top": 605.3,
+            "bottom": 621.13,
+            "width": 335.39,
+            "height": 15.83
+          }
+        },
+        "mark": {
+          "x": 28.03,
+          "y": 285.03,
+          "left": 28.03,
+          "right": 302.69,
+          "top": 285.03,
+          "bottom": 558.63,
+          "width": 274.66,
+          "height": 273.6
+        },
+        "markbox": {
+          "x": 28.03,
+          "y": 285.03,
+          "left": 28.03,
+          "right": 302.69,
+          "top": 285.03,
+          "bottom": 558.63,
+          "width": 274.66,
+          "height": 273.6
+        },
+        "places": {
+          "x": 27.3,
+          "y": 605.3,
+          "left": 27.3,
+          "right": 362.7,
+          "top": 605.3,
+          "bottom": 827.13,
+          "width": 335.39,
+          "height": 221.83
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 390,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.62,
+          "pTarget": 0.62,
+          "spin": 193.33333333333337,
+          "tx": -14.539828059030272,
+          "ty": -60.543448259575285,
+          "sF": 1.306659092878918,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.62,
+          "heroTop": 0,
+          "travel": 1350,
+          "dockX": 195,
+          "dockR": 97.5,
+          "dockY": 726.5,
+          "rBig": 378,
+          "footerH": 907,
+          "frame": {
+            "x": -78.24404907226562,
+            "y": 138.7375946044922,
+            "w": 517.4080810546875,
+            "h": 445.44476318359375
+          },
+          "markbox": {
+            "x": 28.029850006103516,
+            "y": 285.0272521972656,
+            "w": 274.6589660644531,
+            "h": 273.5978088378906
+          },
+          "footer": {
+            "top": 2194.390625,
+            "height": 907.328125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-14.54px, -60.54px) rotate(193.33deg) scale(1.3067)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "shotPath": "D:\\novin3d\\qa\\evidence\\subagent\\390-p0.62.png",
+      "cropPath": "D:\\novin3d\\qa\\evidence\\subagent\\390-p0.62-places.png"
+    },
+    {
+      "tag": "phone-p0.63",
+      "width": 390,
+      "height": 844,
+      "p": 0.63,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.63",
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0.98",
+            "opacity": 0.98,
+            "computedOpacity": 0.98,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-0.3px)",
+            "rect": {
+              "x": 27,
+              "y": 627.13,
+              "left": 27,
+              "right": 362.4,
+              "top": 627.13,
+              "bottom": 667.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 35,
+                "y": 637.13,
+                "left": 35,
+                "right": 65,
+                "top": 637.13,
+                "bottom": 657.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.926",
+            "opacity": 0.926,
+            "computedOpacity": 0.926,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-1.2px)",
+            "rect": {
+              "x": 26.1,
+              "y": 667.13,
+              "left": 26.1,
+              "right": 361.5,
+              "top": 667.13,
+              "bottom": 707.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 44.1,
+                "y": 677.13,
+                "left": 44.1,
+                "right": 54.1,
+                "top": 677.13,
+                "bottom": 697.13,
+                "width": 10,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.844",
+            "opacity": 0.844,
+            "computedOpacity": 0.844,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-2.5px)",
+            "rect": {
+              "x": 24.8,
+              "y": 707.13,
+              "left": 24.8,
+              "right": 360.2,
+              "top": 707.13,
+              "bottom": 747.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 32.8,
+                "y": 717.13,
+                "left": 32.8,
+                "right": 62.8,
+                "top": 717.13,
+                "bottom": 737.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.741",
+            "opacity": 0.741,
+            "computedOpacity": 0.741,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-4.1px)",
+            "rect": {
+              "x": 23.2,
+              "y": 747.13,
+              "left": 23.2,
+              "right": 358.6,
+              "top": 747.13,
+              "bottom": 787.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 29.53,
+                "y": 757.13,
+                "left": 29.53,
+                "right": 62.86,
+                "top": 757.13,
+                "bottom": 777.13,
+                "width": 33.33,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.624",
+            "opacity": 0.624,
+            "computedOpacity": 0.624,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-6px)",
+            "rect": {
+              "x": 21.3,
+              "y": 787.13,
+              "left": 21.3,
+              "right": 356.7,
+              "top": 787.13,
+              "bottom": 827.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 39.04,
+                "y": 797.13,
+                "left": 39.04,
+                "right": 49.55,
+                "top": 797.13,
+                "bottom": 817.13,
+                "width": 10.52,
+                "height": 20
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0.987",
+          "opacity": 0.987,
+          "rect": {
+            "x": 27.1,
+            "y": 605.3,
+            "left": 27.1,
+            "right": 362.5,
+            "top": 605.3,
+            "bottom": 621.13,
+            "width": 335.39,
+            "height": 15.83
+          }
+        },
+        "mark": {
+          "x": -73.2,
+          "y": 211.16,
+          "left": -73.2,
+          "right": 348.43,
+          "top": 211.16,
+          "bottom": 631.89,
+          "width": 421.63,
+          "height": 420.72
+        },
+        "markbox": {
+          "x": -73.2,
+          "y": 211.16,
+          "left": -73.2,
+          "right": 348.43,
+          "top": 211.16,
+          "bottom": 631.89,
+          "width": 421.63,
+          "height": 420.72
+        },
+        "places": {
+          "x": 27.3,
+          "y": 605.3,
+          "left": 27.3,
+          "right": 362.7,
+          "top": 605.3,
+          "bottom": 827.13,
+          "width": 335.39,
+          "height": 221.83
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 390,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.63,
+          "pTarget": 0.63,
+          "spin": 206.04166666666674,
+          "tx": -18.65309655637887,
+          "ty": -77.29831001118865,
+          "sF": 1.8067247907791366,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.63,
+          "heroTop": 0,
+          "travel": 1350,
+          "dockX": 195,
+          "dockR": 97.5,
+          "dockY": 726.5,
+          "rBig": 378,
+          "footerH": 907,
+          "frame": {
+            "x": -208.881103515625,
+            "y": -9.743878364562988,
+            "w": 770.4622192382812,
+            "h": 708.8877563476562
+          },
+          "markbox": {
+            "x": -73.19652557373047,
+            "y": 211.16427612304688,
+            "w": 421.6313171386719,
+            "h": 420.7233581542969
+          },
+          "footer": {
+            "top": 2194.390625,
+            "height": 907.328125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(-18.65px, -77.3px) rotate(206.04deg) scale(1.8067)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "edge-phone-p0.665",
+      "width": 390,
+      "height": 844,
+      "p": 0.665,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.665",
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 627.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 627.13,
+              "bottom": 667.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 19.3,
+                "y": 637.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 637.13,
+                "bottom": 657.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 667.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 667.13,
+              "bottom": 707.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 29.3,
+                "y": 677.13,
+                "left": 29.3,
+                "right": 39.3,
+                "top": 677.13,
+                "bottom": 697.13,
+                "width": 10,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 707.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 707.13,
+              "bottom": 747.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 19.3,
+                "y": 717.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 717.13,
+                "bottom": 737.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.003",
+            "opacity": 0.003,
+            "computedOpacity": 0.003,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-15.9px)",
+            "rect": {
+              "x": 11.4,
+              "y": 747.13,
+              "left": 11.4,
+              "right": 346.8,
+              "top": 747.13,
+              "bottom": 787.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 17.73,
+                "y": 757.13,
+                "left": 17.73,
+                "right": 51.06,
+                "top": 757.13,
+                "bottom": 777.13,
+                "width": 33.33,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0.028",
+            "opacity": 0.028,
+            "computedOpacity": 0.028,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-15.6px)",
+            "rect": {
+              "x": 11.7,
+              "y": 787.13,
+              "left": 11.7,
+              "right": 347.1,
+              "top": 787.13,
+              "bottom": 827.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 29.44,
+                "y": 797.13,
+                "left": 29.44,
+                "right": 39.95,
+                "top": 797.13,
+                "bottom": 817.13,
+                "width": 10.52,
+                "height": 20
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 11.3,
+            "y": 605.3,
+            "left": 11.3,
+            "right": 346.7,
+            "top": 605.3,
+            "bottom": 621.13,
+            "width": 335.39,
+            "height": 15.83
+          }
+        },
+        "mark": {
+          "x": -375.8,
+          "y": 23.06,
+          "left": -375.8,
+          "right": 413.78,
+          "top": 23.06,
+          "bottom": 816.25,
+          "width": 789.57,
+          "height": 793.19
+        },
+        "markbox": {
+          "x": -375.8,
+          "y": 23.06,
+          "left": -375.8,
+          "right": 413.78,
+          "top": 23.06,
+          "bottom": 816.25,
+          "width": 789.57,
+          "height": 793.19
+        },
+        "places": {
+          "x": 27.3,
+          "y": 605.3,
+          "left": 27.3,
+          "right": 362.7,
+          "top": 605.3,
+          "bottom": 827.13,
+          "width": 335.39,
+          "height": 221.83
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 390,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.665,
+          "pTarget": 0.665,
+          "spin": 261.06770833333337,
+          "tx": 11.197086537910565,
+          "ty": -29.366852598354424,
+          "sF": 3.9719682736954454,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.665,
+          "heroTop": 0,
+          "travel": 1350,
+          "dockX": 195,
+          "dockR": 97.5,
+          "dockY": 726.5,
+          "rBig": 378,
+          "footerH": 907,
+          "frame": {
+            "x": -427.3876037597656,
+            "y": -363.611572265625,
+            "w": 1267.1751708984375,
+            "h": 1512.483154296875
+          },
+          "markbox": {
+            "x": -375.7950134277344,
+            "y": 23.064558029174805,
+            "w": 789.572021484375,
+            "h": 793.1893920898438
+          },
+          "footer": {
+            "top": 2194.390625,
+            "height": 907.328125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(11.2px, -29.37px) rotate(261.07deg) scale(3.972)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "edge-phone-p0.67",
+      "width": 390,
+      "height": 844,
+      "p": 0.67,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.67",
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 627.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 627.13,
+              "bottom": 667.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 19.3,
+                "y": 637.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 637.13,
+                "bottom": 657.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 667.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 667.13,
+              "bottom": 707.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 29.3,
+                "y": 677.13,
+                "left": 29.3,
+                "right": 39.3,
+                "top": 677.13,
+                "bottom": 697.13,
+                "width": 10,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 707.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 707.13,
+              "bottom": 747.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 19.3,
+                "y": 717.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 717.13,
+                "bottom": 737.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 747.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 747.13,
+              "bottom": 787.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 17.63,
+                "y": 757.13,
+                "left": 17.63,
+                "right": 50.96,
+                "top": 757.13,
+                "bottom": 777.13,
+                "width": 33.33,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 787.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 787.13,
+              "bottom": 827.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 29.04,
+                "y": 797.13,
+                "left": 29.04,
+                "right": 39.55,
+                "top": 797.13,
+                "bottom": 817.13,
+                "width": 10.52,
+                "height": 20
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 11.3,
+            "y": 605.3,
+            "left": 11.3,
+            "right": 346.7,
+            "top": 605.3,
+            "bottom": 621.13,
+            "width": 335.39,
+            "height": 15.83
+          }
+        },
+        "mark": {
+          "x": -377.83,
+          "y": 27.77,
+          "left": -377.83,
+          "right": 401.73,
+          "top": 27.77,
+          "bottom": 811.34,
+          "width": 779.55,
+          "height": 783.58
+        },
+        "markbox": {
+          "x": -377.83,
+          "y": 27.77,
+          "left": -377.83,
+          "right": 401.73,
+          "top": 27.77,
+          "bottom": 811.34,
+          "width": 779.55,
+          "height": 783.58
+        },
+        "places": {
+          "x": 27.3,
+          "y": 605.3,
+          "left": 27.3,
+          "right": 362.7,
+          "top": 605.3,
+          "bottom": 827.13,
+          "width": 335.39,
+          "height": 221.83
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 390,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.67,
+          "pTarget": 0.67,
+          "spin": 264.37500000000006,
+          "tx": 11.581482238777653,
+          "ty": -19.146136114884676,
+          "sF": 4.102108322124394,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.67,
+          "heroTop": 0,
+          "travel": 1350,
+          "dockX": 195,
+          "dockR": 97.5,
+          "dockY": 726.5,
+          "rBig": 378,
+          "footerH": 907,
+          "frame": {
+            "x": -411.46490478515625,
+            "y": -351.69573974609375,
+            "w": 1236.08984375,
+            "h": 1509.091552734375
+          },
+          "markbox": {
+            "x": -377.8261413574219,
+            "y": 27.765933990478516,
+            "w": 779.5521240234375,
+            "h": 783.5778198242188
+          },
+          "footer": {
+            "top": 2194.390625,
+            "height": 907.328125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(11.58px, -19.15px) rotate(264.38deg) scale(4.1021)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "tag": "phone-p0.68",
+      "width": 390,
+      "height": 844,
+      "p": 0.68,
+      "shot": "390-p0.68.png",
+      "data": {
+        "ready": "true",
+        "qa": "0.68",
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 627.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 627.13,
+              "bottom": 667.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 19.3,
+                "y": 637.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 637.13,
+                "bottom": 657.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 667.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 667.13,
+              "bottom": 707.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 29.3,
+                "y": 677.13,
+                "left": 29.3,
+                "right": 39.3,
+                "top": 677.13,
+                "bottom": 697.13,
+                "width": 10,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 707.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 707.13,
+              "bottom": 747.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 19.3,
+                "y": 717.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 717.13,
+                "bottom": 737.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 747.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 747.13,
+              "bottom": 787.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 17.63,
+                "y": 757.13,
+                "left": 17.63,
+                "right": 50.96,
+                "top": 757.13,
+                "bottom": 777.13,
+                "width": 33.33,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 787.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 787.13,
+              "bottom": 827.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 29.04,
+                "y": 797.13,
+                "left": 29.04,
+                "right": 39.55,
+                "top": 797.13,
+                "bottom": 817.13,
+                "width": 10.52,
+                "height": 20
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 11.3,
+            "y": 605.3,
+            "left": 11.3,
+            "right": 346.7,
+            "top": 605.3,
+            "bottom": 621.13,
+            "width": 335.39,
+            "height": 15.83
+          }
+        },
+        "mark": {
+          "x": -377.05,
+          "y": 36.63,
+          "left": -377.05,
+          "right": 384.14,
+          "top": 36.63,
+          "bottom": 802.34,
+          "width": 761.19,
+          "height": 765.71
+        },
+        "markbox": {
+          "x": -377.05,
+          "y": 36.63,
+          "left": -377.05,
+          "right": 384.14,
+          "top": 36.63,
+          "bottom": 802.34,
+          "width": 761.19,
+          "height": 765.71
+        },
+        "places": {
+          "x": 27.3,
+          "y": 605.3,
+          "left": 27.3,
+          "right": 362.7,
+          "top": 605.3,
+          "bottom": 827.13,
+          "width": 335.39,
+          "height": 221.83
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 390,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.68,
+          "pTarget": 0.68,
+          "spin": 268.33333333333337,
+          "tx": 11.276815493579534,
+          "ty": -5.896969723395374,
+          "sF": 4.257866490322822,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.68,
+          "heroTop": 0,
+          "travel": 1350,
+          "dockX": 195,
+          "dockR": 97.5,
+          "dockY": 726.5,
+          "rBig": 378,
+          "footerH": 907,
+          "frame": {
+            "x": -387.4902038574219,
+            "y": -330.9094543457031,
+            "w": 1187.5404052734375,
+            "h": 1494.0189208984375
+          },
+          "markbox": {
+            "x": -377.052734375,
+            "y": 36.62602615356445,
+            "w": 761.19189453125,
+            "h": 765.7112426757812
+          },
+          "footer": {
+            "top": 2194.390625,
+            "height": 907.328125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(11.28px, -5.9px) rotate(268.33deg) scale(4.2579)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "shotPath": "D:\\novin3d\\qa\\evidence\\subagent\\390-p0.68.png",
+      "cropPath": "D:\\novin3d\\qa\\evidence\\subagent\\390-p0.68-places.png"
+    },
+    {
+      "tag": "phone-p0.72",
+      "width": 390,
+      "height": 844,
+      "p": 0.72,
+      "shot": null,
+      "data": {
+        "ready": "true",
+        "qa": "0.72",
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "dpr": 1,
+        "rowsCount": 5,
+        "rows": [
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 627.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 627.13,
+              "bottom": 667.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "India",
+            "img": {
+              "src": "assets/flags/Flag_of_India.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_India.svg",
+              "complete": true,
+              "naturalWidth": 900,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 19.3,
+                "y": 637.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 637.13,
+                "bottom": 657.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 667.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 667.13,
+              "bottom": 707.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Malaysia",
+            "img": {
+              "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Malaysia,_vertical.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1200,
+              "rect": {
+                "x": 29.3,
+                "y": 677.13,
+                "left": 29.3,
+                "right": 39.3,
+                "top": 677.13,
+                "bottom": 697.13,
+                "width": 10,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 707.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 707.13,
+              "bottom": 747.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "Turkey",
+            "img": {
+              "src": "assets/flags/Flag_of_Turkey.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_Turkey.svg",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 800,
+              "rect": {
+                "x": 19.3,
+                "y": 717.13,
+                "left": 19.3,
+                "right": 49.3,
+                "top": 717.13,
+                "bottom": 737.13,
+                "width": 30,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 747.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 747.13,
+              "bottom": 787.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United Kingdom",
+            "img": {
+              "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+              "complete": true,
+              "naturalWidth": 1000,
+              "naturalHeight": 600,
+              "rect": {
+                "x": 17.63,
+                "y": 757.13,
+                "left": 17.63,
+                "right": 50.96,
+                "top": 757.13,
+                "bottom": 777.13,
+                "width": 33.33,
+                "height": 20
+              }
+            }
+          },
+          {
+            "inlineOpacity": "0",
+            "opacity": 0,
+            "computedOpacity": 0,
+            "display": "flex",
+            "visibility": "visible",
+            "transform": "translateX(-16px)",
+            "rect": {
+              "x": 11.3,
+              "y": 787.13,
+              "left": 11.3,
+              "right": 346.7,
+              "top": 787.13,
+              "bottom": 827.13,
+              "width": 335.39,
+              "height": 40
+            },
+            "name": "United States",
+            "img": {
+              "src": "assets/flags/Vertical_United_States_Flag.svg",
+              "currentSrc": "http://localhost:8080/assets/flags/Vertical_United_States_Flag.svg",
+              "complete": true,
+              "naturalWidth": 600,
+              "naturalHeight": 1140,
+              "rect": {
+                "x": 29.04,
+                "y": 797.13,
+                "left": 29.04,
+                "right": 39.55,
+                "top": 797.13,
+                "bottom": 817.13,
+                "width": 10.52,
+                "height": 20
+              }
+            }
+          }
+        ],
+        "kicker": {
+          "text": "International places",
+          "inlineOpacity": "0",
+          "opacity": 0,
+          "rect": {
+            "x": 11.3,
+            "y": 605.3,
+            "left": 11.3,
+            "right": 346.7,
+            "top": 605.3,
+            "bottom": 621.13,
+            "width": 335.39,
+            "height": 15.83
+          }
+        },
+        "mark": {
+          "x": -377.85,
+          "y": 34.65,
+          "left": -377.85,
+          "right": 387.06,
+          "top": 34.65,
+          "bottom": 804.21,
+          "width": 764.92,
+          "height": 769.56
+        },
+        "markbox": {
+          "x": -377.85,
+          "y": 34.65,
+          "left": -377.85,
+          "right": 387.06,
+          "top": 34.65,
+          "bottom": 804.21,
+          "width": 764.92,
+          "height": 769.56
+        },
+        "places": {
+          "x": 27.3,
+          "y": 605.3,
+          "left": 27.3,
+          "right": 362.7,
+          "top": 605.3,
+          "bottom": 827.13,
+          "width": 335.39,
+          "height": 221.83
+        },
+        "placesComputedOpacity": 1,
+        "oldSections": 0,
+        "allHpRows": 5,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollDiff": 0,
+        "bodyScrollWidth": 390,
+        "heroState": {
+          "scrollY": 0,
+          "p": 0.72,
+          "pTarget": 0.72,
+          "spin": 271.04956268221576,
+          "tx": 15.38795071306015,
+          "ty": 3.7710629084771368,
+          "sF": 4.3234488769326855,
+          "fade": 1,
+          "side": 0,
+          "reduced": false,
+          "qa": 0.72,
+          "heroTop": 0,
+          "travel": 1350,
+          "dockX": 195,
+          "dockR": 97.5,
+          "dockY": 726.5,
+          "rBig": 378,
+          "footerH": 907,
+          "frame": {
+            "x": -384.63812255859375,
+            "y": -326.63037109375,
+            "w": 1190.05615234375,
+            "h": 1504.80078125
+          },
+          "markbox": {
+            "x": -377.8549499511719,
+            "y": 34.65186309814453,
+            "w": 764.9168090820312,
+            "h": 769.5580444335938
+          },
+          "footer": {
+            "top": 2194.390625,
+            "height": 907.328125
+          },
+          "frameTransform": "translate(-50%, -50%) translate(15.39px, 3.77px) rotate(271.05deg) scale(4.3234)",
+          "wordmarkOpacity": 0,
+          "markboxOpacity": 1
+        },
+        "flagsFileCheck": [
+          {
+            "src": "assets/flags/Flag_of_India.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_India.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Malaysia,_vertical.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Malaysia,_vertical.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_Turkey.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_Turkey.svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Flag_of_the_United_Kingdom_(3-5).svg",
+            "exists": true
+          },
+          {
+            "src": "assets/flags/Vertical_United_States_Flag.svg",
+            "abs": "D:\\novin3d\\assets\\flags\\Vertical_United_States_Flag.svg",
+            "exists": true
+          }
+        ]
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    }
+  ],
+  "totals": {
+    "probes": 17,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "loadErrors": 0
+  },
+  "finishedAt": "2026-10-10T18:44:38.150Z"
+}
