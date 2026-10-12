@@ -98,3 +98,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.6.1 -> peeled commit 016c2f2 (code revision fd2d05f).
 - Change: the international places feature moved into the animation — five flag+name rows form a staircase on the right side while the mark grows big at the left (desktop window p 0.615–0.76; compact lower window on phones); the standalone page section was removed. QA now 32 checks (staircase stepping, mark clearance, in/out windows, phones); independent verifier ran 17 probes (all consistent, 0 errors).
 - Worktree smoke: v1.6.1 served on 8081 -> rows 5, ops all 1, flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.1-places.png.
+
+## Rollback drill (lite) — v1.6.2
+- Annotated tag v1.6.2 -> peeled commit fee7abd (code revision 4c1b536).
+- Change: the international places staircase is mirrored — each row now steps down-right (India top-left … USA bottom-right) and rows slide in from the right. Composed envelope unchanged (left edges 793.6–923.6px, right reach 1353.6px at 1440). QA 32 checks incl. mirrored stepping and mark clearance (min gap 234px at p=0.66, 1280 also passing); no overflow anywhere.
+- Worktree smoke: v1.6.2 served on 8081 -> rows 5, ops all 1, lefts [820, 846, 872, 898, 924], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.2-places.png.
