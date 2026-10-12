@@ -1,0 +1,446 @@
+[
+ {
+  "w": 1440,
+  "qa": 0.7,
+  "name": "lateprobe-1440-0_7.png",
+  "rects": [
+   {
+    "left": 719,
+    "top": 294,
+    "right": 797,
+    "bottom": 348
+   },
+   {
+    "left": 745,
+    "top": 368,
+    "right": 823,
+    "bottom": 422
+   },
+   {
+    "left": 771,
+    "top": 442,
+    "right": 849,
+    "bottom": 496
+   },
+   {
+    "left": 797,
+    "top": 516,
+    "right": 875,
+    "bottom": 570
+   },
+   {
+    "left": 823,
+    "top": 590,
+    "right": 901,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.71,
+  "name": "lateprobe-1440-0_71.png",
+  "rects": [
+   {
+    "left": 720,
+    "top": 294,
+    "right": 798,
+    "bottom": 348
+   },
+   {
+    "left": 745,
+    "top": 368,
+    "right": 823,
+    "bottom": 422
+   },
+   {
+    "left": 771,
+    "top": 442,
+    "right": 849,
+    "bottom": 496
+   },
+   {
+    "left": 797,
+    "top": 516,
+    "right": 875,
+    "bottom": 570
+   },
+   {
+    "left": 823,
+    "top": 590,
+    "right": 901,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.72,
+  "name": "lateprobe-1440-0_72.png",
+  "rects": [
+   {
+    "left": 727,
+    "top": 294,
+    "right": 805,
+    "bottom": 348
+   },
+   {
+    "left": 750,
+    "top": 368,
+    "right": 828,
+    "bottom": 422
+   },
+   {
+    "left": 774,
+    "top": 442,
+    "right": 852,
+    "bottom": 496
+   },
+   {
+    "left": 799,
+    "top": 516,
+    "right": 877,
+    "bottom": 570
+   },
+   {
+    "left": 824,
+    "top": 590,
+    "right": 902,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.73,
+  "name": "lateprobe-1440-0_73.png",
+  "rects": [
+   {
+    "left": 734,
+    "top": 294,
+    "right": 812,
+    "bottom": 348
+   },
+   {
+    "left": 758,
+    "top": 368,
+    "right": 836,
+    "bottom": 422
+   },
+   {
+    "left": 782,
+    "top": 442,
+    "right": 860,
+    "bottom": 496
+   },
+   {
+    "left": 805,
+    "top": 516,
+    "right": 883,
+    "bottom": 570
+   },
+   {
+    "left": 829,
+    "top": 590,
+    "right": 907,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.74,
+  "name": "lateprobe-1440-0_74.png",
+  "rects": [
+   {
+    "left": 741,
+    "top": 294,
+    "right": 819,
+    "bottom": 348
+   },
+   {
+    "left": 765,
+    "top": 368,
+    "right": 843,
+    "bottom": 422
+   },
+   {
+    "left": 789,
+    "top": 442,
+    "right": 867,
+    "bottom": 496
+   },
+   {
+    "left": 813,
+    "top": 516,
+    "right": 891,
+    "bottom": 570
+   },
+   {
+    "left": 837,
+    "top": 590,
+    "right": 915,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.75,
+  "name": "lateprobe-1440-0_75.png",
+  "rects": [
+   {
+    "left": 743,
+    "top": 294,
+    "right": 821,
+    "bottom": 348
+   },
+   {
+    "left": 769,
+    "top": 368,
+    "right": 847,
+    "bottom": 422
+   },
+   {
+    "left": 794,
+    "top": 442,
+    "right": 872,
+    "bottom": 496
+   },
+   {
+    "left": 819,
+    "top": 516,
+    "right": 897,
+    "bottom": 570
+   },
+   {
+    "left": 844,
+    "top": 590,
+    "right": 922,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.765,
+  "name": "lateprobe-1440-0_765.png",
+  "rects": [
+   {
+    "left": 743,
+    "top": 294,
+    "right": 821,
+    "bottom": 348
+   },
+   {
+    "left": 769,
+    "top": 368,
+    "right": 847,
+    "bottom": 422
+   },
+   {
+    "left": 795,
+    "top": 442,
+    "right": 873,
+    "bottom": 496
+   },
+   {
+    "left": 821,
+    "top": 516,
+    "right": 899,
+    "bottom": 570
+   },
+   {
+    "left": 847,
+    "top": 590,
+    "right": 925,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.78,
+  "name": "lateprobe-1440-0_78.png",
+  "rects": [
+   {
+    "left": 743,
+    "top": 294,
+    "right": 821,
+    "bottom": 348
+   },
+   {
+    "left": 769,
+    "top": 368,
+    "right": 847,
+    "bottom": 422
+   },
+   {
+    "left": 795,
+    "top": 442,
+    "right": 873,
+    "bottom": 496
+   },
+   {
+    "left": 821,
+    "top": 516,
+    "right": 899,
+    "bottom": 570
+   },
+   {
+    "left": 847,
+    "top": 590,
+    "right": 925,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.8,
+  "name": "lateprobe-1440-0_8.png",
+  "rects": [
+   {
+    "left": 743,
+    "top": 294,
+    "right": 821,
+    "bottom": 348
+   },
+   {
+    "left": 769,
+    "top": 368,
+    "right": 847,
+    "bottom": 422
+   },
+   {
+    "left": 795,
+    "top": 442,
+    "right": 873,
+    "bottom": 496
+   },
+   {
+    "left": 821,
+    "top": 516,
+    "right": 899,
+    "bottom": 570
+   },
+   {
+    "left": 847,
+    "top": 590,
+    "right": 925,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1280,
+  "qa": 0.72,
+  "name": "lateprobe-1280-0_72.png",
+  "rects": [
+   {
+    "left": 633,
+    "top": 244,
+    "right": 711,
+    "bottom": 298
+   },
+   {
+    "left": 657,
+    "top": 318,
+    "right": 735,
+    "bottom": 372
+   },
+   {
+    "left": 681,
+    "top": 392,
+    "right": 759,
+    "bottom": 446
+   },
+   {
+    "left": 706,
+    "top": 466,
+    "right": 784,
+    "bottom": 520
+   },
+   {
+    "left": 730,
+    "top": 540,
+    "right": 808,
+    "bottom": 594
+   }
+  ]
+ },
+ {
+  "w": 1280,
+  "qa": 0.735,
+  "name": "lateprobe-1280-0_735.png",
+  "rects": [
+   {
+    "left": 645,
+    "top": 244,
+    "right": 723,
+    "bottom": 298
+   },
+   {
+    "left": 669,
+    "top": 318,
+    "right": 747,
+    "bottom": 372
+   },
+   {
+    "left": 692,
+    "top": 392,
+    "right": 770,
+    "bottom": 446
+   },
+   {
+    "left": 716,
+    "top": 466,
+    "right": 794,
+    "bottom": 520
+   },
+   {
+    "left": 740,
+    "top": 540,
+    "right": 818,
+    "bottom": 594
+   }
+  ]
+ },
+ {
+  "w": 1280,
+  "qa": 0.75,
+  "name": "lateprobe-1280-0_75.png",
+  "rects": [
+   {
+    "left": 650,
+    "top": 244,
+    "right": 728,
+    "bottom": 298
+   },
+   {
+    "left": 676,
+    "top": 318,
+    "right": 754,
+    "bottom": 372
+   },
+   {
+    "left": 701,
+    "top": 392,
+    "right": 779,
+    "bottom": 446
+   },
+   {
+    "left": 726,
+    "top": 466,
+    "right": 804,
+    "bottom": 520
+   },
+   {
+    "left": 751,
+    "top": 540,
+    "right": 829,
+    "bottom": 594
+   }
+  ]
+ }
+]

@@ -1,0 +1,335 @@
+[
+ {
+  "w": 1440,
+  "qa": 0.645,
+  "name": "edgeprobe-1440-0_645.png",
+  "rects": [
+   {
+    "left": 719,
+    "top": 294,
+    "right": 797,
+    "bottom": 348
+   },
+   {
+    "left": 746,
+    "top": 368,
+    "right": 824,
+    "bottom": 422
+   },
+   {
+    "left": 775,
+    "top": 442,
+    "right": 853,
+    "bottom": 496
+   },
+   {
+    "left": 804,
+    "top": 516,
+    "right": 882,
+    "bottom": 570
+   },
+   {
+    "left": 834,
+    "top": 590,
+    "right": 912,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.655,
+  "name": "edgeprobe-1440-0_655.png",
+  "rects": [
+   {
+    "left": 719,
+    "top": 294,
+    "right": 797,
+    "bottom": 348
+   },
+   {
+    "left": 745,
+    "top": 368,
+    "right": 823,
+    "bottom": 422
+   },
+   {
+    "left": 771,
+    "top": 442,
+    "right": 849,
+    "bottom": 496
+   },
+   {
+    "left": 797,
+    "top": 516,
+    "right": 875,
+    "bottom": 570
+   },
+   {
+    "left": 824,
+    "top": 590,
+    "right": 902,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.665,
+  "name": "edgeprobe-1440-0_665.png",
+  "rects": [
+   {
+    "left": 719,
+    "top": 294,
+    "right": 797,
+    "bottom": 348
+   },
+   {
+    "left": 745,
+    "top": 368,
+    "right": 823,
+    "bottom": 422
+   },
+   {
+    "left": 771,
+    "top": 442,
+    "right": 849,
+    "bottom": 496
+   },
+   {
+    "left": 797,
+    "top": 516,
+    "right": 875,
+    "bottom": 570
+   },
+   {
+    "left": 823,
+    "top": 590,
+    "right": 901,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.675,
+  "name": "edgeprobe-1440-0_675.png",
+  "rects": [
+   {
+    "left": 719,
+    "top": 294,
+    "right": 797,
+    "bottom": 348
+   },
+   {
+    "left": 745,
+    "top": 368,
+    "right": 823,
+    "bottom": 422
+   },
+   {
+    "left": 771,
+    "top": 442,
+    "right": 849,
+    "bottom": 496
+   },
+   {
+    "left": 797,
+    "top": 516,
+    "right": 875,
+    "bottom": 570
+   },
+   {
+    "left": 823,
+    "top": 590,
+    "right": 901,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.7,
+  "name": "edgeprobe-1440-0_7.png",
+  "rects": [
+   {
+    "left": 719,
+    "top": 294,
+    "right": 797,
+    "bottom": 348
+   },
+   {
+    "left": 745,
+    "top": 368,
+    "right": 823,
+    "bottom": 422
+   },
+   {
+    "left": 771,
+    "top": 442,
+    "right": 849,
+    "bottom": 496
+   },
+   {
+    "left": 797,
+    "top": 516,
+    "right": 875,
+    "bottom": 570
+   },
+   {
+    "left": 823,
+    "top": 590,
+    "right": 901,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1440,
+  "qa": 0.735,
+  "name": "edgeprobe-1440-0_735.png",
+  "rects": [
+   {
+    "left": 738,
+    "top": 294,
+    "right": 816,
+    "bottom": 348
+   },
+   {
+    "left": 762,
+    "top": 368,
+    "right": 840,
+    "bottom": 422
+   },
+   {
+    "left": 786,
+    "top": 442,
+    "right": 864,
+    "bottom": 496
+   },
+   {
+    "left": 809,
+    "top": 516,
+    "right": 887,
+    "bottom": 570
+   },
+   {
+    "left": 833,
+    "top": 590,
+    "right": 911,
+    "bottom": 644
+   }
+  ]
+ },
+ {
+  "w": 1280,
+  "qa": 0.655,
+  "name": "edgeprobe-1280-0_655.png",
+  "rects": [
+   {
+    "left": 626,
+    "top": 244,
+    "right": 704,
+    "bottom": 298
+   },
+   {
+    "left": 652,
+    "top": 318,
+    "right": 730,
+    "bottom": 372
+   },
+   {
+    "left": 678,
+    "top": 392,
+    "right": 756,
+    "bottom": 446
+   },
+   {
+    "left": 704,
+    "top": 466,
+    "right": 782,
+    "bottom": 520
+   },
+   {
+    "left": 730,
+    "top": 540,
+    "right": 808,
+    "bottom": 594
+   }
+  ]
+ },
+ {
+  "w": 1280,
+  "qa": 0.665,
+  "name": "edgeprobe-1280-0_665.png",
+  "rects": [
+   {
+    "left": 626,
+    "top": 244,
+    "right": 704,
+    "bottom": 298
+   },
+   {
+    "left": 652,
+    "top": 318,
+    "right": 730,
+    "bottom": 372
+   },
+   {
+    "left": 678,
+    "top": 392,
+    "right": 756,
+    "bottom": 446
+   },
+   {
+    "left": 704,
+    "top": 466,
+    "right": 782,
+    "bottom": 520
+   },
+   {
+    "left": 730,
+    "top": 540,
+    "right": 808,
+    "bottom": 594
+   }
+  ]
+ },
+ {
+  "w": 1280,
+  "qa": 0.7,
+  "name": "edgeprobe-1280-0_7.png",
+  "rects": [
+   {
+    "left": 626,
+    "top": 244,
+    "right": 704,
+    "bottom": 298
+   },
+   {
+    "left": 652,
+    "top": 318,
+    "right": 730,
+    "bottom": 372
+   },
+   {
+    "left": 678,
+    "top": 392,
+    "right": 756,
+    "bottom": 446
+   },
+   {
+    "left": 704,
+    "top": 466,
+    "right": 782,
+    "bottom": 520
+   },
+   {
+    "left": 730,
+    "top": 540,
+    "right": 808,
+    "bottom": 594
+   }
+  ]
+ }
+]
