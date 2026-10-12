@@ -102,9 +102,10 @@
   }
 
   /* ---------------- international places (overlay in the big-left phase) ----------------
-     Five flag+name rows that form a staircase on the right side while the mark
-     grows big at the left edge; they fade/slide in row by row and clear out
-     before the mark sweeps to the right. */
+     Five flag+name rows that form a mirrored staircase on the right side while
+     the mark grows big at the left edge — each row steps slightly further right
+     than the one above (horizontal flip of the original layout), sliding in from
+     the right and clearing out before the mark sweeps to the right. */
   var placesEl = doc.getElementById("hero-places");
   var hpRows = [];
   if (placesEl && C.places && Array.isArray(C.places.items)) {
@@ -353,7 +354,7 @@
       if (wantMtx !== mtx.running) mtxSetActive(wantMtx);
     }
 
-    /* international places: staircase on the right while the mark grows big left */
+    /* international places: mirrored staircase (steps down-right) while the mark grows big left */
     if (hpRows.length) {
       var PL = geo.vw <= 640 ? PL_M : PL_D;
       for (var pj = 0; pj < hpRows.length; pj++) {
@@ -361,7 +362,7 @@
         var pOut = PL.out0 + pj * PL.pd;
         var rp = seg(p, pIn, pIn + PL.dur) * (1 - seg(p, pOut, pOut + PL.odur));
         hpRows[pj].style.opacity = rp.toFixed(3);
-        hpRows[pj].style.transform = "translateX(" + (-pj * PL.step - (1 - rp) * PL.slide).toFixed(1) + "px)";
+        hpRows[pj].style.transform = "translateX(" + ((1 - rp) * PL.slide - (hpRows.length - 1 - pj) * PL.step).toFixed(1) + "px)";
       }
     }
 

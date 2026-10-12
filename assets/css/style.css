@@ -226,9 +226,10 @@ a:hover { color: var(--ink-1); }
 .hero__side--left .hero__side-body { font-size: 1.05rem; }
 
 /* =========================================================================
-   INTERNATIONAL PLACES — staircase overlay while the mark grows big at the
-   left edge (3rd phase): compact flag + name rows, each stepped slightly
-   further left than the one above, fading in row by row.
+   INTERNATIONAL PLACES — mirrored staircase overlay while the mark grows big
+   at the left edge (3rd phase): compact flag + name rows, each stepped
+   slightly further right than the one above (horizontal flip of the original
+   layout), sliding in from the right, fading in row by row.
    ========================================================================= */
 .hero__places {
   position: absolute;

@@ -313,7 +313,7 @@ try {
       await pg3b.close();
     }
 
-    // international places overlay: staircase on the right during the big-left phase
+    // international places overlay: mirrored staircase (steps down-right) during the big-left phase
     {
       const rows = [];
       for (const [w, h] of [[1440, 900], [1280, 800]]) {
@@ -335,9 +335,9 @@ try {
         await shot(pg, 'd/hero-places-' + w + 'x' + h + '.png');
         await pg.close();
       }
-      const stepOk = rows.every((r) => r.lefts.length === 5 && r.lefts.every((x, i) => i === 0 || x < r.lefts[i - 1]));
+      const stepOk = rows.every((r) => r.lefts.length === 5 && r.lefts.every((x, i) => i === 0 || x > r.lefts[i - 1]));
       const ok = rows.every((r) => r.n === 5 && r.minOp >= 0.95 && r.flagsOk && r.minGap >= 4 && r.band === 0 && r.overflow <= 1);
-      add('d', 'international places overlay (staircase right of the big-left phase)', ok && stepOk ? PASS : FAIL, JSON.stringify(rows), 'at p=0.66 (1440/1280): 5 rows fully visible, flags loaded, row left edges stepping (staircase), clear of the mark, standalone section gone', ['evidence/d/hero-places-1440x900.png', 'evidence/d/hero-places-1280x800.png']);
+      add('d', 'international places overlay (staircase right of the big-left phase)', ok && stepOk ? PASS : FAIL, JSON.stringify(rows), 'at p=0.66 (1440/1280): 5 rows fully visible, flags loaded, row left edges stepping down-right (mirrored staircase), clear of the mark, standalone section gone', ['evidence/d/hero-places-1440x900.png', 'evidence/d/hero-places-1280x800.png']);
 
       const offs = [];
       for (const qv of [0.24, 0.58, 0.88]) {
