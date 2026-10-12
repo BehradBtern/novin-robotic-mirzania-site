@@ -234,16 +234,16 @@ a:hover { color: var(--ink-1); }
 .hero__places {
   position: absolute;
   top: 50%;
-  right: clamp(24px, 6vw, 96px);
+  right: clamp(24px, 13vw, 208px);
   transform: translateY(-50%);
   width: min(430px, 30vw);
   z-index: 3;
   pointer-events: none;
 }
 .hp-kicker {
-  margin: 0 0 12px;
+  margin: 0 0 16px;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -253,23 +253,23 @@ a:hover { color: var(--ink-1); }
 .hp-row {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 8px 0;
+  gap: 16px;
+  padding: 10px 0;
   will-change: opacity, transform;
 }
 .hp-flag {
   flex: none;
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 40px;
+  width: 76px;
+  height: 52px;
   border: 1px solid var(--hairline);
 }
-.hp-flag img { display: block; max-width: 44px; max-height: 28px; }
+.hp-flag img { display: block; max-width: 58px; max-height: 38px; }
 .hp-name {
   color: var(--ink-1);
   font-family: var(--font-serif);
-  font-size: 1.12rem;
+  font-size: 1.45rem;
   font-weight: 600;
   line-height: 1.2;
 }
