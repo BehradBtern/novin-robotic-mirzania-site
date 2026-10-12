@@ -144,12 +144,16 @@
     });
   }
   /* staircase timing per viewport: after the mark has swung fully left, the
-     rows form beside it. Desktop rows use a per-row offset table (off[]) so
-     every line sits at its own distance from the mark's pointed right
-     contour — the group fans around the tip. They hold briefly and clear out
+     rows form beside it. Desktop rows use per-row tables: iu[] entry offsets,
+     ou[] exit offsets (exit order tuned so each band clears the mark's sweep)
+     and off[] x-offsets so every line sits at its own distance from the mark's
+     pointed right contour (scaled by viewport). They hold briefly and clear out
      before the mark's lower-right sweep (~0.73). Phones keep the compact
      uniform stack (off all zero) and a shorter, lower window. */
-  var PL_D = { in0: 0.657, pd: 0.0025, dur: 0.024, out0: 0.696, odur: 0.028, slide: 24, off: [-194, -168, -90, -64, -104, -161] };
+  var PL_D = { in0: 0.658, pd: 0.0025, dur: 0.024, out0: 0.698, odur: 0.020, slide: 24,
+    iu: [0.004, 0.0125, 0.0075, 0.0065, 0.009, 0.0115],
+    ou: [0, 0, 3, 2, 1, 0],
+    off: [-275, -249, -117, -94, -164, -249] };
   var PL_M = { in0: 0.606, pd: 0.002, dur: 0.024, out0: 0.628, odur: 0.030, slide: 16, off: [0, 0, 0, 0, 0, 0] };
 
   /* ---------------- hero side copy (appears beside the small symbol) ------ */
@@ -360,12 +364,13 @@
     /* international places: mirrored staircase (steps down-right) while the mark grows big left */
     if (hpRows.length) {
       var PL = geo.vw <= 640 ? PL_M : PL_D;
+      var kOff = Math.min(Math.max(geo.vw / 1440, 0.85), 1.4);
       for (var pj = 0; pj < hpRows.length; pj++) {
-        var pIn = PL.in0 + pj * PL.pd;
-        var pOut = PL.out0 + pj * PL.pd;
+        var pIn = PL.in0 + (PL.iu ? PL.iu[pj] : pj * PL.pd);
+        var pOut = PL.out0 + (PL.ou ? PL.ou[pj] : pj) * PL.pd;
         var rp = seg(p, pIn, pIn + PL.dur) * (1 - seg(p, pOut, pOut + PL.odur));
         hpRows[pj].style.opacity = rp.toFixed(3);
-        hpRows[pj].style.transform = "translateX(" + ((1 - rp) * PL.slide + PL.off[pj]).toFixed(1) + "px)";
+        hpRows[pj].style.transform = "translateX(" + ((1 - rp) * PL.slide + PL.off[pj] * kOff).toFixed(1) + "px)";
       }
     }
 
