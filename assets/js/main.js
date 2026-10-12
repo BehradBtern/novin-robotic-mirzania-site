@@ -143,10 +143,11 @@
       hpRows.push(row);
     });
   }
-  /* staircase timing per viewport: desktops hold the full set while the mark
-     is big at the left; phones use a shorter, lower window before the mark
-     fills the screen */
-  var PL_D = { in0: 0.615, pd: 0.003, dur: 0.028, out0: 0.700, odur: 0.045, step: 26, slide: 24 };
+  /* staircase timing per viewport: after the mark has swung fully left, the
+     rows form beside it, aligned to its right contour; they hold briefly and
+     clear out before the mark's lower-right sweep (~0.74). Phones use a
+     shorter, lower window before the mark fills the screen. */
+  var PL_D = { in0: 0.657, pd: 0.0025, dur: 0.024, out0: 0.700, odur: 0.032, step: 26, slide: 24 };
   var PL_M = { in0: 0.606, pd: 0.002, dur: 0.024, out0: 0.628, odur: 0.030, step: 0, slide: 16 };
 
   /* ---------------- hero side copy (appears beside the small symbol) ------ */

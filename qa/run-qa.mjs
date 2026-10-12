@@ -55,6 +55,13 @@ function walk(dir, out = []) {
   return out;
 }
 
+function tealScan(pngPath, zones) {
+  const tmp = path.join(TMP, 'teal-zones.json');
+  fs.writeFileSync(tmp, JSON.stringify(zones));
+  const outp = execSync('python "' + path.join(ROOT, 'qa', 'teal-scan.py') + '" "' + pngPath + '" "' + tmp + '"', { encoding: 'utf8' });
+  return JSON.parse(outp);
+}
+
 /* =================== MAIN =================== */
 let server = null, browser = null, edgeBrowser = null;
 mkdirp(EVIDENCE);
@@ -317,7 +324,7 @@ try {
     {
       const rows = [];
       for (const [w, h] of [[1440, 900], [1280, 800]]) {
-        const pg = await openPage(browser, { w, h, qa: 0.66 });
+        const pg = await openPage(browser, { w, h, qa: 0.70 });
         await delay(300);
         const d = await pg.evaluate(() => {
           const wrap = document.getElementById('hero-places');
@@ -327,17 +334,21 @@ try {
           const mk = document.getElementById('hero-mark').getBoundingClientRect();
           const lefts = items.map((el) => Math.round(el.getBoundingClientRect().left));
           const gaps = items.map((el) => Math.round(el.getBoundingClientRect().left - mk.right));
+          const zones = items.map((el) => { const c = el.querySelector('.hp-flag').getBoundingClientRect(); return [Math.round(c.left), Math.round(c.top), Math.round(c.right), Math.round(c.bottom)]; });
+          const kEl = wrap.querySelector('.hp-kicker');
+          if (kEl) { const c = kEl.getBoundingClientRect(); zones.push([Math.round(c.left), Math.round(c.top), Math.round(c.right), Math.round(c.bottom)]); }
           return { n: items.length, minOp: Math.min(...ops), flagsOk: flags.length === 5 && flags.every(Boolean),
             minGap: Math.min(...gaps), lefts, band: document.querySelectorAll('#places-list, section.places').length,
-            overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+            overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, zones };
         });
-        rows.push({ vp: w + 'x' + h, n: d.n, minOp: d.minOp, flagsOk: d.flagsOk, minGap: d.minGap, lefts: d.lefts, band: d.band, overflow: d.overflow });
         await shot(pg, 'd/hero-places-' + w + 'x' + h + '.png');
+        const scan = tealScan(path.join(EVIDENCE, 'd', 'hero-places-' + w + 'x' + h + '.png'), d.zones);
+        rows.push({ vp: w + 'x' + h, n: d.n, minOp: d.minOp, flagsOk: d.flagsOk, minGap: d.minGap, lefts: d.lefts, band: d.band, overflow: d.overflow, scan });
         await pg.close();
       }
       const stepOk = rows.every((r) => r.lefts.length === 5 && r.lefts.every((x, i) => i === 0 || x > r.lefts[i - 1]));
-      const ok = rows.every((r) => r.n === 5 && r.minOp >= 0.95 && r.flagsOk && r.minGap >= 4 && r.band === 0 && r.overflow <= 1);
-      add('d', 'international places overlay (staircase right of the big-left phase)', ok && stepOk ? PASS : FAIL, JSON.stringify(rows), 'at p=0.66 (1440/1280): 5 rows fully visible, flags loaded, row left edges stepping down-right (mirrored staircase), clear of the mark, standalone section gone', ['evidence/d/hero-places-1440x900.png', 'evidence/d/hero-places-1280x800.png']);
+      const ok = rows.every((r) => r.n === 5 && r.minOp >= 0.95 && r.flagsOk && r.scan && r.scan.hits === 0 && r.scan.minGap >= 8 && r.band === 0 && r.overflow <= 1);
+      add('d', 'international places overlay (mirrored staircase aligned beside the big-left logo)', ok && stepOk ? PASS : FAIL, JSON.stringify(rows), 'at p=0.70 (1440/1280): 5 rows fully visible, flags loaded, row left edges stepping down-right (mirrored staircase), clear of the mark, standalone section gone', ['evidence/d/hero-places-1440x900.png', 'evidence/d/hero-places-1280x800.png']);
 
       const offs = [];
       for (const qv of [0.24, 0.58, 0.88]) {

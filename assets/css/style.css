@@ -234,7 +234,7 @@ a:hover { color: var(--ink-1); }
 .hero__places {
   position: absolute;
   top: 50%;
-  right: clamp(24px, 13vw, 208px);
+  right: clamp(24px, 32vw, 720px);
   transform: translateY(-50%);
   width: min(430px, 30vw);
   z-index: 3;
