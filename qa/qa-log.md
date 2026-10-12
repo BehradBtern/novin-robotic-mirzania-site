@@ -118,3 +118,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.6.5 -> peeled commit ddec128 (code revision f7041b2).
 - Change: per-line contour fan — desktop rows use an offset table off[-194,-168,-90,-64,-104,-161] so every line sits at its own distance from the mark's pointed right contour (lefts [381,459,485,445,388] at 1440; hold gaps 56–105px, near-uniform). Window tightened (out0 0.696, odur 0.028). Swept p=0.66–0.74 at 1440/1280 with the strict teal scan: all stroke intrusions confined to ≤15% opacity moments; no overflow. QA 32 checks incl. new expected-positions table (±8px) + pixel scan (hits 0, min gap 56px at hold).
 - Worktree smoke: v1.6.5 served on 8081 -> rows 5, ops all 1, lefts [381, 459, 485, 445, 388], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.5-places.png.
+
+## Rollback drill (lite) — v1.6.6
+- Annotated tag v1.6.6 -> peeled commit 9a62abf (code revision 431859e).
+- Change: rows enlarged again (chips 92x62, names 1.72rem, row 86px) and pulled tight to the logo: per-row entry/exit offset tables (iu/ou) + viewport-scaled x-offsets (off x vw/1440) give lefts [300,432,455,385,300] at 1440 with hold gaps 27–41px (was 56–105). Formation/exit swept at 1440/1280: intrusions confined to ≤13% opacity moments; no overflow; 1280 gaps 23–44px.
+- Worktree smoke: v1.6.6 served on 8081 -> rows 5, ops all 1, lefts [300, 432, 455, 385, 300], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.6-places.png. Roundtrip PASS.
