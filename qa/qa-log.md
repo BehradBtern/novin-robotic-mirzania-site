@@ -108,3 +108,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.6.3 -> peeled commit 6670dc4 (code revision 43f12b5).
 - Change: international-places rows enlarged (flag chips 58x40 -> 76x52, name 1.12 -> 1.45rem, row height 58 -> 74px) and the block moved left (right margin 6vw -> 13vw, ~100px at 1440). Formation transient verified at p=0.62–0.66: bright mark stroke clears the first chip by 44px at the tightest instant (p=0.63); full-state bbox gap 133px. QA 32 checks pass, no overflow.
 - Worktree smoke: v1.6.3 served on 8081 -> rows 5, ops all 1, lefts [719, 745, 771, 797, 823], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.3-places.png.
+
+## Rollback drill (lite) — v1.6.4
+- Annotated tag v1.6.4 -> peeled commit 9d5c518 (code revision 560f9ee).
+- Change: staircase now sits aligned beside the big-left logo — right margin 13vw -> 32vw (India edge 719 -> 445 at 1440), window moved later (in0 0.615 -> 0.657, dur 0.024, out0 0.700, odur 0.032) so rows form only after the mark has swung fully left. Swept p=0.66..0.745 at 1440/1280 with a strict teal pixel scan: zero stroke intrusion at every visible moment; drawn-edge gaps 69–254px during hold; rows fully cleared by ~0.745 before the mark's late lower-right sweep (edges 647–842 at p 0.75–0.78). QA 32 checks incl. new pixel-scan assertion (hits 0, min gap >= 8px); no overflow.
+- Worktree smoke: v1.6.4 served on 8081 -> rows 5, ops all 1, lefts [445, 471, 497, 523, 549], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.4-places.png.
