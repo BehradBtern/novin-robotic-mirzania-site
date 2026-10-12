@@ -102,10 +102,10 @@
   }
 
   /* ---------------- international places (overlay in the big-left phase) ----------------
-     Five flag+name rows that form a mirrored staircase on the right side while
-     the mark grows big at the left edge — each row steps slightly further right
-     than the one above (horizontal flip of the original layout), sliding in from
-     the right and clearing out before the mark sweeps to the right. */
+     Five flag+name rows beside the big mark at the left — each row gets its own
+     offset (contour fan) so every line aligns differently to the mark's pointed
+     right contour, sliding in from the right and clearing out before the mark
+     sweeps back to the right. */
   var placesEl = doc.getElementById("hero-places");
   var hpRows = [];
   if (placesEl && C.places && Array.isArray(C.places.items)) {
@@ -144,11 +144,13 @@
     });
   }
   /* staircase timing per viewport: after the mark has swung fully left, the
-     rows form beside it, aligned to its right contour; they hold briefly and
-     clear out before the mark's lower-right sweep (~0.74). Phones use a
-     shorter, lower window before the mark fills the screen. */
-  var PL_D = { in0: 0.657, pd: 0.0025, dur: 0.024, out0: 0.700, odur: 0.032, step: 26, slide: 24 };
-  var PL_M = { in0: 0.606, pd: 0.002, dur: 0.024, out0: 0.628, odur: 0.030, step: 0, slide: 16 };
+     rows form beside it. Desktop rows use a per-row offset table (off[]) so
+     every line sits at its own distance from the mark's pointed right
+     contour — the group fans around the tip. They hold briefly and clear out
+     before the mark's lower-right sweep (~0.73). Phones keep the compact
+     uniform stack (off all zero) and a shorter, lower window. */
+  var PL_D = { in0: 0.657, pd: 0.0025, dur: 0.024, out0: 0.696, odur: 0.028, slide: 24, off: [-194, -168, -90, -64, -104, -161] };
+  var PL_M = { in0: 0.606, pd: 0.002, dur: 0.024, out0: 0.628, odur: 0.030, slide: 16, off: [0, 0, 0, 0, 0, 0] };
 
   /* ---------------- hero side copy (appears beside the small symbol) ------ */
   var sideLeftEl = doc.getElementById("hero-side-left");
@@ -363,7 +365,7 @@
         var pOut = PL.out0 + pj * PL.pd;
         var rp = seg(p, pIn, pIn + PL.dur) * (1 - seg(p, pOut, pOut + PL.odur));
         hpRows[pj].style.opacity = rp.toFixed(3);
-        hpRows[pj].style.transform = "translateX(" + ((1 - rp) * PL.slide - (hpRows.length - 1 - pj) * PL.step).toFixed(1) + "px)";
+        hpRows[pj].style.transform = "translateX(" + ((1 - rp) * PL.slide + PL.off[pj]).toFixed(1) + "px)";
       }
     }
 

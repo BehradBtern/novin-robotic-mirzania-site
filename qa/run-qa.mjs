@@ -324,7 +324,7 @@ try {
     {
       const rows = [];
       for (const [w, h] of [[1440, 900], [1280, 800]]) {
-        const pg = await openPage(browser, { w, h, qa: 0.70 });
+        const pg = await openPage(browser, { w, h, qa: 0.696 });
         await delay(300);
         const d = await pg.evaluate(() => {
           const wrap = document.getElementById('hero-places');
@@ -346,9 +346,10 @@ try {
         rows.push({ vp: w + 'x' + h, n: d.n, minOp: d.minOp, flagsOk: d.flagsOk, minGap: d.minGap, lefts: d.lefts, band: d.band, overflow: d.overflow, scan });
         await pg.close();
       }
-      const stepOk = rows.every((r) => r.lefts.length === 5 && r.lefts.every((x, i) => i === 0 || x > r.lefts[i - 1]));
+      const EXP = { '1440x900': [381, 459, 485, 445, 388], '1280x800': [318, 396, 422, 382, 325] };
+      const stepOk = rows.every((r) => r.lefts.length === 5 && r.lefts.every((x, i) => Math.abs(x - EXP[r.vp][i]) <= 8));
       const ok = rows.every((r) => r.n === 5 && r.minOp >= 0.95 && r.flagsOk && r.scan && r.scan.hits === 0 && r.scan.minGap >= 8 && r.band === 0 && r.overflow <= 1);
-      add('d', 'international places overlay (mirrored staircase aligned beside the big-left logo)', ok && stepOk ? PASS : FAIL, JSON.stringify(rows), 'at p=0.70 (1440/1280): 5 rows fully visible, flags loaded, row left edges stepping down-right (mirrored staircase), clear of the mark, standalone section gone', ['evidence/d/hero-places-1440x900.png', 'evidence/d/hero-places-1280x800.png']);
+      add('d', 'international places overlay (rows fanned to the logo contour, per-line alignment)', ok && stepOk ? PASS : FAIL, JSON.stringify(rows), 'at p=0.696 (1440/1280): 5 rows fully visible, flags loaded, row left edges match the per-line contour fan (+-8px), pixel-scan clear of the mark, standalone section gone', ['evidence/d/hero-places-1440x900.png', 'evidence/d/hero-places-1280x800.png']);
 
       const offs = [];
       for (const qv of [0.24, 0.58, 0.88]) {
