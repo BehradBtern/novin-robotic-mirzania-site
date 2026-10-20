@@ -385,8 +385,9 @@
         hpRows[pj].style.opacity = rp.toFixed(3);
         var xo = (1 - rp) * PL.slide * uS;
         if (tracked) {
-          if (p <= pOut + 0.0001) hpX[pj] = targetX + geo.rBig * PL.v[pj] + 14 * uS - plLeft;
-          if (typeof hpX[pj] === "number") xo += hpX[pj];
+          /* static per-viewport target (the mark's hold-state contour): rows must
+             NOT ride the mark's leftward travel — they fade in at their spot */
+          xo += geo.rBig * PL.v[pj] + 14 * uS - plLeft;
         } else {
           xo += PL.off[pj] * Math.min(Math.max(geo.vw / 1440, 0.85), 1.4);
         }
