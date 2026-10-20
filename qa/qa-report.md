@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.6 round)
 
-- Revision: `c2914b3` · generated 2026-10-20T16:37:42.155Z
+- Revision: `fb945e7` · generated 2026-10-20T16:43:26.838Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/155.0.8059.80 · Edge: Edg/155.0.4283.62
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -21,10 +21,10 @@
 | c | enlarged state (right edge): half clipped, exact 45-degree pose, no overflow | PASS | [{"vp":"1280x800","visFrac":0.497,"markCx":1282.6,"spin":360,"overflow":0,"ok":true},{"vp":"1440x900","visFrac":0.497,"markCx":1443,"spin":360,"overflow":0,"ok":true},{"vp":"1920x1080","visFrac":0.497,"markCx":1923.5,"spin":360,"overflow":0,"ok":true},{"vp":"390x844","visFrac":0.497,"markCx":392.6,"spin":360,"overflow" | visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0 | evidence/b/halfclip-audit.json<br>evidence/b/bigright-1440x900.png |
 | c | big left: half clipped at the left edge, 45-degree pose | PASS | [{"vp":"1280x800","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1440x900","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1920x1080","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"390x844","ogGone":0,"visFrac":0.5,"markCx":0,"s | visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG overlay gone | evidence/b/bigleft-audit.json<br>evidence/b/bigleft-1440x900.png |
 | c | mid-sweep: the big mark crosses the middle, fully on screen | PASS | {"mcx":722.1,"spin":315} | at p=0.77 the big mark sits between the edges, centred vertically | evidence/b/sweep-1440x900.png |
-| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":4780,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
+| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":5265,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
 | c | founder phase: rain morph-out is a smooth partial fade | PASS | {"mtxOp":0.5} | at p=0.545 the rain is mid-fade (0.03 < opacity < 0.97) | — |
 | c | spin phase: no rain (the effect lives with the founder text) | PASS | {"mtxOp":0} | at p=0.24 the rain is off (opacity <= 0.03) | — |
-| d | international places overlay (rows fanned to the logo contour, per-line alignment) | PASS | [{"vp":"1440x900","n":5,"minOp":0.989,"flagsOk":true,"minGap":-232,"lefts":[228,358,445,327,197],"band":0,"overflow":0,"scan":{"zones":[{"left":228,"edge":213,"gap":15,"hits":0},{"left":358,"edge":343,"gap":15,"hits":0},{"left":445,"edge":428,"gap":17,"hits":0},{"left":327,"edge":310,"gap":17,"hits":0},{"left":197,"edg | at p=0.696 (1440/1280): 5 rows fully visible, flags loaded, row left edges match the per-line contour fan (+-8px), pixel-scan clear of the mark, standalone section gone | evidence/d/hero-places-1440x900.png<br>evidence/d/hero-places-1280x800.png |
+| d | international places overlay (rows fanned to the logo contour, per-line alignment) | PASS | [{"vp":"1440x900","n":5,"minOp":0.989,"flagsOk":true,"minGap":-241,"lefts":[223,354,440,319,188],"band":0,"overflow":0,"scan":{"zones":[{"left":223,"edge":213,"gap":10,"hits":0},{"left":354,"edge":343,"gap":11,"hits":0},{"left":440,"edge":428,"gap":12,"hits":0},{"left":319,"edge":310,"gap":9,"hits":0},{"left":188,"edge | at p=0.696 (1440/1280): 5 rows fully visible, flags loaded, row left edges match the per-line contour fan (+-8px), pixel-scan clear of the mark, standalone section gone | evidence/d/hero-places-1440x900.png<br>evidence/d/hero-places-1280x800.png |
 | d | places overlay hidden outside its window (spin, founder copy, dock) | PASS | [{"qa":0.24,"maxOp":0},{"qa":0.58,"maxOp":0},{"qa":0.88,"maxOp":0}] | rows invisible (op <= 0.05) at p=0.24, 0.58, 0.88 | — |
 | d | places overlay on phones (compact, clears before the mark fills) | PASS | {"at063":{"some":true,"minOp":0.624,"flagsOk":true,"overflow":0},"at072":0} | at 390 wide: rows visible around p=0.63 with flags loaded, no overflow, gone by p=0.72 | evidence/d/hero-places-390x844.png |
 | c | side copy: serif type beside the small symbol, then gone before the growth | PASS | [{"vp":"1440x900","centered":true,"visible":true,"noGhost":true,"noOverlap":true,"ogCount":0,"band":0,"mtx0":1,"ff":"\"Cormorant Garamond\", Georgia, \"Times New ","fontOk":true,"mcx":718.5,"mcy":450,"rMark":219.6,"ok":true,"goneAt07":[0,0]},{"vp":"390x844","centered":true,"visible":true,"noGhost":true,"noOverlap":true | both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay | evidence/b/sidecopy-audit.json<br>evidence/b/sidetext-1440x900.png |
@@ -53,7 +53,7 @@
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (345)
+## Evidence files (357)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -169,6 +169,15 @@
 - `qa/evidence/d/cl8-1440-0_71.png`
 - `qa/evidence/d/cl8-1440-0_72.png`
 - `qa/evidence/d/cl8-meta.json`
+- `qa/evidence/d/cl9-1280-0_696.png`
+- `qa/evidence/d/cl9-1280-0_72.png`
+- `qa/evidence/d/cl9-1440-0_67.png`
+- `qa/evidence/d/cl9-1440-0_675.png`
+- `qa/evidence/d/cl9-1440-0_68.png`
+- `qa/evidence/d/cl9-1440-0_696.png`
+- `qa/evidence/d/cl9-1440-0_71.png`
+- `qa/evidence/d/cl9-1440-0_72.png`
+- `qa/evidence/d/cl9-meta.json`
 - `qa/evidence/d/dock-audit.json`
 - `qa/evidence/d/edgeprobe-1280-0_655.png`
 - `qa/evidence/d/edgeprobe-1280-0_665.png`
@@ -267,6 +276,7 @@
 - `qa/evidence/d/rollback-v1.6.5-places.png`
 - `qa/evidence/d/rollback-v1.6.6-places.png`
 - `qa/evidence/d/rollback-v1.6.7-places.png`
+- `qa/evidence/d/rollback-v1.6.8-places.png`
 - `qa/evidence/d/sp3-1280-0_696.png`
 - `qa/evidence/d/sp3-1280-0_72.png`
 - `qa/evidence/d/sp3-1440-0_663.png`
@@ -363,6 +373,8 @@
 - `qa/evidence/probe/prod-bigleft-166.png`
 - `qa/evidence/probe/prod-fan-068.png`
 - `qa/evidence/probe/prod-fan-0696.png`
+- `qa/evidence/probe/prod-flush-068.png`
+- `qa/evidence/probe/prod-flush-0696.png`
 - `qa/evidence/probe/prod-founder-1440.png`
 - `qa/evidence/probe/prod-founder-longer-1440.png`
 - `qa/evidence/probe/prod-founder-rain-1440.png`
