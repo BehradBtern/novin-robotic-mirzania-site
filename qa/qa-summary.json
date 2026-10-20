@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/155.0.8059.80",
     "edge": "Edg/155.0.4283.62",
-    "generatedAt": "2026-10-20T16:19:39.248Z",
-    "sha": "861d718"
+    "generatedAt": "2026-10-20T16:37:42.155Z",
+    "sha": "c2914b3"
   },
-  "generatedAt": "2026-10-20T16:19:39.248Z",
+  "generatedAt": "2026-10-20T16:37:42.155Z",
   "counts": {
     "PASS": 32,
     "FAIL": 0,
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":6395,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":4780,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -159,7 +159,7 @@
       "id": "d",
       "entry": "international places overlay (rows fanned to the logo contour, per-line alignment)",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"n\":5,\"minOp\":1,\"flagsOk\":true,\"minGap\":-225,\"lefts\":[243,380,455,340,204],\"band\":0,\"overflow\":0,\"scan\":{\"zones\":[{\"left\":243,\"edge\":213,\"gap\":30,\"hits\":0},{\"left\":380,\"edge\":343,\"gap\":37,\"hits\":0},{\"left\":455,\"edge\":428,\"gap\":27,\"hits\":0},{\"left\":340,\"edge\":310,\"gap\":30,\"hits\":0},{\"left\":204,\"edge\":174,\"gap\":30,\"hits\":0},{\"left\":217,\"edge\":97,\"gap\":120,\"hits\":0}],\"hits\":0,\"minGap\":27}},{\"vp\":\"1280x800\",\"n\":5,\"minOp\":1,\"flagsOk\":true,\"minGap\":-202,\"lefts\":[214,336,403,301,180],\"band\":0,\"overflow\":0,\"scan\":{\"zones\":[{\"left\":214,\"edge\":164,\"gap\":50,\"hits\":0},{\"left\":336,\"edge\":296,\"gap\":40,\"hits\":0},{\"left\":403,\"edge\":380,\"gap\":23,\"hits\":0},{\"left\":301,\"edge\":261,\"gap\":40,\"hits\":0},{\"left\":180,\"edge\":125,\"gap\":55,\"hits\":0},{\"left\":191,\"edge\":48,\"gap\":143,\"hits\":0}],\"hits\":0,\"minGap\":23}}]",
+      "value": "[{\"vp\":\"1440x900\",\"n\":5,\"minOp\":0.989,\"flagsOk\":true,\"minGap\":-232,\"lefts\":[228,358,445,327,197],\"band\":0,\"overflow\":0,\"scan\":{\"zones\":[{\"left\":228,\"edge\":213,\"gap\":15,\"hits\":0},{\"left\":358,\"edge\":343,\"gap\":15,\"hits\":0},{\"left\":445,\"edge\":428,\"gap\":17,\"hits\":0},{\"left\":327,\"edge\":310,\"gap\":17,\"hits\":0},{\"left\":197,\"edge\":174,\"gap\":23,\"hits\":0},{\"left\":202,\"edge\":97,\"gap\":105,\"hits\":0}],\"hits\":0,\"minGap\":15}},{\"vp\":\"1280x800\",\"n\":5,\"minOp\":0.989,\"flagsOk\":true,\"minGap\":-208,\"lefts\":[201,316,394,289,174],\"band\":0,\"overflow\":0,\"scan\":{\"zones\":[{\"left\":201,\"edge\":164,\"gap\":37,\"hits\":0},{\"left\":316,\"edge\":296,\"gap\":20,\"hits\":0},{\"left\":394,\"edge\":380,\"gap\":14,\"hits\":0},{\"left\":289,\"edge\":261,\"gap\":28,\"hits\":0},{\"left\":174,\"edge\":125,\"gap\":49,\"hits\":0},{\"left\":178,\"edge\":48,\"gap\":130,\"hits\":0}],\"hits\":0,\"minGap\":14}}]",
       "threshold": "at p=0.696 (1440/1280): 5 rows fully visible, flags loaded, row left edges match the per-line contour fan (+-8px), pixel-scan clear of the mark, standalone section gone",
       "evidence": [
         "evidence/d/hero-places-1440x900.png",
@@ -303,7 +303,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":187240}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":187241}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
