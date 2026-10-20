@@ -128,3 +128,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.6.7 -> peeled commit a78b68e (code revision e5091f8).
 - Change: vertical spacing between rows tripled (row padding 12 -> 36px; gap 24 -> 72px, pitch 86 -> 134px). Band heights shift, so the fan was refit: lefts [243,380,455,340,204] at 1440 with hold gaps 27–37px; 1280 gaps 23–55. Formation/exit swept: intrusions confined to ≤9% opacity; no overflow; block fits 900/800-high viewports.
 - Worktree smoke: v1.6.7 served on 8081 -> rows 5, ops all 1, lefts [243, 380, 455, 340, 204], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.7-places.png.
+
+## Rollback drill (lite) — v1.6.8
+- Annotated tag v1.6.8 -> peeled commit 4348e13 (code revision 5c3b06b).
+- Change: rows pulled flush to the logo contour: lefts [228,358,445,327,197] at 1440 with hold gaps 15–23px (was 27–37). Malaysia entry moved later (iu 0.0155) so it can sit at gap 15 without crossing during formation. Swept 0.67–0.72 at 1440/1280: visible-moment gaps >= 15px, intrusions only at ~0 opacity; no overflow.
+- Worktree smoke: v1.6.8 served on 8081 -> rows 5, ops all ~1, lefts [228, 358, 445, 327, 197], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.8-places.png.
