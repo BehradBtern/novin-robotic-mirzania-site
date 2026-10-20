@@ -14,7 +14,7 @@ for c in zones:
             rr, gg, bb = px[x, y]
             if teal(rr, gg, bb):
                 if x < l - 4 and x > edge: edge = x
-                if x >= l - 12: hits += 1
+                if x >= l - 8: hits += 1
     gap = l - edge
     hits_total += hits
     if gap < min_gap: min_gap = gap
