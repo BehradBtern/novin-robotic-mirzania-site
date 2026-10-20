@@ -88,10 +88,10 @@ window.SITE_CONTENT = {
     intro: "",
     items: [
       { country: "India", flag: "assets/flags/Flag_of_India.svg", year: "", text: "" },
-      { country: "Malaysia", flag: "assets/flags/Flag_of_Malaysia,_vertical.svg", year: "", text: "" },
+      { country: "Malaysia", flag: "assets/flags/Flag_of_Malaysia.svg", year: "", text: "" },
       { country: "Turkey", flag: "assets/flags/Flag_of_Turkey.svg", year: "", text: "" },
       { country: "United Kingdom", flag: "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg", year: "", text: "" },
-      { country: "United States", flag: "assets/flags/Vertical_United_States_Flag.svg", year: "", text: "" }
+      { country: "United States", flag: "assets/flags/Flag_of_the_United_States.svg", year: "", text: "" }
     ]
   },
 

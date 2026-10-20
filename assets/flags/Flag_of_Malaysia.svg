@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 84 42">
+	<title>Flag of Malaysia</title>
+	<g transform="translate(0,42) rotate(-90)">
+<path fill="#fff" d="m0 0h42v84H0z"/>
+	<g fill="none" stroke="#c00" stroke-width="84" stroke-dasharray="3">
+		<path d="m42 42H21"/>
+		<path fill="#006" stroke="none" d="m42 0v42H16V0z"/>
+		<path d="m18 42H3"/>
+	</g>
+	<path transform="scale(.001)" fill="#fc0" d="m22690 22500a9000 9000 0 1 1 14620 0 8000 8000 0 1 0-14620 0zm14810 3750-4575 668 3832 2586-4412-1384 2331 3994-3374-3161 367 4609-1669-4312-1669 4312 367-4609-3374 3161 2331-3994-4412 1384 3832-2586-4575-668 4575-668-3832-2586 4412 1384-2331-3994 3374 3161-367-4609 1669 4312 1669-4312-367 4609 3374-3161-2331 3994 4412-1384-3832 2586z"/>
+	</g>
+</svg>
