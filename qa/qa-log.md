@@ -138,3 +138,9 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.6.9 -> peeled commit b46572b (code revision 5dbf9da).
 - Change: rows pushed flush: lefts [223,354,440,319,188] at 1440, hold gaps 9–14px; scan hit-zone tightened 12 -> 8px (min gap assertion kept at 8). Swept 0.67–0.72 at 1440/1280: visible gaps >= 9px, intrusions only at ~0 opacity; 1280 gaps 10–41; no overflow.
 - Worktree smoke: v1.6.9 served on 8081 -> rows 5, ops all ~1, lefts [223, 354, 440, 319, 188], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.9-places.png.
+
+## Rollback drill (lite) — v1.6.10
+- Annotated tag v1.6.10 -> peeled commit aaafedd (code revision b96d44d).
+- Root cause of 'still far': rows were fixed-px while the mark scales with viewport height — gaps drifted to 80-216px on 1536/1920 screens. Fix: places layout now vh-scaled (chip metrics in vh) and each row's x is a fixed fraction of the mark radius (PL_D.v) + 14px equivalent gap, tracked per frame and frozen at exit.
+- Measured hold gaps: 1280 [16,13,13,12,12], 1440 [16,16,14,12,12], 1536 [16,15,13,10,10], 1920 [16,16,16,13,12]; zero scan hits at all four widths. QA 32 checks; no overflow; 1280/1440 EXP tables updated.
+- Worktree smoke: v1.6.10 served on 8081 -> rows 5, ops all ~1, lefts [227,357,442,324,188], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.10-places.png.
