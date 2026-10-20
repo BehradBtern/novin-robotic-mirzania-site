@@ -151,9 +151,9 @@
      before the mark's lower-right sweep (~0.73). Phones keep the compact
      uniform stack (off all zero) and a shorter, lower window. */
   var PL_D = { in0: 0.658, pd: 0.0025, dur: 0.024, out0: 0.698, odur: 0.020, slide: 24,
-    iu: [0.004, 0.0125, 0.0075, 0.0065, 0.009, 0.0115],
+    iu: [0.004, 0.0125, 0.0155, 0.0065, 0.009, 0.0115],
     ou: [0, 0, 3, 2, 1, 0],
-    off: [-332, -306, -169, -94, -209, -345] };
+    off: [-347, -321, -192, -104, -222, -352] };
   var PL_M = { in0: 0.606, pd: 0.002, dur: 0.024, out0: 0.628, odur: 0.030, slide: 16, off: [0, 0, 0, 0, 0, 0] };
 
   /* ---------------- hero side copy (appears beside the small symbol) ------ */
