@@ -144,3 +144,9 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Root cause of 'still far': rows were fixed-px while the mark scales with viewport height — gaps drifted to 80-216px on 1536/1920 screens. Fix: places layout now vh-scaled (chip metrics in vh) and each row's x is a fixed fraction of the mark radius (PL_D.v) + 14px equivalent gap, tracked per frame and frozen at exit.
 - Measured hold gaps: 1280 [16,13,13,12,12], 1440 [16,16,14,12,12], 1536 [16,15,13,10,10], 1920 [16,16,16,13,12]; zero scan hits at all four widths. QA 32 checks; no overflow; 1280/1440 EXP tables updated.
 - Worktree smoke: v1.6.10 served on 8081 -> rows 5, ops all ~1, lefts [227,357,442,324,188], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.10-places.png.
+
+## Rollback drill (lite) — v1.6.11
+- Annotated tag v1.6.11 -> peeled commit a51cd94 (code revision 6683267).
+- Fix: v1.6.10 anchored row x to targetX (the mark's travelling centre) so rows glided ~400px leftward while fading in. Now rows use STATIC per-viewport targets = rBig*v[pj] + gap (the hold-state contour), no state, no freeze needed. Hold gaps measured: 1280 [15,13,12,12,12], 1440 [16,16,14,12,12], 1536 [15,15,13,10,10], 1920 [16,16,16,13,12]; formation/exit clean (hits 0 above ~9% opacity).
+- Note: QA reduced-motion check flaked once (signature dashoffset on load) then passed on re-run; unrelated to this change.
+- Worktree smoke: v1.6.11 on 8081 -> rows 5, ops ~1, lefts [227,357,442,324,188], flagsOk, band 0, sig 3, no errors; shot qa/evidence/d/rollback-v1.6.11-places.png.
