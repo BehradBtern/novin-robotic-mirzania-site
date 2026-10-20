@@ -123,3 +123,8 @@ Rollback path: annotated git tags (per release). Dist zip archives are no longer
 - Annotated tag v1.6.6 -> peeled commit 9a62abf (code revision 431859e).
 - Change: rows enlarged again (chips 92x62, names 1.72rem, row 86px) and pulled tight to the logo: per-row entry/exit offset tables (iu/ou) + viewport-scaled x-offsets (off x vw/1440) give lefts [300,432,455,385,300] at 1440 with hold gaps 27–41px (was 56–105). Formation/exit swept at 1440/1280: intrusions confined to ≤13% opacity moments; no overflow; 1280 gaps 23–44px.
 - Worktree smoke: v1.6.6 served on 8081 -> rows 5, ops all 1, lefts [300, 432, 455, 385, 300], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.6-places.png. Roundtrip PASS.
+
+## Rollback drill (lite) — v1.6.7
+- Annotated tag v1.6.7 -> peeled commit a78b68e (code revision e5091f8).
+- Change: vertical spacing between rows tripled (row padding 12 -> 36px; gap 24 -> 72px, pitch 86 -> 134px). Band heights shift, so the fan was refit: lefts [243,380,455,340,204] at 1440 with hold gaps 27–37px; 1280 gaps 23–55. Formation/exit swept: intrusions confined to ≤9% opacity; no overflow; block fits 900/800-high viewports.
+- Worktree smoke: v1.6.7 served on 8081 -> rows 5, ops all 1, lefts [243, 380, 455, 340, 204], flagsOk=true, band=0, sig=3, zero errors; shot qa/evidence/d/rollback-v1.6.7-places.png.
