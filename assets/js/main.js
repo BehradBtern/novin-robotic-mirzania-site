@@ -1,8 +1,8 @@
-/* =========================================================================
-   main.js — renders content from content.js and drives the logo sequence:
-   hold → clockwise spin (+ shrink, wordmark→mark swap) → side copy appears
-   left/right of the small symbol → grow big at the left edge → spin right
-   across the screen to the right edge (both big states half clipped, 45°) →
+﻿/* =========================================================================
+   main.js â€” renders content from content.js and drives the logo sequence:
+   hold â†’ clockwise spin (+ shrink, wordmarkâ†’mark swap) â†’ side copy appears
+   left/right of the small symbol â†’ grow big at the left edge â†’ spin right
+   across the screen to the right edge (both big states half clipped, 45Â°) â†’
    travel down into the footer dock. Renders the footer.
    Internal QA API: window.__heroState() returns live values (used by the QA
    harness; harmless otherwise). URL hook: ?qa=<0..1> pins progress.
@@ -102,12 +102,19 @@
   }
 
   /* ---------------- international places (overlay in the big-left phase) ----------------
-     Five flag+name rows beside the big mark at the left — each row gets its own
+     Five flag+name rows beside the big mark at the left â€” each row gets its own
      offset (contour fan) so every line aligns differently to the mark's pointed
      right contour, sliding in from the right and clearing out before the mark
      sweeps back to the right. */
   var placesEl = doc.getElementById("hero-places");
   var hpRows = [];
+  var hpX = [];
+  var plLeft = null;
+  function measurePlaces() {
+    if (!placesEl) return;
+    plLeft = placesEl.getBoundingClientRect().left;
+    hpX = [];
+  }
   if (placesEl && C.places && Array.isArray(C.places.items)) {
     placesEl.innerHTML = "";
     if (C.places.kicker) {
@@ -153,6 +160,7 @@
   var PL_D = { in0: 0.658, pd: 0.0025, dur: 0.024, out0: 0.698, odur: 0.020, slide: 24,
     iu: [0.004, 0.0125, 0.0155, 0.0065, 0.009, 0.0115],
     ou: [0, 0, 3, 2, 1, 0],
+    v: [0.223, 0.492, 0.793, 0.9896, 0.7164, 0.4016],
     off: [-352, -326, -196, -109, -230, -361] };
   var PL_M = { in0: 0.606, pd: 0.002, dur: 0.024, out0: 0.628, odur: 0.030, slide: 16, off: [0, 0, 0, 0, 0, 0] };
 
@@ -283,6 +291,7 @@
     geo.tyDock = vh - rFin - 20;              /* docked just above the viewport bottom edge */
 
     root.style.setProperty("--dock-r", rFin.toFixed(2) + "px");
+    if (typeof measurePlaces === "function") measurePlaces();
   }
 
   /* ---------------- render ---------------- */
@@ -291,12 +300,12 @@
   function render(p) {
     p = clamp01(p);
 
-    /* one continuous clockwise turn: spin + shrink (0.10–0.34), hold while the
-       side copy shows (0.34–0.58), grow into the big half-clipped state at
-       the LEFT edge (0.58–0.70, spin 270 — the 45-degree diamond pose), spin
+    /* one continuous clockwise turn: spin + shrink (0.10â€“0.34), hold while the
+       side copy shows (0.34â€“0.58), grow into the big half-clipped state at
+       the LEFT edge (0.58â€“0.70, spin 270 â€” the 45-degree diamond pose), spin
        rightward across the screen to the big state at the RIGHT edge
-       (0.70–0.84, spin 360 — the same exact 45-degree pose), then travel down
-       into the footer dock holding that upright pose (0.84–0.94) */
+       (0.70â€“0.84, spin 360 â€” the same exact 45-degree pose), then travel down
+       into the footer dock holding that upright pose (0.84â€“0.94) */
     var spin =
       A.spinTurns * (180 * cub(p, 0.10, 0.34) +
         90 * cub(p, 0.58, 0.70) +
@@ -310,12 +319,12 @@
       /* C: small symbol holds in the centre; the side copy is visible */
       sF = geo.sC;
     } else if (p <= 0.70) {
-      /* D1: grow into the big state at the LEFT edge — half hangs past it */
+      /* D1: grow into the big state at the LEFT edge â€” half hangs past it */
       var u1 = cub(p, 0.58, 0.70);
       sF = geo.sC + (geo.kBig - geo.sC) * u1;
       targetX = geo.vw / 2 - (geo.vw / 2) * u1;
     } else if (p <= 0.84) {
-      /* D2: still big — spin to the right across the screen */
+      /* D2: still big â€” spin to the right across the screen */
       var u2 = cub(p, 0.70, 0.84);
       sF = geo.kBig;
       targetX = geo.vw * u2;
@@ -326,7 +335,7 @@
       targetX = geo.vw - (geo.vw / 2) * v;
       targetY = geo.vh / 2 + (geo.tyDock - geo.vh / 2) * v;
     }
-    var fade = seg(spin, 90, 150); /* wordmark→mark swap, done inside the turn */
+    var fade = seg(spin, 90, 150); /* wordmarkâ†’mark swap, done inside the turn */
 
     /* keep the MARK's centre on the target path: cancel the lockup-internal
        offset, including how it rotates with the spin (blended in after the
@@ -350,7 +359,7 @@
       sideRightEl.style.transform = "translateY(-50%) translateX(" + soShift.toFixed(1) + "px)";
     }
 
-    /* binary rain: lives with the founder text — morphs in as it appears, out before the growth */
+    /* binary rain: lives with the founder text â€” morphs in as it appears, out before the growth */
     if (mtxWrap) {
       var morphIn = seg(p, 0.34, 0.48);
       var morphOut = seg(p, 0.51, 0.58);
@@ -361,16 +370,27 @@
       if (wantMtx !== mtx.running) mtxSetActive(wantMtx);
     }
 
-    /* international places: mirrored staircase (steps down-right) while the mark grows big left */
+    /* international places: every row hugs the mark's contour â€” its x is a
+       fixed fraction of the mark radius (plus a hairline gap), so the flush
+       alignment holds on every viewport and through the spin */
     if (hpRows.length) {
+      if (plLeft === null) measurePlaces();
       var PL = geo.vw <= 640 ? PL_M : PL_D;
-      var kOff = Math.min(Math.max(geo.vw / 1440, 0.85), 1.4);
+      var uS = geo.vh / 900;
+      var tracked = PL === PL_D && plLeft !== null;
       for (var pj = 0; pj < hpRows.length; pj++) {
         var pIn = PL.in0 + (PL.iu ? PL.iu[pj] : pj * PL.pd);
         var pOut = PL.out0 + (PL.ou ? PL.ou[pj] : pj) * PL.pd;
         var rp = seg(p, pIn, pIn + PL.dur) * (1 - seg(p, pOut, pOut + PL.odur));
         hpRows[pj].style.opacity = rp.toFixed(3);
-        hpRows[pj].style.transform = "translateX(" + ((1 - rp) * PL.slide + PL.off[pj] * kOff).toFixed(1) + "px)";
+        var xo = (1 - rp) * PL.slide * uS;
+        if (tracked) {
+          if (p <= pOut + 0.0001) hpX[pj] = targetX + geo.rBig * PL.v[pj] + 14 * uS - plLeft;
+          if (typeof hpX[pj] === "number") xo += hpX[pj];
+        } else {
+          xo += PL.off[pj] * Math.min(Math.max(geo.vw / 1440, 0.85), 1.4);
+        }
+        hpRows[pj].style.transform = "translateX(" + xo.toFixed(1) + "px)";
       }
     }
 
@@ -679,3 +699,4 @@
 
   root.dataset.ready = "true";
 })();
+

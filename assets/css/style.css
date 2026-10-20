@@ -241,9 +241,9 @@ a:hover { color: var(--ink-1); }
   pointer-events: none;
 }
 .hp-kicker {
-  margin: 0 0 16px;
+  margin: 0 0 1.78vh;
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: 1.51vh;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -253,23 +253,23 @@ a:hover { color: var(--ink-1); }
 .hp-row {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 36px 0;
+  gap: 2vh;
+  padding: 4vh 0;
   will-change: opacity, transform;
 }
 .hp-flag {
   flex: none;
   display: grid;
   place-items: center;
-  width: 92px;
-  height: 62px;
+  width: 10.22vh;
+  height: 6.89vh;
   border: 1px solid var(--hairline);
 }
-.hp-flag img { display: block; max-width: 70px; max-height: 46px; }
+.hp-flag img { display: block; max-width: 7.78vh; max-height: 5.11vh; }
 .hp-name {
   color: var(--ink-1);
   font-family: var(--font-serif);
-  font-size: 1.72rem;
+  font-size: 3.06vh;
   font-weight: 600;
   line-height: 1.2;
 }
