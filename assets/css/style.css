@@ -267,6 +267,7 @@ a:hover { color: var(--ink-1); }
 }
 .hp-flag img { display: block; max-width: 9.6vh; max-height: 6.3vh; }
 .hp-name {
+  white-space: nowrap;
   color: var(--ink-1);
   font-family: var(--font-serif);
   font-size: 3.8vh;
@@ -274,9 +275,12 @@ a:hover { color: var(--ink-1); }
   line-height: 1.2;
 }
 .hp-year {
+  flex: none;
+  width: 6.4vh;
+  text-align: right;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  font-size: 1.9vh;
+  letter-spacing: 0.08em;
   color: var(--ink-3);
 }
 
@@ -428,6 +432,7 @@ a:hover { color: var(--ink-1); }
     width: min(86vw, 350px);
   }
   .hp-row { padding: 4px 0; gap: 10px; }
+  .hp-year { width: 2.4em; font-size: 0.62rem; }
   .hp-flag { width: 44px; height: 30px; }
   .hp-flag img { max-width: 34px; max-height: 20px; }
   .hp-name { font-size: 0.95rem; }

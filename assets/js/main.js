@@ -1,4 +1,4 @@
-﻿/* =========================================================================
+/* =========================================================================
    main.js â€” renders content from content.js and drives the logo sequence:
    hold â†’ clockwise spin (+ shrink, wordmarkâ†’mark swap) â†’ side copy appears
    left/right of the small symbol â†’ grow big at the left edge â†’ spin right
@@ -127,6 +127,10 @@
     C.places.items.forEach(function (it) {
       var row = doc.createElement("div");
       row.className = "hp-row";
+      var yr = doc.createElement("span");
+      yr.className = "hp-year";
+      yr.textContent = it.year || "\u2014";
+      row.appendChild(yr);
       var chip = doc.createElement("span");
       chip.className = "hp-flag";
       var img = doc.createElement("img");
@@ -140,12 +144,6 @@
       nm.className = "hp-name";
       nm.textContent = it.country || "";
       row.appendChild(nm);
-      if (it.year) {
-        var yr = doc.createElement("span");
-        yr.className = "hp-year";
-        yr.textContent = it.year;
-        row.appendChild(yr);
-      }
       placesEl.appendChild(row);
       hpRows.push(row);
     });
