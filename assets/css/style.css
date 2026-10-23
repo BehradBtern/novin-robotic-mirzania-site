@@ -266,6 +266,12 @@ a:hover { color: var(--ink-1); }
   border: 1px solid var(--hairline);
 }
 .hp-flag img { display: block; max-width: 9.6vh; max-height: 6.3vh; }
+.hp-rank {
+  font-family: var(--font-mono);
+  font-size: 1.7vh;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
 .hp-name {
   white-space: nowrap;
   color: var(--ink-1);

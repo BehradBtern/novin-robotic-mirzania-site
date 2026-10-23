@@ -101,6 +101,11 @@
     }
   }
 
+  function ordinalOf(n) {
+    var s = ["th", "st", "nd", "rd"], v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  }
+
   /* ---------------- international places (overlay in the big-left phase) ----------------
      Five flag+name rows beside the big mark at the left â€” each row gets its own
      offset (contour fan) so every line aligns differently to the mark's pointed
@@ -124,7 +129,7 @@
       placesEl.appendChild(pk);
       hpRows.push(pk);
     }
-    C.places.items.forEach(function (it) {
+    C.places.items.forEach(function (it, idx) {
       var row = doc.createElement("div");
       row.className = "hp-row";
       var yr = doc.createElement("span");
@@ -144,6 +149,10 @@
       nm.className = "hp-name";
       nm.textContent = it.country || "";
       row.appendChild(nm);
+      var rk = doc.createElement("span");
+      rk.className = "hp-rank";
+      rk.textContent = it.rank || ordinalOf(idx + 1);
+      row.appendChild(rk);
       placesEl.appendChild(row);
       hpRows.push(row);
     });
