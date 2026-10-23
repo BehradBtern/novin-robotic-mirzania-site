@@ -261,14 +261,14 @@ a:hover { color: var(--ink-1); }
   flex: none;
   display: grid;
   place-items: center;
-  width: 12.55vh;
+  width: 14.6vh;
   height: 8.45vh;
   border: 1px solid var(--hairline);
 }
-.hp-flag img { display: block; max-width: 9.6vh; max-height: 6.3vh; }
+.hp-flag img { display: block; max-width: 11.2vh; max-height: 6.4vh; }
 .hp-rank {
   font-family: var(--font-mono);
-  font-size: 1.7vh;
+  font-size: 1.85vh;
   letter-spacing: 0.08em;
   color: var(--ink-3);
 }
@@ -276,16 +276,16 @@ a:hover { color: var(--ink-1); }
   white-space: nowrap;
   color: var(--ink-1);
   font-family: var(--font-serif);
-  font-size: 3.8vh;
+  font-size: 4.15vh;
   font-weight: 600;
   line-height: 1.2;
 }
 .hp-year {
   flex: none;
-  width: 6.4vh;
+  width: 7vh;
   text-align: right;
   font-family: var(--font-mono);
-  font-size: 1.9vh;
+  font-size: 2.05vh;
   letter-spacing: 0.08em;
   color: var(--ink-3);
 }
