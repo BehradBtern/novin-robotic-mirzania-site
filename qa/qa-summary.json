@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/155.0.8059.85",
     "edge": "Edg/155.0.4283.62",
-    "generatedAt": "2026-10-23T10:25:23.333Z",
-    "sha": "61ea178"
+    "generatedAt": "2026-10-23T11:33:09.332Z",
+    "sha": "02aaff8"
   },
-  "generatedAt": "2026-10-23T10:25:23.333Z",
+  "generatedAt": "2026-10-23T11:33:09.332Z",
   "counts": {
     "PASS": 32,
     "FAIL": 0,
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":5096,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":8380,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"

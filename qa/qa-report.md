@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.6 round)
 
-- Revision: `61ea178` · generated 2026-10-23T10:25:23.333Z
+- Revision: `02aaff8` · generated 2026-10-23T11:33:09.332Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/155.0.8059.85 · Edge: Edg/155.0.4283.62
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -21,7 +21,7 @@
 | c | enlarged state (right edge): half clipped, exact 45-degree pose, no overflow | PASS | [{"vp":"1280x800","visFrac":0.497,"markCx":1282.6,"spin":360,"overflow":0,"ok":true},{"vp":"1440x900","visFrac":0.497,"markCx":1443,"spin":360,"overflow":0,"ok":true},{"vp":"1920x1080","visFrac":0.497,"markCx":1923.5,"spin":360,"overflow":0,"ok":true},{"vp":"390x844","visFrac":0.497,"markCx":392.6,"spin":360,"overflow" | visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0 | evidence/b/halfclip-audit.json<br>evidence/b/bigright-1440x900.png |
 | c | big left: half clipped at the left edge, 45-degree pose | PASS | [{"vp":"1280x800","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1440x900","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1920x1080","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"390x844","ogGone":0,"visFrac":0.5,"markCx":0,"s | visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG overlay gone | evidence/b/bigleft-audit.json<br>evidence/b/bigleft-1440x900.png |
 | c | mid-sweep: the big mark crosses the middle, fully on screen | PASS | {"mcx":722.1,"spin":315} | at p=0.77 the big mark sits between the edges, centred vertically | evidence/b/sweep-1440x900.png |
-| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":5096,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
+| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":8380,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
 | c | founder phase: rain morph-out is a smooth partial fade | PASS | {"mtxOp":0.5} | at p=0.545 the rain is mid-fade (0.03 < opacity < 0.97) | — |
 | c | spin phase: no rain (the effect lives with the founder text) | PASS | {"mtxOp":0} | at p=0.24 the rain is off (opacity <= 0.03) | — |
 | d | international places overlay (rows fanned to the logo contour, per-line alignment) | PASS | [{"vp":"1440x900","n":5,"minOp":0.989,"flagsOk":true,"minGap":-265,"lefts":[205,349,440,314,164],"band":0,"overflow":0,"scan":{"zones":[{"left":281,"edge":193,"gap":88,"hits":0},{"left":425,"edge":337,"gap":88,"hits":0},{"left":516,"edge":428,"gap":88,"hits":0},{"left":390,"edge":302,"gap":88,"hits":0},{"left":240,"edg | at p=0.696 (1440/1280): 5 rows fully visible, flags loaded, row left edges match the per-line contour fan (+-8px), pixel-scan clear of the mark, standalone section gone | evidence/d/hero-places-1440x900.png<br>evidence/d/hero-places-1280x800.png |
@@ -53,7 +53,7 @@
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (426)
+## Evidence files (429)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -300,6 +300,7 @@
 - `qa/evidence/d/rollback-v1.6.15-places.png`
 - `qa/evidence/d/rollback-v1.6.16-places.png`
 - `qa/evidence/d/rollback-v1.6.17-places.png`
+- `qa/evidence/d/rollback-v1.6.18-places.png`
 - `qa/evidence/d/rollback-v1.6.2-places.png`
 - `qa/evidence/d/rollback-v1.6.3-places.png`
 - `qa/evidence/d/rollback-v1.6.4-places.png`
@@ -444,6 +445,8 @@
 - `qa/evidence/probe/prod-mark-plus15-1440.png`
 - `qa/evidence/probe/prod-matrix-1440.png`
 - `qa/evidence/probe/prod-mirror-166.png`
+- `qa/evidence/probe/prod-names-1440.png`
+- `qa/evidence/probe/prod-names-1920.png`
 - `qa/evidence/probe/prod-phase2-diagram-1440.png`
 - `qa/evidence/probe/prod-places-1440.png`
 - `qa/evidence/probe/prod-places-166.png`
