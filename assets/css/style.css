@@ -261,11 +261,11 @@ a:hover { color: var(--ink-1); }
   flex: none;
   display: grid;
   place-items: center;
-  width: 12.55vh;
+  width: 14.6vh;
   height: 8.45vh;
   border: 1px solid var(--hairline);
 }
-.hp-flag img { display: block; max-width: 9.6vh; max-height: 6.3vh; }
+.hp-flag img { display: block; max-width: 11.2vh; max-height: 6.4vh; }
 .hp-rank {
   font-family: var(--font-mono);
   font-size: 1.7vh;
@@ -276,7 +276,7 @@ a:hover { color: var(--ink-1); }
   white-space: nowrap;
   color: var(--ink-1);
   font-family: var(--font-serif);
-  font-size: 4.5vh;
+  font-size: 3.8vh;
   font-weight: 600;
   line-height: 1.2;
 }
