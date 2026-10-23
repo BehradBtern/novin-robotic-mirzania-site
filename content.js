@@ -87,11 +87,11 @@ window.SITE_CONTENT = {
     kicker: "International places",
     intro: "",
     items: [
-      { country: "India", flag: "assets/flags/Flag_of_India.svg", year: "", text: "" },
-      { country: "Malaysia", flag: "assets/flags/Flag_of_Malaysia.svg", year: "", text: "" },
-      { country: "Turkey", flag: "assets/flags/Flag_of_Turkey.svg", year: "", text: "" },
-      { country: "United Kingdom", flag: "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg", year: "", text: "" },
-      { country: "United States", flag: "assets/flags/Flag_of_the_United_States.svg", year: "", text: "" }
+      { country: "India", flag: "assets/flags/Flag_of_India.svg", year: "2019", text: "" },
+      { country: "Malaysia", flag: "assets/flags/Flag_of_Malaysia.svg", year: "2022", text: "" },
+      { country: "Turkey", flag: "assets/flags/Flag_of_Turkey.svg", year: "2023", text: "" },
+      { country: "United Kingdom", flag: "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg", year: "2025", text: "" },
+      { country: "United States", flag: "assets/flags/Flag_of_the_United_States.svg", year: "2026", text: "" }
     ]
   },
 
