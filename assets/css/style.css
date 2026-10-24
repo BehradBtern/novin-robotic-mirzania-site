@@ -266,6 +266,9 @@ a:hover { color: var(--ink-1); }
   border: 1px solid var(--hairline);
 }
 .hp-flag img { display: block; max-width: 11.2vh; max-height: 6.4vh; }
+.hp-rank.hp-rank--1 { color: #e8c568; }
+.hp-rank.hp-rank--2 { color: #d6dbe2; }
+.hp-rank.hp-rank--3 { color: #d68d55; }
 .hp-rank {
   font-family: var(--font-mono);
   font-size: 1.7vh;

@@ -152,6 +152,8 @@
       var rk = doc.createElement("span");
       rk.className = "hp-rank";
       rk.textContent = it.rank || ordinalOf(idx + 1);
+      var rn = parseInt(rk.textContent, 10);
+      if (rn >= 1 && rn <= 3) rk.className += " hp-rank--" + rn;
       row.appendChild(rk);
       placesEl.appendChild(row);
       hpRows.push(row);
