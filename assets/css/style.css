@@ -253,7 +253,7 @@ a:hover { color: var(--ink-1); }
 .hp-row {
   display: flex;
   align-items: center;
-  gap: 2vh;
+  gap: 3.4vh;
   padding: 4vh 0;
   will-change: opacity, transform;
 }
@@ -441,7 +441,7 @@ a:hover { color: var(--ink-1); }
     transform: translateX(-50%);
     width: min(86vw, 350px);
   }
-  .hp-row { padding: 4px 0; gap: 10px; }
+  .hp-row { padding: 4px 0; gap: 13px; }
   .hp-year { width: 2.4em; font-size: 0.62rem; }
   .hp-flag { width: 44px; height: 30px; }
   .hp-flag img { max-width: 34px; max-height: 20px; }
