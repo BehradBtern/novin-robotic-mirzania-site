@@ -271,8 +271,9 @@ a:hover { color: var(--ink-1); }
 .hp-rank.hp-rank--3 { color: #d68d55; }
 .hp-rank {
   font-family: var(--font-mono);
-  font-size: 1.7vh;
-  letter-spacing: 0.08em;
+  font-size: 2.75vh;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   color: var(--ink-3);
 }
 .hp-name {
