@@ -270,6 +270,20 @@ a:hover { color: var(--ink-1); }
 .hp-rank.hp-rank--1 { color: #e8c568; }
 .hp-rank.hp-rank--2 { color: #d6dbe2; }
 .hp-rank.hp-rank--3 { color: #d68d55; }
+.hp-photo {
+  flex: none;
+  width: 11.2vh;
+  height: 6.3vh;
+  margin-left: 1.8vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.hp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hp-photo svg { width: 2.2vh; height: 2.2vh; color: var(--ink-3); opacity: 0.45; }
 .hp-rank {
   margin-left: 3.1vh;
   font-family: var(--font-mono);
@@ -449,6 +463,7 @@ a:hover { color: var(--ink-1); }
   .hp-year { margin-right: 10px; }
   .hp-flag { margin-right: 7px; }
   .hp-rank { margin-left: 10px; }
+  .hp-photo { width: 42px; height: 24px; margin-left: 7px; border-radius: 3px; }
   .hp-year { width: 2.4em; font-size: 0.62rem; }
   .hp-flag { width: 44px; height: 30px; }
   .hp-flag img { max-width: 34px; max-height: 20px; }

@@ -149,6 +149,19 @@
       nm.className = "hp-name";
       nm.textContent = it.country || "";
       row.appendChild(nm);
+      var ph = doc.createElement("span");
+      ph.className = "hp-photo";
+      if (it.photo) {
+        var pim = doc.createElement("img");
+        pim.src = it.photo;
+        pim.alt = "";
+        pim.setAttribute("aria-hidden", "true");
+        pim.decoding = "async";
+        ph.appendChild(pim);
+      } else {
+        ph.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="10" r="1.6" fill="currentColor"/><path d="M4.5 17.5 10 12l3.5 3.5L17 12l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>';
+      }
+      row.appendChild(ph);
       var rk = doc.createElement("span");
       rk.className = "hp-rank";
       rk.textContent = it.rank || ordinalOf(idx + 1);
