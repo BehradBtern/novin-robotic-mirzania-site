@@ -253,7 +253,7 @@ a:hover { color: var(--ink-1); }
 .hp-row {
   display: flex;
   align-items: center;
-  gap: 3.4vh;
+  gap: 4.6vh;
   padding: 4vh 0;
   will-change: opacity, transform;
 }
