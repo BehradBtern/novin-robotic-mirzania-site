@@ -281,8 +281,8 @@ a:hover { color: var(--ink-1); }
   transform: translateY(-50%);
   opacity: 0;
   right: calc(6vw - clamp(24px, 32vw, 720px));
-  width: 28vh;
-  height: 15.75vh;
+  width: 34vh;
+  height: 19.15vh;
   margin-left: 0;
   display: grid;
   place-items: center;
@@ -291,6 +291,11 @@ a:hover { color: var(--ink-1); }
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.03);
 }
+.hp-photo:nth-child(1) { transform: translateY(-50%) rotate(-4deg);   z-index: 1; }
+.hp-photo:nth-child(2) { transform: translateY(-50%) rotate(2.5deg);  z-index: 2; }
+.hp-photo:nth-child(3) { transform: translateY(-50%) rotate(-2deg);   z-index: 3; }
+.hp-photo:nth-child(4) { transform: translateY(-50%) rotate(3.5deg);  z-index: 4; }
+.hp-photo:nth-child(5) { transform: translateY(-50%) rotate(-2.5deg); z-index: 5; }
 .hp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hp-photo svg { width: 3.6vh; height: 3.6vh; color: var(--ink-3); opacity: 0.4; }
 .hp-rank {
