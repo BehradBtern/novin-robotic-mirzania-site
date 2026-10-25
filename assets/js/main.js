@@ -158,6 +158,8 @@
       row.appendChild(nm);
       var ph = doc.createElement("span");
       ph.className = "hp-photo";
+      var phRots = [-4, 2.5, -2, 3.5, -2.5];
+      ph.setAttribute("data-rot", phRots[(hpPhotoEls.length) % phRots.length]);
       if (it.photo) {
         var pim = doc.createElement("img");
         pim.src = it.photo;
@@ -418,7 +420,14 @@
         var pOut = PL.out0 + (PL.ou ? PL.ou[pj] : pj) * PL.pd;
         var rp = seg(p, pIn, pIn + PL.dur) * (1 - seg(p, pOut, pOut + PL.odur));
         hpRows[pj].style.opacity = rp.toFixed(3);
-        if (pj > 0 && hpPhotoEls[pj - 1]) hpPhotoEls[pj - 1].style.opacity = rp.toFixed(3);
+        if (pj > 0 && hpPhotoEls[pj - 1]) {
+          var phEl = hpPhotoEls[pj - 1];
+          var phRot = parseFloat(phEl.getAttribute("data-rot") || "0");
+          var phSc = 0.84 + 0.16 * rp;
+          phEl.style.opacity = rp.toFixed(3);
+          phEl.style.transform = "translateY(-50%) translateX(" + ((1 - rp) * 14).toFixed(1) + "px) rotate(" +
+            (phRot * (0.6 + 0.4 * rp)).toFixed(2) + "deg) scale(" + phSc.toFixed(3) + ")";
+        }
         var xo = (1 - rp) * PL.slide * uS;
         if (tracked) {
           /* static per-viewport target (the mark's hold-state contour): rows must
