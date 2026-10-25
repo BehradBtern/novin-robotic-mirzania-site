@@ -26,7 +26,7 @@
   "pageData": {
     "cls": 0,
     "resources": 16,
-    "transfer": 326793,
+    "transfer": 327057,
     "hosts": {
       "localhost:8123": 16
     }
@@ -34,6 +34,6 @@
   "frames": {
     "n": 374,
     "median": 6.900000000000091,
-    "p95": 7.099999999999909
+    "p95": 7
   }
 }
