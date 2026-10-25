@@ -113,11 +113,18 @@
      sweeps back to the right. */
   var placesEl = doc.getElementById("hero-places");
   var hpRows = [];
+  var hpPhotoEls = [];
+  var hpPhotosWrap = null;
   var hpX = [];
   var plLeft = null;
   function measurePlaces() {
     if (!placesEl) return;
     plLeft = placesEl.getBoundingClientRect().left;
+    for (var mi = 0; mi < hpPhotoEls.length; mi++) {
+      var rEl = hpRows[mi + 1];
+      if (!rEl) continue;
+      hpPhotoEls[mi].style.top = (rEl.offsetTop + rEl.offsetHeight / 2) + "px";
+    }
     hpX = [];
   }
   if (placesEl && C.places && Array.isArray(C.places.items)) {
@@ -161,7 +168,7 @@
       } else {
         ph.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="10" r="1.6" fill="currentColor"/><path d="M4.5 17.5 10 12l3.5 3.5L17 12l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>';
       }
-      row.appendChild(ph);
+      hpPhotoEls.push(ph);
       var rk = doc.createElement("span");
       rk.className = "hp-rank";
       rk.textContent = it.rank || ordinalOf(idx + 1);
@@ -171,6 +178,12 @@
       placesEl.appendChild(row);
       hpRows.push(row);
     });
+    if (hpPhotoEls.length) {
+      hpPhotosWrap = doc.createElement("div");
+      hpPhotosWrap.className = "hp-photos";
+      for (var pi = 0; pi < hpPhotoEls.length; pi++) hpPhotosWrap.appendChild(hpPhotoEls[pi]);
+      placesEl.appendChild(hpPhotosWrap);
+    }
   }
   /* staircase timing per viewport: after the mark has swung fully left, the
      rows form beside it. Desktop rows use per-row tables: iu[] entry offsets,
@@ -405,6 +418,7 @@
         var pOut = PL.out0 + (PL.ou ? PL.ou[pj] : pj) * PL.pd;
         var rp = seg(p, pIn, pIn + PL.dur) * (1 - seg(p, pOut, pOut + PL.odur));
         hpRows[pj].style.opacity = rp.toFixed(3);
+        if (pj > 0 && hpPhotoEls[pj - 1]) hpPhotoEls[pj - 1].style.opacity = rp.toFixed(3);
         var xo = (1 - rp) * PL.slide * uS;
         if (tracked) {
           /* static per-viewport target (the mark's hold-state contour): rows must
