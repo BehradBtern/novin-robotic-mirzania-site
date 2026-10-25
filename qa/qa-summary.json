@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/155.0.8059.85",
     "edge": "Edg/156.0.4314.42",
-    "generatedAt": "2026-10-25T18:55:06.878Z",
-    "sha": "4e2ef0f"
+    "generatedAt": "2026-10-25T19:01:51.335Z",
+    "sha": "726507d"
   },
-  "generatedAt": "2026-10-25T18:55:06.878Z",
+  "generatedAt": "2026-10-25T19:01:51.335Z",
   "counts": {
     "PASS": 32,
     "FAIL": 0,
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":6146,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":6333,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -303,7 +303,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":191083}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":11},\"resources\":11,\"transferBytes\":191503}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
