@@ -158,7 +158,7 @@
       row.appendChild(nm);
       var ph = doc.createElement("span");
       ph.className = "hp-photo";
-      var phRots = [-4, 2.5, -2, 3.5, -2.5];
+      var phRots = [-2.2, 1.6, -1.2, 2, -1.6];
       ph.setAttribute("data-rot", phRots[(hpPhotoEls.length) % phRots.length]);
       if (it.photo) {
         var pim = doc.createElement("img");
@@ -425,6 +425,7 @@
           var phRot = parseFloat(phEl.getAttribute("data-rot") || "0");
           var phSc = 0.84 + 0.16 * rp;
           phEl.style.opacity = rp.toFixed(3);
+          phEl.style.filter = rp > 0.985 ? "none" : "blur(" + ((1 - rp) * 3).toFixed(2) + "px)";
           phEl.style.transform = "translateY(-50%) translateX(" + ((1 - rp) * 14).toFixed(1) + "px) rotate(" +
             (phRot * (0.6 + 0.4 * rp)).toFixed(2) + "deg) scale(" + phSc.toFixed(3) + ")";
         }
