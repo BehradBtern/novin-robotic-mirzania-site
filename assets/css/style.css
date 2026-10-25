@@ -281,8 +281,8 @@ a:hover { color: var(--ink-1); }
   transform: translateY(-50%);
   opacity: 0;
   right: calc(6vw - clamp(24px, 32vw, 720px));
-  width: 24.9vh;
-  height: 14vh;
+  width: 28vh;
+  height: 15.75vh;
   margin-left: 0;
   display: grid;
   place-items: center;
