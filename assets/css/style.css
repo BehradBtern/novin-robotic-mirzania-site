@@ -285,7 +285,7 @@ a:hover { color: var(--ink-1); }
   opacity: 0;
   right: calc(6vw - clamp(24px, 32vw, 720px));
   width: 44vh;
-  height: 24.75vh;
+  height: 19vh;
   margin-left: 0;
   display: grid;
   place-items: center;
