@@ -410,7 +410,7 @@
     /* international places: every row hugs the mark's contour â€” its x is a
        fixed fraction of the mark radius (plus a hairline gap), so the flush
        alignment holds on every viewport and through the spin */
-    if (hpRows.length) {
+    if (hpRows.length && p > 0.58 && p < 0.88) {
       if (plLeft === null) measurePlaces();
       var PL = geo.vw <= 640 ? PL_M : PL_D;
       var uS = geo.vh / 900;
@@ -425,7 +425,6 @@
           var phRot = parseFloat(phEl.getAttribute("data-rot") || "0");
           var phSc = 0.84 + 0.16 * rp;
           phEl.style.opacity = rp.toFixed(3);
-          phEl.style.filter = rp > 0.985 ? "none" : "blur(" + ((1 - rp) * 3).toFixed(2) + "px)";
           phEl.style.transform = "translateY(-50%) translateX(" + ((1 - rp) * 14).toFixed(1) + "px) rotate(" +
             (phRot * (0.6 + 0.4 * rp)).toFixed(2) + "deg) scale(" + phSc.toFixed(3) + ")";
         }
