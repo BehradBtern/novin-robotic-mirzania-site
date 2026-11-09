@@ -674,8 +674,16 @@
       }
     });
 
-    if (reduced) {
+    function sigStatic() {
       sigWrap.classList.add("is-drawn");
+      var ds = sigWrap.querySelectorAll(".sig__draw");
+      for (var di = 0; di < ds.length; di++) {
+        ds[di].style.transition = "none";
+        ds[di].style.strokeDashoffset = "0";
+      }
+    }
+    if (reduced) {
+      sigStatic();
     } else if ("IntersectionObserver" in window) {
       var sio = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
@@ -687,7 +695,7 @@
       }, { threshold: 0.35 });
       sio.observe(sigWrap);
     } else {
-      sigWrap.classList.add("is-drawn");
+      sigStatic();
     }
   }
 

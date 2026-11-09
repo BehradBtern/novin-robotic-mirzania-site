@@ -3,8 +3,8 @@
 ## Environment
 
 - OS: win32 x64 · Node: v22.22.0 · puppeteer-core: 25.12.0
-- Chrome: Chrome/156.0.8078.74 · Edge: Edg/156.0.4314.58
-- Revision: 2e6787f · 2026-11-03T15:51:29.074Z
+- Chrome: Chrome/156.0.8078.80 · Edge: Edg/157.0.4341.42
+- Revision: 9e98c16 · 2026-11-09T16:11:35.877Z
 
 ## How to re-run
 

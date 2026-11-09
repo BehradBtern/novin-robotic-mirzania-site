@@ -3,12 +3,12 @@
     "os": "win32 x64",
     "node": "v22.22.0",
     "puppeteer": "25.12.0",
-    "chrome": "Chrome/156.0.8078.74",
-    "edge": "Edg/156.0.4314.58",
-    "generatedAt": "2026-11-03T15:51:29.074Z",
-    "sha": "2e6787f"
+    "chrome": "Chrome/156.0.8078.80",
+    "edge": "Edg/157.0.4341.42",
+    "generatedAt": "2026-11-09T16:11:35.877Z",
+    "sha": "9e98c16"
   },
-  "generatedAt": "2026-11-03T15:51:29.074Z",
+  "generatedAt": "2026-11-09T16:11:35.877Z",
   "counts": {
     "PASS": 32,
     "FAIL": 0,
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":8553,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":4192,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -303,7 +303,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":16},\"resources\":16,\"transferBytes\":257373}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":16},\"resources\":16,\"transferBytes\":465219}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
@@ -359,7 +359,7 @@
       "id": "k",
       "entry": "Edge subset (same engine as Chrome)",
       "status": "PASS",
-      "value": "{\"version\":\"Edg/156.0.4314.58\",\"sigLayers\":3,\"errors\":0}",
+      "value": "{\"version\":\"Edg/157.0.4341.42\",\"sigLayers\":3,\"errors\":0}",
       "threshold": "footer signature rendered + zero errors on Edge",
       "evidence": [
         "evidence/edge/dock-1440x900.png"
