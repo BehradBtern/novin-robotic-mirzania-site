@@ -6,6 +6,7 @@
     "requests": [
       "http://localhost:8123/",
       "http://localhost:8123/assets/css/style.css",
+      "http://localhost:8123/assets/js/bg-gradient.js",
       "http://localhost:8123/content.js",
       "http://localhost:8123/assets/js/main.js",
       "http://localhost:8123/assets/fonts/cormorant-garamond-latin.woff2",
@@ -25,15 +26,15 @@
   },
   "pageData": {
     "cls": 0,
-    "resources": 16,
-    "transfer": 465219,
+    "resources": 17,
+    "transfer": 477014,
     "hosts": {
-      "localhost:8123": 16
+      "localhost:8123": 17
     }
   },
   "frames": {
     "n": 156,
     "median": 16.699999999999818,
-    "p95": 16.800000000000182
+    "p95": 16.799999999999955
   }
 }
