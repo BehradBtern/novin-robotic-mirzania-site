@@ -13,11 +13,15 @@
   var brandSlot = document.getElementById("gate-brand");
   if (!gate) return;
 
-  var mobileUA = /Android|iPhone|iPad|iPod|Windows Phone|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent);
+  var ua = navigator.userAgent;
+  var mobileUA = /Android|iPhone|iPad|iPod|Windows Phone|IEMobile|Opera Mini|Mobile/i.test(ua);
+  /* crawlers must still see the real page: mobile-first indexing fetches with a
+     smartphone user agent, and a notice-only document would deindex the site */
+  var crawler = /Googlebot|Google-InspectionTool|Bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot|Applebot|facebookexternalhit|Twitterbot|LinkedInBot|AhrefsBot|SemrushBot|PetalBot/i.test(ua);
   var forced = /[?&]desktop=1(?:&|$)/.test(location.search);
 
   function apply() {
-    var gated = !forced && (window.innerWidth < MIN || mobileUA);
+    var gated = !forced && !crawler && (window.innerWidth < MIN || mobileUA);
     root.classList.toggle("is-gated", gated);
     root.setAttribute("data-gated", gated ? "1" : "0");
     gate.hidden = !gated;
