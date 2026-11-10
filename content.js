@@ -104,12 +104,18 @@ window.SITE_CONTENT = {
       { label: "Get in touch", anchor: "#contact" },
       { label: "Back to top", anchor: "#top" }
     ],
+    /* real details, taken from the institute's published listings
+       (madyar.org/School/Roboticmirzania, its Instagram @robotic_mirzania and the
+       Saadat Abad directory entry). No email address is published anywhere, so the
+       field stays empty and the row hides itself instead of showing a placeholder. */
     contact: {
-      email: "hello@example.com",
-      phone: "+00 000 000 0000",
-      address: "00 Example Street, Example City 00000"
+      email: "",
+      phone: "+98 21 2238 4919",
+      mobile: "+98 912 370 1230",
+      address: "Sro-e Sharghi St, Saadat Abad, Tehran, Iran",
+      instagram: "https://www.instagram.com/robotic_mirzania"
     },
     legal: "© 2026 Novin Robotic Mirzania. All rights reserved.",
-    creditNote: "Draft placeholder copy; all text and contact details are editable before launch."
+    creditNote: "Founded and led by Hadis Mirzania, Tehran."
   }
 };

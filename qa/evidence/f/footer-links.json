@@ -22,7 +22,7 @@
     {
       "label": "Get in touch",
       "href": "#contact",
-      "top": 282
+      "top": 305
     },
     {
       "label": "Back to top",
@@ -31,10 +31,15 @@
     }
   ],
   "contactCheck": {
-    "emailText": true,
-    "emailHref": true,
+    "emailHidden": true,
     "phoneHref": true,
+    "phoneText": true,
+    "mobileHref": true,
+    "instagramHref": true,
     "address": true,
-    "legal": true
+    "legal": true,
+    "noPlaceholders": true,
+    "_domLegal": "© 2026 Novin Robotic Mirzania. All rights reserved.",
+    "_contentLegal": "© 2026 Novin Robotic Mirzania. All rights reserved."
   }
 }

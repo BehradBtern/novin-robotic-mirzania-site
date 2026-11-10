@@ -79,17 +79,48 @@
     setText("footer-legal", C.footer.legal);
     setText("footer-credit", C.footer.creditNote);
 
+    var contact = C.footer.contact || {};
     var em = doc.getElementById("footer-email");
-    if (em && C.footer.contact) {
-      em.href = "mailto:" + C.footer.contact.email;
-      em.textContent = C.footer.contact.email;
+    if (em) {
+      if (contact.email) {
+        em.href = "mailto:" + contact.email;
+        em.textContent = contact.email;
+      } else {
+        /* nothing published: drop the row instead of showing an empty link */
+        var emRow = doc.getElementById("footer-email-row");
+        if (emRow) emRow.hidden = true;
+        em.removeAttribute("href");
+        em.textContent = "";
+      }
     }
     var ph = doc.getElementById("footer-phone");
-    if (ph && C.footer.contact) {
-      ph.href = "tel:" + String(C.footer.contact.phone).replace(/[^+\d]/g, "");
-      ph.textContent = C.footer.contact.phone;
+    if (ph) {
+      if (contact.phone) {
+        ph.href = "tel:" + String(contact.phone).replace(/[^+\d]/g, "");
+        ph.textContent = contact.phone;
+      } else {
+        ph.parentNode.hidden = true;
+      }
     }
-    setText("footer-address", C.footer.contact ? C.footer.contact.address : "");
+    var mob = doc.getElementById("footer-mobile");
+    if (mob) {
+      if (contact.mobile) {
+        mob.href = "tel:" + String(contact.mobile).replace(/[^+\d]/g, "");
+        mob.textContent = contact.mobile;
+      } else {
+        mob.parentNode.hidden = true;
+      }
+    }
+    var ig = doc.getElementById("footer-instagram");
+    if (ig) {
+      if (contact.instagram) {
+        ig.href = contact.instagram;
+        ig.textContent = "@robotic_mirzania";
+      } else {
+        ig.parentNode.hidden = true;
+      }
+    }
+    setText("footer-address", contact.address || "");
 
     var explore = doc.getElementById("footer-explore");
     if (explore && Array.isArray(C.footer.explore)) {

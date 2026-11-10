@@ -542,19 +542,30 @@ try {
       }
     }
     const contactCheck = await page.evaluate(() => {
-      const c = window.SITE_CONTENT.footer;
+      const f = window.SITE_CONTENT.footer;
+      const c = f.contact;
+      const tel = (v) => 'tel:' + String(v).replace(/[^+\d]/g, '');
+      const mailEl = document.getElementById('footer-email');
+      const mailRow = document.getElementById('footer-email-row');
+      const bodyText = document.body.innerText;
       return {
-        emailText: document.getElementById('footer-email').textContent === c.contact.email,
-        emailHref: document.getElementById('footer-email').getAttribute('href') === 'mailto:' + c.contact.email,
-        phoneHref: (document.getElementById('footer-phone').getAttribute('href') || '').startsWith('tel:+00000000000'),
-        address: document.getElementById('footer-address').textContent === c.contact.address,
-        legal: document.getElementById('footer-legal').textContent === c.legal
+        emailHidden: c.email ? (mailEl.textContent === c.email) : (mailRow && mailRow.hidden),
+        phoneHref: document.getElementById('footer-phone').getAttribute('href') === tel(c.phone),
+        phoneText: document.getElementById('footer-phone').textContent === c.phone,
+        mobileHref: document.getElementById('footer-mobile').getAttribute('href') === tel(c.mobile),
+        instagramHref: document.getElementById('footer-instagram').getAttribute('href') === c.instagram,
+        address: document.getElementById('footer-address').textContent === c.address,
+        legal: document.getElementById('footer-legal').textContent === f.legal,
+        noPlaceholders: !/example\.com|\+00 000|Example City|Draft placeholder|lorem ipsum/i.test(bodyText),
+        _domLegal: document.getElementById('footer-legal').textContent,
+        _contentLegal: f.legal
       };
     });
     writeJson(evPath('f', 'footer-links.json'), { links, landings, contactCheck });
     const landOk = landings.every((l) => l.top !== null && l.top >= -40 && l.top <= 675);
-    const ok = landOk && Object.values(contactCheck).every(Boolean) && links.length === 3;
-    add('f', 'footer: links land + contact/legal intact', ok ? PASS : FAIL, JSON.stringify({ landings, contactCheck }), '3 links land within viewport; mailto/tel formats; texts == content', ['evidence/f/footer-links.json', 'evidence/f/footer-1440x900.png']);
+    const checks = ['emailHidden', 'phoneHref', 'phoneText', 'mobileHref', 'instagramHref', 'address', 'legal', 'noPlaceholders'];
+    const ok = landOk && checks.every((k) => contactCheck[k]) && links.length === 3;
+    add('f', 'footer: links land + contact/legal intact', ok ? PASS : FAIL, JSON.stringify({ landings, contactCheck }), '3 links land within viewport; phone/mobile tel hrefs; address + legal == content; email row hidden when unpublished; no placeholder copy anywhere', ['evidence/f/footer-links.json', 'evidence/f/footer-1440x900.png']);
 
     /* signature: three layers, draw-in completes */
     const sigBase = await page.evaluate(() => {
