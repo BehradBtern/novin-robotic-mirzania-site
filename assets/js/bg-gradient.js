@@ -229,6 +229,7 @@
   function draw(elapsed) {
     gl.uniform1f(U.u_time, elapsed * ((CFG.speed / 100) * 5) + CFG.offset * 0.01);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
+    window.__bgFrames = (window.__bgFrames || 0) + 1;
   }
 
   function tick(now) {
@@ -278,6 +279,17 @@
 
   if (reduced.addEventListener) {
     reduced.addEventListener("change", run);
+  }
+
+  /* stop paying for pixels once the stage has scrolled away */
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) run();
+        else stop();
+      }
+    }, { threshold: 0 });
+    io.observe(host);
   }
 
   host.dataset.ready = "true";

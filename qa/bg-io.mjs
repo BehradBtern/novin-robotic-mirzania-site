@@ -1,0 +1,18 @@
+﻿import puppeteer from 'puppeteer-core';
+import { CHROME } from './lib.mjs';
+const b = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'] });
+const p = await b.newPage();
+await p.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
+await p.goto('http://localhost:8080/?qa=0.69', { waitUntil: 'networkidle0', timeout: 60000 });
+await p.waitForFunction('document.documentElement.dataset.ready === "true"', { timeout: 20000 }).catch(() => {});
+await new Promise(r => setTimeout(r, 800));
+const a = await p.evaluate(() => window.__bgFrames || 0);
+await new Promise(r => setTimeout(r, 1000));
+const b1 = await p.evaluate(() => window.__bgFrames || 0);
+await p.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+await new Promise(r => setTimeout(r, 600));
+const c = await p.evaluate(() => window.__bgFrames || 0);
+await new Promise(r => setTimeout(r, 1200));
+const d = await p.evaluate(() => window.__bgFrames || 0);
+console.log(JSON.stringify({ heroFramesIn1s: b1 - a, afterScroll: c, afterScrollPlus1_2s: d, stopped: d === c }));
+await b.close();
