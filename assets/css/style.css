@@ -21,6 +21,73 @@
 
 html { -webkit-text-size-adjust: 100%; }
 
+/* ---------- desktop-only gate ---------- */
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 32px 26px;
+  text-align: center;
+  background:
+    radial-gradient(90% 70% at 50% 0%, #1E3C41 0%, rgba(23, 25, 27, 0) 60%),
+    var(--stage);
+  color: var(--ink-2);
+}
+
+.gate[hidden] { display: none; }
+
+.gate__inner { max-width: 30rem; }
+
+.gate__mark {
+  width: 64px;
+  height: 64px;
+  display: block;
+  margin: 0 auto 26px;
+  opacity: 0.9;
+}
+
+.gate__brand {
+  margin: 0 0 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.gate__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(25px, 7vw, 34px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink-1);
+}
+
+.gate__body {
+  margin: 18px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.gate__note {
+  margin: 22px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--hairline);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* when gated, nothing but the notice is laid out and the page cannot scroll */
+html.is-gated { overflow: hidden; }
+html.is-gated body > *:not(.gate) { display: none !important; }
+html.is-gated .page-bg { display: none !important; }
+
 /* animated gradient plane: sits above the body stage colour, below content */
 /* brand-tinted base keeps the plane's presence steady through the shader phase */
 .page-bg {

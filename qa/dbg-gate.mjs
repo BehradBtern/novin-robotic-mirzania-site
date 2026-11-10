@@ -1,0 +1,13 @@
+﻿import puppeteer from 'puppeteer-core';
+import { CHROME } from './lib.mjs';
+const b = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'] });
+const p = await b.newPage();
+const errs = [];
+p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
+p.on('pageerror', e => errs.push('PAGEERROR ' + e.message));
+await p.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
+await p.goto('http://localhost:8080/?qa=0.63', { waitUntil: 'networkidle0', timeout: 60000 });
+await new Promise(r => setTimeout(r, 600));
+const st = await p.evaluate(() => ({ gated: document.documentElement.classList.contains('is-gated'), w: innerWidth, ua: navigator.userAgent.slice(0, 60), hidden: document.getElementById('mobile-gate').hidden }));
+console.log(JSON.stringify(st), 'errors:', JSON.stringify(errs));
+await b.close();

@@ -99,7 +99,7 @@ try {
           document.querySelectorAll('nav, [role=navigation]').forEach((n) => out.navs.push({ inFooter: !!n.closest('footer') }));
           document.querySelectorAll('body *').forEach((el) => {
             const cs = getComputedStyle(el);
-            if ((cs.position === 'fixed' || cs.position === 'sticky') && !el.closest('#story')) {
+            if ((cs.position === 'fixed' || cs.position === 'sticky') && !el.closest('#story') && !el.closest('#mobile-gate')) {
               out.fixed.push((el.className && String(el.className)) || el.tagName);
             }
           });
@@ -237,7 +237,7 @@ try {
     // enlarged-state half-clip audit (single-axis left clip, no overflow)
     {
       const clipRows = [];
-      for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [390, 844]]) {
+      for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080]]) {
         const pg = await openPage(browser, { w, h, qa: 0.84 });
         const stc = await state(pg);
         const mk = stc.markbox;
@@ -258,7 +258,7 @@ try {
     // big-right state: half clipped at the right edge, 45-degree pose
     {
       const rows = [];
-      for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080], [390, 844]]) {
+      for (const [w, h] of [[1280, 800], [1440, 900], [1920, 1080]]) {
         const pg = await openPage(browser, { w, h, qa: 0.70 });
         const stc = await state(pg);
         const mk = stc.markbox;
@@ -372,18 +372,25 @@ try {
       });
       await shot(pg2, 'd/hero-places-390x844.png');
       await pg2.close();
-      const m3pg = await openPage(browser, { w: 390, h: 844, qa: 0.72 });
+      const gatePg = await openPage(browser, { w: 390, h: 844, qa: 0.63 });
       await delay(250);
-      const m3 = await m3pg.evaluate(() => Math.max(0, ...Array.from(document.querySelectorAll('#hero-places .hp-row')).map((el) => parseFloat(el.style.opacity || '0'))));
-      await m3pg.close();
-      const mobOk = m2.some && m2.flagsOk && m2.overflow <= 1 && m3 <= 0.05;
-      add('d', 'places overlay on phones (compact, clears before the mark fills)', mobOk ? PASS : FAIL, JSON.stringify({ at063: m2, at072: m3 }), 'at 390 wide: rows visible around p=0.63 with flags loaded, no overflow, gone by p=0.72', ['evidence/d/hero-places-390x844.png']);
+      const gate = await gatePg.evaluate(() => ({
+        gated: document.documentElement.classList.contains('is-gated'),
+        noticeShown: !document.getElementById('mobile-gate').hidden,
+        title: (document.querySelector('#mobile-gate .gate__title') || {}).textContent || '',
+        rows: document.querySelectorAll('#hero-places .hp-row').length,
+        scrollable: document.documentElement.scrollHeight > window.innerHeight + 1
+      }));
+      await shot(gatePg, 'd/gate-390x844.png');
+      await gatePg.close();
+      const mobOk = gate.gated && gate.noticeShown && gate.rows === 0 && !gate.scrollable;
+      add('d', 'phones get the desktop-only notice instead of the site', mobOk ? PASS : FAIL, JSON.stringify(gate), 'at 390 wide: gate class set, notice visible, no overlay rows built, page not scrollable', ['evidence/d/gate-390x844.png']);
     }
 
     // side-copy stage: text appears left/right of the small symbol, mark centred
     {
       const rows = [];
-      for (const [w, h] of [[1440, 900], [390, 844]]) {
+      for (const [w, h] of [[1440, 900], [1280, 800]]) {
         const pg = await openPage(browser, { w, h, qa: 0.5 });
         const stt = await state(pg);
         const o = await pg.evaluate(() => {
@@ -433,7 +440,7 @@ try {
     // hero end state: mark docked just above the bottom edge, upright
     {
       const rows = [];
-      for (const [w, h] of [[1440, 900], [834, 1112], [390, 844]]) {
+      for (const [w, h] of [[1440, 900], [1280, 800], [1920, 1080]]) {
         const pg = await openPage(browser, { w, h, qa: 0.995 });
         const stt = await state(pg);
         const mcx = stt.markbox.x + stt.markbox.w / 2;
@@ -451,7 +458,7 @@ try {
 
     // stage stills at pins
     for (const q of [0, 0.25, 0.5, 0.70, 0.84, 0.93, 1.0]) {
-      for (const [w, h] of [[1440, 900], [834, 1112], [390, 844]]) {
+      for (const [w, h] of [[1440, 900], [1280, 800], [1920, 1080]]) {
         const p = await openPage(browser, { w, h, qa: q });
         await shot(p, 'b/pin-' + q + '-' + w + 'x' + h + '.png');
         await p.close();
@@ -577,6 +584,21 @@ try {
     const rows = [];
     for (const [w, h] of vps) {
       const out = { vp: w + 'x' + h, ok: true };
+      if (w < 900) {
+        const page = await openPage(browser, { w, h, qa: 0.70 });
+        const m = await page.evaluate(() => ({
+          overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          gated: document.documentElement.classList.contains('is-gated'),
+          noticeShown: !document.getElementById('mobile-gate').hidden
+        }));
+        out.gated = m.gated;
+        out.noticeShown = m.noticeShown;
+        out['overflow@gate'] = m.overflow;
+        if (!m.gated || !m.noticeShown || m.overflow > 1) out.ok = false;
+        await page.close();
+        rows.push(out);
+        continue;
+      }
       for (const q of [0.70, 1]) {
         const page = await openPage(browser, { w, h, qa: q });
         const m = await page.evaluate((qq) => {
@@ -593,7 +615,7 @@ try {
       rows.push(out);
     }
     writeJson(evPath('g', 'responsive.json'), rows);
-    add('g', 'responsive: no overflow at max size and landing', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'scrollWidth overflow <= 1px in both states; no horizontal scrollbar', ['evidence/g/responsive.json']);
+    add('g', 'responsive: gate below 900px, no overflow at or above it', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'sub-900 viewports show the desktop-only notice; 900+ keep overflow <= 1px in both states', ['evidence/g/responsive.json']);
   } catch (e) { add('g', 'responsive scan', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
     /* ---------- h) reduced motion ---------- */

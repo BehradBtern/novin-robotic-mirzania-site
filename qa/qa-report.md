@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.6 round)
 
-- Revision: `7184ad3` · generated 2026-11-10T16:31:42.337Z
+- Revision: `68416ff` · generated 2026-11-10T17:01:32.609Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/156.0.8078.80 · Edge: Edg/157.0.4341.42
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -12,32 +12,32 @@
 | id | check | status | value | threshold | evidence |
 |----|-------|--------|-------|-----------|----------|
 | a | nav absence (9 cells) | PASS | headers 0; no fixed/sticky outside hero; nav only in footer | zero nav outside footer | evidence/a/nav-sweep.json |
-| a | old placeholder elements removed from DOM (incl. the programmes section) | PASS | {"copy":0,"indicator":0,"hint":0,"rmMark":0} galleryGone=0 body=["A.skip-link","NOSCRIPT","SECTION#story.hero","FOOTER#footer.footer"] | copy/indicator/hint/rm-mark/gallery counts all 0; body = skip-link + noscript + hero + footer | evidence/a/nav-sweep.json |
+| a | old placeholder elements removed from DOM (incl. the programmes section) | PASS | {"copy":0,"indicator":0,"hint":0,"rmMark":0} galleryGone=0 body=["DIV#mobile-gate.gate","SCRIPT","A.skip-link","NOSCRIPT","SECTION#story.hero","FOOTER#footer.footer"] | copy/indicator/hint/rm-mark/gallery counts all 0; body = skip-link + noscript + hero + footer | evidence/a/nav-sweep.json |
 | a | source audit: no dead placeholders; programmes assets removed | PASS | {"deadRefs":0,"imgFiles":0} | no hero__copy/hint/indicator/rm-mark/gallery refs in shipped files; assets/img empty | evidence/a/removal-audit.txt |
 | b | intro: big wordmark centered on dark gray, unclipped | PASS | [{"vp":"1280x800","dx":0,"dy":0,"frameW":979.7,"expectedW":979.7,"sizeOk":true,"notClipped":true,"bg":"rgb(23, 25, 27)","spin":0,"markOpacity":0,"wordOpacity":1,"sideOp":0},{"vp":"1440x900","dx":0,"dy":0,"frameW":1102.2,"expectedW":1102.2,"sizeOk":true,"notClipped":true,"bg":"rgb(23, 25, 27)","spin":0,"markOpacity":0," | hero size == min(92vw, 96vh*1.2757, 1600px) ±3; centered ±8px; fully in viewport; side copy hidden; bg rgb(23,25,27) | evidence/a/intro-1440x900.png<br>evidence/a/intro-audit.json |
 | c | motion trace (60 steps) | PASS | {"mapErr":0,"monoSpin":true,"spinEnd":360,"maxSpinStep":34.1,"maxPosStep":436.9,"orderOk":true,"opacityOk":true,"cEndTx":719.54,"dEndTy":363.92} | clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; grow left on the middle line; sweep right; enlarged state at exact 45-degree pose; dock travel left+down; no position jumps (max step <= 500px/sample); swap opacity sum=1 | evidence/b/motion-trace.json |
 | c | settle / no-oscillation / idle-stability | PASS | {"settleOk":true,"p":0.41667,"mapP":0.41667,"reversals":0,"idleDelta":0} | p==mapping after stop (0.002); <=2 reversals; idle delta 0 | — |
 | c | determinism (same scrollY twice) | PASS | identical serialized transforms | identical | — |
-| c | enlarged state (right edge): half clipped, exact 45-degree pose, no overflow | PASS | [{"vp":"1280x800","visFrac":0.497,"markCx":1282.6,"spin":360,"overflow":0,"ok":true},{"vp":"1440x900","visFrac":0.497,"markCx":1443,"spin":360,"overflow":0,"ok":true},{"vp":"1920x1080","visFrac":0.497,"markCx":1923.5,"spin":360,"overflow":0,"ok":true},{"vp":"390x844","visFrac":0.497,"markCx":392.6,"spin":360,"overflow" | visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0 | evidence/b/halfclip-audit.json<br>evidence/b/bigright-1440x900.png |
-| c | big left: half clipped at the left edge, 45-degree pose | PASS | [{"vp":"1280x800","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1440x900","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1920x1080","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"390x844","ogGone":0,"visFrac":0.5,"markCx":0,"s | visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG overlay gone | evidence/b/bigleft-audit.json<br>evidence/b/bigleft-1440x900.png |
+| c | enlarged state (right edge): half clipped, exact 45-degree pose, no overflow | PASS | [{"vp":"1280x800","visFrac":0.497,"markCx":1282.6,"spin":360,"overflow":0,"ok":true},{"vp":"1440x900","visFrac":0.497,"markCx":1443,"spin":360,"overflow":0,"ok":true},{"vp":"1920x1080","visFrac":0.497,"markCx":1923.5,"spin":360,"overflow":0,"ok":true}] | visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0 | evidence/b/halfclip-audit.json<br>evidence/b/bigright-1440x900.png |
+| c | big left: half clipped at the left edge, 45-degree pose | PASS | [{"vp":"1280x800","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1440x900","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1920x1080","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true}] | visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG overlay gone | evidence/b/bigleft-audit.json<br>evidence/b/bigleft-1440x900.png |
 | c | mid-sweep: the big mark crosses the middle, fully on screen | PASS | {"mcx":722.1,"spin":315} | at p=0.77 the big mark sits between the edges, centred vertically | evidence/b/sweep-1440x900.png |
-| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":6660,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
+| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":6266,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
 | c | founder phase: rain morph-out is a smooth partial fade | PASS | {"mtxOp":0.5} | at p=0.545 the rain is mid-fade (0.03 < opacity < 0.97) | — |
 | c | spin phase: no rain (the effect lives with the founder text) | PASS | {"mtxOp":0} | at p=0.24 the rain is off (opacity <= 0.03) | — |
 | d | international places overlay (rows fanned to the logo contour, per-line alignment) | PASS | [{"vp":"1440x900","n":5,"minOp":0.989,"flagsOk":true,"minGap":-265,"lefts":[205,349,440,314,164],"band":0,"overflow":0,"scan":{"zones":[{"left":290,"edge":193,"gap":97,"hits":0},{"left":435,"edge":338,"gap":97,"hits":0},{"left":525,"edge":428,"gap":97,"hits":0},{"left":399,"edge":302,"gap":97,"hits":0},{"left":249,"edg | at p=0.696 (1440/1280): 5 rows fully visible, flags loaded, row left edges match the per-line contour fan (+-8px), pixel-scan clear of the mark, standalone section gone | evidence/d/hero-places-1440x900.png<br>evidence/d/hero-places-1280x800.png |
 | d | places overlay hidden outside its window (spin, founder copy, dock) | PASS | [{"qa":0.24,"maxOp":0},{"qa":0.58,"maxOp":0},{"qa":0.88,"maxOp":0}] | rows invisible (op <= 0.05) at p=0.24, 0.58, 0.88 | — |
-| d | places overlay on phones (compact, clears before the mark fills) | PASS | {"at063":{"some":true,"minOp":0.624,"flagsOk":true,"overflow":0},"at072":0} | at 390 wide: rows visible around p=0.63 with flags loaded, no overflow, gone by p=0.72 | evidence/d/hero-places-390x844.png |
-| c | side copy: serif type beside the small symbol, then gone before the growth | PASS | [{"vp":"1440x900","centered":true,"visible":true,"noGhost":true,"noOverlap":true,"ogCount":0,"band":0,"mtx0":1,"ff":"\"Cormorant Garamond\", Georgia, \"Times New ","fontOk":true,"mcx":718.5,"mcy":450,"rMark":219.6,"ok":true,"goneAt07":[0,0]},{"vp":"390x844","centered":true,"visible":true,"noGhost":true,"noOverlap":true | both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay | evidence/b/sidecopy-audit.json<br>evidence/b/sidetext-1440x900.png |
-| d | hero end: mark docked upright just above the bottom edge | PASS | [{"vp":"1440x900","center":[721,734.9],"expY":734.9,"spin":360,"overflow":0,"ok":true},{"vp":"834x1112","center":[418,940.4],"expY":940.4,"spin":360,"overflow":0,"ok":true},{"vp":"390x844","center":[195.7,726.5],"expY":726.5,"spin":360,"overflow":0,"ok":true}] | centre == (vw/2, vh−dockR−20) ±6; spin 360±1.5; fully visible; no overflow | evidence/b/herodock-audit.json |
+| d | phones get the desktop-only notice instead of the site | PASS | {"gated":true,"noticeShown":true,"title":"This experience is built for desktop.","rows":0,"scrollable":false} | at 390 wide: gate class set, notice visible, no overlay rows built, page not scrollable | evidence/d/gate-390x844.png |
+| c | side copy: serif type beside the small symbol, then gone before the growth | PASS | [{"vp":"1440x900","centered":true,"visible":true,"noGhost":true,"noOverlap":true,"ogCount":0,"band":0,"mtx0":1,"ff":"\"Cormorant Garamond\", Georgia, \"Times New ","fontOk":true,"mcx":718.5,"mcy":450,"rMark":219.6,"ok":true,"goneAt07":[0,0]},{"vp":"1280x800","centered":true,"visible":true,"noGhost":true,"noOverlap":tru | both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay | evidence/b/sidecopy-audit.json<br>evidence/b/sidetext-1440x900.png |
+| d | hero end: mark docked upright just above the bottom edge | PASS | [{"vp":"1440x900","center":[721,734.9],"expY":734.9,"spin":360,"overflow":0,"ok":true},{"vp":"1280x800","center":[640.9,641.4],"expY":641.4,"spin":360,"overflow":0,"ok":true},{"vp":"1920x1080","center":[961.1,904.8],"expY":904.8,"spin":360,"overflow":0,"ok":true}] | centre == (vw/2, vh−dockR−20) ±6; spin 360±1.5; fully visible; no overflow | evidence/b/herodock-audit.json |
 | d | footer: giant text present; the big logo above it removed | PASS | {"endmark":0,"landing":0,"sigLayers":3,"sigW":1180,"overflow":0} | no endmark/landing elements; signature has 3 layers spanning the footer; no overflow | evidence/d/dock-audit.json<br>evidence/d/footer-1440x900.png |
 | d2 | footer stability: page height steady across scrolling | PASS | {"h1":3751,"h2":3751} | scrollHeight shift <= 2px | — |
 | e | enlarged mark rendered from vector (SVG) source | PASS | {"markSrc":"http://localhost:8123/assets/logo/logo-mark.svg","dpr":2} | mark displayed from .svg (scale-free) | evidence/e/mark-zoom-2x.png |
 | f | single content source (no duplicates) | PASS | duplicates outside content.js: 0 | 0 occurrences of sample strings in shipped files | evidence/f/content-audit.txt |
 | f | footer: links land + contact/legal intact | PASS | {"landings":[{"label":"Our story","href":"#story","top":0},{"label":"Get in touch","href":"#contact","top":282},{"label":"Back to top","href":"#top","top":0}],"contactCheck":{"emailText":true,"emailHref":true,"phoneHref":true,"address":true,"legal":true}} | 3 links land within viewport; mailto/tel formats; texts == content | evidence/f/footer-links.json<br>evidence/f/footer-1440x900.png |
 | f | footer signature: text present, draw-in completes | PASS | {"layers":3,"drawn":true,"dashAfter":0} | 3 text layers with the brand name; stroke draw-in finishes (dashoffset 0) | evidence/f/signature-audit.json<br>evidence/f/footer-signature-1440x900.png |
-| g | responsive: no overflow at max size and landing | PASS | [{"vp":"360x740","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"768x1024","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1280x800","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1440x900","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1920x1080","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"2560x1080"," | scrollWidth overflow <= 1px in both states; no horizontal scrollbar | evidence/g/responsive.json |
+| g | responsive: gate below 900px, no overflow at or above it | PASS | [{"vp":"360x740","ok":true,"gated":true,"noticeShown":true,"overflow@gate":0},{"vp":"768x1024","ok":true,"gated":true,"noticeShown":true,"overflow@gate":0},{"vp":"1280x800","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1440x900","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1920x1080","ok":true,"overflow@0.7":0 | sub-900 viewports show the desktop-only notice; 900+ keep overflow <= 1px in both states | evidence/g/responsive.json |
 | h | reduced motion: signature drawn statically; big mark stays removed | PASS | {"hasClass":true,"sigLayers":3,"sigContent":"NOVIN ROBOTIC MIRZANIA","sigDash":0,"endmark":0,"overflow":0} | reduced class on; signature 3 layers with dashoffset 0; no endmark; no overflow | evidence/h/reduced-1440-full.png |
-| i | perf: zero errors, local-only | PASS | {"consoleErrors":0,"pageErrors":0,"failed":0,"hosts":{"localhost:8123":17},"resources":17,"transferBytes":477613} | 0 errors; localhost-only; no failed requests | evidence/i/perf.json |
+| i | perf: zero errors, local-only | PASS | {"consoleErrors":0,"pageErrors":0,"failed":0,"hosts":{"localhost:8123":18},"resources":18,"transferBytes":481746} | 0 errors; localhost-only; no failed requests | evidence/i/perf.json |
 | i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":16.7,"frameP95Ms":16.8} | informational only | — |
 | j | resize mid-sequence | PASS | {"p":[0.55,0.61875],"spin":192.1219889322917,"expSpin":192.1} | state re-renders consistently after resize | — |
 | j | fling (wheel bursts) | PASS | {"p":1,"mapP":1} | end state == mapping ±0.002 | — |
@@ -53,7 +53,7 @@
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (511)
+## Evidence files (535)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -83,13 +83,17 @@
 - `qa/evidence/b/halfclip-1920x1080.png`
 - `qa/evidence/b/halfclip-390x844.png`
 - `qa/evidence/b/halfclip-audit.json`
+- `qa/evidence/b/herodock-1280x800.png`
 - `qa/evidence/b/herodock-1440x900.png`
+- `qa/evidence/b/herodock-1920x1080.png`
 - `qa/evidence/b/herodock-390x844.png`
 - `qa/evidence/b/herodock-834x1112.png`
 - `qa/evidence/b/herodock-audit.json`
 - `qa/evidence/b/motion-trace.json`
 - `qa/evidence/b/phase2-diagram.png`
+- `qa/evidence/b/pin-0-1280x800.png`
 - `qa/evidence/b/pin-0-1440x900.png`
+- `qa/evidence/b/pin-0-1920x1080.png`
 - `qa/evidence/b/pin-0-390x844.png`
 - `qa/evidence/b/pin-0-834x1112.png`
 - `qa/evidence/b/pin-0.06-1440x900.png`
@@ -98,13 +102,17 @@
 - `qa/evidence/b/pin-0.19-1440x900.png`
 - `qa/evidence/b/pin-0.19-390x844.png`
 - `qa/evidence/b/pin-0.19-834x1112.png`
+- `qa/evidence/b/pin-0.25-1280x800.png`
 - `qa/evidence/b/pin-0.25-1440x900.png`
+- `qa/evidence/b/pin-0.25-1920x1080.png`
 - `qa/evidence/b/pin-0.25-390x844.png`
 - `qa/evidence/b/pin-0.25-834x1112.png`
 - `qa/evidence/b/pin-0.3-1440x900.png`
 - `qa/evidence/b/pin-0.3-390x844.png`
 - `qa/evidence/b/pin-0.3-834x1112.png`
+- `qa/evidence/b/pin-0.5-1280x800.png`
 - `qa/evidence/b/pin-0.5-1440x900.png`
+- `qa/evidence/b/pin-0.5-1920x1080.png`
 - `qa/evidence/b/pin-0.5-390x844.png`
 - `qa/evidence/b/pin-0.5-834x1112.png`
 - `qa/evidence/b/pin-0.56-1440x900.png`
@@ -113,7 +121,9 @@
 - `qa/evidence/b/pin-0.66-1440x900.png`
 - `qa/evidence/b/pin-0.66-390x844.png`
 - `qa/evidence/b/pin-0.66-834x1112.png`
+- `qa/evidence/b/pin-0.7-1280x800.png`
 - `qa/evidence/b/pin-0.7-1440x900.png`
+- `qa/evidence/b/pin-0.7-1920x1080.png`
 - `qa/evidence/b/pin-0.7-390x844.png`
 - `qa/evidence/b/pin-0.7-834x1112.png`
 - `qa/evidence/b/pin-0.78-1440x900.png`
@@ -122,7 +132,9 @@
 - `qa/evidence/b/pin-0.8-1440x900.png`
 - `qa/evidence/b/pin-0.8-390x844.png`
 - `qa/evidence/b/pin-0.8-834x1112.png`
+- `qa/evidence/b/pin-0.84-1280x800.png`
 - `qa/evidence/b/pin-0.84-1440x900.png`
+- `qa/evidence/b/pin-0.84-1920x1080.png`
 - `qa/evidence/b/pin-0.84-390x844.png`
 - `qa/evidence/b/pin-0.84-834x1112.png`
 - `qa/evidence/b/pin-0.86-1440x900.png`
@@ -131,13 +143,18 @@
 - `qa/evidence/b/pin-0.92-1440x900.png`
 - `qa/evidence/b/pin-0.92-390x844.png`
 - `qa/evidence/b/pin-0.92-834x1112.png`
+- `qa/evidence/b/pin-0.93-1280x800.png`
 - `qa/evidence/b/pin-0.93-1440x900.png`
+- `qa/evidence/b/pin-0.93-1920x1080.png`
 - `qa/evidence/b/pin-0.93-390x844.png`
 - `qa/evidence/b/pin-0.93-834x1112.png`
+- `qa/evidence/b/pin-1-1280x800.png`
 - `qa/evidence/b/pin-1-1440x900.png`
+- `qa/evidence/b/pin-1-1920x1080.png`
 - `qa/evidence/b/pin-1-390x844.png`
 - `qa/evidence/b/pin-1-834x1112.png`
 - `qa/evidence/b/sidecopy-audit.json`
+- `qa/evidence/b/sidetext-1280x800.png`
 - `qa/evidence/b/sidetext-1440x900.png`
 - `qa/evidence/b/sidetext-390x844.png`
 - `qa/evidence/b/sweep-1440x900.png`
@@ -257,6 +274,7 @@
 - `qa/evidence/d/fx-1920x1080-0_696.png`
 - `qa/evidence/d/fx-390x844-0_63.png`
 - `qa/evidence/d/fx-meta.json`
+- `qa/evidence/d/gate-390x844.png`
 - `qa/evidence/d/hero-places-1280x800.png`
 - `qa/evidence/d/hero-places-1440x900.png`
 - `qa/evidence/d/hero-places-390x844.png`
@@ -440,6 +458,9 @@
 - `qa/evidence/probe/big-og-1440.png`
 - `qa/evidence/probe/big-reverted-1440.png`
 - `qa/evidence/probe/bottom-viewport.png`
+- `qa/evidence/probe/clear-1920.png`
+- `qa/evidence/probe/clear-footer.png`
+- `qa/evidence/probe/clear-phone.png`
 - `qa/evidence/probe/dock-og-1440.png`
 - `qa/evidence/probe/el-brand.png`
 - `qa/evidence/probe/el-dockedmark.png`
@@ -447,6 +468,8 @@
 - `qa/evidence/probe/founder-bigger-1440.png`
 - `qa/evidence/probe/founder-bigger-390.png`
 - `qa/evidence/probe/founder-longer-1440.png`
+- `qa/evidence/probe/gate-390.png`
+- `qa/evidence/probe/gate-desktop-1440.png`
 - `qa/evidence/probe/mark-bigger-1440.png`
 - `qa/evidence/probe/mark-plus15-1440.png`
 - `qa/evidence/probe/matrix-full-mobile.png`
@@ -490,6 +513,7 @@
 - `qa/evidence/probe/prod-bigcollage-1440.png`
 - `qa/evidence/probe/prod-bigleft-0635.png`
 - `qa/evidence/probe/prod-bigleft-166.png`
+- `qa/evidence/probe/prod-clear-1440.png`
 - `qa/evidence/probe/prod-fan-068.png`
 - `qa/evidence/probe/prod-fan-0696.png`
 - `qa/evidence/probe/prod-flagsbig-1440.png`

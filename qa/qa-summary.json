@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/156.0.8078.80",
     "edge": "Edg/157.0.4341.42",
-    "generatedAt": "2026-11-10T16:31:42.337Z",
-    "sha": "7184ad3"
+    "generatedAt": "2026-11-10T17:01:32.609Z",
+    "sha": "68416ff"
   },
-  "generatedAt": "2026-11-10T16:31:42.337Z",
+  "generatedAt": "2026-11-10T17:01:32.609Z",
   "counts": {
     "PASS": 32,
     "FAIL": 0,
@@ -32,7 +32,7 @@
       "id": "a",
       "entry": "old placeholder elements removed from DOM (incl. the programmes section)",
       "status": "PASS",
-      "value": "{\"copy\":0,\"indicator\":0,\"hint\":0,\"rmMark\":0} galleryGone=0 body=[\"A.skip-link\",\"NOSCRIPT\",\"SECTION#story.hero\",\"FOOTER#footer.footer\"]",
+      "value": "{\"copy\":0,\"indicator\":0,\"hint\":0,\"rmMark\":0} galleryGone=0 body=[\"DIV#mobile-gate.gate\",\"SCRIPT\",\"A.skip-link\",\"NOSCRIPT\",\"SECTION#story.hero\",\"FOOTER#footer.footer\"]",
       "threshold": "copy/indicator/hint/rm-mark/gallery counts all 0; body = skip-link + noscript + hero + footer",
       "evidence": [
         "evidence/a/nav-sweep.json"
@@ -95,7 +95,7 @@
       "id": "c",
       "entry": "enlarged state (right edge): half clipped, exact 45-degree pose, no overflow",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.497,\"markCx\":1282.6,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.497,\"markCx\":1443,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.497,\"markCx\":1923.5,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"visFrac\":0.497,\"markCx\":392.6,\"spin\":360,\"overflow\":0,\"ok\":true}]",
+      "value": "[{\"vp\":\"1280x800\",\"visFrac\":0.497,\"markCx\":1282.6,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"visFrac\":0.497,\"markCx\":1443,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"visFrac\":0.497,\"markCx\":1923.5,\"spin\":360,\"overflow\":0,\"ok\":true}]",
       "threshold": "visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0",
       "evidence": [
         "evidence/b/halfclip-audit.json",
@@ -107,7 +107,7 @@
       "id": "c",
       "entry": "big left: half clipped at the left edge, 45-degree pose",
       "status": "PASS",
-      "value": "[{\"vp\":\"1280x800\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true}]",
+      "value": "[{\"vp\":\"1280x800\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1440x900\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"ogGone\":0,\"visFrac\":0.5,\"markCx\":0,\"spin\":270,\"overflow\":0,\"ok\":true}]",
       "threshold": "visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG overlay gone",
       "evidence": [
         "evidence/b/bigleft-audit.json",
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":6660,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":6266,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -178,12 +178,12 @@
     },
     {
       "id": "d",
-      "entry": "places overlay on phones (compact, clears before the mark fills)",
+      "entry": "phones get the desktop-only notice instead of the site",
       "status": "PASS",
-      "value": "{\"at063\":{\"some\":true,\"minOp\":0.624,\"flagsOk\":true,\"overflow\":0},\"at072\":0}",
-      "threshold": "at 390 wide: rows visible around p=0.63 with flags loaded, no overflow, gone by p=0.72",
+      "value": "{\"gated\":true,\"noticeShown\":true,\"title\":\"This experience is built for desktop.\",\"rows\":0,\"scrollable\":false}",
+      "threshold": "at 390 wide: gate class set, notice visible, no overlay rows built, page not scrollable",
       "evidence": [
-        "evidence/d/hero-places-390x844.png"
+        "evidence/d/gate-390x844.png"
       ],
       "note": ""
     },
@@ -191,7 +191,7 @@
       "id": "c",
       "entry": "side copy: serif type beside the small symbol, then gone before the growth",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"band\":0,\"mtx0\":1,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":718.5,\"mcy\":450,\"rMark\":219.6,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"390x844\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"band\":0,\"mtx0\":1,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":194.5,\"mcy\":422,\"rMark\":68.4,\"ok\":true,\"goneAt07\":[0,0]}]",
+      "value": "[{\"vp\":\"1440x900\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"band\":0,\"mtx0\":1,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":718.5,\"mcy\":450,\"rMark\":219.6,\"ok\":true,\"goneAt07\":[0,0]},{\"vp\":\"1280x800\",\"centered\":true,\"visible\":true,\"noGhost\":true,\"noOverlap\":true,\"ogCount\":0,\"band\":0,\"mtx0\":1,\"ff\":\"\\\"Cormorant Garamond\\\", Georgia, \\\"Times New \",\"fontOk\":true,\"mcx\":638.8,\"mcy\":400,\"rMark\":172.8,\"ok\":true,\"goneAt07\":[0,0]}]",
       "threshold": "both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay",
       "evidence": [
         "evidence/b/sidecopy-audit.json",
@@ -203,7 +203,7 @@
       "id": "d",
       "entry": "hero end: mark docked upright just above the bottom edge",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"center\":[721,734.9],\"expY\":734.9,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"834x1112\",\"center\":[418,940.4],\"expY\":940.4,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"390x844\",\"center\":[195.7,726.5],\"expY\":726.5,\"spin\":360,\"overflow\":0,\"ok\":true}]",
+      "value": "[{\"vp\":\"1440x900\",\"center\":[721,734.9],\"expY\":734.9,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1280x800\",\"center\":[640.9,641.4],\"expY\":641.4,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"center\":[961.1,904.8],\"expY\":904.8,\"spin\":360,\"overflow\":0,\"ok\":true}]",
       "threshold": "centre == (vw/2, vh−dockR−20) ±6; spin 360±1.5; fully visible; no overflow",
       "evidence": [
         "evidence/b/herodock-audit.json"
@@ -279,10 +279,10 @@
     },
     {
       "id": "g",
-      "entry": "responsive: no overflow at max size and landing",
+      "entry": "responsive: gate below 900px, no overflow at or above it",
       "status": "PASS",
-      "value": "[{\"vp\":\"360x740\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"768x1024\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1280x800\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1440x900\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1920x1080\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"2560x1080\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1280x500\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0}]",
-      "threshold": "scrollWidth overflow <= 1px in both states; no horizontal scrollbar",
+      "value": "[{\"vp\":\"360x740\",\"ok\":true,\"gated\":true,\"noticeShown\":true,\"overflow@gate\":0},{\"vp\":\"768x1024\",\"ok\":true,\"gated\":true,\"noticeShown\":true,\"overflow@gate\":0},{\"vp\":\"1280x800\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1440x900\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1920x1080\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"2560x1080\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0},{\"vp\":\"1280x500\",\"ok\":true,\"overflow@0.7\":0,\"overflow@1\":0}]",
+      "threshold": "sub-900 viewports show the desktop-only notice; 900+ keep overflow <= 1px in both states",
       "evidence": [
         "evidence/g/responsive.json"
       ],
@@ -303,7 +303,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":17},\"resources\":17,\"transferBytes\":477613}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":18},\"resources\":18,\"transferBytes\":481746}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"

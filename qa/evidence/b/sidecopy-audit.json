@@ -20,7 +20,7 @@
     ]
   },
   {
-    "vp": "390x844",
+    "vp": "1280x800",
     "centered": true,
     "visible": true,
     "noGhost": true,
@@ -30,9 +30,9 @@
     "mtx0": 1,
     "ff": "\"Cormorant Garamond\", Georgia, \"Times New ",
     "fontOk": true,
-    "mcx": 194.5,
-    "mcy": 422,
-    "rMark": 68.4,
+    "mcx": 638.8,
+    "mcy": 400,
+    "rMark": 172.8,
     "ok": true,
     "goneAt07": [
       0,

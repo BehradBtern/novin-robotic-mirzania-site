@@ -90,7 +90,12 @@ export async function openPage(browser, opts = {}) {
   }
   await page.goto(target, { waitUntil: 'networkidle0', timeout: 60000 });
   if (fullPageReady) {
-    await page.waitForFunction('document.documentElement.dataset.ready === "true"', { timeout: 20000 });
+    /* gated viewports deliberately never boot the sequence, so they have no
+       ready flag; treat them as loaded once the notice is up */
+    await page.waitForFunction(
+      'document.documentElement.dataset.ready === "true" || document.documentElement.classList.contains("is-gated")',
+      { timeout: 20000 }
+    );
     await page.evaluate(() => document.fonts && document.fonts.ready);
     await delay(250);
   }

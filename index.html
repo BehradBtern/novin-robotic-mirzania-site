@@ -13,6 +13,17 @@
   <script src="assets/js/main.js" defer></script>
 </head>
 <body id="top">
+  <!-- desktop-only gate: shown below 900px or on phone user agents -->
+  <div class="gate" id="mobile-gate" hidden>
+    <div class="gate__inner">
+      <img class="gate__mark" src="assets/logo/logo-mark.svg" alt="" aria-hidden="true">
+      <p class="gate__brand" id="gate-brand"></p>
+      <h1 class="gate__title">This experience is built for desktop.</h1>
+      <p class="gate__body">The scroll-driven logo sequence needs a wide screen and a pointer. Open this address on a laptop or desktop computer &mdash; 900&nbsp;px wide or more.</p>
+      <p class="gate__note">Site not available on phones or tablets.</p>
+    </div>
+  </div>
+  <script src="assets/js/gate.js"></script>
   <a class="skip-link" href="#footer">Skip to footer</a>
   <noscript><p class="noscript-note">This site requires JavaScript.</p></noscript>
 

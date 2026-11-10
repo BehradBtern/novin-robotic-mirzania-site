@@ -1,0 +1,44 @@
+/* Desktop-only gate.
+   Loaded synchronously right after the notice markup so it can hide the site
+   before anything paints. The site is not offered on phones or on viewports
+   narrower than 900px; the notice replaces it and nothing else is laid out.
+
+   Escape hatch for support and QA: append ?desktop=1 to the URL. */
+(function () {
+  "use strict";
+
+  var MIN = 900;
+  var root = document.documentElement;
+  var gate = document.getElementById("mobile-gate");
+  var brandSlot = document.getElementById("gate-brand");
+  if (!gate) return;
+
+  var mobileUA = /Android|iPhone|iPad|iPod|Windows Phone|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent);
+  var forced = /[?&]desktop=1(?:&|$)/.test(location.search);
+
+  function apply() {
+    var gated = !forced && (window.innerWidth < MIN || mobileUA);
+    root.classList.toggle("is-gated", gated);
+    root.setAttribute("data-gated", gated ? "1" : "0");
+    gate.hidden = !gated;
+    if (gated) fillBrand();
+  }
+
+  /* the brand name lives in content.js only, so the notice borrows it rather
+     than repeating a second copy of the string in markup */
+  var brandFilled = false;
+  function fillBrand() {
+    if (brandFilled || !brandSlot) return;
+    var C = window.SITE_CONTENT;
+    if (!C || !C.brand || !C.brand.name) return;
+    brandSlot.textContent = C.brand.name;
+    brandFilled = true;
+  }
+
+  apply();
+  window.addEventListener("resize", apply, { passive: true });
+  document.addEventListener("DOMContentLoaded", function () {
+    fillBrand();
+    if (root.classList.contains("is-gated")) apply();
+  });
+})();

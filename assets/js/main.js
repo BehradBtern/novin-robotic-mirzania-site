@@ -10,6 +10,10 @@
 (function () {
   "use strict";
 
+  /* desktop-only gate: when the notice is shown there is nothing to animate,
+     so the whole scroll sequence (and every image it would load) stays off */
+  if (document.documentElement.classList.contains("is-gated")) return;
+
   var C = window.SITE_CONTENT;
   if (!C) return;
 
@@ -146,10 +150,11 @@
       var chip = doc.createElement("span");
       chip.className = "hp-flag";
       var img = doc.createElement("img");
-      img.src = it.flag || "";
       img.alt = "";
       img.setAttribute("aria-hidden", "true");
       img.decoding = "async";
+      img.loading = "lazy";
+      if (it.flag) img.setAttribute("data-src", it.flag);
       chip.appendChild(img);
       row.appendChild(chip);
       var nm = doc.createElement("span");
@@ -162,10 +167,11 @@
       ph.setAttribute("data-rot", phRots[(hpPhotoEls.length) % phRots.length]);
       if (it.photo) {
         var pim = doc.createElement("img");
-        pim.src = it.photo;
         pim.alt = "";
         pim.setAttribute("aria-hidden", "true");
         pim.decoding = "async";
+        pim.loading = "lazy";
+        if (it.photo) pim.setAttribute("data-src", it.photo);
         ph.appendChild(pim);
       } else {
         ph.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="10" r="1.6" fill="currentColor"/><path d="M4.5 17.5 10 12l3.5 3.5L17 12l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>';
@@ -410,7 +416,22 @@
     /* international places: every row hugs the mark's contour â€” its x is a
        fixed fraction of the mark radius (plus a hairline gap), so the flush
        alignment holds on every viewport and through the spin */
-    if (hpRows.length && p > 0.58 && p < 0.88) {
+    /* deferred images: nothing under #hero-places is fetched until the sequence
+     is about to reach the overlay; the browser then lazy-decodes the rest */
+  var plImagesArmed = false;
+  function armPlaceImages() {
+    if (plImagesArmed) return;
+    plImagesArmed = true;
+    var nodes = doc.querySelectorAll("#hero-places img[data-src]");
+    for (var ii = 0; ii < nodes.length; ii++) {
+      nodes[ii].src = nodes[ii].getAttribute("data-src");
+      nodes[ii].removeAttribute("data-src");
+    }
+  }
+
+  if (hpRows.length && p > 0.45) armPlaceImages();
+
+  if (hpRows.length && p > 0.58 && p < 0.88) {
       if (plLeft === null) measurePlaces();
       var PL = geo.vw <= 640 ? PL_M : PL_D;
       var uS = geo.vh / 900;

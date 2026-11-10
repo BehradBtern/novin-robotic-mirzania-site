@@ -9,32 +9,33 @@
       "http://localhost:8123/assets/js/bg-gradient.js",
       "http://localhost:8123/content.js",
       "http://localhost:8123/assets/js/main.js",
+      "http://localhost:8123/assets/logo/logo-mark.svg",
+      "http://localhost:8123/assets/js/gate.js",
       "http://localhost:8123/assets/fonts/cormorant-garamond-latin.woff2",
       "http://localhost:8123/assets/logo/logo-wordmark.svg",
-      "http://localhost:8123/assets/logo/logo-mark.svg",
       "http://localhost:8123/assets/flags/Flag_of_India.svg",
-      "http://localhost:8123/assets/photos/event-1.jpg",
       "http://localhost:8123/assets/flags/Flag_of_Malaysia.svg",
-      "http://localhost:8123/assets/photos/event-2.jpg",
       "http://localhost:8123/assets/flags/Flag_of_Turkey.svg",
-      "http://localhost:8123/assets/photos/event-3.jpg",
       "http://localhost:8123/assets/flags/Flag_of_the_United_Kingdom_(3-5).svg",
-      "http://localhost:8123/assets/photos/event-4.jpg",
       "http://localhost:8123/assets/flags/Flag_of_the_United_States.svg",
+      "http://localhost:8123/assets/photos/event-1.jpg",
+      "http://localhost:8123/assets/photos/event-2.jpg",
+      "http://localhost:8123/assets/photos/event-3.jpg",
+      "http://localhost:8123/assets/photos/event-4.jpg",
       "http://localhost:8123/assets/photos/event-5.jpg"
     ]
   },
   "pageData": {
     "cls": 0,
-    "resources": 17,
-    "transfer": 477613,
+    "resources": 18,
+    "transfer": 481746,
     "hosts": {
-      "localhost:8123": 17
+      "localhost:8123": 18
     }
   },
   "frames": {
-    "n": 156,
+    "n": 155,
     "median": 16.699999999999818,
-    "p95": 16.800000000000182
+    "p95": 16.799999999999955
   }
 }
