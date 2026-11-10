@@ -224,7 +224,7 @@
   }
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var rafId = null, start = 0, lastDraw = 0;
+  var rafId = null, start = 0, lastDraw = 0, tBase = 0;
 
   function draw(elapsed) {
     gl.uniform1f(U.u_time, elapsed * ((CFG.speed / 100) * 5) + CFG.offset * 0.01);
@@ -236,13 +236,18 @@
     rafId = window.requestAnimationFrame(tick);
     if (now - lastDraw < 32) return;
     lastDraw = now;
-    draw((now - start) / 1000);
+    draw(tBase + (now - start) / 1000);
   }
 
   function stop() {
     if (rafId !== null) {
       window.cancelAnimationFrame(rafId);
       rafId = null;
+    }
+    /* remember where the animation was so resuming does not snap the phase */
+    if (start) {
+      tBase += Math.max(0, (performance.now() - start) / 1000);
+      start = 0;
     }
   }
 
@@ -252,7 +257,7 @@
     gl.viewport(0, 0, canvas.width, canvas.height);
     uniforms();
     if (reduced.matches) {
-      draw(0.0);
+      draw(tBase);
       return;
     }
     start = performance.now();
