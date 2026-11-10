@@ -39,6 +39,65 @@
     brandFilled = true;
   }
 
+  /* one real affordance: carry the link to the machine that can open it */
+  var copyBtn = document.getElementById("gate-copy");
+  var urlNote = document.getElementById("gate-url");
+  var status = document.getElementById("gate-status");
+  var resetTimer = null;
+
+  function reset() {
+    if (!copyBtn) return;
+    copyBtn.setAttribute("data-state", "idle");
+    if (urlNote) urlNote.hidden = true;
+    if (status) status.textContent = "";
+  }
+
+  function settle(state, message, persist) {
+    if (!copyBtn) return;
+    copyBtn.setAttribute("data-state", state);
+    if (status) status.textContent = message;
+    if (resetTimer) window.clearTimeout(resetTimer);
+    if (!persist) resetTimer = window.setTimeout(reset, 2600);
+  }
+
+  function legacyCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function copyLink() {
+    var link = location.origin + location.pathname;
+    function done() { settle("done", "Link copied"); }
+    function failed() {
+      settle("fail", "Copy unavailable, the link is shown below", true);
+      if (urlNote) { urlNote.textContent = link.replace(/^https?:\/\//, ""); urlNote.hidden = false; }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(link).then(done, function () {
+        if (legacyCopy(link)) done(); else failed();
+      });
+    } else if (legacyCopy(link)) {
+      done();
+    } else {
+      failed();
+    }
+  }
+
+  if (copyBtn) {
+    copyBtn.addEventListener("click", copyLink);
+    /* keyboard parity: Enter/Space already click, nothing else to wire */
+  }
+
   apply();
   window.addEventListener("resize", apply, { passive: true });
   document.addEventListener("DOMContentLoaded", function () {
