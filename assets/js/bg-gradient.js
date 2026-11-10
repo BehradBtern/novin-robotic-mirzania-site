@@ -34,7 +34,7 @@
 
   var CFG = {
     color1: "#17191B",
-    color2: "#56C1C966",
+    color2: "#56C1C982",
     color3: "#0E1214",
     rotation: -35,
     proportion: 0.58,
@@ -43,7 +43,7 @@
     distortion: 3,
     swirl: 52,
     swirlIterations: 6,
-    softness: 100,
+    softness: 94,
     offset: -299,
     shape: 0,        /* 0 checks, 1 stripes, 2 edge */
     shapeSize: 30
