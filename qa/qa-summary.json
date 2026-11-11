@@ -3,12 +3,12 @@
     "os": "win32 x64",
     "node": "v22.22.0",
     "puppeteer": "25.12.0",
-    "chrome": "Chrome/156.0.8078.80",
+    "chrome": "Chrome/157.0.8103.50",
     "edge": "Edg/157.0.4341.42",
-    "generatedAt": "2026-11-10T18:19:37.384Z",
-    "sha": "6894fad"
+    "generatedAt": "2026-11-11T13:11:42.568Z",
+    "sha": "d95a1a8"
   },
-  "generatedAt": "2026-11-10T18:19:37.384Z",
+  "generatedAt": "2026-11-11T13:11:42.568Z",
   "counts": {
     "PASS": 32,
     "FAIL": 0,
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":5156,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":4447,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -303,7 +303,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":18},\"resources\":18,\"transferBytes\":489141}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":18},\"resources\":18,\"transferBytes\":489173}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
@@ -314,7 +314,7 @@
       "id": "i",
       "entry": "CLS + frame cadence (headless)",
       "status": "INFO",
-      "value": "{\"cls\":0,\"frameMedianMs\":16.7,\"frameP95Ms\":16.8}",
+      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7.1}",
       "threshold": "informational only",
       "evidence": [],
       "note": ""
