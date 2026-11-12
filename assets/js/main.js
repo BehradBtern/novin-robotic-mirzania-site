@@ -231,7 +231,7 @@
      pointed right contour (scaled by viewport). They hold briefly and clear out
      before the mark's lower-right sweep (~0.73). Phones keep the compact
      uniform stack (off all zero) and a shorter, lower window. */
-  var PL_D = { in0: 0.658, pd: 0.0025, dur: 0.024, out0: 0.698, odur: 0.020, slide: 24,
+  var PL_D = { in0: 0.628, pd: 0.0025, dur: 0.030, out0: 0.748, odur: 0.028, slide: 24,
     iu: [0.004, 0.0125, 0.0155, 0.0065, 0.009, 0.0115],
     ou: [0, 0, 3, 2, 1, 0],
     v: [0.1412, 0.4421, 0.7755, 0.9861, 0.6944, 0.3472],
@@ -462,7 +462,7 @@
 
   if (hpRows.length && p > 0.45) armPlaceImages();
 
-  if (hpRows.length && p > 0.58 && p < 0.88) {
+  if (hpRows.length && p > 0.56 && p < 0.90) {
       if (plLeft === null) measurePlaces();
       var PL = geo.vw <= 640 ? PL_M : PL_D;
       var uS = geo.vh / 900;

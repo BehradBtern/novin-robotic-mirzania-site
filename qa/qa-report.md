@@ -1,8 +1,8 @@
 # QA report — logo-sequence site (v1.3.6 round)
 
-- Revision: `d95a1a8` · generated 2026-11-11T13:11:42.568Z
+- Revision: `7be8de4` · generated 2026-11-12T18:15:30.719Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
-- Chrome: Chrome/157.0.8103.50 · Edge: Edg/157.0.4341.42
+- Chrome: Chrome/157.0.8103.50 · Edge: Edg/157.0.4341.46
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
   dock measured once pinned and once at maximum scroll (live).
 - Labels: PASS/FAIL = instrumented vs threshold; OBSERVED = judged artefact; INFO = recorded; NOT PERFORMED = no runtime.
@@ -21,10 +21,10 @@
 | c | enlarged state (right edge): half clipped, exact 45-degree pose, no overflow | PASS | [{"vp":"1280x800","visFrac":0.497,"markCx":1282.6,"spin":360,"overflow":0,"ok":true},{"vp":"1440x900","visFrac":0.497,"markCx":1443,"spin":360,"overflow":0,"ok":true},{"vp":"1920x1080","visFrac":0.497,"markCx":1923.5,"spin":360,"overflow":0,"ok":true}] | visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0 | evidence/b/halfclip-audit.json<br>evidence/b/bigright-1440x900.png |
 | c | big left: half clipped at the left edge, 45-degree pose | PASS | [{"vp":"1280x800","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1440x900","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1920x1080","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true}] | visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG overlay gone | evidence/b/bigleft-audit.json<br>evidence/b/bigleft-1440x900.png |
 | c | mid-sweep: the big mark crosses the middle, fully on screen | PASS | {"mcx":722.1,"spin":315} | at p=0.77 the big mark sits between the edges, centred vertically | evidence/b/sweep-1440x900.png |
-| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":4447,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
+| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":4927,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
 | c | founder phase: rain morph-out is a smooth partial fade | PASS | {"mtxOp":0.5} | at p=0.545 the rain is mid-fade (0.03 < opacity < 0.97) | — |
 | c | spin phase: no rain (the effect lives with the founder text) | PASS | {"mtxOp":0} | at p=0.24 the rain is off (opacity <= 0.03) | — |
-| d | international places overlay (rows fanned to the logo contour, per-line alignment) | PASS | [{"vp":"1440x900","n":5,"minOp":0.989,"flagsOk":true,"minGap":-265,"lefts":[205,349,440,314,164],"band":0,"overflow":0,"scan":{"zones":[{"left":290,"edge":193,"gap":97,"hits":0},{"left":435,"edge":338,"gap":97,"hits":0},{"left":525,"edge":428,"gap":97,"hits":0},{"left":399,"edge":302,"gap":97,"hits":0},{"left":249,"edg | at p=0.696 (1440/1280): 5 rows fully visible, flags loaded, row left edges match the per-line contour fan (+-8px), pixel-scan clear of the mark, standalone section gone | evidence/d/hero-places-1440x900.png<br>evidence/d/hero-places-1280x800.png |
+| d | international places overlay (rows fanned to the logo contour, per-line alignment) | PASS | [{"vp":"1440x900","n":5,"minOp":1,"flagsOk":true,"minGap":-265,"lefts":[205,349,440,314,164],"band":0,"overflow":0,"scan":{"zones":[{"left":290,"edge":193,"gap":97,"hits":0},{"left":434,"edge":338,"gap":96,"hits":0},{"left":525,"edge":428,"gap":97,"hits":0},{"left":399,"edge":302,"gap":97,"hits":0},{"left":249,"edge":1 | at p=0.696 (1440/1280): 5 rows fully visible, flags loaded, row left edges match the per-line contour fan (+-8px), pixel-scan clear of the mark, standalone section gone | evidence/d/hero-places-1440x900.png<br>evidence/d/hero-places-1280x800.png |
 | d | places overlay hidden outside its window (spin, founder copy, dock) | PASS | [{"qa":0.24,"maxOp":0},{"qa":0.58,"maxOp":0},{"qa":0.88,"maxOp":0}] | rows invisible (op <= 0.05) at p=0.24, 0.58, 0.88 | — |
 | d | phones get the desktop-only notice instead of the site | PASS | {"gated":true,"noticeShown":true,"title":"Built for a bigger screen.","rows":0,"scrollable":false} | at 390 wide: gate class set, notice visible, no overlay rows built, page not scrollable | evidence/d/gate-390x844.png |
 | c | side copy: serif type beside the small symbol, then gone before the growth | PASS | [{"vp":"1440x900","centered":true,"visible":true,"noGhost":true,"noOverlap":true,"ogCount":0,"band":0,"mtx0":1,"ff":"\"Cormorant Garamond\", Georgia, \"Times New ","fontOk":true,"mcx":718.5,"mcy":450,"rMark":219.6,"ok":true,"goneAt07":[0,0]},{"vp":"1280x800","centered":true,"visible":true,"noGhost":true,"noOverlap":tru | both blocks fully visible + clear of the mark at p=0.5; centred mark; wordmark fully swapped (no ghost); hidden by p=0.7; Cormorant Garamond active; no OG overlay | evidence/b/sidecopy-audit.json<br>evidence/b/sidetext-1440x900.png |
@@ -43,7 +43,7 @@
 | j | fling (wheel bursts) | PASS | {"p":1,"mapP":1} | end state == mapping ±0.002 | — |
 | j | reload mid-sequence | PASS | {"scrollY":1080,"p":0.5,"mapP":0.5} | deterministic restore | — |
 | j | QA hook robustness | PASS | [{"qa":"abc","got":null,"errors":0},{"qa":"-1","got":0,"errors":0},{"qa":"2","got":1,"errors":0},{"qa":"0.5","got":0.5,"errors":0}] | invalid ignored; clamped; no errors | — |
-| k | Edge subset (same engine as Chrome) | PASS | {"version":"Edg/157.0.4341.42","sigLayers":3,"errors":0} | footer signature rendered + zero errors on Edge | evidence/edge/dock-1440x900.png |
+| k | Edge subset (same engine as Chrome) | PASS | {"version":"Edg/157.0.4341.46","sigLayers":3,"errors":0} | footer signature rendered + zero errors on Edge | evidence/edge/dock-1440x900.png |
 
 ## Summary
 
@@ -53,7 +53,7 @@
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (539)
+## Evidence files (544)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -468,6 +468,11 @@
 - `qa/evidence/probe/founder-bigger-1440.png`
 - `qa/evidence/probe/founder-bigger-390.png`
 - `qa/evidence/probe/founder-longer-1440.png`
+- `qa/evidence/probe/fs-after-1440.png`
+- `qa/evidence/probe/fs-after-1920.png`
+- `qa/evidence/probe/fs-after-2560.png`
+- `qa/evidence/probe/fs-before-1920.png`
+- `qa/evidence/probe/fs-before-2560.png`
 - `qa/evidence/probe/gate-390.png`
 - `qa/evidence/probe/gate-desktop-1440.png`
 - `qa/evidence/probe/gate-desktop-places.png`
