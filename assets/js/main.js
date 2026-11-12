@@ -231,6 +231,8 @@
      pointed right contour (scaled by viewport). They hold briefly and clear out
      before the mark's lower-right sweep (~0.73). Phones keep the compact
      uniform stack (off all zero) and a shorter, lower window. */
+  var plCleared = false;
+
   var PL_D = { in0: 0.628, pd: 0.0025, dur: 0.030, out0: 0.748, odur: 0.028, slide: 24,
     iu: [0.004, 0.0125, 0.0155, 0.0065, 0.009, 0.0115],
     ou: [0, 0, 3, 2, 1, 0],
@@ -462,7 +464,24 @@
 
   if (hpRows.length && p > 0.45) armPlaceImages();
 
+  /* A jump across the overlay window (anchor link, scrollbar drag, End key) can skip
+     every frame in which the rows would have faded out. One clear pass when leaving
+     the window keeps a stale overlay from riding into the dock phase. */
+  if (hpRows.length && (p <= 0.56 || p >= 0.90)) {
+    if (!plCleared) {
+      for (var pc = 0; pc < hpRows.length; pc++) {
+        hpRows[pc].style.opacity = "0";
+        hpRows[pc]._plO = "0.000";
+        if (hpPhotoEls[pc]) {
+          hpPhotoEls[pc].style.opacity = "0";
+          hpPhotoEls[pc]._plO = "0.000";
+        }
+      }
+      plCleared = true;
+    }
+  }
   if (hpRows.length && p > 0.56 && p < 0.90) {
+    plCleared = false;
       if (plLeft === null) measurePlaces();
       var PL = geo.vw <= 640 ? PL_M : PL_D;
       var uS = geo.vh / 900;
@@ -471,14 +490,31 @@
         var pIn = PL.in0 + (PL.iu ? PL.iu[pj] : pj * PL.pd);
         var pOut = PL.out0 + (PL.ou ? PL.ou[pj] : pj) * PL.pd;
         var rp = seg(p, pIn, pIn + PL.dur) * (1 - seg(p, pOut, pOut + PL.odur));
-        hpRows[pj].style.opacity = rp.toFixed(3);
+        /* Only touch the DOM when the quantised value actually changed. During the
+           hold every rp is 1, so this drops from 20 style writes per frame to zero. */
+        var rowEl = hpRows[pj];
+        var rpTxt = rp.toFixed(3);
+        if (rowEl._plO !== rpTxt) {
+          rowEl.style.opacity = rpTxt;
+          rowEl._plO = rpTxt;
+          if (window.__plWrites !== undefined) window.__plWrites++;
+        }
         if (pj > 0 && hpPhotoEls[pj - 1]) {
           var phEl = hpPhotoEls[pj - 1];
-          var phRot = parseFloat(phEl.getAttribute("data-rot") || "0");
-          var phSc = 0.84 + 0.16 * rp;
-          phEl.style.opacity = rp.toFixed(3);
-          phEl.style.transform = "translateY(-50%) translateX(" + ((1 - rp) * 14).toFixed(1) + "px) rotate(" +
-            (phRot * (0.6 + 0.4 * rp)).toFixed(2) + "deg) scale(" + phSc.toFixed(3) + ")";
+          if (phEl._plRot === undefined) phEl._plRot = parseFloat(phEl.getAttribute("data-rot") || "0");
+          var phRot = phEl._plRot;
+          var phTxt = "translateY(-50%) translateX(" + ((1 - rp) * 14).toFixed(1) + "px) rotate(" +
+            (phRot * (0.6 + 0.4 * rp)).toFixed(2) + "deg) scale(" + (0.84 + 0.16 * rp).toFixed(3) + ")";
+          if (phEl._plO !== rpTxt) {
+            phEl.style.opacity = rpTxt;
+            phEl._plO = rpTxt;
+            if (window.__plWrites !== undefined) window.__plWrites++;
+          }
+          if (phEl._plT !== phTxt) {
+            phEl.style.transform = phTxt;
+            phEl._plT = phTxt;
+            if (window.__plWrites !== undefined) window.__plWrites++;
+          }
         }
         var xo = (1 - rp) * PL.slide * uS;
         if (tracked) {
@@ -488,7 +524,12 @@
         } else {
           xo += PL.off[pj] * Math.min(Math.max(geo.vw / 1440, 0.85), 1.4);
         }
-        hpRows[pj].style.transform = "translateX(" + xo.toFixed(1) + "px)";
+        var xoTxt = "translateX(" + xo.toFixed(1) + "px)";
+        if (rowEl._plT !== xoTxt) {
+          rowEl.style.transform = xoTxt;
+          rowEl._plT = xoTxt;
+          if (window.__plWrites !== undefined) window.__plWrites++;
+        }
       }
     }
 
