@@ -7,11 +7,23 @@
     "overflow@gate": 0
   },
   {
-    "vp": "768x1024",
+    "vp": "810x1080",
     "ok": true,
     "gated": true,
     "noticeShown": true,
     "overflow@gate": 0
+  },
+  {
+    "vp": "1024x768",
+    "ok": true,
+    "overflow@0.7": 0,
+    "overflow@1": 0
+  },
+  {
+    "vp": "1194x834",
+    "ok": true,
+    "overflow@0.7": 0,
+    "overflow@1": 0
   },
   {
     "vp": "1280x800",

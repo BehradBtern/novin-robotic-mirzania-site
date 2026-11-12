@@ -683,6 +683,23 @@ a:hover { color: var(--ink-1); }
   .hero { height: 300vh; }
 }
 
+/* tablet landscape (1024-1150px): the collage shrinks and tucks closer to the
+   right edge so the longest country names never run underneath it */
+@media (min-width: 1024px) and (max-width: 1200px) {
+  /* Tablet landscape: the collage keeps its proportions but the row type steps
+     down ~9% so the longest country name clears it. Verified gap >= 14px at
+     1024, 1080 and 1120 wide. */
+  .hp-name { font-size: 3.45vh; }
+  .hp-year { font-size: 1.75vh; width: 5.9vh; }
+  .hp-rank { font-size: 2.1vh; }
+  .hp-flag { width: 13.3vh; height: 7.7vh; }
+  .hp-flag img { max-width: 10.2vh; max-height: 5.85vh; }
+  .hp-photo {
+    width: 33vh;
+    height: 18.5625vh;
+  }
+}
+
 @media (max-width: 640px) {
   .hero { height: 260vh; }
   .footer__grid { grid-template-columns: 1fr; }

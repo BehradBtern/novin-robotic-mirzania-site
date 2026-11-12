@@ -1,6 +1,6 @@
 # QA report — logo-sequence site (v1.3.6 round)
 
-- Revision: `21e0db2` · generated 2026-11-12T18:34:04.461Z
+- Revision: `657aa6e` · generated 2026-11-12T19:18:15.208Z
 - Environment: win32 x64 · Node v22.22.0 · puppeteer-core 25.12.0
 - Chrome: Chrome/157.0.8103.50 · Edge: Edg/157.0.4341.46
 - Method: puppeteer-core only; local CSP-mirror server; deterministic states via `?qa=`;
@@ -21,7 +21,7 @@
 | c | enlarged state (right edge): half clipped, exact 45-degree pose, no overflow | PASS | [{"vp":"1280x800","visFrac":0.497,"markCx":1282.6,"spin":360,"overflow":0,"ok":true},{"vp":"1440x900","visFrac":0.497,"markCx":1443,"spin":360,"overflow":0,"ok":true},{"vp":"1920x1080","visFrac":0.497,"markCx":1923.5,"spin":360,"overflow":0,"ok":true}] | visible width fraction 0.42-0.58 at max size; centre on the right edge ±5; spin 360±1 (exact 45-degree diamond pose); scrollWidth overflow 0 | evidence/b/halfclip-audit.json<br>evidence/b/bigright-1440x900.png |
 | c | big left: half clipped at the left edge, 45-degree pose | PASS | [{"vp":"1280x800","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1440x900","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true},{"vp":"1920x1080","ogGone":0,"visFrac":0.5,"markCx":0,"spin":270,"overflow":0,"ok":true}] | visible fraction 0.42-0.58 with the centre on the left edge; spin 270±1 (45-degree pose); overflow 0; OG overlay gone | evidence/b/bigleft-audit.json<br>evidence/b/bigleft-1440x900.png |
 | c | mid-sweep: the big mark crosses the middle, fully on screen | PASS | {"mcx":722.1,"spin":315} | at p=0.77 the big mark sits between the edges, centred vertically | evidence/b/sweep-1440x900.png |
-| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":5670,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
+| c | founder phase: binary rain (0/1) active; no guide/hologram elements | PASS | {"mtxOp":1,"lit":7981,"band":0} | rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM | evidence/b/founder-rain.png |
 | c | founder phase: rain morph-out is a smooth partial fade | PASS | {"mtxOp":0.5} | at p=0.545 the rain is mid-fade (0.03 < opacity < 0.97) | — |
 | c | spin phase: no rain (the effect lives with the founder text) | PASS | {"mtxOp":0} | at p=0.24 the rain is off (opacity <= 0.03) | — |
 | d | international places overlay (rows fanned to the logo contour, per-line alignment) | PASS | [{"vp":"1440x900","n":5,"minOp":1,"flagsOk":true,"minGap":-265,"lefts":[205,349,440,314,164],"band":0,"overflow":0,"scan":{"zones":[{"left":290,"edge":193,"gap":97,"hits":0},{"left":434,"edge":338,"gap":96,"hits":0},{"left":525,"edge":428,"gap":97,"hits":0},{"left":399,"edge":302,"gap":97,"hits":0},{"left":249,"edge":1 | at p=0.696 (1440/1280): 5 rows fully visible, flags loaded, row left edges match the per-line contour fan (+-8px), pixel-scan clear of the mark, standalone section gone | evidence/d/hero-places-1440x900.png<br>evidence/d/hero-places-1280x800.png |
@@ -35,10 +35,11 @@
 | f | single content source (no duplicates) | PASS | duplicates outside content.js: 0 | 0 occurrences of sample strings in shipped files | evidence/f/content-audit.txt |
 | f | footer: links land + contact/legal intact | PASS | {"landings":[{"label":"Our story","href":"#story","top":0},{"label":"Get in touch","href":"#contact","top":305},{"label":"Back to top","href":"#top","top":0}],"contactCheck":{"emailHidden":true,"phoneHref":true,"phoneText":true,"mobileHref":true,"instagramHref":true,"address":true,"legal":true,"noPlaceholders":true,"_d | 3 links land within viewport; phone/mobile tel hrefs; address + legal == content; email row hidden when unpublished; no placeholder copy anywhere | evidence/f/footer-links.json<br>evidence/f/footer-1440x900.png |
 | f | footer signature: text present, draw-in completes | PASS | {"layers":3,"drawn":true,"dashAfter":0} | 3 text layers with the brand name; stroke draw-in finishes (dashoffset 0) | evidence/f/signature-audit.json<br>evidence/f/footer-signature-1440x900.png |
-| g | responsive: gate below 900px, no overflow at or above it | PASS | [{"vp":"360x740","ok":true,"gated":true,"noticeShown":true,"overflow@gate":0},{"vp":"768x1024","ok":true,"gated":true,"noticeShown":true,"overflow@gate":0},{"vp":"1280x800","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1440x900","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1920x1080","ok":true,"overflow@0.7":0 | sub-900 viewports show the desktop-only notice; 900+ keep overflow <= 1px in both states | evidence/g/responsive.json |
+| g | responsive: gate below 1024px, no overflow at or above it | PASS | [{"vp":"360x740","ok":true,"gated":true,"noticeShown":true,"overflow@gate":0},{"vp":"810x1080","ok":true,"gated":true,"noticeShown":true,"overflow@gate":0},{"vp":"1024x768","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1194x834","ok":true,"overflow@0.7":0,"overflow@1":0},{"vp":"1280x800","ok":true,"overflow@0.7":0, | sub-1024 viewports show the desktop-only notice; 1024+ (tablet landscape included) lay out with overflow <= 1px | evidence/g/responsive.json |
+| l | tablets: landscape allowed with clearance, portrait and phones gated | PASS | [{"label":"iPad portrait","vp":"810x1080","gated":true,"want":true,"gap":null,"ok":true},{"label":"iPad landscape 1024","vp":"1024x768","gated":false,"want":false,"gap":16,"ok":true},{"label":"iPad 10.9 landscape","vp":"1080x810","gated":false,"want":false,"gap":17,"ok":true},{"label":"iPad Air landscape","vp":"1194x83 | iPad landscape 1024/1080/1194 mount the sequence with >= 8px between the longest row and the collage; iPad portrait, iPhone portrait and iPhone desktop-mode stay gated | evidence/l/tablet-matrix.json |
 | h | reduced motion: signature drawn statically; big mark stays removed | PASS | {"hasClass":true,"sigLayers":3,"sigContent":"NOVIN ROBOTIC MIRZANIA","sigDash":0,"endmark":0,"overflow":0} | reduced class on; signature 3 layers with dashoffset 0; no endmark; no overflow | evidence/h/reduced-1440-full.png |
-| i | perf: zero errors, local-only | PASS | {"consoleErrors":0,"pageErrors":0,"failed":0,"hosts":{"localhost:8123":18},"resources":18,"transferBytes":490792} | 0 errors; localhost-only; no failed requests | evidence/i/perf.json |
-| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":7,"frameP95Ms":7.1} | informational only | — |
+| i | perf: zero errors, local-only | PASS | {"consoleErrors":0,"pageErrors":0,"failed":0,"hosts":{"localhost:8123":18},"resources":18,"transferBytes":491865} | 0 errors; localhost-only; no failed requests | evidence/i/perf.json |
+| i | CLS + frame cadence (headless) | INFO | {"cls":0,"frameMedianMs":6.9,"frameP95Ms":7.1} | informational only | — |
 | j | resize mid-sequence | PASS | {"p":[0.55,0.61875],"spin":192.1219889322917,"expSpin":192.1} | state re-renders consistently after resize | — |
 | j | fling (wheel bursts) | PASS | {"p":1,"mapP":1} | end state == mapping ±0.002 | — |
 | j | reload mid-sequence | PASS | {"scrollY":1080,"p":0.5,"mapP":0.5} | deterministic restore | — |
@@ -47,13 +48,13 @@
 
 ## Summary
 
-- PASS: 32
+- PASS: 33
 - FAIL: 0
 - INFO: 1
 - OBSERVED: 0
 - NOT PERFORMED: 0
 
-## Evidence files (544)
+## Evidence files (552)
 
 - `qa/evidence/a/intro-1280x800.png`
 - `qa/evidence/a/intro-1440x900.png`
@@ -443,6 +444,7 @@
 - `qa/evidence/i/responsive.json`
 - `qa/evidence/j/dock-live-zoom-2x.png`
 - `qa/evidence/j/reduced-motion.json`
+- `qa/evidence/l/tablet-matrix.json`
 - `qa/evidence/probe/bg-end-1440.png`
 - `qa/evidence/probe/bg-final-1920.png`
 - `qa/evidence/probe/bg-final-dock.png`
@@ -488,6 +490,7 @@
 - `qa/evidence/probe/news-1280.png`
 - `qa/evidence/probe/news-1440.png`
 - `qa/evidence/probe/news-1920.png`
+- `qa/evidence/probe/opt-after-1440.png`
 - `qa/evidence/probe/phase2-0.16.png`
 - `qa/evidence/probe/phase2-0.24.png`
 - `qa/evidence/probe/phase2-0.31.png`
@@ -585,6 +588,12 @@
 - `qa/evidence/probe/retry-prod-places.png`
 - `qa/evidence/probe/side-serif-1440.png`
 - `qa/evidence/probe/status-footer-1440.png`
+- `qa/evidence/probe/tablet-1024.png`
+- `qa/evidence/probe/tablet-1194.png`
+- `qa/evidence/probe/tablet-810.png`
+- `qa/evidence/probe/tablet-fixed-1024.png`
+- `qa/evidence/probe/tablet-fixed-1080.png`
+- `qa/evidence/probe/tablet-ok-1024.png`
 - `qa/evidence/probe/zoom-brand.png`
 - `qa/evidence/probe/zoom-top.png`
 - `qa/evidence/subagent/1440-p0.63-places.png`

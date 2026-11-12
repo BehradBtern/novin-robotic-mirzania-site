@@ -591,11 +591,11 @@ try {
 
   /* ---------- g) responsive scan ---------- */
   try {
-    const vps = [[360, 740], [768, 1024], [1280, 800], [1440, 900], [1920, 1080], [2560, 1080], [1280, 500]];
+    const vps = [[360, 740], [810, 1080], [1024, 768], [1194, 834], [1280, 800], [1440, 900], [1920, 1080], [2560, 1080], [1280, 500]];
     const rows = [];
     for (const [w, h] of vps) {
       const out = { vp: w + 'x' + h, ok: true };
-      if (w < 900) {
+      if (w < 1024) {
         const page = await openPage(browser, { w, h, qa: 0.70 });
         const m = await page.evaluate(() => ({
           overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -626,10 +626,56 @@ try {
       rows.push(out);
     }
     writeJson(evPath('g', 'responsive.json'), rows);
-    add('g', 'responsive: gate below 900px, no overflow at or above it', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'sub-900 viewports show the desktop-only notice; 900+ keep overflow <= 1px in both states', ['evidence/g/responsive.json']);
+    add('g', 'responsive: gate below 1024px, no overflow at or above it', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'sub-1024 viewports show the desktop-only notice; 1024+ (tablet landscape included) lay out with overflow <= 1px', ['evidence/g/responsive.json']);
   } catch (e) { add('g', 'responsive scan', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
-    /* ---------- h) reduced motion ---------- */
+    /* ---------- l) tablet landscape: allowed, and the collage clears the rows ---------- */
+  try {
+    const IPAD = 'Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
+    const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
+    const cases = [
+      { vp: [810, 1080], ua: IPAD, want: true, label: 'iPad portrait' },
+      { vp: [1024, 768], ua: IPAD, want: false, label: 'iPad landscape 1024' },
+      { vp: [1080, 810], ua: IPAD, want: false, label: 'iPad 10.9 landscape' },
+      { vp: [1194, 834], ua: IPAD, want: false, label: 'iPad Air landscape' },
+      { vp: [390, 844], ua: IPHONE, want: true, label: 'iPhone portrait' },
+      { vp: [980, 844], ua: IPHONE, want: true, label: 'iPhone desktop-mode' }
+    ];
+    const rows = [];
+    for (const c of cases) {
+      const pg = await browser.newPage();
+      const errs = [];
+      pg.on('pageerror', (e) => errs.push(e.message));
+      await pg.setViewport({ width: c.vp[0], height: c.vp[1], deviceScaleFactor: 1, hasTouch: true });
+      await pg.setUserAgent(c.ua);
+      await pg.goto('http://localhost:' + PORT + '/?qa=0.696', { waitUntil: 'networkidle0', timeout: 60000 });
+      await pg.waitForFunction('document.documentElement.dataset.ready === "true" || document.documentElement.classList.contains("is-gated")', { timeout: 20000 }).catch(() => {});
+      await delay(250);
+      const m = await pg.evaluate(() => {
+        const gated = document.documentElement.classList.contains('is-gated');
+        let gap = null;
+        const ph = document.querySelector('#hero-places .hp-photo');
+        if (!gated && ph) {
+          const pr = ph.getBoundingClientRect();
+          let maxRight = 0;
+          document.querySelectorAll('#hero-places .hp-row').forEach((r) => {
+            r.querySelectorAll('.hp-year, .hp-flag, .hp-name, .hp-rank').forEach((el) => {
+              const rr = el.getBoundingClientRect();
+              if (rr.right > maxRight) maxRight = rr.right;
+            });
+          });
+          gap = Math.round(pr.left - maxRight);
+        }
+        return { gated, gap, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+      });
+      await pg.close();
+      const ok = m.gated === c.want && m.overflow <= 1 && errs.length === 0 && (c.want || m.gap === null || m.gap >= 8);
+      rows.push({ label: c.label, vp: c.vp.join('x'), gated: m.gated, want: c.want, gap: m.gap, ok });
+    }
+    writeJson(evPath('l', 'tablet-matrix.json'), rows);
+    add('l', 'tablets: landscape allowed with clearance, portrait and phones gated', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'iPad landscape 1024/1080/1194 mount the sequence with >= 8px between the longest row and the collage; iPad portrait, iPhone portrait and iPhone desktop-mode stay gated', ['evidence/l/tablet-matrix.json']);
+  } catch (e) { add('l', 'tablet matrix', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
+  /* ---------- h) reduced motion ---------- */
   try {
     const page = await openPage(browser, { w: 1440, h: 900, reduced: true });
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));

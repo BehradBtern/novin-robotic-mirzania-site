@@ -1,0 +1,50 @@
+[
+  {
+    "label": "iPad portrait",
+    "vp": "810x1080",
+    "gated": true,
+    "want": true,
+    "gap": null,
+    "ok": true
+  },
+  {
+    "label": "iPad landscape 1024",
+    "vp": "1024x768",
+    "gated": false,
+    "want": false,
+    "gap": 16,
+    "ok": true
+  },
+  {
+    "label": "iPad 10.9 landscape",
+    "vp": "1080x810",
+    "gated": false,
+    "want": false,
+    "gap": 17,
+    "ok": true
+  },
+  {
+    "label": "iPad Air landscape",
+    "vp": "1194x834",
+    "gated": false,
+    "want": false,
+    "gap": 94,
+    "ok": true
+  },
+  {
+    "label": "iPhone portrait",
+    "vp": "390x844",
+    "gated": true,
+    "want": true,
+    "gap": null,
+    "ok": true
+  },
+  {
+    "label": "iPhone desktop-mode",
+    "vp": "980x844",
+    "gated": true,
+    "want": true,
+    "gap": null,
+    "ok": true
+  }
+]

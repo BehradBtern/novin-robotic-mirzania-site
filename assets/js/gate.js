@@ -7,21 +7,25 @@
 (function () {
   "use strict";
 
-  var MIN = 900;
+  var MIN = 1024;   /* narrowest viewport where the overlay layout still fits */
   var root = document.documentElement;
   var gate = document.getElementById("mobile-gate");
   var brandSlot = document.getElementById("gate-brand");
   if (!gate) return;
 
   var ua = navigator.userAgent;
-  var mobileUA = /Android|iPhone|iPad|iPod|Windows Phone|IEMobile|Opera Mini|Mobile/i.test(ua);
+  /* phones are blocked by device class as well as width: a phone in "desktop site"
+     mode reports ~980px and would otherwise slip through the width test.
+     iPads and Android tablets are covered by the width rule instead, so a tablet
+     in landscape (1024px and wider) is allowed through. */
+  var phoneUA = /iPhone|iPod|Windows Phone|IEMobile|Opera Mini|BlackBerry|Android.*Mobile/i.test(ua);
   /* crawlers must still see the real page: mobile-first indexing fetches with a
      smartphone user agent, and a notice-only document would deindex the site */
   var crawler = /Googlebot|Google-InspectionTool|Bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot|Applebot|facebookexternalhit|Twitterbot|LinkedInBot|AhrefsBot|SemrushBot|PetalBot/i.test(ua);
   var forced = /[?&]desktop=1(?:&|$)/.test(location.search);
 
   function apply() {
-    var gated = !forced && !crawler && (window.innerWidth < MIN || mobileUA);
+    var gated = !forced && !crawler && (window.innerWidth < MIN || (phoneUA && window.innerWidth < 1100));
     root.classList.toggle("is-gated", gated);
     root.setAttribute("data-gated", gated ? "1" : "0");
     gate.hidden = !gated;
