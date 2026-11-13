@@ -1,0 +1,31 @@
+﻿import puppeteer from "puppeteer-core";
+import { CHROME } from "./lib.mjs";
+const W = "C:/Users/USER/.openclaw-autoclaw/agents/auto-coder/workspace/.openclaw/tmp/shots";
+const b = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ["--use-gl=angle","--use-angle=swiftshader","--enable-unsafe-swiftshader"] });
+const p = await b.newPage();
+const errs = []; p.on("pageerror", e => errs.push(e.message));
+await p.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
+await p.goto("http://localhost:8080/", { waitUntil: "networkidle0", timeout: 90000 });
+await p.evaluate(() => document.getElementById("gallery").scrollIntoView({ block: "center" }));
+await new Promise(r => setTimeout(r, 1200));
+await p.screenshot({ path: W + "/gallery-1440d.png" });
+const before = await p.evaluate(() => document.querySelector(".gallery__cylinder").style.transform);
+// drag the drum
+const box = await p.evaluate(() => { const r = document.querySelector(".gallery__stage").getBoundingClientRect(); return { x: r.x + r.width/2, y: r.y + r.height/2 }; });
+await p.mouse.move(box.x, box.y);
+await p.mouse.down();
+await p.mouse.move(box.x + 220, box.y, { steps: 12 });
+await p.mouse.up();
+await new Promise(r => setTimeout(r, 700));
+const after = await p.evaluate(() => document.querySelector(".gallery__cylinder").style.transform);
+// click a face to open the lightbox
+await p.mouse.move(box.x, box.y);
+await p.mouse.down(); await p.mouse.up();
+await new Promise(r => setTimeout(r, 600));
+const open = await p.evaluate(() => ({ hidden: document.getElementById("gallery-lightbox").hidden, cls: document.getElementById("gallery-lightbox").className, cap: document.querySelector(".gallery__lbcap").textContent, src: !!document.querySelector(".gallery__lightbox img").getAttribute("src") }));
+await p.screenshot({ path: W + "/gallery-lightbox.png" });
+await p.keyboard.press("Escape");
+await new Promise(r => setTimeout(r, 400));
+const closed = await p.evaluate(() => document.getElementById("gallery-lightbox").hidden);
+console.log(JSON.stringify({ before, after, rotated: before !== after, open, closed, errs: errs.slice(0,2) }));
+await b.close();

@@ -66,6 +66,21 @@
   <!-- ================================== FOOTER =================================== -->
   <!-- Columns, then the giant animated brand text over a radial glow,
        then the legal row. -->
+  <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+    <header class="gallery__head">
+      <p class="gallery__kicker">Gallery</p>
+      <h2 class="gallery__title" id="gallery-title">Nine moments from the competition floor</h2>
+      <p class="gallery__hint">Drag to spin &middot; click a frame to open it</p>
+    </header>
+    <div class="gallery__stage" tabindex="0" role="group" aria-label="Photograph carousel">
+      <div class="gallery__cylinder"></div>
+    </div>
+    <div class="gallery__lightbox" id="gallery-lightbox" hidden tabindex="-1" role="dialog" aria-modal="true" aria-label="Photograph">
+      <img alt="">
+      <p class="gallery__lbcap"></p>
+    </div>
+  </section>
+  <script src="assets/js/gallery.js" defer></script>
   <footer class="footer" id="footer">
     <div class="footer__glow" aria-hidden="true"></div>
     <div class="shell footer__inner">

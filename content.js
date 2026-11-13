@@ -83,6 +83,19 @@ window.SITE_CONTENT = {
   },
 
   /* International places (flags live in assets/flags/). */
+  /* The closing gallery: real competition photographs, each with its outlet.
+     Same coverage that supplies the award frames above. */
+  gallery: [
+    { src: "assets/gallery/g1.jpg", credit: "Jamaran (IRNA)", caption: "Iran and Malaysia flags, IRC 2019" },
+    { src: "assets/gallery/g2.jpg", credit: "Young Journalists Club", caption: "Team and robots, Beijing 2023" },
+    { src: "assets/gallery/g3.jpg", credit: "Mehr News Agency", caption: "Certificates and trophy, Teknofest 2025" },
+    { src: "assets/gallery/g4.jpg", credit: "Sinapress", caption: "Asia-Pacific squad with medals, 2025" },
+    { src: "assets/gallery/g5.jpg", credit: "Mehr News Agency", caption: "ROBO OBSTACLE RACE podium, APRC 2026" },
+    { src: "assets/gallery/g6.jpg", credit: "Mehr News Agency", caption: "APRC 2026, team presentation" },
+    { src: "assets/gallery/g7.jpg", credit: "Mehr News Agency", caption: "APRC 2026, arena and judges" },
+    { src: "assets/gallery/g8.jpg", credit: "Sinapress", caption: "Asian championship squad, 2025" },
+    { src: "assets/gallery/g9.jpg", credit: "Jamejam", caption: "RobotChallenge stage, 2026" }
+  ],
   places: {
     kicker: "International places",
     intro: "",

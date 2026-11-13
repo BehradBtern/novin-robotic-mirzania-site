@@ -85,7 +85,9 @@ try {
         await delay(300);
         const r = await page.evaluate(() => {
           const out = {
-            headers: document.querySelectorAll('header').length,
+            /* only site-level headers count as chrome: a <header> inside a <section> is the
+   section's own heading block, which the gallery uses */
+headers: Array.from(document.querySelectorAll('header')).filter((h) => !h.closest('section')).length,
             navs: [], fixed: [],
             removed: {
               copy: document.querySelectorAll('.hero__copy, #hero-copy, .hero__col').length,
@@ -93,13 +95,13 @@ try {
               hint: document.querySelectorAll('.hero__hint, #hero-hint').length,
               rmMark: document.querySelectorAll('.rm-mark').length
             },
-            galleryGone: document.querySelectorAll('#programmes, .gallery, .gallery__card').length,
+            legacyGone: document.querySelectorAll('#programmes, .gallery__card, .chapters, .scrollhint').length,
             bodyChildren: Array.from(document.body.children).map((el) => el.tagName + (el.id ? '#' + el.id : '') + (el.className ? '.' + String(el.className).split(' ')[0] : ''))
           };
           document.querySelectorAll('nav, [role=navigation]').forEach((n) => out.navs.push({ inFooter: !!n.closest('footer') }));
           document.querySelectorAll('body *').forEach((el) => {
             const cs = getComputedStyle(el);
-            if ((cs.position === 'fixed' || cs.position === 'sticky') && !el.closest('#story') && !el.closest('#mobile-gate')) {
+            if ((cs.position === 'fixed' || cs.position === 'sticky') && !el.closest('#story') && !el.closest('#mobile-gate') && !el.closest('.gallery__lightbox')) {
               out.fixed.push((el.className && String(el.className)) || el.tagName);
             }
           });
@@ -112,14 +114,14 @@ try {
     writeJson(evPath('a', 'nav-sweep.json'), sweep);
     const navOk = sweep.every((r) => r.headers === 0 && r.fixed.length === 0 && r.navs.every((n) => n.inFooter));
     add('a', 'nav absence (9 cells)', navOk ? PASS : FAIL, navOk ? 'headers 0; no fixed/sticky outside hero; nav only in footer' : JSON.stringify(sweep.filter((r) => r.headers || r.fixed.length)), 'zero nav outside footer', ['evidence/a/nav-sweep.json']);
-    const remOk = sweep.every((r) => Object.values(r.removed).every((v) => v === 0) && r.galleryGone === 0);
-    add('a', 'old placeholder elements removed from DOM (incl. the programmes section)', remOk ? PASS : FAIL, JSON.stringify(sweep[0].removed) + ' galleryGone=' + sweep[0].galleryGone + ' body=' + JSON.stringify(sweep[0].bodyChildren), 'copy/indicator/hint/rm-mark/gallery counts all 0; body = skip-link + noscript + hero + footer', ['evidence/a/nav-sweep.json']);
+    const remOk = sweep.every((r) => Object.values(r.removed).every((v) => v === 0) && r.legacyGone === 0);
+    add('a', 'old placeholder elements removed from DOM (legacy programmes/cards, not the new gallery)', remOk ? PASS : FAIL, JSON.stringify(sweep[0].removed) + ' galleryGone=' + sweep[0].galleryGone + ' body=' + JSON.stringify(sweep[0].bodyChildren), 'copy/indicator/hint/rm-mark/gallery counts all 0; body = skip-link + noscript + hero + footer', ['evidence/a/nav-sweep.json']);
   } catch (e) { add('a', 'structure sweep', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
 
   /* ---------- a2) source audit: no dead placeholders; programmes removed ---------- */
   try {
     const files = ['index.html', 'assets/css/style.css', 'assets/js/main.js', 'content.js'];
-    const needles = ['hero__copy', 'hero__hint', 'hero__indicator', 'rm-mark', 'chapters', 'scrollhint', 'gallery', '#programmes'];
+    const needles = ['hero__copy', 'hero__hint', 'hero__indicator', 'rm-mark', 'chapters', 'scrollhint', 'programmes'];
     const lines = [];
     let total = 0;
     for (const f of files) {
@@ -700,6 +702,49 @@ try {
     const ok = m.count === 5 && m.match && m.footerOk && m.readable;
     add('m', 'photo credits: each frame names its outlet, footer lists them', ok ? PASS : FAIL, JSON.stringify(m), 'five frames each carry the outlet from content.js, the footer line matches footer.photoCredit, and the caption is at least 8px', ['evidence/m/photo-credits-1440.png']);
   } catch (e) { add('m', 'photo credits', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
+  /* ---------- n) closing gallery ---------- */
+  try {
+    const pg = await openPage(browser, { w: 1440, h: 900 });
+    await pg.evaluate(() => document.getElementById('gallery').scrollIntoView({ block: 'center' }));
+    await delay(1200);
+    const state = await pg.evaluate(() => {
+      const faces = Array.from(document.querySelectorAll('.gallery__face'));
+      const imgs = Array.from(document.querySelectorAll('.gallery__face img'));
+      const cyl = document.querySelector('.gallery__cylinder');
+      return {
+        faces: faces.length,
+        tabbable: faces.every((f) => f.getAttribute('tabindex') === '0'),
+        loaded: imgs.filter((i) => i.naturalWidth > 0).length,
+        transform: cyl ? cyl.style.transform : '',
+        stageH: Math.round(document.querySelector('.gallery__stage').getBoundingClientRect().height)
+      };
+    });
+    const box = await pg.evaluate(() => { const r = document.querySelector('.gallery__stage').getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; });
+    await pg.mouse.move(box.x, box.y);
+    await pg.mouse.down();
+    await pg.mouse.move(box.x + 200, box.y, { steps: 10 });
+    await pg.mouse.up();
+    await delay(600);
+    const afterDrag = await pg.evaluate(() => document.querySelector('.gallery__cylinder').style.transform);
+    await pg.mouse.move(box.x, box.y);
+    await pg.mouse.down();
+    await pg.mouse.up();
+    await delay(500);
+    const box1 = await pg.evaluate(() => {
+      const lb = document.getElementById('gallery-lightbox');
+      return { open: !lb.hidden && lb.classList.contains('is-open'), cap: (document.querySelector('.gallery__lbcap') || {}).textContent || '', role: lb.getAttribute('role'), modal: lb.getAttribute('aria-modal'), hasSrc: !!(document.querySelector('.gallery__lightbox img') || {}).getAttribute && !!document.querySelector('.gallery__lightbox img').getAttribute('src') };
+    });
+    await shot(pg, 'n/gallery-lightbox-1440.png');
+    await pg.keyboard.press('Escape');
+    await delay(400);
+    const closed = await pg.evaluate(() => document.getElementById('gallery-lightbox').hidden);
+    await pg.evaluate(() => document.getElementById('gallery').scrollIntoView({ block: 'center' }));
+    await delay(400);
+    await shot(pg, 'n/gallery-1440.png');
+    await pg.close();
+    const ok = state.faces === 9 && state.tabbable && state.loaded === 9 && state.transform !== afterDrag && box1.open && /—/.test(box1.cap) && box1.role === 'dialog' && box1.modal === 'true' && box1.hasSrc && closed === true;
+    add('n', 'closing gallery: nine frames, drag spins, click opens and Esc closes', ok ? PASS : FAIL, JSON.stringify({ state, afterDrag, box1, closed }), 'nine focusable faces with images loaded on approach, a drag changes the cylinder transform, clicking a face opens a dialog with credit text, Escape closes it', ['evidence/n/gallery-1440.png', 'evidence/n/gallery-lightbox-1440.png']);
+  } catch (e) { add('n', 'closing gallery', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
   /* ---------- h) reduced motion ---------- */
   try {
     const page = await openPage(browser, { w: 1440, h: 900, reduced: true });

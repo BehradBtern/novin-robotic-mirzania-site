@@ -16,13 +16,15 @@
       "hint": 0,
       "rmMark": 0
     },
-    "galleryGone": 0,
+    "legacyGone": 0,
     "bodyChildren": [
       "DIV#mobile-gate.gate",
       "SCRIPT",
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#gallery.gallery",
+      "SCRIPT",
       "FOOTER#footer.footer"
     ]
   },
@@ -43,13 +45,15 @@
       "hint": 0,
       "rmMark": 0
     },
-    "galleryGone": 0,
+    "legacyGone": 0,
     "bodyChildren": [
       "DIV#mobile-gate.gate",
       "SCRIPT",
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#gallery.gallery",
+      "SCRIPT",
       "FOOTER#footer.footer"
     ]
   },
@@ -70,13 +74,15 @@
       "hint": 0,
       "rmMark": 0
     },
-    "galleryGone": 0,
+    "legacyGone": 0,
     "bodyChildren": [
       "DIV#mobile-gate.gate",
       "SCRIPT",
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#gallery.gallery",
+      "SCRIPT",
       "FOOTER#footer.footer"
     ]
   },
@@ -97,13 +103,15 @@
       "hint": 0,
       "rmMark": 0
     },
-    "galleryGone": 0,
+    "legacyGone": 0,
     "bodyChildren": [
       "DIV#mobile-gate.gate",
       "SCRIPT",
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#gallery.gallery",
+      "SCRIPT",
       "FOOTER#footer.footer"
     ]
   },
@@ -124,13 +132,15 @@
       "hint": 0,
       "rmMark": 0
     },
-    "galleryGone": 0,
+    "legacyGone": 0,
     "bodyChildren": [
       "DIV#mobile-gate.gate",
       "SCRIPT",
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#gallery.gallery",
+      "SCRIPT",
       "FOOTER#footer.footer"
     ]
   },
@@ -151,13 +161,15 @@
       "hint": 0,
       "rmMark": 0
     },
-    "galleryGone": 0,
+    "legacyGone": 0,
     "bodyChildren": [
       "DIV#mobile-gate.gate",
       "SCRIPT",
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#gallery.gallery",
+      "SCRIPT",
       "FOOTER#footer.footer"
     ]
   },
@@ -178,13 +190,15 @@
       "hint": 0,
       "rmMark": 0
     },
-    "galleryGone": 0,
+    "legacyGone": 0,
     "bodyChildren": [
       "DIV#mobile-gate.gate",
       "SCRIPT",
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#gallery.gallery",
+      "SCRIPT",
       "FOOTER#footer.footer"
     ]
   },
@@ -205,13 +219,15 @@
       "hint": 0,
       "rmMark": 0
     },
-    "galleryGone": 0,
+    "legacyGone": 0,
     "bodyChildren": [
       "DIV#mobile-gate.gate",
       "SCRIPT",
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#gallery.gallery",
+      "SCRIPT",
       "FOOTER#footer.footer"
     ]
   },
@@ -232,13 +248,15 @@
       "hint": 0,
       "rmMark": 0
     },
-    "galleryGone": 0,
+    "legacyGone": 0,
     "bodyChildren": [
       "DIV#mobile-gate.gate",
       "SCRIPT",
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
+      "SECTION#gallery.gallery",
+      "SCRIPT",
       "FOOTER#footer.footer"
     ]
   }
