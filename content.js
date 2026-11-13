@@ -87,11 +87,11 @@ window.SITE_CONTENT = {
     kicker: "International places",
     intro: "",
     items: [
-      { country: "India", flag: "assets/flags/Flag_of_India.svg", year: "2019", text: "", rank: "3rd", photo: "assets/photos/event-1.jpg" },
-      { country: "Malaysia", flag: "assets/flags/Flag_of_Malaysia.svg", year: "2022", text: "", rank: "2nd", photo: "assets/photos/event-2.jpg" },
-      { country: "Turkey", flag: "assets/flags/Flag_of_Turkey.svg", year: "2023", text: "", rank: "1st", photo: "assets/photos/event-3.jpg" },
-      { country: "United Kingdom", flag: "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg", year: "2025", text: "", rank: "2nd", photo: "assets/photos/event-4.jpg" },
-      { country: "United States", flag: "assets/flags/Flag_of_the_United_States.svg", year: "2026", text: "", rank: "2nd", photo: "assets/photos/event-5.jpg" }
+      { country: "India", flag: "assets/flags/Flag_of_India.svg", year: "2019", text: "", rank: "3rd", photo: "assets/photos/event-1.jpg", credit: "Jamaran (IRNA)" },
+      { country: "Malaysia", flag: "assets/flags/Flag_of_Malaysia.svg", year: "2022", text: "", rank: "2nd", photo: "assets/photos/event-2.jpg", credit: "Young Journalists Club" },
+      { country: "Turkey", flag: "assets/flags/Flag_of_Turkey.svg", year: "2023", text: "", rank: "1st", photo: "assets/photos/event-3.jpg", credit: "Mehr News Agency" },
+      { country: "United Kingdom", flag: "assets/flags/Flag_of_the_United_Kingdom_(3-5).svg", year: "2025", text: "", rank: "2nd", photo: "assets/photos/event-4.jpg", credit: "Sinapress" },
+      { country: "United States", flag: "assets/flags/Flag_of_the_United_States.svg", year: "2026", text: "", rank: "2nd", photo: "assets/photos/event-5.jpg", credit: "Mehr News Agency" }
     ]
   },
 
@@ -109,13 +109,13 @@ window.SITE_CONTENT = {
        Saadat Abad directory entry). No email address is published anywhere, so the
        field stays empty and the row hides itself instead of showing a placeholder. */
     contact: {
-      email: "",
       phone: "+98 21 2238 4919",
       mobile: "+98 912 370 1230",
       address: "No. 74, Sro-e Sharghi St, Paydar Shopping Center, Saadat Abad, Tehran, Iran",
       instagram: "https://www.instagram.com/robotic_mirzania"
     },
     legal: "© 2026 Novin Robotic Mirzania. All rights reserved.",
-    creditNote: "Founded and led by Hadis Mirzania, Tehran."
+    creditNote: "Founded and led by Hadis Mirzania, Tehran.",
+    photoCredit: "Award photographs: Jamaran, Young Journalists Club, Mehr News Agency, Sinapress."
   }
 };

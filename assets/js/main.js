@@ -78,21 +78,9 @@
     setText("footer-blurb", C.footer.blurb);
     setText("footer-legal", C.footer.legal);
     setText("footer-credit", C.footer.creditNote);
+    setText("footer-photocredit", C.footer.photoCredit || "");
 
     var contact = C.footer.contact || {};
-    var em = doc.getElementById("footer-email");
-    if (em) {
-      if (contact.email) {
-        em.href = "mailto:" + contact.email;
-        em.textContent = contact.email;
-      } else {
-        /* nothing published: drop the row instead of showing an empty link */
-        var emRow = doc.getElementById("footer-email-row");
-        if (emRow) emRow.hidden = true;
-        em.removeAttribute("href");
-        em.textContent = "";
-      }
-    }
     var ph = doc.getElementById("footer-phone");
     if (ph) {
       if (contact.phone) {
@@ -161,6 +149,24 @@
       hpPhotoEls[mi].style.top = (rEl.offsetTop + rEl.offsetHeight / 2) + "px";
     }
     hpX = [];
+
+    /* Fit the collage to the gutter the rows actually leave free: the frames are
+       height-driven by design, which on a short-and-wide window can push them under
+       the longest country name. Measured once per layout pass, not per frame. */
+    var contentRight = 0;
+    for (var mi = 0; mi < hpRows.length; mi++) {
+      var kids = hpRows[mi].children;
+      for (var ki = 0; ki < kids.length; ki++) {
+        var kb = kids[ki].getBoundingClientRect();
+        if (kb.right > contentRight) contentRight = kb.right;
+      }
+    }
+    var pageRight = geo.vw - Math.max(24, geo.vw * 0.06);
+    var avail = contentRight ? pageRight - contentRight - 16 : 0;
+    var base = geo.vh * 0.4;
+    var fit = avail > 0 ? Math.min(base, avail) : base;
+    fit = Math.max(150, Math.min(fit, 520));
+    root.style.setProperty("--pl-photo-w", Math.round(fit) + "px");
   }
   if (placesEl && C.places && Array.isArray(C.places.items)) {
     placesEl.innerHTML = "";
@@ -196,6 +202,12 @@
       ph.className = "hp-photo";
       var phRots = [-2.2, 1.6, -1.2, 2, -1.6];
       ph.setAttribute("data-rot", phRots[(hpPhotoEls.length) % phRots.length]);
+      if (it.credit) {
+        var cr = doc.createElement("span");
+        cr.className = "hp-photo-credit";
+        cr.textContent = it.credit;
+        ph.appendChild(cr);
+      }
       if (it.photo) {
         var pim = doc.createElement("img");
         pim.alt = "";
@@ -232,6 +244,7 @@
      before the mark's lower-right sweep (~0.73). Phones keep the compact
      uniform stack (off all zero) and a shorter, lower window. */
   var plCleared = false;
+  var plScale = 1;
 
   var PL_D = { in0: 0.628, pd: 0.0025, dur: 0.030, out0: 0.748, odur: 0.028, slide: 24,
     iu: [0.004, 0.0125, 0.0155, 0.0065, 0.009, 0.0115],
@@ -480,6 +493,16 @@
       plCleared = true;
     }
   }
+  if (hpRows.length) {
+    /* below the 1024 design width the fan is wider than the viewport, so the whole
+       places layer is scaled down about its left edge instead of being blocked */
+    var plK = geo.vw < 1024 ? Math.max(0.78, Math.min(1, geo.vw / 1024)) : 1;
+    if (plK !== plScale) {
+      plScale = plK;
+      root.style.setProperty("--pl-scale", plK.toFixed(3));
+    }
+  }
+
   if (hpRows.length && p > 0.56 && p < 0.90) {
     plCleared = false;
       if (plLeft === null) measurePlaces();
@@ -497,7 +520,6 @@
         if (rowEl._plO !== rpTxt) {
           rowEl.style.opacity = rpTxt;
           rowEl._plO = rpTxt;
-          if (window.__plWrites !== undefined) window.__plWrites++;
         }
         if (pj > 0 && hpPhotoEls[pj - 1]) {
           var phEl = hpPhotoEls[pj - 1];
@@ -508,13 +530,11 @@
           if (phEl._plO !== rpTxt) {
             phEl.style.opacity = rpTxt;
             phEl._plO = rpTxt;
-            if (window.__plWrites !== undefined) window.__plWrites++;
-          }
+            }
           if (phEl._plT !== phTxt) {
             phEl.style.transform = phTxt;
             phEl._plT = phTxt;
-            if (window.__plWrites !== undefined) window.__plWrites++;
-          }
+            }
         }
         var xo = (1 - rp) * PL.slide * uS;
         if (tracked) {
@@ -528,7 +548,6 @@
         if (rowEl._plT !== xoTxt) {
           rowEl.style.transform = xoTxt;
           rowEl._plT = xoTxt;
-          if (window.__plWrites !== undefined) window.__plWrites++;
         }
       }
     }

@@ -545,11 +545,9 @@ try {
       const f = window.SITE_CONTENT.footer;
       const c = f.contact;
       const tel = (v) => 'tel:' + String(v).replace(/[^+\d]/g, '');
-      const mailEl = document.getElementById('footer-email');
-      const mailRow = document.getElementById('footer-email-row');
       const bodyText = document.body.innerText;
       return {
-        emailHidden: c.email ? (mailEl.textContent === c.email) : (mailRow && mailRow.hidden),
+        emailAbsent: !document.getElementById('footer-email') && !document.getElementById('footer-email-row') && !('email' in c),
         phoneHref: document.getElementById('footer-phone').getAttribute('href') === tel(c.phone),
         phoneText: document.getElementById('footer-phone').textContent === c.phone,
         mobileHref: document.getElementById('footer-mobile').getAttribute('href') === tel(c.mobile),
@@ -563,7 +561,7 @@ try {
     });
     writeJson(evPath('f', 'footer-links.json'), { links, landings, contactCheck });
     const landOk = landings.every((l) => l.top !== null && l.top >= -40 && l.top <= 675);
-    const checks = ['emailHidden', 'phoneHref', 'phoneText', 'mobileHref', 'instagramHref', 'address', 'legal', 'noPlaceholders'];
+    const checks = ['emailAbsent', 'phoneHref', 'phoneText', 'mobileHref', 'instagramHref', 'address', 'legal', 'noPlaceholders'];
     const ok = landOk && checks.every((k) => contactCheck[k]) && links.length === 3;
     add('f', 'footer: links land + contact/legal intact', ok ? PASS : FAIL, JSON.stringify({ landings, contactCheck }), '3 links land within viewport; phone/mobile tel hrefs; address + legal == content; email row hidden when unpublished; no placeholder copy anywhere', ['evidence/f/footer-links.json', 'evidence/f/footer-1440x900.png']);
 
@@ -638,6 +636,8 @@ try {
       { vp: [1024, 768], ua: IPAD, want: false, label: 'iPad landscape 1024' },
       { vp: [1080, 810], ua: IPAD, want: false, label: 'iPad 10.9 landscape' },
       { vp: [1194, 834], ua: IPAD, want: false, label: 'iPad Air landscape' },
+      { vp: [1104, 884], ua: IPAD, want: false, label: 'folding device landscape' },
+      { vp: [884, 1104], ua: IPAD, want: true, label: 'folding device portrait' },
       { vp: [390, 844], ua: IPHONE, want: true, label: 'iPhone portrait' },
       { vp: [980, 844], ua: IPHONE, want: true, label: 'iPhone desktop-mode' }
     ];
@@ -675,6 +675,31 @@ try {
     writeJson(evPath('l', 'tablet-matrix.json'), rows);
     add('l', 'tablets: landscape allowed with clearance, portrait and phones gated', rows.every((r) => r.ok) ? PASS : FAIL, JSON.stringify(rows), 'iPad landscape 1024/1080/1194 mount the sequence with >= 8px between the longest row and the collage; iPad portrait, iPhone portrait and iPhone desktop-mode stay gated', ['evidence/l/tablet-matrix.json']);
   } catch (e) { add('l', 'tablet matrix', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
+  /* ---------- m) photo credits ---------- */
+  try {
+    const pg = await openPage(browser, { w: 1440, h: 900, qa: 0.696 });
+    const m = await pg.evaluate(() => {
+      const items = window.SITE_CONTENT.places.items;
+      const frames = Array.from(document.querySelectorAll('#hero-places .hp-photo'));
+      const credits = frames.map((f) => (f.querySelector('.hp-photo-credit') || {}).textContent || '');
+      const footer = (document.getElementById('footer-photocredit') || {}).textContent || '';
+      const expected = items.filter((i) => i.photo).map((i) => i.credit);
+      const style = frames[0] ? getComputedStyle(frames[0].querySelector('.hp-photo-credit')) : null;
+      return {
+        count: frames.length,
+        credits,
+        expected,
+        footer,
+        match: credits.length === expected.length && credits.every((c, i) => c === expected[i]),
+        footerOk: footer === (window.SITE_CONTENT.footer.photoCredit || ''),
+        readable: style ? parseFloat(style.fontSize) >= 8 && style.color !== 'rgba(0, 0, 0, 0)' : false
+      };
+    });
+    await shot(pg, 'm/photo-credits-1440.png');
+    await pg.close();
+    const ok = m.count === 5 && m.match && m.footerOk && m.readable;
+    add('m', 'photo credits: each frame names its outlet, footer lists them', ok ? PASS : FAIL, JSON.stringify(m), 'five frames each carry the outlet from content.js, the footer line matches footer.photoCredit, and the caption is at least 8px', ['evidence/m/photo-credits-1440.png']);
+  } catch (e) { add('m', 'photo credits', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
   /* ---------- h) reduced motion ---------- */
   try {
     const page = await openPage(browser, { w: 1440, h: 900, reduced: true });

@@ -5,12 +5,12 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/157.0.8103.50",
     "edge": "Edg/157.0.4341.46",
-    "generatedAt": "2026-11-12T19:18:15.208Z",
-    "sha": "657aa6e"
+    "generatedAt": "2026-11-13T09:25:51.282Z",
+    "sha": "8810a7e"
   },
-  "generatedAt": "2026-11-12T19:18:15.208Z",
+  "generatedAt": "2026-11-13T09:25:51.282Z",
   "counts": {
-    "PASS": 33,
+    "PASS": 34,
     "FAIL": 0,
     "INFO": 1,
     "OBSERVED": 0,
@@ -66,7 +66,7 @@
       "id": "c",
       "entry": "motion trace (60 steps)",
       "status": "PASS",
-      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":34.1,\"maxPosStep\":436.9,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":719.54,\"dEndTy\":366.12}",
+      "value": "{\"mapErr\":0,\"monoSpin\":true,\"spinEnd\":360,\"maxSpinStep\":34.1,\"maxPosStep\":436.9,\"orderOk\":true,\"opacityOk\":true,\"cEndTx\":719.54,\"dEndTy\":364.4}",
       "threshold": "clockwise monotonic to 360±0.5; spin in place; side-copy hold with centred mark; grow left on the middle line; sweep right; enlarged state at exact 45-degree pose; dock travel left+down; no position jumps (max step <= 500px/sample); swap opacity sum=1",
       "evidence": [
         "evidence/b/motion-trace.json"
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":7981,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":7734,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -203,7 +203,7 @@
       "id": "d",
       "entry": "hero end: mark docked upright just above the bottom edge",
       "status": "PASS",
-      "value": "[{\"vp\":\"1440x900\",\"center\":[721,739.7],\"expY\":739.7,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1280x800\",\"center\":[640.9,646.2],\"expY\":646.2,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"center\":[961,909.8],\"expY\":909.9,\"spin\":360,\"overflow\":0,\"ok\":true}]",
+      "value": "[{\"vp\":\"1440x900\",\"center\":[721,735.9],\"expY\":735.9,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1280x800\",\"center\":[640.9,642.5],\"expY\":642.5,\"spin\":360,\"overflow\":0,\"ok\":true},{\"vp\":\"1920x1080\",\"center\":[961.1,906.1],\"expY\":906.1,\"spin\":360,\"overflow\":0,\"ok\":true}]",
       "threshold": "centre == (vw/2, vh−dockR−20) ±6; spin 360±1.5; fully visible; no overflow",
       "evidence": [
         "evidence/b/herodock-audit.json"
@@ -226,7 +226,7 @@
       "id": "d2",
       "entry": "footer stability: page height steady across scrolling",
       "status": "PASS",
-      "value": "{\"h1\":3728,\"h2\":3728}",
+      "value": "{\"h1\":3746,\"h2\":3746}",
       "threshold": "scrollHeight shift <= 2px",
       "evidence": [],
       "note": ""
@@ -257,7 +257,7 @@
       "id": "f",
       "entry": "footer: links land + contact/legal intact",
       "status": "PASS",
-      "value": "{\"landings\":[{\"label\":\"Our story\",\"href\":\"#story\",\"top\":0},{\"label\":\"Get in touch\",\"href\":\"#contact\",\"top\":305},{\"label\":\"Back to top\",\"href\":\"#top\",\"top\":0}],\"contactCheck\":{\"emailHidden\":true,\"phoneHref\":true,\"phoneText\":true,\"mobileHref\":true,\"instagramHref\":true,\"address\":true,\"legal\":true,\"noPlaceholders\":true,\"_domLegal\":\"© 2026 Novin Robotic Mirzania. All rights reserved.\",\"_contentLegal\":\"© 2026 Novin Robotic Mirzania. All rights reserved.\"}}",
+      "value": "{\"landings\":[{\"label\":\"Our story\",\"href\":\"#story\",\"top\":0},{\"label\":\"Get in touch\",\"href\":\"#contact\",\"top\":287},{\"label\":\"Back to top\",\"href\":\"#top\",\"top\":0}],\"contactCheck\":{\"emailAbsent\":true,\"phoneHref\":true,\"phoneText\":true,\"mobileHref\":true,\"instagramHref\":true,\"address\":true,\"legal\":true,\"noPlaceholders\":true,\"_domLegal\":\"© 2026 Novin Robotic Mirzania. All rights reserved.\",\"_contentLegal\":\"© 2026 Novin Robotic Mirzania. All rights reserved.\"}}",
       "threshold": "3 links land within viewport; phone/mobile tel hrefs; address + legal == content; email row hidden when unpublished; no placeholder copy anywhere",
       "evidence": [
         "evidence/f/footer-links.json",
@@ -292,10 +292,21 @@
       "id": "l",
       "entry": "tablets: landscape allowed with clearance, portrait and phones gated",
       "status": "PASS",
-      "value": "[{\"label\":\"iPad portrait\",\"vp\":\"810x1080\",\"gated\":true,\"want\":true,\"gap\":null,\"ok\":true},{\"label\":\"iPad landscape 1024\",\"vp\":\"1024x768\",\"gated\":false,\"want\":false,\"gap\":16,\"ok\":true},{\"label\":\"iPad 10.9 landscape\",\"vp\":\"1080x810\",\"gated\":false,\"want\":false,\"gap\":17,\"ok\":true},{\"label\":\"iPad Air landscape\",\"vp\":\"1194x834\",\"gated\":false,\"want\":false,\"gap\":94,\"ok\":true},{\"label\":\"iPhone portrait\",\"vp\":\"390x844\",\"gated\":true,\"want\":true,\"gap\":null,\"ok\":true},{\"label\":\"iPhone desktop-mode\",\"vp\":\"980x844\",\"gated\":true,\"want\":true,\"gap\":null,\"ok\":true}]",
+      "value": "[{\"label\":\"iPad portrait\",\"vp\":\"810x1080\",\"gated\":true,\"want\":true,\"gap\":null,\"ok\":true},{\"label\":\"iPad landscape 1024\",\"vp\":\"1024x768\",\"gated\":false,\"want\":false,\"gap\":11,\"ok\":true},{\"label\":\"iPad 10.9 landscape\",\"vp\":\"1080x810\",\"gated\":false,\"want\":false,\"gap\":11,\"ok\":true},{\"label\":\"iPad Air landscape\",\"vp\":\"1194x834\",\"gated\":false,\"want\":false,\"gap\":35,\"ok\":true},{\"label\":\"folding device landscape\",\"vp\":\"1104x884\",\"gated\":false,\"want\":false,\"gap\":12,\"ok\":true},{\"label\":\"folding device portrait\",\"vp\":\"884x1104\",\"gated\":true,\"want\":true,\"gap\":null,\"ok\":true},{\"label\":\"iPhone portrait\",\"vp\":\"390x844\",\"gated\":true,\"want\":true,\"gap\":null,\"ok\":true},{\"label\":\"iPhone desktop-mode\",\"vp\":\"980x844\",\"gated\":true,\"want\":true,\"gap\":null,\"ok\":true}]",
       "threshold": "iPad landscape 1024/1080/1194 mount the sequence with >= 8px between the longest row and the collage; iPad portrait, iPhone portrait and iPhone desktop-mode stay gated",
       "evidence": [
         "evidence/l/tablet-matrix.json"
+      ],
+      "note": ""
+    },
+    {
+      "id": "m",
+      "entry": "photo credits: each frame names its outlet, footer lists them",
+      "status": "PASS",
+      "value": "{\"count\":5,\"credits\":[\"Jamaran (IRNA)\",\"Young Journalists Club\",\"Mehr News Agency\",\"Sinapress\",\"Mehr News Agency\"],\"expected\":[\"Jamaran (IRNA)\",\"Young Journalists Club\",\"Mehr News Agency\",\"Sinapress\",\"Mehr News Agency\"],\"footer\":\"Award photographs: Jamaran, Young Journalists Club, Mehr News Agency, Sinapress.\",\"match\":true,\"footerOk\":true,\"readable\":true}",
+      "threshold": "five frames each carry the outlet from content.js, the footer line matches footer.photoCredit, and the caption is at least 8px",
+      "evidence": [
+        "evidence/m/photo-credits-1440.png"
       ],
       "note": ""
     },
@@ -314,7 +325,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":18},\"resources\":18,\"transferBytes\":491865}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":18},\"resources\":18,\"transferBytes\":494573}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"

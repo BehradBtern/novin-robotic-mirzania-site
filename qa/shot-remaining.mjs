@@ -1,0 +1,12 @@
+﻿import puppeteer from 'puppeteer-core';
+import { CHROME } from './lib.mjs';
+const W = 'C:/Users/USER/.openclaw-autoclaw/agents/auto-coder/workspace';
+const b = await puppeteer.launch({ executablePath: CHROME, headless: true });
+const p = await b.newPage();
+await p.setViewport({ width: 1200, height: 900, deviceScaleFactor: 1 });
+const errs = []; p.on('pageerror', e => errs.push(e.message));
+await p.goto('file:///' + W + '/DELIVERY/remaining-work-2026-11-13.html', { waitUntil: 'load' });
+const info = await p.evaluate(() => ({ h: document.documentElement.scrollHeight, imgs: [...document.images].length, broken: [...document.images].filter(i => !i.naturalWidth).length, tables: document.querySelectorAll('table').length }));
+await p.screenshot({ path: W + '/.openclaw/tmp/shots/remaining-top.png' });
+console.log(JSON.stringify(info), 'errors:', errs.length);
+await b.close();

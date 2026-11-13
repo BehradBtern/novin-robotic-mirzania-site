@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  var MIN = 1024;   /* narrowest viewport where the overlay layout still fits */
+  var MIN = 1024;   /* the fan of rows needs this much width; folding phones qualify when unfolded flat */
   var root = document.documentElement;
   var gate = document.getElementById("mobile-gate");
   var brandSlot = document.getElementById("gate-brand");
@@ -25,7 +25,13 @@
   var forced = /[?&]desktop=1(?:&|$)/.test(location.search);
 
   function apply() {
-    var gated = !forced && !crawler && (window.innerWidth < MIN || (phoneUA && window.innerWidth < 1100));
+    /* A phone in "desktop site" mode reports a ~980px layout viewport while its
+       physical screen stays narrow. Rather than trusting the layout width, the
+       physical screen width is used to catch that case - and only that case, so a
+       folding phone opened out (>= 820px on both measures) is allowed through. */
+    var screenW = (window.screen && window.screen.width) || window.innerWidth;
+    var desktopModePhone = phoneUA && screenW < 600 && window.innerWidth >= MIN;
+    var gated = !forced && !crawler && (window.innerWidth < MIN || desktopModePhone);
     root.classList.toggle("is-gated", gated);
     root.setAttribute("data-gated", gated ? "1" : "0");
     gate.hidden = !gated;

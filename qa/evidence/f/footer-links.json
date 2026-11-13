@@ -22,7 +22,7 @@
     {
       "label": "Get in touch",
       "href": "#contact",
-      "top": 305
+      "top": 287
     },
     {
       "label": "Back to top",
@@ -31,7 +31,7 @@
     }
   ],
   "contactCheck": {
-    "emailHidden": true,
+    "emailAbsent": true,
     "phoneHref": true,
     "phoneText": true,
     "mobileHref": true,

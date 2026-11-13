@@ -12,7 +12,7 @@
     "vp": "1024x768",
     "gated": false,
     "want": false,
-    "gap": 16,
+    "gap": 11,
     "ok": true
   },
   {
@@ -20,7 +20,7 @@
     "vp": "1080x810",
     "gated": false,
     "want": false,
-    "gap": 17,
+    "gap": 11,
     "ok": true
   },
   {
@@ -28,7 +28,23 @@
     "vp": "1194x834",
     "gated": false,
     "want": false,
-    "gap": 94,
+    "gap": 35,
+    "ok": true
+  },
+  {
+    "label": "folding device landscape",
+    "vp": "1104x884",
+    "gated": false,
+    "want": false,
+    "gap": 12,
+    "ok": true
+  },
+  {
+    "label": "folding device portrait",
+    "vp": "884x1104",
+    "gated": true,
+    "want": true,
+    "gap": null,
     "ok": true
   },
   {
