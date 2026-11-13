@@ -712,6 +712,7 @@ headers: Array.from(document.querySelectorAll('header')).filter((h) => !h.closes
       const cyl = document.querySelector('.gallery__cylinder');
       return {
         faces: faces.length,
+        expected: (window.SITE_CONTENT.gallery || []).length,
         tabbable: faces.every((f) => f.getAttribute('tabindex') === '0'),
         loaded: imgs.filter((i) => i.naturalWidth > 0).length,
         transform: cyl ? cyl.style.transform : '',
@@ -743,7 +744,7 @@ headers: Array.from(document.querySelectorAll('header')).filter((h) => !h.closes
     await delay(400);
     await shot(pg, 'n/gallery-1440.png');
     await pg.close();
-    const ok = state.faces === 9 && state.tabbable && state.loaded === 9 && state.visible && state.inStage && state.transform !== afterDrag && box1.open && /—/.test(box1.cap) && box1.role === 'dialog' && box1.modal === 'true' && box1.hasSrc && closed === true;
+    const ok = state.faces === state.expected && state.faces > 0 && state.tabbable && state.loaded === state.faces && state.visible && state.inStage && state.transform !== afterDrag && box1.open && /—/.test(box1.cap) && box1.role === 'dialog' && box1.modal === 'true' && box1.hasSrc && closed === true;
     add('n', 'closing gallery: nine frames, drag spins, click opens and Esc closes', ok ? PASS : FAIL, JSON.stringify({ state, afterDrag, box1, closed }), 'the gallery is a layer inside the sticky stage, fully visible at p=0.98: nine focusable faces with images loaded, a drag changes the cylinder transform, clicking opens a dialog with credit text, Escape closes it', ['evidence/n/gallery-1440.png', 'evidence/n/gallery-lightbox-1440.png']);
   } catch (e) { add('n', 'closing gallery', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
   /* ---------- h) reduced motion ---------- */

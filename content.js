@@ -94,7 +94,8 @@ window.SITE_CONTENT = {
     { src: "assets/gallery/g6.jpg", credit: "Mehr News Agency", caption: "APRC 2026, team presentation" },
     { src: "assets/gallery/g7.jpg", credit: "Mehr News Agency", caption: "APRC 2026, arena and judges" },
     { src: "assets/gallery/g8.jpg", credit: "Sinapress", caption: "Asian championship squad, 2025" },
-    { src: "assets/gallery/g9.jpg", credit: "Jamejam", caption: "RobotChallenge stage, 2026" }
+    { src: "assets/gallery/g9.jpg", credit: "Jamejam", caption: "RobotChallenge stage, 2026" },
+    { src: "assets/gallery/g10.jpg", credit: "Mehr News Agency", caption: "Soccer 180g podium, APRC 2026" }
   ],
   places: {
     kicker: "International places",
