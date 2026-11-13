@@ -481,8 +481,8 @@
 
   /* ---- gallery phase: after the places overlay, with the mark docked left ---- */
   if (hpGallery) {
-    var gIn = seg(p, 0.90, 0.945);
-    var gOut = seg(p, 1.02, 1.05);
+    var gIn = seg(p, 0.795, 0.835);
+    var gOut = seg(p, 0.905, 0.945);
     var gp = Math.max(0, gIn * (1 - gOut));
     if (galleryLast === null || Math.abs(gp - galleryLast) > 0.002) {
       galleryLast = gp;
@@ -493,7 +493,7 @@
         hpGallery.classList.toggle("is-live", live);
       }
     }
-    if (p > 0.80 && !galleryArmed) {   /* warm the images before the phase opens */
+    if (p > 0.70 && !galleryArmed) {   /* warm the images before the phase opens */
       galleryArmed = true;
       if (window.__galleryArm) window.__galleryArm();
     }

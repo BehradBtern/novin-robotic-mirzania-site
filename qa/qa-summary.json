@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/157.0.8103.51",
     "edge": "Edg/157.0.4341.46",
-    "generatedAt": "2026-11-13T16:54:33.229Z",
-    "sha": "e004fb9"
+    "generatedAt": "2026-11-13T17:06:30.481Z",
+    "sha": "57083bd"
   },
-  "generatedAt": "2026-11-13T16:54:33.229Z",
+  "generatedAt": "2026-11-13T17:06:30.481Z",
   "counts": {
     "PASS": 35,
     "FAIL": 0,
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":4663,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":7908,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -312,10 +312,10 @@
     },
     {
       "id": "n",
-      "entry": "closing gallery: nine frames, drag spins, click opens and Esc closes",
+      "entry": "gallery phase: frames spin, click opens, Esc closes",
       "status": "PASS",
-      "value": "{\"state\":{\"faces\":10,\"expected\":10,\"tabbable\":true,\"loaded\":10,\"transform\":\"translateZ(-286px) rotateY(-12deg)\",\"stageH\":378,\"visible\":true,\"inStage\":true},\"afterDrag\":\"translateZ(-286px) rotateY(407.93deg)\",\"box1\":{\"open\":true,\"cap\":\"Soccer 180g podium, APRC 2026 — Mehr News Agency\",\"role\":\"dialog\",\"modal\":\"true\",\"hasSrc\":true},\"closed\":true}",
-      "threshold": "the gallery is a layer inside the sticky stage, fully visible at p=0.98: nine focusable faces with images loaded, a drag changes the cylinder transform, clicking opens a dialog with credit text, Escape closes it",
+      "value": "{\"state\":{\"faces\":10,\"expected\":10,\"tabbable\":true,\"loaded\":10,\"transform\":\"translateZ(-252px) rotateY(-12deg)\",\"stageH\":414,\"visible\":true,\"inStage\":true},\"afterDrag\":\"translateZ(-252px) rotateY(408.21deg)\",\"box1\":{\"open\":true,\"cap\":\"Soccer 180g podium, APRC 2026 — Mehr News Agency\",\"role\":\"dialog\",\"modal\":\"true\",\"hasSrc\":true},\"closed\":true}",
+      "threshold": "the gallery is a layer inside the sticky stage, fully visible at p=0.86: nine focusable faces with images loaded, a drag changes the cylinder transform, clicking opens a dialog with credit text, Escape closes it",
       "evidence": [
         "evidence/n/gallery-1440.png",
         "evidence/n/gallery-lightbox-1440.png"
@@ -337,7 +337,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":29},\"resources\":29,\"transferBytes\":1193290}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":29},\"resources\":29,\"transferBytes\":1193066}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"

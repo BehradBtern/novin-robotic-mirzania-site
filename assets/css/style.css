@@ -24,20 +24,19 @@ html { -webkit-text-size-adjust: 100%; }
 /* ---------- gallery phase: rides the sticky stage after the places overlay ---------- */
 .gallery {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  /* the mark docks on the left, so the gallery owns the right half only */
-  width: min(40vw, 620px);
+  top: 14vh;
+  bottom: 16vh;
+  left: 5vw;
+  right: auto;
+  width: min(58vw, 900px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 0 4vw;
+  padding: 0;
   opacity: 0;
   pointer-events: none;
   text-align: left;
-  transition: opacity 420ms cubic-bezier(0.32, 0.72, 0, 1);
   z-index: 50;
 }
 
@@ -47,10 +46,8 @@ html { -webkit-text-size-adjust: 100%; }
 .gallery::before {
   content: "";
   position: absolute;
-  inset: -12% -4% -12% -14%;
-  background:
-    linear-gradient(to right, rgba(12, 16, 18, 0) 0%, rgba(12, 16, 18, 0.55) 14%, rgba(12, 16, 18, 0.82) 30%, rgba(12, 16, 18, 0.88) 100%),
-    radial-gradient(70% 70% at 56% 48%, rgba(12, 16, 18, 0.55) 0%, rgba(12, 16, 18, 0.2) 60%, rgba(12, 16, 18, 0) 85%);
+  inset: -22% -26% -22% -26%;
+  background: radial-gradient(64% 58% at 42% 50%, rgba(10, 14, 16, 0.94) 0%, rgba(10, 14, 16, 0.8) 42%, rgba(10, 14, 16, 0.34) 68%, rgba(10, 14, 16, 0) 84%);
   pointer-events: none;
   z-index: -1;
 }
@@ -93,7 +90,7 @@ html { -webkit-text-size-adjust: 100%; }
 .gallery__stage {
   position: relative;
   width: 100%;
-  height: min(42vh, 420px);
+  height: min(46vh, 440px);
   margin: 26px 0 0;
   perspective: 1100px;
   cursor: grab;
@@ -958,6 +955,9 @@ a:hover { color: var(--ink-1); }
    must clip its own drum or it widens the document */
 .reduced-motion .gallery {
   position: relative;
+  left: 0;
+  top: auto;
+  bottom: auto;
   width: auto;
   max-width: 100%;
   box-sizing: border-box;
