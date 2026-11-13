@@ -4,7 +4,7 @@
 
 - OS: win32 x64 · Node: v22.22.0 · puppeteer-core: 25.12.0
 - Chrome: Chrome/157.0.8103.51 · Edge: Edg/157.0.4341.46
-- Revision: 57083bd · 2026-11-13T17:06:30.481Z
+- Revision: 808b7ef · 2026-11-13T17:22:45.197Z
 
 ## How to re-run
 

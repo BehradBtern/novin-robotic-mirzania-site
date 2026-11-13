@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/157.0.8103.51",
     "edge": "Edg/157.0.4341.46",
-    "generatedAt": "2026-11-13T17:06:30.481Z",
-    "sha": "57083bd"
+    "generatedAt": "2026-11-13T17:22:45.197Z",
+    "sha": "808b7ef"
   },
-  "generatedAt": "2026-11-13T17:06:30.481Z",
+  "generatedAt": "2026-11-13T17:22:45.197Z",
   "counts": {
     "PASS": 35,
     "FAIL": 0,
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":7908,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":7963,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -314,7 +314,7 @@
       "id": "n",
       "entry": "gallery phase: frames spin, click opens, Esc closes",
       "status": "PASS",
-      "value": "{\"state\":{\"faces\":10,\"expected\":10,\"tabbable\":true,\"loaded\":10,\"transform\":\"translateZ(-252px) rotateY(-12deg)\",\"stageH\":414,\"visible\":true,\"inStage\":true},\"afterDrag\":\"translateZ(-252px) rotateY(408.21deg)\",\"box1\":{\"open\":true,\"cap\":\"Soccer 180g podium, APRC 2026 — Mehr News Agency\",\"role\":\"dialog\",\"modal\":\"true\",\"hasSrc\":true},\"closed\":true}",
+      "value": "{\"state\":{\"faces\":10,\"expected\":10,\"tabbable\":true,\"loaded\":10,\"transform\":\"translateZ(-424px) rotateY(-12deg)\",\"stageH\":444,\"visible\":true,\"inStage\":true},\"afterDrag\":\"translateZ(-424px) rotateY(408.33deg)\",\"box1\":{\"open\":true,\"cap\":\"Soccer 180g podium, APRC 2026 — Mehr News Agency\",\"role\":\"dialog\",\"modal\":\"true\",\"hasSrc\":true},\"closed\":true}",
       "threshold": "the gallery is a layer inside the sticky stage, fully visible at p=0.86: nine focusable faces with images loaded, a drag changes the cylinder transform, clicking opens a dialog with credit text, Escape closes it",
       "evidence": [
         "evidence/n/gallery-1440.png",
@@ -337,7 +337,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":29},\"resources\":29,\"transferBytes\":1193066}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":29},\"resources\":29,\"transferBytes\":1193065}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"
@@ -348,7 +348,7 @@
       "id": "i",
       "entry": "CLS + frame cadence (headless)",
       "status": "INFO",
-      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7.1}",
+      "value": "{\"cls\":0,\"frameMedianMs\":6.9,\"frameP95Ms\":7.2}",
       "threshold": "informational only",
       "evidence": [],
       "note": ""
