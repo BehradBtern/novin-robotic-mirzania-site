@@ -704,9 +704,8 @@ headers: Array.from(document.querySelectorAll('header')).filter((h) => !h.closes
   } catch (e) { add('m', 'photo credits', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
   /* ---------- n) closing gallery ---------- */
   try {
-    const pg = await openPage(browser, { w: 1440, h: 900 });
-    await pg.evaluate(() => document.getElementById('gallery').scrollIntoView({ block: 'center' }));
-    await delay(1200);
+    const pg = await openPage(browser, { w: 1440, h: 900, qa: 0.98 });
+    await delay(900);
     const state = await pg.evaluate(() => {
       const faces = Array.from(document.querySelectorAll('.gallery__face'));
       const imgs = Array.from(document.querySelectorAll('.gallery__face img'));
@@ -716,7 +715,9 @@ headers: Array.from(document.querySelectorAll('header')).filter((h) => !h.closes
         tabbable: faces.every((f) => f.getAttribute('tabindex') === '0'),
         loaded: imgs.filter((i) => i.naturalWidth > 0).length,
         transform: cyl ? cyl.style.transform : '',
-        stageH: Math.round(document.querySelector('.gallery__stage').getBoundingClientRect().height)
+        stageH: Math.round(document.querySelector('.gallery__stage').getBoundingClientRect().height),
+        visible: +getComputedStyle(document.getElementById('gallery')).opacity > 0.9,
+        inStage: !!document.getElementById('gallery').closest('.hero__sticky')
       };
     });
     const box = await pg.evaluate(() => { const r = document.querySelector('.gallery__stage').getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; });
@@ -742,8 +743,8 @@ headers: Array.from(document.querySelectorAll('header')).filter((h) => !h.closes
     await delay(400);
     await shot(pg, 'n/gallery-1440.png');
     await pg.close();
-    const ok = state.faces === 9 && state.tabbable && state.loaded === 9 && state.transform !== afterDrag && box1.open && /—/.test(box1.cap) && box1.role === 'dialog' && box1.modal === 'true' && box1.hasSrc && closed === true;
-    add('n', 'closing gallery: nine frames, drag spins, click opens and Esc closes', ok ? PASS : FAIL, JSON.stringify({ state, afterDrag, box1, closed }), 'nine focusable faces with images loaded on approach, a drag changes the cylinder transform, clicking a face opens a dialog with credit text, Escape closes it', ['evidence/n/gallery-1440.png', 'evidence/n/gallery-lightbox-1440.png']);
+    const ok = state.faces === 9 && state.tabbable && state.loaded === 9 && state.visible && state.inStage && state.transform !== afterDrag && box1.open && /—/.test(box1.cap) && box1.role === 'dialog' && box1.modal === 'true' && box1.hasSrc && closed === true;
+    add('n', 'closing gallery: nine frames, drag spins, click opens and Esc closes', ok ? PASS : FAIL, JSON.stringify({ state, afterDrag, box1, closed }), 'the gallery is a layer inside the sticky stage, fully visible at p=0.98: nine focusable faces with images loaded, a drag changes the cylinder transform, clicking opens a dialog with credit text, Escape closes it', ['evidence/n/gallery-1440.png', 'evidence/n/gallery-lightbox-1440.png']);
   } catch (e) { add('n', 'closing gallery', FAIL, 'exception: ' + e.message, 'no exceptions', []); }
   /* ---------- h) reduced motion ---------- */
   try {

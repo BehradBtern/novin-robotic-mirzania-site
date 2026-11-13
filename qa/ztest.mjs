@@ -1,0 +1,20 @@
+﻿import puppeteer from "puppeteer-core";
+import { CHROME } from "./lib.mjs";
+const W = "C:/Users/USER/.openclaw-autoclaw/agents/auto-coder/workspace/.openclaw/tmp/shots";
+const b = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ["--use-gl=angle","--use-angle=swiftshader","--enable-unsafe-swiftshader"] });
+const p = await b.newPage();
+await p.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
+await p.goto("http://localhost:8080/?qa=0.90", { waitUntil: "networkidle0", timeout: 90000 });
+await new Promise(r => setTimeout(r, 600));
+const info = await p.evaluate(() => {
+  const g = document.getElementById("gallery");
+  g.style.zIndex = "50";
+  const mark = document.getElementById("hero-mark");
+  const r = mark.getBoundingClientRect();
+  const gr = g.getBoundingClientRect();
+  return { markRect: { x: Math.round(r.x), w: Math.round(r.width), h: Math.round(r.height) }, galleryRect: { x: Math.round(gr.x), w: Math.round(gr.width) }, markOpacity: getComputedStyle(mark).opacity };
+});
+await new Promise(r => setTimeout(r, 300));
+await p.screenshot({ path: W + "/gallery-ztop.png" });
+console.log(JSON.stringify(info));
+await b.close();

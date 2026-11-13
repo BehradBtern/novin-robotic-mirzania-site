@@ -244,6 +244,8 @@
      before the mark's lower-right sweep (~0.73). Phones keep the compact
      uniform stack (off all zero) and a shorter, lower window. */
   var plCleared = false;
+  var hpGallery = doc.getElementById("gallery");
+  var galleryLast = null, galleryLive = false, galleryArmed = false;
   var plScale = 1;
 
   var PL_D = { in0: 0.628, pd: 0.0025, dur: 0.030, out0: 0.748, odur: 0.028, slide: 24,
@@ -477,6 +479,25 @@
 
   if (hpRows.length && p > 0.45) armPlaceImages();
 
+  /* ---- gallery phase: after the places overlay, with the mark docked left ---- */
+  if (hpGallery) {
+    var gIn = seg(p, 0.90, 0.945);
+    var gOut = seg(p, 1.02, 1.05);
+    var gp = Math.max(0, gIn * (1 - gOut));
+    if (galleryLast === null || Math.abs(gp - galleryLast) > 0.002) {
+      galleryLast = gp;
+      hpGallery.style.opacity = gp.toFixed(3);
+      var live = gp > 0.55;
+      if (live !== galleryLive) {
+        galleryLive = live;
+        hpGallery.classList.toggle("is-live", live);
+      }
+    }
+    if (p > 0.80 && !galleryArmed) {   /* warm the images before the phase opens */
+      galleryArmed = true;
+      if (window.__galleryArm) window.__galleryArm();
+    }
+  }
   /* A jump across the overlay window (anchor link, scrollbar drag, End key) can skip
      every frame in which the rows would have faded out. One clear pass when leaving
      the window keeps a stale overlay from riding into the dock phase. */

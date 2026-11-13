@@ -49,7 +49,7 @@
 
   function layout() {
     var vw = window.innerWidth;
-    var cyW = Math.max(1700, Math.min(3000, Math.round(vw * 1.9)));
+    var cyW = Math.max(1150, Math.min(1900, Math.round(vw * 1.25)));
     faceW = Math.round(cyW / count);
     radius = Math.round(cyW / (2 * Math.PI));
     cylinder.style.width = cyW + "px";
@@ -152,6 +152,8 @@
 
   /* ---- lightbox ---- */
   var box = host.querySelector(".gallery__lightbox");
+  /* the stage clips its children, so the dialog lives on the body instead */
+  if (box && box.parentNode !== document.body) document.body.appendChild(box);
   var boxImg = box.querySelector("img");
   var boxCap = box.querySelector(".gallery__lbcap");
   var lastFocus = null;
@@ -192,20 +194,9 @@
     });
   }
 
-  /* ---- only work while the gallery is on screen ---- */
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      for (var i = 0; i < entries.length; i++) {
-        activeNow = entries[i].isIntersecting;
-        if (activeNow) arm();
-      }
-      if (!activeNow && raf) { window.cancelAnimationFrame(raf); raf = 0; }
-    }, { rootMargin: "300px 0px" });
-    io.observe(host);
-  } else {
-    activeNow = true;
-    arm();
-  }
+  /* main.js owns the phase timing: it arms the images and toggles .is-live */
+  window.__galleryArm = arm;
+  activeNow = true;
 
   var rt = 0;
   window.addEventListener("resize", function () {

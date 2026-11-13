@@ -23,9 +23,8 @@
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#gallery.gallery",
-      "SCRIPT",
-      "FOOTER#footer.footer"
+      "FOOTER#footer.footer",
+      "DIV#gallery-lightbox.gallery__lightbox"
     ]
   },
   {
@@ -52,9 +51,8 @@
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#gallery.gallery",
-      "SCRIPT",
-      "FOOTER#footer.footer"
+      "FOOTER#footer.footer",
+      "DIV#gallery-lightbox.gallery__lightbox"
     ]
   },
   {
@@ -81,9 +79,8 @@
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#gallery.gallery",
-      "SCRIPT",
-      "FOOTER#footer.footer"
+      "FOOTER#footer.footer",
+      "DIV#gallery-lightbox.gallery__lightbox"
     ]
   },
   {
@@ -110,9 +107,8 @@
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#gallery.gallery",
-      "SCRIPT",
-      "FOOTER#footer.footer"
+      "FOOTER#footer.footer",
+      "DIV#gallery-lightbox.gallery__lightbox"
     ]
   },
   {
@@ -139,9 +135,8 @@
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#gallery.gallery",
-      "SCRIPT",
-      "FOOTER#footer.footer"
+      "FOOTER#footer.footer",
+      "DIV#gallery-lightbox.gallery__lightbox"
     ]
   },
   {
@@ -168,9 +163,8 @@
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#gallery.gallery",
-      "SCRIPT",
-      "FOOTER#footer.footer"
+      "FOOTER#footer.footer",
+      "DIV#gallery-lightbox.gallery__lightbox"
     ]
   },
   {
@@ -197,9 +191,8 @@
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#gallery.gallery",
-      "SCRIPT",
-      "FOOTER#footer.footer"
+      "FOOTER#footer.footer",
+      "DIV#gallery-lightbox.gallery__lightbox"
     ]
   },
   {
@@ -226,9 +219,8 @@
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#gallery.gallery",
-      "SCRIPT",
-      "FOOTER#footer.footer"
+      "FOOTER#footer.footer",
+      "DIV#gallery-lightbox.gallery__lightbox"
     ]
   },
   {
@@ -255,9 +247,8 @@
       "A.skip-link",
       "NOSCRIPT",
       "SECTION#story.hero",
-      "SECTION#gallery.gallery",
-      "SCRIPT",
-      "FOOTER#footer.footer"
+      "FOOTER#footer.footer",
+      "DIV#gallery-lightbox.gallery__lightbox"
     ]
   }
 ]
