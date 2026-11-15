@@ -33,20 +33,25 @@
       "http://localhost:8123/assets/gallery/g7.jpg",
       "http://localhost:8123/assets/gallery/g8.jpg",
       "http://localhost:8123/assets/gallery/g9.jpg",
-      "http://localhost:8123/assets/gallery/g10.jpg"
+      "http://localhost:8123/assets/gallery/g10.jpg",
+      "http://localhost:8123/assets/gallery/g11.jpg",
+      "http://localhost:8123/assets/gallery/g12.jpg",
+      "http://localhost:8123/assets/gallery/g13.jpg",
+      "http://localhost:8123/assets/gallery/g14.jpg",
+      "http://localhost:8123/assets/gallery/g15.jpg"
     ]
   },
   "pageData": {
     "cls": 0,
-    "resources": 29,
-    "transfer": 1193065,
+    "resources": 34,
+    "transfer": 1590972,
     "hosts": {
-      "localhost:8123": 29
+      "localhost:8123": 34
     }
   },
   "frames": {
-    "n": 367,
+    "n": 366,
     "median": 6.900000000000091,
-    "p95": 7.199999999999818
+    "p95": 7.099999999999909
   }
 }
