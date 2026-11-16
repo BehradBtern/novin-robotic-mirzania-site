@@ -97,10 +97,10 @@ window.SITE_CONTENT = {
     { src: "assets/gallery/g9.jpg", credit: "Jamejam", caption: "RobotChallenge stage, 2026" },
     { src: "assets/gallery/g10.jpg", credit: "Mehr News Agency", caption: "Soccer 180g podium, APRC 2026" },
     { src: "assets/gallery/g11.jpg", credit: "Mehr News Agency", caption: "Robo Obstacle Race delegation, APRC 2026" },
-    { src: "assets/gallery/g12.jpg", credit: "Mehr News Agency", caption: "Drone Aerial Combat winners, APRC 2026" },
+    { src: "assets/gallery/g12.jpg", credit: "Mehr News Agency", caption: "Team line-up with medals, Asian championship 2025" },
     { src: "assets/gallery/g13.jpg", credit: "Mehr News Agency", caption: "Soccer 180g winners with the flag, APRC 2026" },
-    { src: "assets/gallery/g14.jpg", credit: "Mehr News Agency", caption: "Soccer 180g stage, APRC 2026" },
-    { src: "assets/gallery/g15.jpg", credit: "Mehr News Agency", caption: "Soccer 180g podium, trophy close-up, APRC 2026" }
+    { src: "assets/gallery/g14.jpg", credit: "Mehr News Agency", caption: "Team salute on stage, Asian championship 2025" },
+    { src: "assets/gallery/g15.jpg", credit: "Mehr News Agency", caption: "Team with the flag, Asian championship 2025" }
   ],
   places: {
     kicker: "International places",
