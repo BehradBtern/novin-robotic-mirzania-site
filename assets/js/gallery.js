@@ -49,7 +49,7 @@
 
   function layout() {
     var vw = window.innerWidth;
-    var cyW = Math.max(2100, Math.min(3500, Math.round(vw * 2.2)));
+    var cyW = Math.max(1200, Math.min(3500, Math.round(count * 330)));
     faceW = Math.round(cyW / count);
     radius = Math.round(cyW / (2 * Math.PI));
     cylinder.style.width = cyW + "px";

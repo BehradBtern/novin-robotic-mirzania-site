@@ -24,34 +24,26 @@
       "http://localhost:8123/assets/photos/event-3.jpg",
       "http://localhost:8123/assets/photos/event-4.jpg",
       "http://localhost:8123/assets/photos/event-5.jpg",
-      "http://localhost:8123/assets/gallery/g1.jpg",
-      "http://localhost:8123/assets/gallery/g2.jpg",
-      "http://localhost:8123/assets/gallery/g3.jpg",
-      "http://localhost:8123/assets/gallery/g4.jpg",
-      "http://localhost:8123/assets/gallery/g5.jpg",
-      "http://localhost:8123/assets/gallery/g6.jpg",
-      "http://localhost:8123/assets/gallery/g7.jpg",
-      "http://localhost:8123/assets/gallery/g8.jpg",
-      "http://localhost:8123/assets/gallery/g9.jpg",
-      "http://localhost:8123/assets/gallery/g10.jpg",
-      "http://localhost:8123/assets/gallery/g11.jpg",
-      "http://localhost:8123/assets/gallery/g12.jpg",
-      "http://localhost:8123/assets/gallery/g13.jpg",
-      "http://localhost:8123/assets/gallery/g14.jpg",
-      "http://localhost:8123/assets/gallery/g15.jpg"
+      "http://localhost:8123/assets/gallery/i01.jpg",
+      "http://localhost:8123/assets/gallery/i02.jpg",
+      "http://localhost:8123/assets/gallery/i03.jpg",
+      "http://localhost:8123/assets/gallery/i04.jpg",
+      "http://localhost:8123/assets/gallery/i05.jpg",
+      "http://localhost:8123/assets/gallery/i06.jpg",
+      "http://localhost:8123/assets/gallery/i07.jpg"
     ]
   },
   "pageData": {
     "cls": 0,
-    "resources": 34,
-    "transfer": 1559617,
+    "resources": 26,
+    "transfer": 838339,
     "hosts": {
-      "localhost:8123": 34
+      "localhost:8123": 26
     }
   },
   "frames": {
-    "n": 155,
-    "median": 16.699999999999818,
-    "p95": 16.800000000000182
+    "n": 372,
+    "median": 6.900000000000091,
+    "p95": 7.099999999999909
   }
 }

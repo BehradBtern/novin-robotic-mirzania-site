@@ -86,21 +86,13 @@ window.SITE_CONTENT = {
   /* The closing gallery: real competition photographs, each with its outlet.
      Same coverage that supplies the award frames above. */
   gallery: [
-    { src: "assets/gallery/g1.jpg", credit: "Jamaran (IRNA)", caption: "Iran and Malaysia flags, IRC 2019" },
-    { src: "assets/gallery/g2.jpg", credit: "Young Journalists Club", caption: "Team and robots, Beijing 2023" },
-    { src: "assets/gallery/g3.jpg", credit: "Mehr News Agency", caption: "Certificates and trophy, Teknofest 2025" },
-    { src: "assets/gallery/g4.jpg", credit: "Sinapress", caption: "Asia-Pacific squad with medals, 2025" },
-    { src: "assets/gallery/g5.jpg", credit: "Mehr News Agency", caption: "ROBO OBSTACLE RACE podium, APRC 2026" },
-    { src: "assets/gallery/g6.jpg", credit: "Mehr News Agency", caption: "Drone Aerial Combat stage, APRC 2026" },
-    { src: "assets/gallery/g7.jpg", credit: "Mehr News Agency", caption: "Drone Aerial Combat trio, APRC 2026" },
-    { src: "assets/gallery/g8.jpg", credit: "Sinapress", caption: "Asian championship squad, 2025" },
-    { src: "assets/gallery/g9.jpg", credit: "Jamejam", caption: "RobotChallenge stage, 2026" },
-    { src: "assets/gallery/g10.jpg", credit: "Mehr News Agency", caption: "Soccer 180g podium, APRC 2026" },
-    { src: "assets/gallery/g11.jpg", credit: "Mehr News Agency", caption: "Robo Obstacle Race delegation, APRC 2026" },
-    { src: "assets/gallery/g12.jpg", credit: "Mehr News Agency", caption: "Drone trio with the trophy, APRC 2026" },
-    { src: "assets/gallery/g13.jpg", credit: "Sinapress", caption: "Team line-up with the flag, Asian championship 2025" },
-    { src: "assets/gallery/g14.jpg", credit: "Sinapress", caption: "Team salute on stage, Asian championship 2025" },
-    { src: "assets/gallery/g15.jpg", credit: "Sinapress", caption: "Team with the flag, Asian championship 2025" }
+    { src: "assets/gallery/i01.jpg", credit: "Instagram @robotic_mirzania", caption: "Students building at the classroom bench" },
+    { src: "assets/gallery/i02.jpg", credit: "Instagram @robotic_mirzania", caption: "Testing the robot on the competition table" },
+    { src: "assets/gallery/i03.jpg", credit: "Instagram @robotic_mirzania", caption: "Portrait of a team member" },
+    { src: "assets/gallery/i04.jpg", credit: "Instagram @robotic_mirzania", caption: "Two students wiring a board" },
+    { src: "assets/gallery/i05.jpg", credit: "Instagram @robotic_mirzania", caption: "Students coding on the glass board" },
+    { src: "assets/gallery/i06.jpg", credit: "Instagram @robotic_mirzania", caption: "The miniature city table the robot drives" },
+    { src: "assets/gallery/i07.jpg", credit: "Instagram @robotic_mirzania", caption: "The Mirzania studio wall" }
   ],
   places: {
     kicker: "International places",
