@@ -5,10 +5,10 @@
     "puppeteer": "25.12.0",
     "chrome": "Chrome/157.0.8103.51",
     "edge": "Edg/157.0.4341.60",
-    "generatedAt": "2026-11-17T08:28:15.447Z",
-    "sha": "2bbecb3"
+    "generatedAt": "2026-11-17T08:54:46.979Z",
+    "sha": "9b270b7"
   },
-  "generatedAt": "2026-11-17T08:28:15.447Z",
+  "generatedAt": "2026-11-17T08:54:46.979Z",
   "counts": {
     "PASS": 35,
     "FAIL": 0,
@@ -130,7 +130,7 @@
       "id": "c",
       "entry": "founder phase: binary rain (0/1) active; no guide/hologram elements",
       "status": "PASS",
-      "value": "{\"mtxOp\":1,\"lit\":6549,\"band\":0}",
+      "value": "{\"mtxOp\":1,\"lit\":7936,\"band\":0}",
       "threshold": "rain visible during the founder text (opacity ~1, lit pixels > 40); no diagram elements remain in the DOM",
       "evidence": [
         "evidence/b/founder-rain.png"
@@ -314,7 +314,7 @@
       "id": "n",
       "entry": "gallery phase: frames spin, click opens, Esc closes",
       "status": "PASS",
-      "value": "{\"state\":{\"faces\":7,\"expected\":7,\"tabbable\":true,\"loaded\":7,\"transform\":\"translateZ(-368px) rotateY(-12deg)\",\"stageH\":444,\"visible\":true,\"inStage\":true},\"afterDrag\":\"translateZ(-368px) rotateY(408.07deg)\",\"box1\":{\"open\":true,\"cap\":\"The Mirzania studio wall — Instagram @robotic_mirzania\",\"role\":\"dialog\",\"modal\":\"true\",\"hasSrc\":true},\"closed\":true}",
+      "value": "{\"state\":{\"faces\":6,\"expected\":6,\"tabbable\":true,\"loaded\":6,\"transform\":\"translateZ(-382px) rotateY(-12deg)\",\"stageH\":495,\"visible\":true,\"inStage\":true},\"afterDrag\":\"translateZ(-382px) rotateY(407.93deg)\",\"box1\":{\"open\":true,\"cap\":\"Champion with the flag, 2025 — Sinapress\",\"role\":\"dialog\",\"modal\":\"true\",\"hasSrc\":true},\"closed\":true}",
       "threshold": "the gallery is a layer inside the sticky stage, fully visible at p=0.86: nine focusable faces with images loaded, a drag changes the cylinder transform, clicking opens a dialog with credit text, Escape closes it",
       "evidence": [
         "evidence/n/gallery-1440.png",
@@ -337,7 +337,7 @@
       "id": "i",
       "entry": "perf: zero errors, local-only",
       "status": "PASS",
-      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":26},\"resources\":26,\"transferBytes\":838339}",
+      "value": "{\"consoleErrors\":0,\"pageErrors\":0,\"failed\":0,\"hosts\":{\"localhost:8123\":25},\"resources\":25,\"transferBytes\":806265}",
       "threshold": "0 errors; localhost-only; no failed requests",
       "evidence": [
         "evidence/i/perf.json"

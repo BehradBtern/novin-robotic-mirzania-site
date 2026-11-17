@@ -86,13 +86,12 @@ window.SITE_CONTENT = {
   /* The closing gallery: real competition photographs, each with its outlet.
      Same coverage that supplies the award frames above. */
   gallery: [
-    { src: "assets/gallery/i01.jpg", credit: "Instagram @robotic_mirzania", caption: "Students building at the classroom bench" },
-    { src: "assets/gallery/i02.jpg", credit: "Instagram @robotic_mirzania", caption: "Testing the robot on the competition table" },
-    { src: "assets/gallery/i03.jpg", credit: "Instagram @robotic_mirzania", caption: "Portrait of a team member" },
-    { src: "assets/gallery/i04.jpg", credit: "Instagram @robotic_mirzania", caption: "Two students wiring a board" },
-    { src: "assets/gallery/i05.jpg", credit: "Instagram @robotic_mirzania", caption: "Students coding on the glass board" },
-    { src: "assets/gallery/i06.jpg", credit: "Instagram @robotic_mirzania", caption: "The miniature city table the robot drives" },
-    { src: "assets/gallery/i07.jpg", credit: "Instagram @robotic_mirzania", caption: "The Mirzania studio wall" }
+    { src: "assets/gallery/i01.jpg", credit: "Instagram @robotic_mirzania", caption: "Student beside the Iran flags" }  ,
+    { src: "assets/gallery/i03.jpg", credit: "Instagram @robotic_mirzania", caption: "Portrait of a team member" }  ,
+    { src: "assets/gallery/i04.jpg", credit: "Instagram @robotic_mirzania", caption: "Two students at the bench" }  ,
+    { src: "assets/gallery/g1.jpg", credit: "Jamaran (IRNA)", caption: "Iran and Malaysia flags, IRC 2019" }  ,
+    { src: "assets/gallery/g2.jpg", credit: "Young Journalists Club", caption: "Team and robots, Beijing 2023" }  ,
+    { src: "assets/gallery/g8.jpg", credit: "Sinapress", caption: "Champion with the flag, 2025" }
   ],
   places: {
     kicker: "International places",

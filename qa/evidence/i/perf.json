@@ -25,20 +25,19 @@
       "http://localhost:8123/assets/photos/event-4.jpg",
       "http://localhost:8123/assets/photos/event-5.jpg",
       "http://localhost:8123/assets/gallery/i01.jpg",
-      "http://localhost:8123/assets/gallery/i02.jpg",
       "http://localhost:8123/assets/gallery/i03.jpg",
       "http://localhost:8123/assets/gallery/i04.jpg",
-      "http://localhost:8123/assets/gallery/i05.jpg",
-      "http://localhost:8123/assets/gallery/i06.jpg",
-      "http://localhost:8123/assets/gallery/i07.jpg"
+      "http://localhost:8123/assets/gallery/g1.jpg",
+      "http://localhost:8123/assets/gallery/g2.jpg",
+      "http://localhost:8123/assets/gallery/g8.jpg"
     ]
   },
   "pageData": {
     "cls": 0,
-    "resources": 26,
-    "transfer": 838339,
+    "resources": 25,
+    "transfer": 806265,
     "hosts": {
-      "localhost:8123": 26
+      "localhost:8123": 25
     }
   },
   "frames": {

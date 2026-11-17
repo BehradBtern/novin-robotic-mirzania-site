@@ -520,7 +520,10 @@ headers: Array.from(document.querySelectorAll('header')).filter((h) => !h.closes
     const lines = [];
     let total = 0;
     for (const f of files) {
-      const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
+      let src = fs.readFileSync(path.join(ROOT, f), 'utf8');
+      // Head metadata (og/twitter/JSON-LD) must ship statically for crawlers, so the
+      // duplication rule applies to rendered body copy only.
+      if (f === 'index.html') src = src.replace(/<head>[\s\S]*?<\/head>/i, '<head></head>');
       const counts = needles.map((n) => ({ n, c: src.split(n).length - 1 }));
       total += counts.reduce((a, b) => a + b.c, 0);
       lines.push(f + ' :: ' + counts.map((c) => c.n + '=' + c.c).join(', '));
