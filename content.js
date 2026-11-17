@@ -91,16 +91,16 @@ window.SITE_CONTENT = {
     { src: "assets/gallery/g3.jpg", credit: "Mehr News Agency", caption: "Certificates and trophy, Teknofest 2025" },
     { src: "assets/gallery/g4.jpg", credit: "Sinapress", caption: "Asia-Pacific squad with medals, 2025" },
     { src: "assets/gallery/g5.jpg", credit: "Mehr News Agency", caption: "ROBO OBSTACLE RACE podium, APRC 2026" },
-    { src: "assets/gallery/g6.jpg", credit: "Mehr News Agency", caption: "APRC 2026, team presentation" },
-    { src: "assets/gallery/g7.jpg", credit: "Mehr News Agency", caption: "APRC 2026, arena and judges" },
+    { src: "assets/gallery/g6.jpg", credit: "Mehr News Agency", caption: "Drone Aerial Combat stage, APRC 2026" },
+    { src: "assets/gallery/g7.jpg", credit: "Mehr News Agency", caption: "Drone Aerial Combat trio, APRC 2026" },
     { src: "assets/gallery/g8.jpg", credit: "Sinapress", caption: "Asian championship squad, 2025" },
     { src: "assets/gallery/g9.jpg", credit: "Jamejam", caption: "RobotChallenge stage, 2026" },
     { src: "assets/gallery/g10.jpg", credit: "Mehr News Agency", caption: "Soccer 180g podium, APRC 2026" },
     { src: "assets/gallery/g11.jpg", credit: "Mehr News Agency", caption: "Robo Obstacle Race delegation, APRC 2026" },
-    { src: "assets/gallery/g12.jpg", credit: "Mehr News Agency", caption: "Team line-up with medals, Asian championship 2025" },
-    { src: "assets/gallery/g13.jpg", credit: "Mehr News Agency", caption: "Soccer 180g winners with the flag, APRC 2026" },
-    { src: "assets/gallery/g14.jpg", credit: "Mehr News Agency", caption: "Team salute on stage, Asian championship 2025" },
-    { src: "assets/gallery/g15.jpg", credit: "Mehr News Agency", caption: "Team with the flag, Asian championship 2025" }
+    { src: "assets/gallery/g12.jpg", credit: "Mehr News Agency", caption: "Drone trio with the trophy, APRC 2026" },
+    { src: "assets/gallery/g13.jpg", credit: "Sinapress", caption: "Team line-up with the flag, Asian championship 2025" },
+    { src: "assets/gallery/g14.jpg", credit: "Sinapress", caption: "Team salute on stage, Asian championship 2025" },
+    { src: "assets/gallery/g15.jpg", credit: "Sinapress", caption: "Team with the flag, Asian championship 2025" }
   ],
   places: {
     kicker: "International places",
